@@ -6,9 +6,6 @@ export default defineConfig({
 	integrations: [
 		starlight({
 			title: 'Programación desde 0',
-			social: {
-				github: 'https://github.com/jesusdmedinac',
-			},
 			sidebar: [
         {
           label: 'Para no programadores',
@@ -27,6 +24,22 @@ export default defineConfig({
             { label: 'DevOps', link: '/roadmap/para-no-programadores/12'},
           ]
         },
+        {
+          label: '[Próximamente] Para principiantes (Juniors)',
+          items: []
+        },
+        {
+          label: '[Próximamente] Elige tu Stack personalizado',
+          items: []
+        },
+        {
+          label: '[Próximamente] Ingeniería de Software',
+          items: []
+        },
+        {
+          label: '[Próximamente] Kotlin Multiplatform',
+          items: []
+        }
 			],
 		}),
 	],
