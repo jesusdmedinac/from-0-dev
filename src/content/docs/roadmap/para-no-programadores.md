@@ -12,7 +12,7 @@ Además tendrás una asesoría 1 : 1 con un [instructor](https://jesusdmedinac.c
 
 ## Contenido
 
-1. Antes de empezar
+1. [Antes de empezar](/roadmap/para-no-programadores/1)
 2. Conceptos básicos
 3. Language Tour
 4. Paradigmas
