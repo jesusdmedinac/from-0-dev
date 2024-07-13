@@ -1,0 +1,511 @@
+---
+title: Programación desde 0 - Para no programadores
+description: Ruta de aprendizaje de programación desde 0
+hero:
+  actions:
+    - text: Registrarme
+      link: https://tally.so/r/3lA8G5
+      icon: right-arrow
+      variant: primary
+    - text: Conocer la ruta de aprendizaje
+      link: /roadmap/para-no-programadores
+      icon: seti:notebook
+---
+
+import { Image } from 'astro:assets';
+import algoritmo1 from '../../../../assets/algoritmo-1.png';
+import algoritmo2 from '../../../../assets/algoritmo-2.png';
+import algoritmo3 from '../../../../assets/algoritmo-3.png';
+
+## Conceptos básicos
+
+¡Prepárate para dar el primer paso hacia el mundo de la programación! En esta sección, 
+exploraremos los conceptos fundamentales que te permitirán desarrollar una carrera como
+programador de software.
+
+En esta clase entenderás qué es una variables, qué tipos existen y para qué se utilizan.
+También dominarás los diferentes tipos de operadores para realizar operaciones con los datos.
+Continuaremos con estrucutras de control para controlar el flujo de la ejecución de tu programa y 
+definiremos funciones como bloques de código reutilizables. Realizarás algoritmos para resolver problemas
+específicos en forma de secuencia y aprenderás lo que son los arreglos y las estructuras de datos para
+organizar y almacenar datos de manera eficiente.
+
+Para esta clase utilizaremos JavaScript para cada uno de los ejemplos.
+
+### Variables
+
+En programación, una variable es un dato o información almacenado en la memoria de nuestra computadora.
+Nosotros asignamos un nombre y le indicamos qué dato almacenar.
+
+Es decir, definimos el nombre del valor que queremos guardar. Por ejemplo:
+```JavaScript
+var nombre = "Joul"
+var edad = 29
+var dirección = "La dirección de Joul"
+```
+
+Veamos la estructura para escribir variables:
+
+```JavaScript
+/*1*/var /*2*/nombreDeLaVariable /*3*/= /*4*/"Valor de la variable"
+```
+
+1. Palabra reservada para indicar que crearemos una variable: `var`, `let`, `const`.
+
+Aunque en JavaScript no es obligatorio utilizar esta palabra reservada, se recomienda utilizarla
+para que nuestro código sea más fácil de leer por otros programadores.
+
+2. Nombre de la variable.
+
+El nombre es muy importante por el mismo tema de la legibilidad de nuestro código. Se recomienda que
+el nombre sea descriptivo y fácil de entender.
+
+Podemos utilizar casi cualquier caracter para escribir el nombre de nuestras variables, pero lo más
+común es escribir nombre en inglés.
+
+3. Operador de asignación: `=`, `+=`, `-=`, `*=`.
+
+Estos operadores los explicaremos en la sección de operadores. Pero su uso es básicamente decirle a
+la variable qué valor va a tener asignado.
+
+4. Valor de la variable.
+
+Prácticamente cualquier información que queramos utilizar más adelante. Es decir, si tú necesitas
+que tu programa recuerde algo, puedes definir variables con valores para utilizarlos en otra parte
+de tu código.
+
+Si sientes que esto de las variables es muy ambigüo, repasemos los ejercicios de la clase pasada:
+
+```JavaScript
+var suma = 2 + 2
+var suma = 2 + 2
+var resta = 2 - 2
+var multiplicacion = 2 * 2
+var divicion = 2 / 2
+var modulo = 2 % 2
+alert(suma)
+alert(resta)
+alert(multiplicacion)
+alert(divicion)
+alert(modulo)
+```
+
+### Tipos de datos
+
+Después de entender las variables, debiste haber notado que los valores de las variables se escriben de
+forma distinta dependiendo del tipo de información que quieres almacenar. Es decir, el tipo de dato.
+
+Los tipos de datos representan categorías de información, es decir, tipos de información.
+
+En todos los lenguajes de programación encontraremos representaciones de los tipos de datos para las
+siguientes categorías: texto, números, buleanos, arreglos y objetos.
+
+En JavaScript tenemos diferentes tipos de datos para representar estas categorías:
+```JavaScript
+// string -> Cadena de texto
+var nombre = "Joul"
+// number -> Cualquier número, enteros, decimales, negativos, etc.
+var edad = 29
+// boolean -> Buleanos, es decir, true (verdadero) o false (falso).
+var esMayorDeEdad = true
+// array -> Arreglos, esto lo explicaremos más adelante.
+var gustos = ["Cocina", "Fotografía", "Tomar café"]
+// object -> Objetos, esto lo explicaremos en la clase de paradigmas.
+var persona = Person(nombre, edad, gustos)
+```
+
+### Operadores
+
+Los operadores son símbolos utilizados para realizar operaciones. Existen varios tipos de operaciones 
+comunes: Aritméticos, asignación, comparación, lógicos, bit a bit, cadena, ternario, tipos, desestructuración
+y nulidad.
+
+Veamos uno por uno:
+```JavaScript
+// Operadores aritméticos
+let a = 10;
+let b = 5;
+
+let suma = a + b;          // Suma
+let resta = a - b;         // Resta
+let multiplicacion = a * b; // Multiplicación
+let division = a / b;      // División
+let modulo = a % b;        // Módulo
+let exponente = a ** b;    // Exponenciación
+a++;                       // Incremento
+b--;                       // Decremento
+
+// Operadores de asignación
+let c = 10;
+
+c = 5;         // Asignación
+c += 5;        // Suma y asignación
+c -= 2;        // Resta y asignación
+c *= 3;        // Multiplicación y asignación
+c /= 2;        // División y asignación
+c %= 3;        // Módulo y asignación
+c **= 2;       // Exponenciación y asignación
+
+// Operadores de comparación
+let d = 10;
+let e = 20;
+
+d == e;        // Igualdad
+d != e;        // Desigualdad
+d === e;       // Igualdad estricta
+d !== e;       // Desigualdad estricta
+d > e;         // Mayor que
+d < e;         // Menor que
+d >= e;        // Mayor o igual que
+d <= e;        // Menor o igual que
+
+// Operadores lógicos
+let f = true;
+let g = false;
+
+f && g;        // AND lógico
+f || g;        // OR lógico
+!f;            // NOT lógico
+
+// Operadores bit a bit
+let h = 5;    // 0101 en binario
+let i = 3;    // 0011 en binario
+
+h & i;        // AND bit a bit (0001)
+h | i;        // OR bit a bit (0111)
+h ^ i;        // XOR bit a bit (0110)
+~h;           // NOT bit a bit (1010)
+h << 1;       // Desplazamiento a la izquierda (1010)
+h >> 1;       // Desplazamiento a la derecha (0010)
+h >>> 1;      // Desplazamiento a la derecha sin signo (0010)
+
+// Operadores de cadena
+let j = "Hola";
+let k = "Mundo";
+
+let concatenacion = j + " " + k; // Concatenación de cadenas
+j += " a todos";                // Concatenación y asignación
+
+// Operador ternario
+let l = 10;
+let resultado = (l > 5) ? "Mayor que 5" : "Menor o igual a 5";
+
+// Operadores de tipo
+let m = "Hola Mundo";
+
+typeof m;                 // Devuelve "string"
+m instanceof String;      // Devuelve false (String primitivo no es instancia de String objeto)
+
+// Operadores de desestructuración
+let [n, o] = [1, 2];      // Desestructuración de array
+let { p, q } = { p: 3, q: 4 }; // Desestructuración de objeto
+
+// Operador de nulidad
+let r = null;
+let valor = r ?? "Valor por defecto"; // Devuelve "Valor por defecto" ya que r es null
+```
+
+### Estructuras de control
+
+Al escribir código, podemos controlar el flujo en el que se ejecutan nuestras líneas.
+Es decir, podemos hacer que nuestro código tome decisiones para tomar diferentes caminos.
+
+Tomemos un ejemplo muy sencillo:
+Imagina que queremos mostrar un mensaje diferente dependiendo de si una persona es mayor
+de edad.
+
+```JavaScript
+var esMayorDeEdad = true
+if (esMayorDeEdad) {
+  alert("Es mayor de edad")
+} else {
+  alert("Es menor de edad")
+}
+```
+
+Las estructuras de control nos ayudan a simplificar el código.
+```JavaScript
+// if, else if, else
+let a = 10;
+
+if (a > 5) {
+    console.log("a es mayor que 5");
+} else if (a === 5) {
+    console.log("a es igual a 5");
+} else {
+    console.log("a es menor que 5");
+}
+
+// switch
+let dia = 3;
+let nombreDia;
+
+switch (dia) {
+    case 1:
+        nombreDia = "Lunes";
+        break;
+    case 2:
+        nombreDia = "Martes";
+        break;
+    case 3:
+        nombreDia = "Miércoles";
+        break;
+    case 4:
+        nombreDia = "Jueves";
+        break;
+    case 5:
+        nombreDia = "Viernes";
+        break;
+    case 6:
+        nombreDia = "Sábado";
+        break;
+    case 7:
+        nombreDia = "Domingo";
+        break;
+    default:
+        nombreDia = "Día no válido";
+}
+
+console.log(nombreDia);
+
+// Bucles o Ciclos
+// for
+for (let i = 0; i < 5; i++) {
+    console.log("Iteración número " + i);
+}
+// while
+let b = 0;
+
+while (b < 5) {
+    console.log("b es " + b);
+    b++;
+}
+// do..while
+let c = 0;
+
+do {
+    console.log("c es " + c);
+    c++;
+} while (c < 5);
+
+// for...in (para iterar sobre las propiedades de un objeto)
+let objeto = { nombre: "Juan", edad: 30, ciudad: "Madrid" };
+
+for (let propiedad in objeto) {
+    console.log(propiedad + ": " + objeto[propiedad]);
+}
+
+// for...of (para iterar sobre elementos de un iterable como arrays)
+let array = [10, 20, 30, 40, 50];
+
+for (let valor of array) {
+    console.log(valor);
+}
+
+// Manejo de Errores
+// try...catch
+try {
+    let resultado = 10 / 0; // No lanza error pero resultado será Infinity
+    console.log(resultado);
+
+    let noDefinido;
+    console.log(noDefinido.propiedad); // Esto lanzará un error
+} catch (error) {
+    console.log("Se ha producido un error: " + error.message);
+}
+
+// try...catch...finally
+try {
+    let resultado = 10 / 2;
+    console.log(resultado);
+} catch (error) {
+    console.log("Se ha producido un error: " + error.message);
+} finally {
+    console.log("Esto se ejecuta siempre, haya o no error");
+}
+
+// throw (para lanzar errores)
+function dividir(a, b) {
+    if (b === 0) {
+        throw new Error("No se puede dividir por cero");
+    }
+    return a / b;
+}
+
+try {
+    let resultado = dividir(10, 0);
+    console.log(resultado);
+} catch (error) {
+    console.log("Error: " + error.message);
+}
+```
+
+Estas estructuras de control permiten tomar decisiones y repetir acciones en tu código de 
+manera eficiente y controlada.
+
+### Funciones
+
+Cuando escribimos código, es muy común querer reutilizar nuestro código en diferentes partes de nuestro código.
+Sin embargo, no es muy práctico copiar el código y pegarlo cada vez que lo necesitemos.
+
+```JavaScript
+// Calcular si un número es par
+var primerNumero = 1
+var segundoNumero = 2
+var tercerNumero = 3
+
+var elPrimerNumeroEsPar = primerNumero % 2 == 0
+var elSegundoNumeroEsPar = segundoNumero % 2 == 0
+var elTercerNumeroEsPar = tercerNumero % 2 == 0
+```
+
+En lugar de eso, podemos crear una función para que nos haga el trabajo.
+```JavaScript
+// Calcular si un número es par
+function esPar(numero) {
+  return numero % 2 == 0
+}
+
+var primerNumero = 1
+var segundoNumero = 2
+var tercerNumero = 3
+
+var elPrimerNumeroEsPar = esPar(primerNumero)
+var elSegundoNumeroEsPar = esPar(segundoNumero)
+var elTercerNumeroEsPar = esPar(tercerNumero)
+```
+
+O incluso podemos simplificar aún más
+
+```JavaScript
+var elPrimerNumeroEsPar = esPar(1)
+var elSegundoNumeroEsPar = esPar(2)
+var elTercerNumeroEsPar = esPar(3)
+```
+
+Entendamos la estructura de una función en JavaScript.
+
+1. Palabra reservada `function`.
+
+La palabra clave function es el punto de partida para definir una función.
+
+2. Nombre de la función
+
+El nombre de la función identifica la función. Es importante seguir las convenciones 
+de nomenclatura, como usar `camelCase`.
+
+3. Parámetros
+
+Los parámetros se definen dentro de paréntesis (). Puedes tener cero o más parámetros 
+separados por comas.
+
+4. Cuerpo de la función
+
+El cuerpo de la función está encerrado entre llaves {} y contiene las declaraciones que 
+definen lo que hace la función.
+
+5. Palabra reservada para regresar valores `return`.
+
+```JavaScript
+function esPar(numero) { // Palabra clave 'function', nombre de la función 'esPar', y parámetro 'numero'
+  return numero % 2 == 0 // Cuerpo de la función y palabra reservada `return`
+}
+```
+
+### Algoritmos
+
+Imagina una receta. Sigues cada uno de los pasos para preparar el platillo perfecto. Pero no te sale como en el video. ¿Por qué? Quizás olvidaste un paso importante, o hay algún paso que no aparece en el recetario o video de cocina.
+
+Cada paso en la receta es importante. Es lo que determina que obtengas el mismo resultado siempre; seguir el mismo algoritmo.
+
+#### Definición de algoritmo
+
+:::💡 
+En informática, se llaman algoritmos el conjunto de instrucciones sistemáticas y previamente definidas que se utilizan para realizar una determinada tarea. Estas instrucciones están ordenadas y acotadas a manera de pasos a seguir para alcanzar un objetivo.x
+:::
+
+
+Esta es una de las definiciones más complejas que he encontrado. Pero es la ideal para nosotros.
+
+#### Conjunto de instrucciones sistemáticas
+
+Una instrucción es una sub-tarea precisa. Por ejemplo, en una receta, cada paso de la receta es una instrucción. Pero el conjunto de instrucciones forman un sistema llamado receta.
+
+#### Que se utilizan para realizar una determinada tarea
+
+La tarea en una receta es el platillo a cocinar. Si sigues cada paso lograrás realizar la tarea determinada.
+
+#### Estas instrucciones están ordenadas y acotadas a manera de pasos a seguir
+
+Ordenar y acotar las instrucciones es esencial para obtener el mismo resultado. Si decides cambiar el orden de las tareas corres el riesgo de obtener un resultado diferente. 
+
+Y en ocasiones es imposible cambiar el orden. Por ejemplo, no puedes batir los huevos sin antes romper el cascarón. O no puedes cocinar sin antes prender la estufa. Sé que parece lógico, pero es importante precisar el orden y acotar las instrucciones para que garanticemos el mismo resultado.
+
+Es por eso que obtener un resultado diferente nos hace pensar si hay algún paso que no seguimos al pie de la letra.
+
+#### ¿Cuáles son las características de un algoritmo?
+
+Es importante precisar que cada algoritmo es diferente. Sin embargo, todos deben cumplir con las siguientes características para ser considerado algoritmos:
+
+1. **Inicio y fin:** Es importante precisar que un algoritmo puede o no tener pre-requisitos. Es decir, qué se necesita antes de empezar. Pero una vez empieza el algoritmo, debe terminar en algún punto.
+2. **Exactitud:** Cada algoritmo debe de garantizar que, siempre que se siga al pie de la letra, el resultado debe ser el mismo.
+3. **Secuencia:** Cambiar el orden de las instrucciones siempre provocará un resultado diferente.
+4. **Finitos:** El número de pasos para ejecutar la tarea debe ser finito para darla por concluida.
+
+#### Ejemplo de un algoritmo
+
+Hagamos un pequeño ejemplo de un algoritmo para ayudar a nuestro pequeño robot a llegar al final del laberinto.
+
+<Image src={algoritmo1} alt="Laberinto 1" width="512"/>
+
+En la imagen tenemos marcado el punto de inicio con una S de start de color verde, y de rojo tenemos la E de exit.
+
+Todo algoritmo tiene un inicio y un fin, así que nuestro algoritmo se definiría de la siguiente manera:
+
+1. Iniciamos desde la puerta de entrada S
+2. …
+3. Salimos por la puerta de salida E
+
+¿Y cómo definimos los pasos intermedios? primero intenta resolver el laberinto. ¿Listo? ¿No? aquí tienes una pequeña ayuda:
+
+<Image src={algoritmo2} alt="Laberinto 2" width="512"/>
+
+Ahora intenta describir paso a paso cómo avanzarías por el laberinto.
+
+¿Cómo te fue? ¿Pudiste hacerlo? ¿No? no te preocupes, deja te muestro cómo lo describiría yo:
+
+1. Iniciamos desde la puerta de entrada S.
+2. Avanzamos recto hasta la intersección.
+3. Giramos hacia la derecha.
+4. Avanzamos recto hasta la intersección.
+5. Giramos hacia la izquierda.
+6. Avanzamos recto hasta la pared.
+7. Giramos hacia la derecha.
+8. Avanzamos recto hasta la pared.
+9. Giramos hacia la izquierda.
+10. Avanzamos recto hasta la pared.
+11. Giramos hacia la izquierda.
+12. Avanzamos recto hasta la pared.
+13. Giramos hacia la izquierda.
+14. Avanzamos recto hasta la pared.
+15. Giramos hacia la derecha.
+16. Avanzamos recto hasta la pared.
+17. Giramos hacia la derecha.
+18. Avanzamos recto hasta la salida.
+19. Salimos por la puerta de salida E.
+
+Intenta seguir mi algoritmo en el laberinto y verifica si llegas hasta la salida.
+
+Lo sé, es muchísimo más fácil simplemente ir dibujando en el laberinto el camino por el que vamos avanzando y olvidarnos de los pasos anteriores. Nuestro cerebro es bueno para resolver este tipo de problemas sin que nosotros tengamos que pensar en el paso a paso.
+
+Pero te aseguro que si practicas haciendo más algoritmo, eventualmente podrás resolver problemas muchísimo más complejos que antes tu mente no te permitía. Por ejemplo, imagina cómo sería el algoritmo para resolver este laberinto?
+
+<Image src={algoritmo3} alt="Laberinto 3" width="512" style="background-color: #FFF"/>
+
+#### Conclusión
+
+Describir el paso a paso de la solución de un problema puede ser una tarea tediosa, pero una vez que somos consientes de cada paso para la solución de un problema podemos resolver problemas muchísimo más complejos un paso a la vez.
+
+Definir un algoritmo es fundamental para que resolver problemas utilizando el pensamiento lógico. Esto nos ayudará a describir soluciones utilizando lenguajes de programación y desarrollar aplicaciones super simples.
+
+Espero que puedas escribir tus propios algoritmos a partir de ahora.
