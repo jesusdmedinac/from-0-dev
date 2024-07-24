@@ -1,6 +1,6 @@
 ---
 title: Programación desde 0 - Para no programadores - Language Tour
-description: Ruta de aprendizaje de programación desde 0
+description: JavaScript es un lenguaje de programación versátil que se puede usar de diferentes maneras. Es dinámico, lo que significa que puede cambiar mientras se está ejecutando. Tiene tipos y operadores (que son como las reglas y símbolos matemáticos), así como objetos y métodos estándar (funciones predefinidas que puedes usar).
 hero:
   actions:
     - text: Registrarme
@@ -17,7 +17,7 @@ hero:
 import { LinkCard, CardGrid } from '@astrojs/starlight/components';
 import { Aside } from '@astrojs/starlight/components';
 
-<Aside>Esta lección está inspirada en el sitio web de [Mozilla Developer](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Language_overview)</Aside>
+<Aside title="Nota">Esta lección está inspirada en el sitio web de [Mozilla Developer](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Language_overview)</Aside>
 
 JavaScript es un lenguaje de programación versátil que se puede usar de diferentes maneras. Es dinámico, lo que significa que puede cambiar mientras se está ejecutando. Tiene tipos y operadores (que son como las reglas y símbolos matemáticos), así como objetos y métodos estándar (funciones predefinidas que puedes usar).
 
@@ -365,7 +365,7 @@ switch (accion) {
 }
 ```
 
-Las cláusulas de `case` son conceptualmente iguales a [las etiquetas](https://arc.net/l/quote/zjycorbu), por lo que si no agrega una un `break`, la ejecución "pasará al siguiente nivel". Sin embargo, en realidad no son tablas de salto: cualquier expresión puede ser parte de la cláusula `case`, no solo literales de cadena o números, y se evaluarían una por una hasta que una sea igual al valor que se busca. La comparación se realiza entre los dos utilizando el operador `===`.
+Las cláusulas de `case` son conceptualmente iguales a [las etiquetas](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/label), por lo que si no agrega una un `break`, la ejecución "pasará al siguiente nivel". Sin embargo, en realidad no son tablas de salto: cualquier expresión puede ser parte de la cláusula `case`, no solo literales de cadena o números, y se evaluarían una por una hasta que una sea igual al valor que se busca. La comparación se realiza entre los dos utilizando el operador `===`.
 
 Las estructuras de control son declaraciones en JavaScript, lo que significa que no puedes asignarlas a una variable, como `const a = if (x) { 1 } else { 2 }`.
 

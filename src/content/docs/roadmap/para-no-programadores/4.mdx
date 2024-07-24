@@ -1,0 +1,258 @@
+---
+title: Programación desde 0 - Para no programadores - Paradigmas
+description: JavaScript es un lenguaje de programación versátil que soporta varios paradigmas de programación. Los principales paradigmas que se pueden manejar en JavaScript son Programación Imperativa, Programación Orientada a Objetos (OOP), Programación Funcional, Programación Declarativa y Programación Asíncrona.
+hero:
+  actions:
+    - text: Registrarme
+      link: https://tally.so/r/3lA8G5
+      icon: right-arrow
+      variant: primary
+    - text: Conocer la ruta de aprendizaje
+      link: /roadmap/para-no-programadores
+      icon: seti:notebook
+---
+
+## Paradigmas
+
+import { Aside } from '@astrojs/starlight/components';
+
+<Aside title="Referencia">Se denominan paradigmas de programación a las formas de clasificar los lenguajes de programación en función de sus características. Los idiomas se pueden clasificar en múltiples paradigmas. - [Wikipedia](https://es.wikipedia.org/wiki/Paradigma_de_programaci%C3%B3n)</Aside>
+
+JavaScript es un lenguaje de programación versátil que soporta varios paradigmas de programación. Los principales paradigmas que se pueden manejar en JavaScript son:
+
+1. Programación Imperativa
+2. Programación Orientada a Objetos (OOP)
+3. Programación Funcional
+4. Programación Declarativa
+5. Programación Asíncrona
+
+### Programación Imperativa
+
+<Aside title="Referencia">En ciencias de la computación, la programación imperativa es un paradigma de programación de software que utiliza declaraciones que cambian el estado del programa. Más o meno, así como cuando en lenguaje natural expresamos órdenes, un programa imperativo consiste en comandos para la que la computadora los ejecute. La programación imperativa se enfoca en describir cómo un programa debe operar paso a paso, en lugar de descripciones de alto nivel. - [Wikipedia](https://en.wikipedia.org/wiki/Imperative_programming)</Aside>
+
+Debemos entender que la programación es dar instrucciones a la computadora. Pero esta idea es demasiado abstracta para una computadora. Necesitamos traducir esta idea a algo más explícita.
+
+De este modo, JavaScript nos permite comunicarnos con el navegador. A través de este lenguaje le damos instrucciones para que manipulo nuestra página web.
+
+En programación imperativa, estas instrucciones son comando como:
+
+```javascript
+// Crea una variable llamada nombre con el valor Daniel
+let nombre = "Daniel"
+// Crea una variable llamada mensaje concatenando el valor de la variable nombre y anteponiendo la palabra Hola y un espacio
+let mensaje = "Hola " + nombre
+// Envía una alerta con el mensaje creado
+alert(mensaje)
+```
+
+A pesar del esfuerzo por describir el paso a paso en los comentarios en lenguaje natural, JavaScript es mucho más explícito en lo que está haciendo. De este modo, es importante entender qué queremos que nuestro sitio web o en navegador haga paso a paso para escribir nuestro código de forma correcta y evitar comportamientos inesperados.
+
+### Programación Orientada a Objetos (OOP)
+
+<Aside title="Referencia">La programación orientada a objetos (POO) es un paradigma de programación que parte del concepto de "objetos" como base, los cuales contienen información en forma de campos (a veces también referidos como atributos, cualidades o propiedades) y código en forma de métodos. - [Wikipedia](https://es.wikipedia.org/wiki/Programaci%C3%B3n_orientada_a_objetos)</Aside>
+
+La base de este paradigma son los objetos. Para entender un objeto debemos analizar tres conceptos que definen las bases de este paradigma: Clase, Instancia y Objeto.
+
+#### Clase
+
+Una clase es la abstracción de un objeto. En terminos simples, debemos imaginar un objeto del mundo real e intentar describirlo. Los objetos en el mundo real son demasiado completos para describirlos por completo, pero en POO no es  necesario describirlos completamente, basta con abstraerlos lo suficiente como para que cumplan su rol dentro de nuestro programa.
+
+Para entender una clase imaginemos una **Persona**. Describir a una persona en general es muy difícil, porque las personas somos físicamente super complejas, ni hablar de mentalmente, pero no debemos preocuparnos. Para un programa de computadora, o un sitio web, una persona puede ser tan simple como el nombre y su edad.
+
+Si queremos hacerlo más complejo, podemos imaginar entonces que una **Persona** es un **Usuario**, entonces tenemos dos clases, cada una representando un objeto del mundo real pero de forma abstracta para nuestro programa. El **Usuario** tendrá nombre de usuario y contraseña, mientras que la **Persona** sólo nombre y edad.
+
+De esta forma, las clases son representaciones abstractas de objetos en el mundo real pero con información útil para nuestro programa.
+
+En JavaScript podemos definir clase de la siguiente manera:
+
+```javascript
+class Person {
+  name;
+
+  constructor(name) {
+    this.name = name;
+  }
+
+  introduceSelf() {
+    console.log(`¡Hola!, soy ${name}`);
+  }
+}
+```
+
+#### Instancia
+
+Una instancia es la creación de un objeto a través de su clase. Es decir, definir un objeto en particular.
+
+Pensemos de nuevo en la clase **Persona**. Para definir una instancia de la clase persona utilizaremos su constructor y lo almacenaremos en una variable que podremos utilizar posteriormente.
+
+```javascript
+let person = new Person("Daniel")
+```
+
+Esta simple línea está creando una instancia de la clase Persona. La clase puede ser utilizada para crear infinidad de instancias, pero cada una de ellas es única.
+
+Es importante entender que la variable en la que estamos almacenando nuestra instancia puede recibir otro valor y nuestra instancia se puede perder. Si queremos tener otra instancia con el mismo nombre, debemos tomar en cuenta que no será la misma instancia. Podrá tener el mismo nombre, pero cada vez que utilizamos la palabra reservada `new`, estamos creando una nueva instancia.
+
+#### Objeto
+
+Y finalmente, el objeto es la instancia de la clase.
+
+Aunque instancia y objeto pueden parecer lo mismo, la instancia se refiera a un objeto en particular, mientras que el concepto de objeto representa la unidad que utilizamos para manipular los datos en nuestro programa.
+
+Es decir, la instancia es la creación de un objeto a partir de una clase. La razón por la que creamos instancias de la clase es para interactuar y manipular información en nuestro programa. Cada instancia es un objeto diferente.
+
+De esta forma, podemos tener múltiples objetos para realizar lo siguiente:
+
+```javascript
+let persona1 = new Persona("Daniel")
+let persona2 = new Persona("Tomás")
+
+persona1.introduceSelf()
+persona2.introduceSelf()
+```
+
+#### Conceptos extras
+
+Algunas características clave de la programación orientada a objetos son la herencia, cohesión, abstracción, acoplamiento y encapsulamiento.
+
+Todos estos conceptos serán abordados de forma profunda en el curso de [Programación para principiantes (Juniors)](/roadmap/para-principiantes). Pero es importante que los sepamos que existen para estudiarlos por encima cuando tengamos tiempo libre.
+
+### Programación Funcional
+
+<Aside>En informática, la programación funcional es un paradigma de programación declarativa basado en el uso de verdaderas funciones matemáticas. En este estilo de programación las funciones son ciudadanas de primera clase, porque sus expresiones pueden ser asignadas a variables como se haría con cualquier otro valor; además de que pueden crearse funciones de orden superior. - [Wikipedia](https://es.wikipedia.org/wiki/Programaci%C3%B3n_funcional)</Aside>
+
+Para poder entender este paradigma debemos explicar primero qué es una función.
+
+Una función representa una rutina o algoritmo de programación. Dicha rutina puede ser utilizada múltiples veces en un programa. Cada vez que se utiliza, en lugar de escribir el código contenido en la rutina, sólo declaramos una llamada a la rutina para indicar a nuestro programa que utiizaremos nuestra función:
+
+```javascript
+function imprimirMensajeEnConsola(mensaje) {
+  console.log(mensaje)
+}
+
+imprimirMensajeEnConsola("Mensaje");
+```
+
+Cuando definimos una función, más allá de su estructura, en programación funcional debemos tomar en cuenta que las funciones siempre deben de retornar el mismo resultado si se le proporcionan los mismos valores de entrada. Es decir, para una súma de dos números, el resultado debería ser siempre igual.
+
+```javascript
+function suma(a, b) {
+  return a + b;
+}
+
+let resultadoDeLaSuma = suma(2, 2)
+console.log(resultadoDeLaSuma);
+```
+
+La programación funcional se utiliza para dividir tareas complejas en subtareas o funciones que en partes pequeñas van resolviendo problemas sencillos pero en conjunto resuelven problemas mucho más complicados.
+
+Imaginemos la programación funcional como una calculadora. Aunque podemos definir una función llamada calcular, dependiendo que qué operación queremos realizar, podríamos requerir una serie de funciones sencillas o cada vez más complicadas juntando varias funciones para construir la función calcular.
+
+### Programación Declarativa
+
+<Aside>En ciencias de la computación se denomina programación delcarativa a un paradigma de programación de software en el que no se detallan los pasos a seguir, sino solo el resultado deseado con cierto código fuente - [Wikipedia](https://es.wikipedia.org/wiki/Programaci%C3%B3n_declarativa)</Aside>
+
+A diferencia de la programación imperativa, en donde debemos indicar las instrucciones paso a paso para que nuestro programa genere el resultado deseado, en la programación declarativa nos enfocamos más bien en el resultado en lugar de en las instrucciones.
+
+Es básicamente pensar en el **Qué** y no en el **Cómo**.
+
+En un artículo llamado [Jetpack Compose - A declarative UI](https://blog.jesusdmedinac.com/jetpack-compose-a-declarative-ui-380128e34f69) explico la diferencia entre programación imperativa y declarativa mostrando algunos ejemplos con un framework de programación para crear interfaces gráficas llamado Jetpack Compose.
+
+En ese artículo explico que si queremos cambiar el color de fondo de un botón, cada paradigma nos permite abordar el problema desde una perspectiva diferente.
+
+En JavaScript también tenemos una herramienta que nos permite crear interfaces gráficas de forma declarativa e imperativa.
+
+##### DOM - UI Imperativo
+
+Para entender la programación declarativa utilizaremos un concepto que profundizaremos más en la siguiente etapa de esta formación [Programación para principiantes (Juniors)](/roadmap/para-principiantes).
+
+El DOM en JavaScript es la herramienta que nos permite manipular la interfaz gráfica de nuestras páginas web.
+
+De forma imperativa debemos realizar los siguientes pasos para cambiar el color de fondo de un botón.
+
+<Aside>Vamos a asumir que ya sabes [HTML](https://www.w3schools.com/html/) para el siguiente ejemplo</Aside>
+
+```javascript
+// Imagina que creamos un color al azar y lo guardamos en una variable llamada randomColor
+let botón = document.getElementById("mi-botón")
+botón.style['background-color'] = randomColor
+```
+
+Como vez en el ejemplo, para cambiar el color debemos primero indicar **cómo** obtener el botón y **cómo** cambiar su color.
+
+##### ReactJS - UI Declarativo
+
+En programación declarativa debemos cambiar nuestra forma de pensar.
+
+<Aside>Vamos a asumir que ya sabes [React](https://es.react.dev/learn) para el siguiente ejemplo</Aside>
+
+Veamos cómo cambiamos el color de fondo de un botón en React:
+
+```javascript
+import { useState } from 'react';
+
+function MiButton() {
+  // Imagina que creamos un color al azar y lo guardamos en una variable llamada randomColor
+  let [randomColor, setRandomColor] = useState(...);
+  return (
+    <button
+    style={{
+      background-color: randomColor
+    }}
+    >Soy un botón</button>
+  );
+}
+```
+
+En este ejemplo estamos indicando más bien **qué** color queremos cambiar y **qué** color le queremos poner. El cómo está implicito en la librería.
+
+### Programación Asíncrona
+
+Finalmente, JavaScript también nos permite utilizar un paradigma llamado Programación Asíncrona.
+
+<Aside>Debemos notar que el navegador recorre el programa línea a línea, en el mismo orden en que nosotros lo escribimos. En cada punto, el navegador espera a que la líinea termine su trabajo antes de pasar a la siguiente línea. Tiene que hacer esto porque cada línea depende del trabajo realizado en las líneas precedentes. - [Developer Mozilla](https://developer.mozilla.org/es/docs/Learn/JavaScript/Asynchronous/Introducing)</Aside>
+
+Al cargar nuestra página web, normalmente nuestro código JavaScript se ejecuta línea por línea. A esto se le llama programación síncrona. Sin embargo, no siempre es lo más adecuado ejecutar línea por línea nuestro código. Por ejemplo, la acción de un botón queremos que se ejecute cuando el usuario presione el botón. A esto se le llama eventos.
+
+También hay escenarios en los que una acción puede tomar demasiado tiempo para terminar; como una descarga de un archivo o mostrar un vídeo. En estos casos podemos recurir a la programación asíncrona.
+
+Que algo sea asíncrono significa que puede ejecutarse varias tareas al mismo tiempo. Gracias a la sincronidad podemos definir el orden de ejecución de cada tarea, pero este orden no siempre es claro, en esos escenarios utilizamos tareas asíncronas.
+
+Para que entender con mayor claridad la diferencia entre síncrono y asíncrono, imagina que tenemos que descargar varios archivos:
+
+```javascript
+async function descargarArchivo1() { ... }
+async function descargarArchivo2() { ... }
+async function descargarArchivo3() { ... }
+
+let archivo1 = await descargarArchivo1(); // Tiempo de descarga estimado: 3 segundos
+let archivo2 = await descargarArchivo2(); // Tiempo de descarga estimado: 2 segundos
+let archivo3 = await descargarArchivo3(); // Tiempo de descarga estimado: 4 segundos
+
+// Tiempo de descarga total estimado: 9 segundos
+```
+
+En este ejemplo, para poder descargar cada archivo debemos esperar a que el primer archivo se termine de descargar para descargar el siguiente. Esto sería programación síncrona. Cada tarea se ejecuta una despues de otra en un orden muy claro
+
+Ahora, veamos el mismo ejemplo pero con programación asíncrona:
+
+```javascript
+async function descargarArchivo1() { ... }
+async function descargarArchivo2() { ... }
+async function descargarArchivo3() { ... }
+
+let archivo1 = descargarArchivo1(); // Tiempo de descarga estimado: 3 segundos
+let archivo2 = descargarArchivo2(); // Tiempo de descarga estimado: 2 segundos
+let archivo3 = descargarArchivo3(); // Tiempo de descarga estimado: 4 segundos
+
+const todosLosArchivos = Promise.all([archivo1, archivo2, archivo3])
+// Tiempo de descarga total estimado: 4 segundos
+```
+
+En este ejemplo todos los archivos se ejecutan casi al mismo tiempo. No es al mismo tiempo porque hay una diferencia de tiempo entre ejecutar cada línea, pero eso puede ser una diferencia de 1 milisegundo; insignificante en la mayoría de los casos. Lo interesante de este ejemplo es que el tiempo total estimado será igual al tiempo total estimado del archivo que tarde más tiempo en ejecutarse, por lo que el tiempo total se ve reducido sin lugar a duda.
+
+Con este paradigma podemos desarrollar páginas web y aplicaciones modernas con una mejor distribución de los tiempos de espera para los usuarios.
+
+## Conclusión
+
+JavaScript permite utilizar una gran variedad de paradigmas. Cada uno de ellos nos puede servir para resolver distintos problemas, por eso es importante entender el propósito de cada uno y saber cuándo utilizar cada uno e incluso cómo utilizar mezclas de los mismos.

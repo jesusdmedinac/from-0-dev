@@ -38,7 +38,7 @@ En programación, una variable es un dato o información almacenado en la memori
 Nosotros asignamos un nombre y le indicamos qué dato almacenar.
 
 Es decir, definimos el nombre del valor que queremos guardar. Por ejemplo:
-```JavaScript
+```javascript
 var nombre = "Joul"
 var edad = 29
 var dirección = "La dirección de Joul"
@@ -46,7 +46,7 @@ var dirección = "La dirección de Joul"
 
 Veamos la estructura para escribir variables:
 
-```JavaScript
+```javascript
 /*1*/var /*2*/nombreDeLaVariable /*3*/= /*4*/"Valor de la variable"
 ```
 
@@ -76,7 +76,7 @@ de tu código.
 
 Si sientes que esto de las variables es muy ambigüo, repasemos los ejercicios de la clase pasada:
 
-```JavaScript
+```javascript
 var suma = 2 + 2
 var suma = 2 + 2
 var resta = 2 - 2
@@ -101,7 +101,7 @@ En todos los lenguajes de programación encontraremos representaciones de los ti
 siguientes categorías: texto, números, buleanos, arreglos y objetos.
 
 En JavaScript tenemos diferentes tipos de datos para representar estas categorías:
-```JavaScript
+```javascript
 // string -> Cadena de texto
 var nombre = "Joul"
 // number -> Cualquier número, enteros, decimales, negativos, etc.
@@ -121,7 +121,7 @@ comunes: Aritméticos, asignación, comparación, lógicos, bit a bit, cadena, t
 y nulidad.
 
 Veamos uno por uno:
-```JavaScript
+```javascript
 // Operadores aritméticos
 let a = 10;
 let b = 5;
@@ -214,7 +214,7 @@ Tomemos un ejemplo muy sencillo:
 Imagina que queremos mostrar un mensaje diferente dependiendo de si una persona es mayor
 de edad.
 
-```JavaScript
+```javascript
 var esMayorDeEdad = true
 if (esMayorDeEdad) {
   alert("Es mayor de edad")
@@ -224,7 +224,7 @@ if (esMayorDeEdad) {
 ```
 
 Las estructuras de control nos ayudan a simplificar el código.
-```JavaScript
+```javascript
 // if, else if, else
 let a = 10;
 
@@ -348,7 +348,7 @@ manera eficiente y controlada.
 Cuando escribimos código, es muy común querer reutilizar nuestro código en diferentes partes de nuestro código.
 Sin embargo, no es muy práctico copiar el código y pegarlo cada vez que lo necesitemos.
 
-```JavaScript
+```javascript
 // Calcular si un número es par
 var primerNumero = 1
 var segundoNumero = 2
@@ -360,7 +360,7 @@ var elTercerNumeroEsPar = tercerNumero % 2 == 0
 ```
 
 En lugar de eso, podemos crear una función para que nos haga el trabajo.
-```JavaScript
+```javascript
 // Calcular si un número es par
 function esPar(numero) {
   return numero % 2 == 0
@@ -377,7 +377,7 @@ var elTercerNumeroEsPar = esPar(tercerNumero)
 
 O incluso podemos simplificar aún más
 
-```JavaScript
+```javascript
 var elPrimerNumeroEsPar = esPar(1)
 var elSegundoNumeroEsPar = esPar(2)
 var elTercerNumeroEsPar = esPar(3)
@@ -406,7 +406,7 @@ definen lo que hace la función.
 
 5. Palabra reservada para regresar valores `return`.
 
-```JavaScript
+```javascript
 function esPar(numero) { // Palabra clave 'function', nombre de la función 'esPar', y parámetro 'numero'
   return numero % 2 == 0 // Cuerpo de la función y palabra reservada `return`
 }

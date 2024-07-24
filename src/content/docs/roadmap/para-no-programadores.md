@@ -15,7 +15,7 @@ Además tendrás una asesoría 1 : 1 con un [instructor](https://jesusdmedinac.c
 1. [Antes de empezar](/roadmap/para-no-programadores/1)
 2. [Conceptos básicos](/roadmap/para-no-programadores/2)
 3. [Language Tour](/roadmap/para-no-programadores/3)
-4. Paradigmas
+4. [Paradigmas](/roadmap/para-no-programadores/4)
 5. Stacks
 6. Frontend
 7. Backend
