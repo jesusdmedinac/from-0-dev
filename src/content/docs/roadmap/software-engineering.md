@@ -1,5 +1,5 @@
 ---
-title: Programación desde 0 - Ingeniería de software
+title: Ingeniería de software
 description: Ruta de aprendizaje de programación desde 0
 ---
 

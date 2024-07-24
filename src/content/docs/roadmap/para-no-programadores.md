@@ -1,5 +1,5 @@
 ---
-title: Programación desde 0 - Para no programadores
+title: Para no programadores
 description: Ruta de aprendizaje de programación desde 0
 ---
 
