@@ -1,9 +1,8 @@
 ---
 title: Para no programadores
-description: Ruta de aprendizaje de programación desde 0
+description: En este taller podrás dar tus primeros pasos en el mundo del desarrollo de software.
 ---
 
-## Taller online y presencial
 En este taller podrás dar tus primeros pasos en el mundo del desarrollo de software.
 Tendrás las bases para tener una carrera en el mundo del desarrollo de software.
 Además tendrás una asesoría 1 : 1 con un [instructor](https://jesusdmedinac.com/about/) altamente calificado.
