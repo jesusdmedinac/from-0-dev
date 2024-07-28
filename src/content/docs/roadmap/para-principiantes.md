@@ -1,6 +1,7 @@
 ---
 title: Para principiantes (Juniors)
 description: En este taller práctico y teórico te convertirás en desarrollador Junior. Tendrás las bases para conseguir tu primer empleo como programador e impulsar tu carrera en la especialidad que más te guste.
+template: splash
 ---
 
 En este taller práctico y teórico te convertirás en desarrollador Junior. Tendrás las bases para conseguir tu primer empleo como programador e impulsar tu carrera en la especialidad que más te guste.
@@ -11,7 +12,7 @@ Además tendrás una asesoría 1 : 1 con un [instructor](https://jesusdmedinac.c
 
 ## Contenido
 
-1. Introducción y Configuración del Entorno
+1. [Introducción y Configuración del Entorno](/roadmap/para-principiantes/1)
 2. Introducción a la Programación Orientada a Objetos
 3. Desarrollo Frontend
 4. Desarrollo Backend

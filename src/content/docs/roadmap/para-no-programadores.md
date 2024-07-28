@@ -1,6 +1,7 @@
 ---
 title: Para no programadores
 description: En este taller podrás dar tus primeros pasos en el mundo del desarrollo de software.
+template: splash
 ---
 
 En este taller podrás dar tus primeros pasos en el mundo del desarrollo de software.
