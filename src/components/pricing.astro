@@ -1,0 +1,56 @@
+---
+import { Tick } from "@components/ui/icons";
+import Link from "@components/ui/link.astro";
+
+const { plan } = Astro.props;
+---
+
+<div>
+  <div
+    class="flex flex-col w-full order-first lg:order-none border-2 border-[#D8DEE9] border-opacity-50 py-5 px-6 rounded-md">
+    <div class="text-center">
+      <h4 class="text-lg font-medium text-gray-400">
+        {plan.name}
+        {
+          plan.name === "Anual"
+          ? <span class="ml-1 px-2 py-0.5 text-[10px] animate-pulse font-semibold uppercase text-white bg-blue-600 rounded-full">
+            Mejor Valor
+          </span>
+          : ""
+        }
+      </h4>
+      {
+        plan.price && typeof plan.price === "object"
+          ? <p class="mt-3 text-4xl font-bold text-black md:text-4xl">
+            {plan.price.current}
+          </p>
+          <p class="mt-1 text-xl font-medium text-gray-400 line-through md:text-2xl">
+            {plan.price.original}
+          </p>
+          <span class="ml-1 px-2 py-0.5 text-[10px] font-semibold uppercase text-white bg-blue-600 rounded-full">
+            {plan.price.discount}
+          </span>
+          : <p
+        class="mt-3 text-4xl font-bold text-black md:text-4xl">
+          {plan.price}
+      </p>
+      }
+    </div><ul class="grid mt-8 text-left gap-y-4">
+      {
+        plan.features.map((item) => (
+          <li class="flex items-start gap-3 text-gray-800">
+            <Tick class="w-6 h-6" />
+            <span>{item}</span>
+          </li>
+        ))
+      }
+    </ul><div class="flex mt-8">
+      <Link
+        href={plan.button.link || "#"}
+        block
+        style={plan.popular ? "primary" : "outline"}>
+        {plan.button.text || "Get Started"}
+      </Link>
+    </div>
+  </div>
+</div>

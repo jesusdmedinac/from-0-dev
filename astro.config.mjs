@@ -1,11 +1,16 @@
 import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
+import tailwind from "@astrojs/tailwind";
+import mdx from "@astrojs/mdx";
+import sitemap from "@astrojs/sitemap";
 
 // https://astro.build/config
 export default defineConfig({
+  base: '/',
+  site: "https://desde0.jesusdmedinac.com",
 	integrations: [
 		starlight({
-			title: 'Programación desde 0',
+			title: 'Desde0',
 			sidebar: [
         {
           label: 'Para no programadores',
@@ -29,5 +34,6 @@ export default defineConfig({
         }
 			],
 		}),
+    tailwind(), mdx(), sitemap()
 	],
 });

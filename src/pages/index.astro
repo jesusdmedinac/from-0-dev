@@ -1,0 +1,108 @@
+---
+import Container from "@components/container.astro";
+import Cta from "@components/cta.astro";
+import Features from "@components/features.astro";
+import Hero from "@components/hero.astro";
+import Logos from "@components/logos.astro";
+import Layout from "@layouts/Layout.astro";
+import heroImage from "assets/jesus-medina.jpg";
+import paraNoProgramadoresLogo from "assets/logos-desde0/para-no-programadores.png";
+import paraPrincipiantesLogo from "assets/logos-desde0/para-principiantes.png";
+import stackPersonalizadoLogo from "assets/logos-desde0/stack-personalizado.png";
+import softwareEngineeringLogo from "assets/logos-desde0/software-engineering.png";
+import kotlinMultiplatformLogo from "assets/logos-desde0/kotlin-multiplatform.png";
+import Link from "@components/ui/link.astro";
+import { Icon } from '@astrojs/starlight/components';
+import Stages from "@components/stages/stages.astro";
+import Stage from "@components/stages/stage.astro"
+---
+
+<Layout title="Desde0">
+  <Container>
+    <Hero
+      title="Tu carrera en tecnología comienza aquí"
+      subtitle="Taller de programación desde 0 a experto."
+      heroImage={heroImage}
+    >
+      <Link
+        href="https://tally.so/r/3lA8G5"
+        target="_blank"
+        class="flex gap-1 items-center justify-center"
+        rel="noopener">
+        Registrarme
+        <Icon class="text-white w-5 h-5" name="right-arrow" />
+      </Link>
+      <Link
+        size="lg"
+        style="outline"
+        rel="noopener"
+        href="/roadmap"
+        class="flex gap-1 items-center justify-center"
+        target="_blank">
+        Conoce las rutas de aprendizaje
+        <Icon class="text-black w-4 h-4" name="seti:notebook" />
+      </Link>
+    </Hero>
+    <Cta
+      title="Desarrollo de sitios web y apps móviles gratis"
+      message="Consigue practicantes para tus proyectos e ideas"
+    >
+      <Link href="https://tally.so/r/wv2l84" style="inverted">Contrata talento</Link>
+    </Cta>
+    <Stages
+      title="Conoce las etapas de aprendizaje">
+      <Stage
+          title="Para no programadores"
+          description="Da tus primeros pasos en el desarrollo de software. Construye unas bases sólidas para poder elegir correctamente sólo integrarlo en tu día a día y decide si quieres dedicarte tiempo completo al desarrollo de software."
+          primaryRef="https://tally.so/r/3lA8G5"
+          secondaryRef="/roadmap/para-no-programadores"
+          picture={paraNoProgramadoresLogo}
+      ></Stage>
+      <Stage
+        title="Para principiantes (Juniors)"
+        description="Si ya decidiste a qué te quieres dedicar, ahora debes incrementar tu valor al perfeccionar las habilidades que aumentarán tu empleabilidad. Domina las técnicas de desarrollo de software más utilizadas y comienza a compartir lo que sabes con el mundo."
+        picture={paraPrincipiantesLogo}
+        primaryRef="https://tally.so/r/3lA8G5"
+        secondaryRef="/roadmap/para-principiantes"
+      ></Stage>
+      <Stage
+        title="Elige tu Stack personalizado"
+        description="Elegir una especialidad te destacará del resto. Android, iOS, Frontend, Backend, Desktop. Cada Stack tiene una ruta personalizada para ti. Aprenderás los lenguajes de programación, técnicas de desarrollo y administración de base de datos."
+        picture={stackPersonalizadoLogo}
+        primaryRef="https://tally.so/r/3lA8G5"
+        secondaryRef="/roadmap/stack-personalizado"
+      ></Stage>
+      <Stage
+        title="Software Engineering"
+        description="Desde principios básicos como YAGNI, DRY, SOLID hasta técnicas de desarrollo avanzadas como TDD, DDD y Clean Code o Clean Architecture. Cambia tu manera de pensar y de trabajar en equipos de alto rendimiento. Destácate por tus habilidades sociales."
+        picture={softwareEngineeringLogo}
+        primaryRef="https://tally.so/r/3lA8G5"
+        secondaryRef="/roadmap/software-engineering"
+      ></Stage>
+    </Stages>
+    <Hero
+      title="Kotlin Multiplatform"
+      subtitle="Desarrolla sistemas interconectados entre diferentes plataformas aprovechando al máximo las capacidades de Kotlin Multiplatform."
+      heroImage={kotlinMultiplatformLogo}
+    >
+      <Link
+        href="https://tally.so/r/3XDpzY"
+        target="_blank"
+        class="flex gap-1 items-center justify-center"
+        rel="noopener">
+        Registrarme
+        <Icon class="text-white w-5 h-5" name="right-arrow" />
+      </Link>
+      <Link
+        size="lg"
+        style="outline"
+        rel="noopener"
+        href="https://kmp.jesusdmedinac.com/"
+        class="flex gap-1 items-center justify-center"
+        target="_blank">
+        Conoce las rutas de aprendizaje
+        <Icon class="text-black w-4 h-4" name="seti:notebook" />
+      </Link>
+    </Hero>
+  </Container>
+</Layout>
