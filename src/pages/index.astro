@@ -15,6 +15,7 @@ import Link from "@components/ui/link.astro";
 import { Icon } from '@astrojs/starlight/components';
 import Stages from "@components/stages/stages.astro";
 import Stage from "@components/stages/stage.astro"
+import { CardGrid, Card } from '@astrojs/starlight/components';
 ---
 
 <Layout title="Desde0">
@@ -26,7 +27,6 @@ import Stage from "@components/stages/stage.astro"
     >
       <Link
         href="https://tally.so/r/3lA8G5"
-        target="_blank"
         class="bg-paradiso text-white flex gap-1 items-center justify-center rounded-full"
         rel="noopener">
         Registrarme
@@ -37,8 +37,7 @@ import Stage from "@components/stages/stage.astro"
         style="outline"
         rel="noopener"
         href="/roadmap"
-        class="border-charlotte bg-charlotte text-paradiso flex gap-1 items-center justify-center rounded-full"
-        target="_blank">
+        class="border-charlotte bg-charlotte text-paradiso flex gap-1 items-center justify-center rounded-full">
         Conoce las rutas de aprendizaje
         <Icon class="w-4 h-4" name="seti:notebook" />
       </Link>
@@ -80,6 +79,12 @@ import Stage from "@components/stages/stage.astro"
         secondaryRef="/roadmap/software-engineering"
       ></Stage>
     </Stages>
+    <Cta
+      title="Desarrollo de sitios web y apps móviles gratis"
+      message="Consigue practicantes para tus proyectos e ideas"
+    >
+      <Link href="https://tally.so/r/wv2l84" style="inverted" class="rounded-full">Contrata talento gratis</Link>
+    </Cta>
     <Hero
       title="Kotlin Multiplatform"
       subtitle="Desarrolla sistemas interconectados entre diferentes plataformas aprovechando al máximo las capacidades de Kotlin Multiplatform."
@@ -87,7 +92,6 @@ import Stage from "@components/stages/stage.astro"
     >
       <Link
         href="https://tally.so/r/3XDpzY"
-        target="_blank"
         class="bg-paradiso flex gap-1 items-center justify-center rounded-full"
         rel="noopener">
         Registrarme
@@ -98,12 +102,30 @@ import Stage from "@components/stages/stage.astro"
         style="outline"
         rel="noopener"
         href="https://kmp.jesusdmedinac.com/"
-        class="border-charlotte bg-charlotte text-paradiso flex gap-1 items-center justify-center rounded-full"
-        target="_blank">
+        class="border-charlotte bg-charlotte text-paradiso flex gap-1 items-center justify-center rounded-full">
         Conoce la ruta de aprendizaje
         <Icon class="w-4 h-4" name="seti:notebook" />
       </Link>
     </Hero>
+    <Cta
+      title="Desarrollo de sitios web y apps móviles gratis"
+      message="Consigue practicantes para tus proyectos e ideas"
+    >
+      <Link href="https://tally.so/r/wv2l84" style="inverted" class="rounded-full">Contrata talento gratis</Link>
+    </Cta>
+    <br>
+    <br>
+    <br>
+    <br>
+    <h2 class="text-black text-4xl md:text-6xl tracking-tight">
+      Testimonios de estudiantes
+    </h2>
+    <CardGrid stagger>
+      <Card title="Diana - No programadora" class:list={"border-black"}>
+        Primeramente me gustó mucho, y agradezco al profesor por la paciencia para enseñar y forma de explicar cada paso y cada detalle a medida que avanzábamos en la clase. Y cómo va uno aprendiendo las palabras claves en inglés para poder programar.
+        No hay límite de edad para aprender.
+      </Card>
+    </CardGrid>
     <Cta
       title="Desarrollo de sitios web y apps móviles gratis"
       message="Consigue practicantes para tus proyectos e ideas"
