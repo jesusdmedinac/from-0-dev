@@ -11,6 +11,10 @@ export default defineConfig({
 	integrations: [
 		starlight({
 			title: 'Desde0',
+      customCss: [
+        // Path to your Tailwind base styles:
+        './src/custom.css',
+      ],
 			sidebar: [
         {
           label: 'Para no programadores',
@@ -33,7 +37,19 @@ export default defineConfig({
           link: 'https://kmp.jesusdmedinac.com/'
         }
 			],
+      social: {
+        youtube: 'https://www.youtube.com/@jesusdmedinac',
+        linkedin: 'https://www.linkedin.com/in/jesusdmedinac/',
+        facebook: 'https://www.facebook.com/jesusdmedinac',
+        instagram: 'https://www.instagram.com/jesusdmedinac',
+        'x.com': 'https://x.com/JesusDMedinaC',
+        github: 'https://github.com/jesusdmedinac',
+        discord: 'https://discord.gg/nChTf3PdGJ',
+        twitch: 'https://www.twitch.tv/jesusdmedinac',
+      }
 		}),
-    tailwind(), mdx(), sitemap()
+    tailwind(),
+    mdx(), 
+    sitemap(),
 	],
 });

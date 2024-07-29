@@ -24,22 +24,25 @@ const {
   <div class="mt-4 flex justify-between">
     <p class="mt-1 text-xl">{description}</p>
   </div>
-  <Link
-    href={primaryRef}
-    target="_blank"
-    class="flex gap-1 items-center justify-center"
-    rel="noopener">
-    Registrarme
-    <Icon class="text-white w-5 h-5" name="right-arrow" />
-  </Link>
-  <Link
-    size="lg"
-    style="outline"
-    rel="noopener"
-    href={secondaryRef}
-    class="flex gap-1 items-center justify-center"
-    target="_blank">
-    Conoce la ruta de aprendizaje
-    <Icon class="text-black w-4 h-4" name="seti:notebook" />
-  </Link>
+  <div class="mt-4 flex">
+    <Link
+      href={primaryRef}
+      target="_blank"
+      class="bg-paradiso flex gap-1 items-center justify-center rounded-full"
+      rel="noopener">
+      Registrarme
+      <Icon class="text-white w-5 h-5" name="right-arrow" />
+    </Link>
+    <div class="w-2"></div>
+    <Link
+      size="lg"
+      style="outline"
+      rel="noopener"
+      href={secondaryRef}
+      class="border-charlotte bg-charlotte text-paradiso flex gap-1 items-center justify-center rounded-full"
+      target="_blank">
+      Conoce la ruta de aprendizaje
+      <Icon class="w-4 h-4" name="seti:notebook" />
+    </Link>
+  </div>
 </div>

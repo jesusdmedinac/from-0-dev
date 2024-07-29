@@ -1,0 +1,30 @@
+/* Dark mode colors. */
+:root {
+	--sl-color-accent-low: #b9e9ef;  /* Color más claro del logo */
+	--sl-color-accent: #a3dae0;  /* Color principal del logo */
+	--sl-color-accent-high: #78ccd6;  /* Color más oscuro del logo */
+	--sl-color-white: #E7F5FF;  /* Color más claro del logo para simular el blanco */
+	--sl-color-gray-1: #C0D6DF;  /* Gris claro */
+	--sl-color-gray-2: #A9C0C8;  /* Gris un poco más oscuro */
+	--sl-color-gray-3: #93AAB2;  /* Gris medio */
+	--sl-color-gray-4: #7D949C;  /* Gris más oscuro */
+	--sl-color-gray-5: #677E86;  /* Gris aún más oscuro */
+	--sl-color-gray-6: #1F2A35;  /* Gris muy oscuro */
+	--sl-color-gray-7: #1F2A35;  /* Gris casi negro */
+	--sl-color-black: #1F2A35;  /* Negro */
+}
+/* Light mode colors. */
+:root[data-theme='light'] {
+	--sl-color-accent-low: #4ba3ad;  /* Color más claro del logo */
+	--sl-color-accent: #147681;  /* Color principal del logo */
+	--sl-color-accent-high: #116b75;  /* Color más oscuro del logo */
+	--sl-color-white: #000000;  /* Blanco */
+	--sl-color-gray-1: #202838;  /* Gris claro */
+	--sl-color-gray-2: #405060;  /* Gris un poco más oscuro */
+	--sl-color-gray-3: #60707E;  /* Gris medio */
+	--sl-color-gray-4: #80989C;  /* Gris más oscuro */
+	--sl-color-gray-5: #A0B2B6;  /* Gris aún más oscuro */
+	--sl-color-gray-6: #FFFFFF;  /* Gris muy oscuro */
+	--sl-color-gray-7: #FFFFFF;  /* Gris casi negro */
+	--sl-color-black: #FFFFFF;  /* Negro */
+}
