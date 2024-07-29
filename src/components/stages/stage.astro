@@ -11,18 +11,18 @@ const {
   picture,
 } = Astro.props;
 ---
-<div class="group relative">
+<div class="group relative p-8">
   <div class="aspect-h-1 overflow-hidden rounded-md lg:aspect-none group-hover:opacity-75">
     <h2 class="text-2xl font-bold tracking-tight text-gray-900">{title}</h2>
 
     <Picture
       src={picture}
       alt="Front of men&#039;s Basic Tee in black." 
-      class="h-full object-cover object-center lg:h-full"
+      class="px-20 w-full object-cover lg:w-full"
     />
   </div>
   <div class="mt-4 flex justify-between">
-    <p class="mt-1 text-xl">{description}</p>
+    <p class="mt-1 text-l">{description}</p>
   </div>
   <div class="mt-4 flex">
     <Link
