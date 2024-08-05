@@ -21,7 +21,7 @@ export default defineConfig({
           link: '/roadmap/para-no-programadores/',
         },
         {
-          label: '[Próximamente] Para principiantes (Juniors)',
+          label: 'Para principiantes (Juniors)',
           link: '/roadmap/para-principiantes/',
         },
         {

@@ -1,0 +1,313 @@
+---
+title: Stacks
+description: En desarrollo de software un stack es un conjunto de tecnologías utilizadas para crear aplicaciones CRUD en diferentes plataformas.
+hero:
+  actions:
+    - text: Registrarme
+      link: https://tally.so/r/3lA8G5
+      icon: right-arrow
+      variant: primary
+    - text: Conocer la ruta de aprendizaje
+      link: /roadmap/para-no-programadores
+      icon: seti:notebook
+prev:
+  link: /roadmap/para-no-programadores/4
+  label: Language Tour
+next:
+  link: /roadmap/para-no-programadores/6
+  label: Frontend
+---
+
+import { Aside } from '@astrojs/starlight/components';
+
+<Aside title="Referencia">El `stack` tecnológico es el conjunto de tecnologías utilizadas para desarrollar una aplicación, incluidos los lenguajes de programación, los marcos, las bases de datos, las herramientas de front-end (cara que verá el cliente) y back-end (cara de desarrollo que trabajamos en producción) y las API. - [Bambu Mobile](https://bambu-mobile.com/que-es-el-stack-tecnologico/)</Aside>
+
+## ¿Qué es un `Stack` en desarrollo de software?
+
+La palabra `stack` en el contexto del desarrollo de software proviene del término en inglés que significa “pila”. En informática, una “pila” es una estructura de datos que opera bajo el principio LIFO (Last In, First Out), donde el último elemento en entrar es el primero en salir. Sin embargo, en el desarrollo de software, `stack` se utiliza para referirse a un conjunto de tecnologías que se utilizan en conjunto para desarrollar una aplicación o sistema completo.
+
+Un ejemplo común es el “LAMP `stack`”, que incluye Linux (sistema operativo), Apache (servidor web), MySQL (base de datos) y PHP (lenguaje de programación). Otro ejemplo es el “MEAN `stack`”, que incluye MongoDB (base de datos), Express.js (framework de servidor web), Angular (framework de front-end) y Node.js (entorno de ejecución de JavaScript del lado del servidor).
+
+El uso del término `stack` en este sentido se popularizó en las comunidades de desarrollo de software para describir la combinación de tecnologías y herramientas que forman la base de una aplicación o servicio web.
+
+## ¿Cómo saber qué `Stack` necesito?
+
+Aunque no hay una convención sobre qué tecnologías definen el `stack` de desarrollo, existen algunos `Stacks` aceptados por la comunidad. Estos `Stacks` son propuestos por grupos de desarrolladores para desarrollar aplicaciones completas.
+
+Por ejemplo, los `Stacks` LAMP y XAMP son comunmente utilizados para introducir a principiantes en el mundo de desarrollo porque otorgan un entorno controlado y fácil de utilizar. LAMP y XAMP tienen en común lo siguiente: Ambos utilizan Apache como servidor web, MySQL como base de datos y PHP como lenguaje de programación. La diferencia que tiene cáda uno es el sistema operativo en donde se ejecuta el servidor. LAMP utiliza Linux y XAMP utiliza Windows.
+
+<Aside>Si quieres profundizar más sobre estos `stacks` te recomiendo que consultes el siguiente enlace: [Qué tipo de servidor usar](https://achetemele.wordpress.com/2013/04/10/que-tipo-de-servidor-utilizar-wamp-mamp-xampp-lamp/)</Aside>
+
+Para fines prácticos, el `Stack` que elijas dependerá de 3 preguntas claves:
+
+1. ¿Dónde estará tu Frontend?
+2. ¿Dónde estará tu Backend?
+3. ¿Dónde almacenarás los datos?
+
+## ¿Dónde estará tu Frontend?
+
+Para elegir un Frontend debemos tomar en cuenta a nuestros usuarios. Es decir, qué dispositivo utilizan nuestros usuarios. Por ejemplo, si nuestro usuario utiliza una computadora, un teléfono móvil, un navegador, etc.
+
+Casi todas los dispositivos tienen alguna forma de navegar en internet, por lo que crear una aplicación web suele ser la forma más práctica de llegar a la gran mayoría de usuarios.
+
+Aunque el Frontend no es exclusivo de aplicaciones web, es mucho más común referirse a desarrolladores web como Frontend developers. Sin embargo, cualquier desarrollador que se dedique a crear interfaces de usuario podría ser considerado Frontend.
+
+Para fines prácticos, nosotros asumiremos que queremos crear una aplicación web. Eso significa que debemos elegir una tecnología para ejecutar nuestra aplicación.
+
+PHP suele ser un lenguaje muy utilizado por su versatilidad para crear el Frontend y el Backend con el mismo lenguaje. Sin embargo, las herramientas requeridas para comenzar a utilizar el lenguaje suelen ser más complejas que sólo utiizar JavaScript.
+
+JavaScript también requiere herramientas para poderlo utilizar en Frontend y Backend, pero es mucho más sencillo de utilizar en el Front, ya que con un simple archivo HTML estamos listos para crear una aplicación web.
+
+<Aside>Un sitio web es un conjunto de páginas web en un mismo dominio, por ejemplo wikipedia.com. Una aplicación web es un sitio web cuyo propósito suele estar bien acotado para resolver problemas como por ejemplo facebook.com</Aside>
+
+Para este curso crearemos una aplicación para acortar URLs. Para ello crearemos un HTML de la siguiente manera:
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ShortURLDesde0</title>
+</head>
+<body>
+  <h1>ShortURLDesde0</h1>
+  <input type="text" name="url" id="url-to-shorten" placeholder="URL a acortar">
+  <input type="submit" value="Acortar" id="shorten-button">
+  <ul id="shortened-urls">
+  </ul>
+</body>
+</html>
+```
+
+Con este pequeño HTML tenemos nuestra interfaz para acortar URLs. Ahora debemos crear el comportamiento utilizando JavaScript.
+
+```javascript
+// Cargamos los elementos utilizando el DOM
+const urlToShortenInput = document.getElementById('url-to-shorten');
+const shortenButton = document.getElementById('shorten-button');
+const shortenedUrlsList = document.getElementById('shortened-urls');
+// Creamos un arreglo para almacenar los urls que acortaremos
+const shortenedUrls = [];
+
+// Configuramos el evento de click para acortar los urls
+shortenButton.addEventListener('click', () => {
+  // Ejecutamos la función para acortar urls
+  shortURL();
+});
+
+function shortURL() {
+  // Tomamos el valor de nuestro url a acortar
+  const urlToShorten = urlToShortenInput.value;
+  // Si nuestro valor no es falsy agregamos el url a la lista
+  if (urlToShorten) {
+    shortenedUrls.push(urlToShorten);
+    // Ejecutamos la función para dibujar la lista de urls acortados
+    renderShortenedUrls();
+  }
+}
+
+function renderShortenedUrls() {
+  // Eliminamos el contenido de nuestra lista
+  shortenedUrlsList.innerHTML = '';
+  // Recorremos la lista de urls acortados
+  for (let shortenedUrl of shortenedUrls) {
+    // Agregamos un elemento a la lista por cada url acortado
+    shortenedUrlsList.innerHTML += `<li><a href="${shortenedUrl}" target="_blank">${shortenedUrl}</a></li>`;
+  }
+}
+```
+
+## ¿Dónde estará tu Backend?
+
+El Backend suele ser la parte más importante de nuestro `Stack` pero también la más infravalorada debido a que los usuarios no entienden que el Frontend interactúa con ella.
+
+Aunque hoy en día el Frontend y el Backend se consideran como aislados, no siempre se les consideró así. Existen lenguajes de programación que nos permiten crear el Frontend y el Backend. Por ejemplo, PHP:
+
+```php
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consulta de Base de Datos</title>
+</head>
+<body>
+
+<?php
+$servername = "localhost"; // Cambia esto si tu servidor de base de datos está en otro host
+$username = "tu_usuario"; // Tu usuario de base de datos
+$password = "tu_contraseña"; // Tu contraseña de base de datos
+$dbname = "mi_base_de_datos";
+
+// Crear conexión
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+// Verificar conexión
+if ($conn->connect_error) {
+    die("Conexión fallida: " . $conn->connect_error);
+}
+
+// Realizar consulta
+$sql = "SELECT nombre, email FROM usuarios WHERE nombre = 'Juan'";
+$result = $conn->query($sql);
+
+$mensaje = "";
+
+if ($result->num_rows > 0) {
+    // Salida de datos de cada fila
+    while($row = $result->fetch_assoc()) {
+        $mensaje .= "Nombre: " . $row["nombre"]. " - Email: " . $row["email"]. "<br>";
+    }
+} else {
+    $mensaje = "0 resultados";
+}
+
+$conn->close();
+?>
+
+<p id="resultado">
+    <?php echo $mensaje; ?>
+</p>
+
+</body>
+</html>
+```
+
+En este ejemplo podemos ver cómo desde el mismo archivo estamos creando el Frontend y el Backend.
+
+Para entender el Backend lo simplificaremos como el encargado de acceder a los datos y generar una interfaz para el Frontend. ¿Por qué el Frontend no accede directamente a los datos? la respuesta simple es porque no todas las herramientas utilizadas utilizadas para crear aplicaciones de Frontend pueden acceder a los datos. Si bien, PHP nos permite crear un Frontend y un Backend en un solo archivo, al utilizar HTML y JavaScript puros, tenemos la limitante del lenguaje, por lo que debemos recurrir a otras técnicas para conectarnos a los datos.
+
+El Backend suele generar interfaces que el Frontend puede leer. Estas interfaces presentan los datos de la base de datos en un formato que el Frontend puede interpretar y utilizar para actualizar la interfaz gráfica.
+
+Algunos tipos de API son REST y SOAP. Con el mismo ejemplo del acortador de URLs, crearemos una API REST en formato JSON con una tecnología que nos permite utilizar JavaScript para acceder a los datos llamada Node.JS.
+
+### Instalar Node.JS
+
+Para este proyecto utilizaremos [NodeJS LTS 20.16.0](https://nodejs.org/en/download/package-manager). En este sitio podrás seleccionar la configuración más adecuada para tu sistema operativo.
+
+Una vez instalado, podemos comprobar nuesra versión de node y npm:
+
+```shell
+# Verificar la versión de Node
+node -v
+# Verificar la versión de npm
+npm -v
+```
+
+### Crear nuestro Backend
+
+Con estas herramientas configuradas podremos crear un servidor web en nuestra computadora de la siguiente manera:
+
+```javascript
+// Importamos las librerías nativas para crear nuestro servidor
+const http = require('http');
+const url = require('url');
+
+const shortenedUrls = [];
+
+// Creamos el servidor HTTP
+const server = http.createServer((req, res) => {
+    // Analizamos la URL de la solicitud
+    const parsedUrl = url.parse(req.url, true);
+    // Extraemos el nombre de la ruta
+    const pathname = parsedUrl.pathname;
+    // Extraemos el método de la solicitud
+    const method = req.method;
+
+    // Configuramos el formato de la respuesta
+    res.setHeader('Content-Type', 'application/json');
+
+    // Verificamos el método de la solicitud y la ruta solicitada
+    if (method === 'GET' && pathname === '/api/shorturl') {
+      // Tomamos el url que recibimos como parametro en la consulta
+      const urlToShorten = parsedUrl.query.urlToShorten;
+      /*
+       * Creamos un objeto para guardar el url que acortamos
+       * y el URL que hace referencia a este mismo.
+       */
+      const shortenURL = { 
+        urlToShorten, 
+        shortenedUrl: `http://localhost:3000/api/redirect?shortenedUrlIndex=${shortenedUrls.length + 1}` 
+      };
+      shortenedUrls.push(shortenURL);
+      // Definimos el código del estatus de la respuesta
+      res.writeHead(200);
+      // Enviamos la respuesta en formato JSON
+      res.end(JSON.stringify({ 
+        message: 'GET request to /api/shorturl', 
+        shortenURL
+      }));
+    } else if (method === 'GET' && pathname === '/api/redirect') {
+      // Tomamos el url que recibimos como parametro en la consulta
+      const shortenedUrlIndex = parsedUrl.query.shortenedUrlIndex
+      // Redirigimos la solicitud al url original
+      res.writeHead(302, { Location: shortenedUrls[shortenedUrlIndex - 1].url });
+      // Finalizamos la solicitud
+      res.end();
+    }
+});
+
+// Configuramos una función para escuchar las solicitudes del servidor en el puerto 3000
+const PORT = 3000;
+server.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
+});
+```
+
+Con este pequeño servidor web podemos exponer nuestra API que se encargará de acortar los URL de nuestra aplicación web.
+
+## ¿Dónde almacenarás los datos?
+
+Ya tenemos nuestro Frontend y nuestro Backend. Sin embargo, NodeJS no tiene un sistema de almacenamiento o memoria permanente, por lo que los URLs acortados se pierden cada vez que reiniciamos el servidor. Para persistir los datos (Recordarlos con el paso del tiempo) debemos utilizar una base de datos que no sólo almacene los datos sino que tenga un mecanismo con las siguientes características.
+
+### ¿Qué es una base de datos?
+
+Una base de datos es un sistema de información estructurada que persiste con el tiempo. Normalmente la información es digital y por lo tanto, depende de Hardware (Equipos electrónicos físicos) para almacenar la información. Dicho Hardware suele estar contenido en super computadoras cuando se requiere almacenar grandes cantidades de información. Pero para fines de desarrollo de software, casi cualquier computadora moderna puede instalar un sistema de gestión de base de datos ([DBMS](https://es.wikipedia.org/wiki/Sistema_de_gesti%C3%B3n_de_bases_de_datos)) para configurar, crear y manipular datos de forma local, es decir, sólo disponibles en nuestra computadora personal.
+
+### Instalar [SQLite](https://www.sqlite.org/)
+
+Gracias a Node.JS podemos acceder a una gran variedad de bases de datos. Entre las más populares están [MySQL](https://www.mysql.com/), [PostgreSQL](https://www.postgresql.org/) y [MongoDB](https://www.mongodb.com/). Sin embargo, la forma más simple de empezar a aprender sobre base de datos es [SQLite](https://www.sqlite.org/), que como su nombre lo indica, nos permite tener una base de datos muy ligera pero con características potentes para almacenar pequeñas o incluso grandes cantidades de datos si el proyecto crece lo suficiente.
+
+### [SQLite en Node.JS](https://www.sqlitetutorial.net/sqlite-nodejs/)
+
+Esta sección está inspirada en el articulo de [sqlitetutorial](https://www.sqlitetutorial.net/sqlite-nodejs/) en el que explican cómo conectarse y manipular una base de datos utilizando la librería de SQLite3 de node.
+
+Para empezar a utilizar SQLite debemos instalar una librería que pueda conectarse a nuestra base de datos. Gracias a node podemos utilizar npm para instalar dicha librería:
+
+```shel
+npm install sqlite3
+```
+
+Para conectarnos a una base de datos SQLite necesitaremos:
+
+1. Importar el módulo de sqlite3
+2. Mandar a llamar la función de `Database()` del módulo sqlite3 y pasarle la información del archivo de nuestra base de datos, el mode de apertura de la base de datos y una función que se ejecute cuando la base de datos sea creada.
+
+#### Conectándose a una base de datos
+
+Para abrir una conección a una base de datos podemos hacer lo siguiente:
+
+```javascript
+// Importamos el módulo de sqlite3
+// La función verbose permite que los posibles errores sean mucho más claros
+const sqlite3 = require('sqlite3').verbose();
+// Creamos un objeto de nuestra base de datos
+// Con sqlite3.OPEN_CREATE permite que si la base de datos no existe, se cree automáticamente
+let db = new sqlite3.Database('/db/file.db', sqlite3.OPEN_CREATE, (err) => {
+  // Y podemos mostrar los errores de la siguiente manera
+  if (err) {
+    return console.error(err.message);
+  }
+  console.log('Connected to the in-memory SQlite database.');
+});
+```
+
+Es importante cerrar la conneción a nuestra base de datos una vez que terminemos de utilizarla.
+```javascript
+db.close();
+```
+
+## ¿Cómo conectamos todo?
+
+¡Perfecto! ya tenemos nuestro Frontend, Backend y nuestra base de datos. ¿Cómo podemos conectar todo? Pues eso lo veremos las siguientes clases, en las que estudiaremos con un poco más de profundidad cada uno de ellos: [Frontend](https://desde0.jesusdmedinac/roadmap/para-no-programadores/6), [Backend](https://desde0.jesusdmedinac/roadmap/para-no-programadores/7) y [Base de Datos](https://desde0.jesusdmedinac/roadmap/para-no-programadores/8)
