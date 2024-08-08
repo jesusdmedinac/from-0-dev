@@ -82,7 +82,7 @@ Para este curso crearemos una aplicación para acortar URLs. Para ello crearemos
 
 Con este pequeño HTML tenemos nuestra interfaz para acortar URLs. Ahora debemos crear el comportamiento utilizando JavaScript.
 
-```javascript
+```js
 // Cargamos los elementos utilizando el DOM
 const urlToShortenInput = document.getElementById('url-to-shorten');
 const shortenButton = document.getElementById('shorten-button');
@@ -188,7 +188,7 @@ Para este proyecto utilizaremos [NodeJS LTS 20.16.0](https://nodejs.org/en/downl
 
 Una vez instalado, podemos comprobar nuesra versión de node y npm:
 
-```shell
+```bash title="Verificando la versión de node"
 # Verificar la versión de Node
 node -v
 # Verificar la versión de npm
@@ -199,7 +199,7 @@ npm -v
 
 Con estas herramientas configuradas podremos crear un servidor web en nuestra computadora de la siguiente manera:
 
-```javascript
+```js
 // Importamos las librerías nativas para crear nuestro servidor
 const http = require('http');
 const url = require('url');
@@ -275,7 +275,7 @@ Esta sección está inspirada en el articulo de [sqlitetutorial](https://www.sql
 
 Para empezar a utilizar SQLite debemos instalar una librería que pueda conectarse a nuestra base de datos. Gracias a node podemos utilizar npm para instalar dicha librería:
 
-```shel
+```bash title="Instalando sqlite3"
 npm install sqlite3
 ```
 
@@ -288,7 +288,7 @@ Para conectarnos a una base de datos SQLite necesitaremos:
 
 Para abrir una conección a una base de datos podemos hacer lo siguiente:
 
-```javascript
+```js
 // Importamos el módulo de sqlite3
 // La función verbose permite que los posibles errores sean mucho más claros
 const sqlite3 = require('sqlite3').verbose();
@@ -304,7 +304,7 @@ let db = new sqlite3.Database('/db/file.db', sqlite3.OPEN_CREATE, (err) => {
 ```
 
 Es importante cerrar la conneción a nuestra base de datos una vez que terminemos de utilizarla.
-```javascript
+```js
 db.close();
 ```
 

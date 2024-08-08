@@ -40,7 +40,7 @@ De este modo, JavaScript nos permite comunicarnos con el navegador. A través de
 
 En programación imperativa, estas instrucciones son comando como:
 
-```javascript
+```js
 // Crea una variable llamada nombre con el valor Daniel
 let nombre = "Daniel"
 // Crea una variable llamada mensaje concatenando el valor de la variable nombre y anteponiendo la palabra Hola y un espacio
@@ -69,7 +69,7 @@ De esta forma, las clases son representaciones abstractas de objetos en el mundo
 
 En JavaScript podemos definir clase de la siguiente manera:
 
-```javascript
+```js
 class Person {
   name;
 
@@ -89,7 +89,7 @@ Una instancia es la creación de un objeto a través de su clase. Es decir, defi
 
 Pensemos de nuevo en la clase **Persona**. Para definir una instancia de la clase persona utilizaremos su constructor y lo almacenaremos en una variable que podremos utilizar posteriormente.
 
-```javascript
+```js
 let person = new Person("Daniel")
 ```
 
@@ -107,7 +107,7 @@ Es decir, la instancia es la creación de un objeto a partir de una clase. La ra
 
 De esta forma, podemos tener múltiples objetos para realizar lo siguiente:
 
-```javascript
+```js
 let persona1 = new Persona("Daniel")
 let persona2 = new Persona("Tomás")
 
@@ -129,7 +129,7 @@ Para poder entender este paradigma debemos explicar primero qué es una función
 
 Una función representa una rutina o algoritmo de programación. Dicha rutina puede ser utilizada múltiples veces en un programa. Cada vez que se utiliza, en lugar de escribir el código contenido en la rutina, sólo declaramos una llamada a la rutina para indicar a nuestro programa que utiizaremos nuestra función:
 
-```javascript
+```js
 function imprimirMensajeEnConsola(mensaje) {
   console.log(mensaje)
 }
@@ -139,7 +139,7 @@ imprimirMensajeEnConsola("Mensaje");
 
 Cuando definimos una función, más allá de su estructura, en programación funcional debemos tomar en cuenta que las funciones siempre deben de retornar el mismo resultado si se le proporcionan los mismos valores de entrada. Es decir, para una súma de dos números, el resultado debería ser siempre igual.
 
-```javascript
+```js
 function suma(a, b) {
   return a + b;
 }
@@ -176,7 +176,7 @@ De forma imperativa debemos realizar los siguientes pasos para cambiar el color 
 
 <Aside>Vamos a asumir que ya sabes [HTML](https://www.w3schools.com/html/) para el siguiente ejemplo</Aside>
 
-```javascript
+```js
 // Imagina que creamos un color al azar y lo guardamos en una variable llamada randomColor
 let botón = document.getElementById("mi-botón")
 botón.style['background-color'] = randomColor
@@ -192,7 +192,7 @@ En programación declarativa debemos cambiar nuestra forma de pensar.
 
 Veamos cómo cambiamos el color de fondo de un botón en React:
 
-```javascript
+```js
 import { useState } from 'react';
 
 function MiButton() {
@@ -224,7 +224,7 @@ Que algo sea asíncrono significa que puede ejecutarse varias tareas al mismo ti
 
 Para que entender con mayor claridad la diferencia entre síncrono y asíncrono, imagina que tenemos que descargar varios archivos:
 
-```javascript
+```js
 async function descargarArchivo1() { ... }
 async function descargarArchivo2() { ... }
 async function descargarArchivo3() { ... }
@@ -240,7 +240,7 @@ En este ejemplo, para poder descargar cada archivo debemos esperar a que el prim
 
 Ahora, veamos el mismo ejemplo pero con programación asíncrona:
 
-```javascript
+```js
 async function descargarArchivo1() { ... }
 async function descargarArchivo2() { ... }
 async function descargarArchivo3() { ... }

@@ -73,13 +73,13 @@ JavaScript tiene dos tipos de números: Number y BigInt.
 
 El tipo Number es un [valor de punto flotante de doble precisión de 64-bit según la convención de la IEEE 764](https://en.wikipedia.org/wiki/Double_precision_floating-point_format), esto significa que los enteros pueden ser representados entre [-(2<sup>53</sup> − 1)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/MIN_SAFE_INTEGER) y [(2<sup>53</sup> − 1)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/MAX_SAFE_INTEGER) sin perder precision, y números con punto flotante que pueden ser almacenados hasta [1.79 × 10308](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/MAX_VALUE). Entre los números, JavaScript no distingue entre punto flotante y enteros.
 
-```javascript
+```js
 console.log(3 / 2); // 1.5, no 1
 ```
 
 Así que un número entero es en realidad implicitamente un número con punto flotante. Debido al estandar IEEE 754 la precisión de los puntos flotante puede ser imprecisa.
 
-```javascript
+```js
 console.log(0.1 + 0.2); // 0.30000000000000004
 ```
 
@@ -87,7 +87,7 @@ Para las operaciones que esperan número enteros, como las operaciones de bit a 
 
 [Los literales numéricos](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Lexical_grammar#numeric_literals) también pueden tener prefijos para indicar la base numérica (Binaria, octal, decimal o hexadecimal) o un sufijo de exponente.
 
-```javascript
+```js
 console.log(0b111110111); // 503
 console.log(0o767); // 503
 console.log(0x1f7); // 503
@@ -96,7 +96,7 @@ console.log(5.03e2); // 503
 
 El tipo [BigInt](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/BigInt) es un entero de longitud arbitraria. Los BigInt se especifican con un literal numérico y un sufijo `n`.
 
-```javascript
+```js
 console.log(-3n / 2n); // -1n
 ```
 
@@ -104,7 +104,7 @@ console.log(-3n / 2n); // -1n
 
 El objeto [Math](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math)proporciona funciones y constantes matemáticas estándar.
 
-```javascript
+```js
 Math.sin(3.5);
 const circunferencia = 2 * Math.PI * r;
 ```
@@ -124,14 +124,14 @@ Los valores numéricos también incluyen [NaN](https://developer.mozilla.org/en-
 
 Las cadenas de texto en JavaScript son secuencias de caracteres [Unicode UTF-16](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String#utf-16_characters_unicode_code_points_and_grapheme_clusters).
 
-```javascript
+```js
 console.log("Hello, world");
 console.log("你好，世界！"); // Casi todos los caracteres Unicode pueden utilizarse en literales Strings
 ```
 
 Las cadenas se pueden escribir con comillas simples o dobles: JavaScript no distingue entre caracteres y cadenas. Si deseas representar un solo carácter, simplemente utiliza una cadena que conste de ese único carácter.
 
-```javascript
+```js
 console.log("Hello"[1] === "e"); // true
 ```
 
@@ -141,7 +141,7 @@ Las cadenas tienen [métodos de utilidad](https://developer.mozilla.org/en-US/do
 
 El operador `+`, además de ser utilizado para números, también puede ser utilizado para cadenas de texto: cuando lo utilizamos con cadenas de texto, en lugar de sumar, concatena (junta) las cadenas. También podemos utilizar [plantillas](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals) en las cadenas de texto para agregar variables dentro de las cadenas.
 
-```javascript
+```js
 const edad = 25;
 console.log("Tengo " + edad + " años."); // Concatenación de String
 console.log(`Tengo ${edad} años.`); // Plantilla de String (Template Literals en Inglés)
@@ -160,7 +160,7 @@ JavaScript tiene un tipo Boolean con dos posibles valores `true` y `false`. Ambo
 
 Puedes realizar esta conversión de forma explícita utilizando la función `Boolean()`:
 
-```javascript
+```js
 Boolean(""); // false
 Boolean(234); // true
 ```
@@ -177,7 +177,7 @@ Las variables en JavaScript se declaran utilizando una de estas tres palabras cl
 
 `let` permite declarar variables a nivel de bloque. La variable declarada está disponible en el bloque en el que se encuentra.
 
-```javascript
+```js
 let a;
 let nombre = "Simon";
 
@@ -192,21 +192,21 @@ for (let miVariableLet = 0; miVariableLet < 5; miVariableLet++) {
 
 `const` permite declarar variables cuyos valores nunca deben cambiar. La variable está disponible en el bloque en el que se declara.
 
-```javascript
+```js
 const Pi = 3.14; // Declara la variable Pi
 console.log(Pi); // 3.14
 ```
 
 Una variable declarada con const no se puede reasignar, es decir, cambiar su valor.
 
-```javascript
+```js
 const Pi = 3.14;
 Pi = 1; // Esto arrojará un error porque no puedes cambiar el valor de una constante.
 ```
 
 `const` evita que reasignes su valor, pero no evita que cambies los valores de un objeto.
 
-```javascript
+```js
 const obj = {};
 obj.a = 1; // no error
 console.log(obj); // { a: 1 }
@@ -218,7 +218,7 @@ Si declaras una variable sin asignarle ningún valor, su valor será `undefined`
 
 las variables declaradas con `let` y `const` siguen ocupando todo el ámbito en el que están definidas y se encuentran en una región conocida como [zona muerta temporal](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/let#temporal_dead_zone_tdz) antes de la línea de declaración real.
 
-```javascript
+```js
 function fun(x, condicion) {
   if (condicion) {
     console.log(x);
@@ -233,7 +233,7 @@ fun(1, true);
 
 JavaScript tiene tipos dinámicos. Los tipos dinámicos (como se describe en la [sección anterior](/roadmap/para-no-programadores/3#tipos-de-datos)) solo se asocian con valores, pero no con variables. En el caso de `let` las variables declaradas, siempre pueden cambiar su tipo mediante una reasignación.
 
-```javascript
+```js
 let a = 1;
 a = "texto";
 ```
@@ -242,7 +242,7 @@ a = "texto";
 
 Los operadores numéricos de JavaScript incluyen `+`, `-`, `*`, `/`, `%`(resto) y `**`(exponenciación). Los valores se asignan mediante `=`. Cada operador binario también tiene una contraparte de asignación compuesta, como `+=` y `-=`, que se extienden hasta `x = x operador y`.
 
-```javascript
+```js
 x += 5;
 x = x + 5;
 ```
@@ -251,13 +251,13 @@ Puede utilizar `++` y `--` para incrementar y decrementar respectivamente. Estos
 
 El operador `+` también realiza concatenación de textos:
 
-```javascript
+```js
 "hola" + " mundo"; // "hola mundo"
 ```
 
 Si agregas un texto a un número (u otro valor), todo se convierte primero en un texto. Esto puede ser confuso:
 
-```javascript
+```js
 "3" + 4 + 5; // "345"
 3 + 4 + "5"; // "75"
 ```
@@ -266,7 +266,7 @@ Agregar una cadena vacía a algo es una forma útil de convertirlo en una cadena
 
 Las comparaciones en JavaScript se pueden realizar utilizando `<`, `>`, `<=` y `>=`, que funcionan tanto para cadenas como para números. Para la igualdad, el operador de doble igualdad realiza una coerción de tipos si se le asignan tipos diferentes, es decir, no es estricto al comparar los resultados. Por otro lado, el operador de triple igualdad no intenta la coerción de tipos, es decir, es estricto al compararlos y, por lo general, es preferible utilizarlo.
 
-```javascript
+```js
 123 == "123"; // true
 1 == true; // true
 
@@ -278,20 +278,20 @@ Los operadores doble igual y triple igual también tienen sus contrapartes de de
 
 JavaScript también tiene [operadores bit a bit](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators#bitwise_shift_operators) y [operadores lógicos](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators#binary_logical_operators). Cabe destacar que los operadores lógicos no funcionan solo con valores booleanos, sino que funcionan según la "veracidad" del valor.
 
-```javascript
+```js
 const a = 0 && "Hola"; // 0 porque 0 es "falseable"
 const b = "Hola" || "mundo"; // "Hola" porque ambos "Hola" y "mundo" son "veraces"
 ```
 
 Los operadores `&&` y `||` utilizan lógica de cortocircuito, lo que significa que la ejecución del segundo operando depende del primero. Esto resulta útil para comprobar si hay objetos nulos antes de acceder a sus atributos:
 
-```javascript
+```js
 const name = o && o.getName();
 ```
 
 O para almacenar valores en caché (cuando los valores falsos no son válidos):
 
-```javascript
+```js
 const name = cachedName || (cachedName = getName());
 ```
 
@@ -311,7 +311,7 @@ Para una mirada en profundidad a la gramática de JavaScript, consulte la [pági
 
 Las sentencias condicionales son compatibles con [if y else](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/if...else); puedes encadenarlas entre sí:
 
-```javascript
+```js
 let name = "gatitos";
 if (name === "perritos") {
   name += " woof";
@@ -325,7 +325,7 @@ name === "gatitos meow";
 
 JavaScript tiene bucles [while](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/while) y [do...whilebucles](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/do...while). El primero es bueno para bucles básicos; el segundo es para bucles en los que desea asegurarse de que el cuerpo del bucle se ejecute al menos una vez:
 
-```javascript
+```js
 while (true) {
   // un bucle infinito
 }
@@ -338,7 +338,7 @@ do {
 
 [El bucle for](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for) permite proporcionar la información de control para un bucle en una sola línea.
 
-```javascript
+```js
 for (let i = 0; i < 5; i++) {
   // Se ejecuta 5 veces
 }
@@ -346,7 +346,7 @@ for (let i = 0; i < 5; i++) {
 
 JavaScript también contiene otros dos bucles for destacados: [for...of](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for...of), que itera sobre [iterables](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols), especialmente matrices, y [for...in](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for...in), que visita todas las propiedades [enumerables](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Enumerability_and_ownership_of_properties) de un objeto.
 
-```javascript
+```js
 for (const valor of arreglo) {
   // hacer algo con el valor del arreglo
 }
@@ -358,7 +358,7 @@ for (const propiedad in objeto) {
 
 La sentencia `switch` se puede utilizar para múltiples ramas según la verificación de igualdad.
 
-```javascript
+```js
 switch (accion) {
   case "dibujar":
     dibuja();
@@ -377,7 +377,7 @@ Las estructuras de control son declaraciones en JavaScript, lo que significa que
 
 Los errores de JavaScript se manejan mediante la declaración [try...catch](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/try...catch).
 
-```javascript
+```js
 try {
   construirMiSitioWeb("./sitioweb");
 } catch (e) {
@@ -387,7 +387,7 @@ try {
 
 Se pueden generar errores mediante la declaración [throw](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/throw). Muchas operaciones integradas también pueden generar errores.
 
-```javascript
+```js
 function construirMiSitioWeb(directorioDelSitio) {
   if (!laRutaExiste(directorioDelSitio)) {
     throw new Error("El directorio del sitio no existe");
@@ -397,7 +397,7 @@ function construirMiSitioWeb(directorioDelSitio) {
 
 En general, no se puede saber el tipo de error que se acaba de detectar, porque se puede lanzar cualquier cosa desde una declaración `throw`. Sin embargo, normalmente se puede asumir que es una instancia de [Error](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error), como en el ejemplo anterior. Hay algunas subclases de `Error`, como [TypeError](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/TypeError) y [RangeError](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RangeError), que se pueden usar para proporcionar semántica adicional sobre el error. No hay captura condicional en JavaScript: si solo se desea gestionar un tipo de error, es necesario capturar todo, identificar el tipo de error mediante [instanceof](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/instanceof) y, a continuación, volver a lanzar los otros casos.
 
-```javascript
+```js
 try {
   construirMiSitioWeb("./sitioweb");
 } catch (e) {
