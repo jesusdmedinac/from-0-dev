@@ -1,29 +1,15 @@
 ---
 title: Language Tour
 description: JavaScript es un lenguaje de programación versátil que se puede usar de diferentes maneras. Es dinámico, lo que significa que puede cambiar mientras se está ejecutando. Tiene tipos y operadores (que son como las reglas y símbolos matemáticos), así como objetos y métodos estándar (funciones predefinidas que puedes usar).
-hero:
-  actions:
-    - text: Registrarme
-      link: https://tally.so/r/3lA8G5
-      icon: right-arrow
-      variant: primary
-    - text: Conocer la ruta de aprendizaje
-      link: /roadmap/para-no-programadores
-      icon: seti:notebook
-prev:
-  link: /roadmap/para-no-programadores/2
-  label: Conceptos básicos
-next:
-  link: /roadmap/para-no-programadores/4
-  label: Paradigmas
 ---
 
-## Language Tour
-
+import Link from "@components/ui/link.astro";
+import { Icon } from '@astrojs/starlight/components';
 import { LinkCard, CardGrid } from '@astrojs/starlight/components';
 import { Aside } from '@astrojs/starlight/components';
+import Cta from '@components/cta/para-no-programadores/cta.astro';
 
-<Aside title="Nota">Esta lección está inspirada en el sitio web de [Mozilla Developer](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Language_overview)</Aside>
+<Cta></Cta>
 
 JavaScript es un lenguaje de programación versátil que se puede usar de diferentes maneras. Es dinámico, lo que significa que puede cambiar mientras se está ejecutando. Tiene tipos y operadores (que son como las reglas y símbolos matemáticos), así como objetos y métodos estándar (funciones predefinidas que puedes usar).
 
@@ -47,6 +33,8 @@ Aquí te comparto otros Language Tour para que explores aún más:
   description="Un recorrido rápido - Explora las características y la sintaxis de Swift."
   />
 </CardGrid>
+
+<Aside title="Nota">Esta lección está inspirada en el sitio web de [Mozilla Developer](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Language_overview)</Aside>
 
 ### Tipos de datos
 
@@ -416,3 +404,5 @@ try {
 Si ningún elemento de la pila de llamadas detecta un error `try...catch`, el programa se cerrará.
 
 Para obtener una lista completa de declaraciones de flujo de control, consulte la [sección de referencia](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements).
+
+<Cta></Cta>
