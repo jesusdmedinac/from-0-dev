@@ -1,5 +1,7 @@
 /** @type {import('tailwindcss').Config} */
 const defaultTheme = require("tailwindcss/defaultTheme");
+const colors = require('tailwindcss/colors')
+
 module.exports = {
   content: ["./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}"],
   theme: {
@@ -9,6 +11,9 @@ module.exports = {
       },
     },
     colors: {
+      indigo: colors.indigo,
+      'via-sky': colors['via-sky'],
+      emerald: colors.emerald,
       transparent: 'transparent',
       current: 'currentColor',
       white: '#FFFFFF',

@@ -4,7 +4,7 @@ export default function ChatMessages({ messages }) {
   return (
     <>
       {/* Área de Chat */}
-      <main className="flex-grow overflow-y-auto p-4 bg-gray-100">
+      <main className="flex-grow overflow-y-auto p-4 bg-botticelli">
         {messages.map((message, index) => {
           let author = "";
           if (message.role == "user") {

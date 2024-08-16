@@ -1,7 +1,9 @@
 import { useEffect, useState } from 'react';
-import ChatInput from './components/ChatInput.jsx';
-import ChatMessages from './components/ChatMessages.jsx';
-import GeminiAPI from './data/GeminiAPI.tsx';
+import ChatInput from '@maxister/chat/components/ChatInput.jsx';
+import ChatMessages from '@maxister/chat/components/ChatMessages.jsx';
+import GeminiAPI from '@maxister/chat/data/GeminiAPI.tsx';
+import { Constants } from '@maxister/constants.tsx';
+import { IoArrowBackOutline } from "react-icons/io5";
 
 export default function Chat({ geminiKey }) {
   const [messages, setMessages] = useState([]);
@@ -38,13 +40,20 @@ export default function Chat({ geminiKey }) {
   return (
     <>
       {/* Encabezado */}
-      <header className="bg-blue-500 text-white text-center py-4 shadow-md">
-        <h1 className="text-2xl font-bold text-black"><a href="/">Maxister</a></h1>
+      <header className="leading-none flex items-center bg-botticelli rounded-t-lg py-4 px-4 text-paradiso">
+        <a className="" href="/">
+          <IoArrowBackOutline className='size-8'/>
+        </a>
+        <h1 className="text-2xl font-bold px-4">
+          Maxister {Constants.versionName}
+        </h1>
+        <span className='grow'></span>
+        <span className='bg-gradient-to-br from-indigo-500 from-10% via-sky-500 via-30% to-emerald-500 to-90% rounded-full text-white py-2 px-2'>Experimental</span>
       </header>
 
-      <ChatMessages messages={messages} />
+      <ChatMessages messages={messages}/>
       {/* Campo de Entrada */}
-      <footer className="bg-white p-4 shadow-md">
+      <footer className="bg-botticelli rounded-b-lg p-4">
         <ChatInput
           message={message}
           onMessageChange={(message) => {
