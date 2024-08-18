@@ -56,7 +56,7 @@ export default defineConfig({
           items: [
             { label: 'Introducción y Objetivos de carrera', link: '/roadmap/stack-personalizado/1' },
             { label: 'Planeación y Estimación', link: '/roadmap/stack-personalizado/2' },
-            { label: 'Diseño y Architectura de Aplicaciones', link: '/roadmap/stack-personalizado/3' },
+            { label: 'Diseño y Arquitectura de Aplicaciones', link: '/roadmap/stack-personalizado/3' },
             { label: 'Backend Development: RESTful y GraphQL', link: '/roadmap/stack-personalizado/4' },
             { label: 'Frontend Development: UI/UX y Componentes Reutilizables', link: '/roadmap/stack-personalizado/5' },
             { label: 'Base de datos y ORM', link: '/roadmap/stack-personalizado/6' },
