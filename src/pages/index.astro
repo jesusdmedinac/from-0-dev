@@ -15,7 +15,7 @@ import Stages from "@components/stages/stages.astro";
 import Stage from "@components/stages/stage.astro"
 import Testimonies from "@components/testimonies.astro";
 ---
-
+<script type="module" src="https://cdn.jsdelivr.net/npm/@justinribeiro/lite-youtube@1.5.0/lite-youtube.js"></script>
 <Layout title="Desde0">
   <Container>
     <Hero
@@ -41,6 +41,9 @@ import Testimonies from "@components/testimonies.astro";
         <Icon class="w-4 h-4" name="seti:notebook" />
       </Link>
     </Hero>
+    <lite-youtube class="pt-16 w-full aspect-[16/9] rounded-lg" videoid="hluYBL87HJY">
+      <a class="lite-youtube-fallback" href="https://www.youtube.com/watch?v=hluYBL87HJY">Ver en YouTube: "Demo ¿Ya platicaste con Bubble?"</a>
+    </lite-youtube>
     <Cta
       title="Desarrollo de sitios web y apps móviles gratis"
       message="Consigue practicantes para tus proyectos e ideas"
