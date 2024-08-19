@@ -1,5 +1,5 @@
 ---
-import Maxister from '@maxister/chat/chat.jsx';
+import Auth from './Auth';
 ---
 <!DOCTYPE html>
 <html lang="en">
@@ -11,7 +11,7 @@ import Maxister from '@maxister/chat/chat.jsx';
   </head>
   <body>
     <div class="mx-auto p-4 max-w-4xl h-screen flex flex-col">
-      <Maxister client:load geminiKey={import.meta.env.GEMINI_API_KEY}/>
+      <Auth client:only/>
     </div>
   </body>
 </html>

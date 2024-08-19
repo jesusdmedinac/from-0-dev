@@ -1,0 +1,24 @@
+---
+import Chat from './Chat';
+import ProfileButton from './ProfileButton';
+---
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+  </head>
+  <body>
+    <div class="p-4 flex flex-col h-screen">
+      <div class="flex items-center p-2">
+        <span class="grow"></span>
+        <ProfileButton client:only />
+      </div>
+      <div class="mx-auto max-w-4xl w-full h-screen flex flex-col border rounded-lg">
+        <Chat client:only geminiKey={import.meta.env.PUBLIC_GEMINI_API_KEY}/>
+      </div>
+    </div>
+  </body>
+</html>

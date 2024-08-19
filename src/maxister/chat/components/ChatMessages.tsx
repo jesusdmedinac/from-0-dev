@@ -1,15 +1,16 @@
 import { useEffect, useRef } from 'react';
-import Markdown from 'react-markdown'
+import Markdown from 'react-markdown';
+import { type Message } from "@maxister/chat/types/ChatTypes";
 
-export default function ChatMessages({ messages }) {
-  let lastMessageRef = useRef(null);
+export default function ChatMessages({ messages }: { messages: Message[] }) {
+  let lastMessageRef = useRef<HTMLInputElement | null>(null);
   useEffect(() => {
     const {current} = lastMessageRef
     if (current !== null){
       current.scrollIntoView({behavior: "smooth", block: "end"})
     }
     return () => {
-      lastMessageRef = null;
+      lastMessageRef.current = null;
     }
   }, [messages]);
   return (
@@ -19,7 +20,7 @@ export default function ChatMessages({ messages }) {
         {messages.map((message, index) => {
           const markdown = message.content;
           return (
-            message.role == "user" 
+            message.role == "user"
             ? <div key={index} className="mb-4 text-right" ref={lastMessageRef}>
               <div className="bg-paradiso text-white p-3 rounded-lg shadow-md max-w-md ml-auto">
                 <Markdown>{markdown}</Markdown>

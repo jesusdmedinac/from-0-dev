@@ -2,7 +2,7 @@ import { LuSparkles } from "react-icons/lu";
 
 export function ChatButton() {
   const onClick = () => {
-    window.location.href = "./maxister/";
+    window.location.href = "./auth/";
   };
   return (
     <div className="leading-none relative">

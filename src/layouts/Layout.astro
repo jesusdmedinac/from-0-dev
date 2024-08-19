@@ -2,7 +2,7 @@
 import { SEO } from "astro-seo";
 import Footer from "@components/footer.astro";
 import Navbar from "@components/navbar/navbar.astro";
-import ChatApp from "@maxister/chat.app.jsx";
+import ChatAccess from "@maxister/chat.access";
 import "@fontsource-variable/inter/index.css";
 
 export interface Props {
@@ -58,7 +58,7 @@ const makeTitle = title
     <Navbar />
     <slot />
     <Footer />
-    <ChatApp client:load/>
+    <ChatAccess client:load/>
     <style is:global>
       /* Improve Page speed */
       /* https://css-tricks.com/almanac/properties/c/content-visibility/ */

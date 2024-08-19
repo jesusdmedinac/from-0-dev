@@ -16,7 +16,7 @@ module.exports = {
       emerald: colors.emerald,
       transparent: 'transparent',
       current: 'currentColor',
-      white: '#FFFFFF',
+      white: colors.white,
       black: '#000000',
       paradiso: '#107E86',
       charlotte: '#BEEAF2',
