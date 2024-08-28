@@ -7,6 +7,92 @@ import Cta from '@components/cta/para-principiantes/cta.astro';
 
 <Cta></Cta>
 
+Cualquier programador de JavaScript sabe que casi todo en este lenguaje de programación es un objeto: desde matrices hasta funciones, desde expresiones regulares hasta fechas. Podemos decir que lo que no es un tipo de dato primitivo es un objeto. Pero, incluso los tipos de datos primitivos como números o cadenas tienen contenedores de objetos, es decir, son accesibles a través de objetos. Por lo tnato, podemos argumentar que los objetos son vitales en JavaScript y que debemos aprender a usarlos lo mejor que podamos para crear mejores aplicaciones. Una forma, por ejemplo, de usar mejor los objetos es aplicar el paradigma de Programación orientada a Objetos (POO).
+
+Sin embargo, antes de sumergirnos en los principios y patrones de la POO, comencemos por un repaso rápido sobre los fundamentos de los objetos. En particular:
+- Cómo crear y gestionar objetos literales
+- Cómo definir constructores de objetos
+- Qué es un prototipo y cómo utilizarlo
+- La nueva construcción de clases de ECMAScript 2015 y su relación con objetos, constructores y prototipos.
+
+# Fundamentos de objetos en JavaScript
+
+## Cómo crear y gestionar objetos literales
+
+Un objeto es un contenedor de valores combinados para formar una única estrucutra de datos que tiene una identidad particular. Normalmente , de hecho, un objeto se utiliza para representar una entidad específica, como una persona, un pedido, una factura, una reserva, etc., a través de una agregación de datos y funcionalidades.
+
+Los datos se denominan propiedades y se representan mediante pares de nombres y valores. Las funcionalidades se denominan habitualmente métodos y se representan mediante funciones, aunque no sean más que los mismos pares de nombres y valores que para las propiedades, donde los valores resultan ser funciones.
+
+La forma sencilla de crear un objeto en JavaScript es la representación literal, como se muestra en el siguiente ejemplo:
+
+```js
+var objetoVacio = {};
+var persona = { "nombre": "Elía", "apellido": "Cuevas"}
+```
+
+A través de la notación literal, representamos un objeto encerrando sus propiedades y métodos entre llaves. En la primera sentencia, creamos un objeto vacío, un objeto sin propiedades ni métodos; en definitiva, no muy útil pero importante para entender que un objeto es básicamente una lista de pares de valores y, como toda lista, puede estar vacío. 
+
+En la segunda declaración, para definir el objeto persona, enumeramos dos pares de strings separados por comas. Cada par está conformado por dos strings separados por el símbolo de dos puntos `:`. El primer string es el nombre de la propiedad mientras que el segundo representa su valor.
+
+## Propiedades
+
+Para asignar nombres a las propiedades de un objeto, no tenemos las mismas restricciones como para declarar los nombres de las variables en JavaScript. Podemos utilizar cualquier string, aún cuando existe alguna restricción al momento de acceder a la propiedad con un nombre en particular, así como lo veremos más adelante.
+
+Las comillas dobles o simples alrededor del nombre de la propiedad son generalmente opcionales, pero se necesitan cuando el nombre no respeta las reglas de [nomenclatura de variables](https://developer.mozilla.org/es/docs/Web/JavaScript/Guide/Grammar_and_types). Es decir, podemos crear nuestro objeto `person` de la siguiente manera:
+
+```js
+var persona = { nombre: "Elías", apellido: "Cuevas"};
+```
+
+Pero si necesitamos crear un objeto de la siguiente manera, debemos utilizar comillas dobles o simples en el nombre de nuestras propiedades:
+
+```js
+var persona = { "primer-nombre": "Juan", "segundo-nombre": "Carlos"};
+```
+
+Podemos asignarle cualquier valor a las propiedades de nuestros objetos, incluyendo otro objeto. Es decir, podemos anidar objetos:
+
+```js
+var persona = {
+  nombre: "Elías",
+  apellido: "Cuevas",
+  direccion: {
+    calle: "De Elías",
+    ciudad: "Donde Vive Elías"
+  }
+}
+```
+
+Como podemos observar, un objeto con es asignado a la propiedad direccion.
+
+Para acceder a los valores almacenados en la propiedad de un objeto, tenemos dos opciones. La primera opción se le conoce como **dot-notation** (Notación de punto), en la que accedemos a la propiedad que deseamos agregando un punto después del objeto que vamos a utilizar:
+
+```js
+var nombre = persona.nombre;
+```
+
+Esta es la manera más común porque es muy parecida a la mayoría de los lenguajes de programación modernos.
+
+La segunda opción es escribiendo corchetes y agregando en nombre de la propiedad utilizando comillas dobles o simples dentro de los corchetes:
+
+```js
+var nombre = persona["nombre"];
+```
+
+Esta segunda opción es obligatoria cuando el nombre de la propiedad no sigue las reglas de nomenclatura de variables de JavaScript. Por ejemplo, no podemos utilizar **dot-notation** para acceder a una propiedad llamada `first-name`.
+
+Si intentamos acceder a una propiedad que no existe en un objeto, no se genera ningún error, pero obtenemos `undefined` como resultado.
+
+```js
+var edad = persona.edad;
+```
+
+Si intentamos asignarle un valor a una propiedad que no ha sido definida, se crea la propiedad con el valor que le asignamos:
+
+```js
+persona.edad = 100;
+```
+
 WIP
 
-<Cta></Cta>
+<Cta><Cta>
