@@ -93,6 +93,211 @@ Si intentamos asignarle un valor a una propiedad que no ha sido definida, se cre
 persona.edad = 100;
 ```
 
-WIP
+Este ejemplo nos muestra la naturaleza dinámica de los objetos de JavaScript. La estructura de los objetos es muy flexible y puede ser modificada dinámicamente durante la ejecución de un script. Esta funcionalidad nos da una forma alternativa de crear un objeto de forma incremental. En la práctica, en lugar de definir completamente nuestros objetos, podemos empezar por una representación básica y gradualmente completarlo con propiedades que deseemos. Siguiendo este enfoque, podemos definir nuestro objeto persona de la siguiente manera:
 
-<Cta><Cta>
+```js
+var persona = {};
+persona.nombre = "Esteban";
+persona.apellido = "González";
+perona.direccion = {
+  calle: "De Elías",
+  ciudad: "Donde Vive Elías"
+};
+persona.edad = 100;
+```
+
+Además de ser capaces de crear dinámicamente las propiedades de nuestros objetos, también podemos destruirlas en tiempo de ejecución utilizando la declaración `delete`. En el siguiente ejemplo se muestra cómo eliminar la propiedad `direccion` de nuestro objeto persona.
+
+```js
+delete persona.direccion;
+```
+
+## Métodos
+
+Mientras que las propiedades de los objetos representan datos, los métodos representan acciones que un objeto puede realizar. Si revisamos su sintáxis, la definición de un método de un objeto es algo similar a la definición de una propiedad. Por ejemplo:
+
+```js
+function mostrarNombreCompleto() {
+  return "Jeremías Quiróz";
+}
+
+persona.nombreCompleto = mostrarNombreCompleto;
+```
+
+También podemos asignar un método a un objeto dentro de su representación literal como se muestra a continuación:
+
+```js
+var persona = {
+  nombre: "Jeremías",
+  apellido: "Quiróz",
+  mostrarNombreCompleto: function() {
+    return "Jeremías Quiróz";
+  }
+};
+```
+
+ECMAScript2015 nos permite definir métodos en notación literal de una forma más directa:
+
+```js
+var persona = {
+  nombre: "Jeremías",
+  apellido: "Quiróz",
+  mostrarNombreCompleto() {
+    return "Jeremías Quiróz";
+  }
+};
+```
+
+De hecho, la distinción entre propiedades y métodos es de alguna manera artificial en JavaScript. El hecho es, dado que las funciones también son objetos, un método no es nada más que una propiedad que tiene una función asignada.
+
+Incidentalmente, dado que el valor asignado a una propiedad puede cambiar en tiempo de ejecución, es posible que una propiedad, a la que inicialmente se le asignó una función, después se le asigne un valor diferente, como un `string` o un `number`. A diferencia de otros lenguajes de programación, un método no es una condición estable para un miembro de un objeto, no es una característica de una propiedad específica. Podemos simplemente afirmar que una propiedad es un método cuando tiene una función asignada, pero su condición es dinámica.
+
+En el ejemplo anterior, definimos una función que simplemente regresaba un `string` y asignamos ese nombre de la funci'ón a una nueva propiedad del objeto persona. Es importante notar que no estamos asignando el resultado de la función, sino la función.
+
+La propiedad `nombreComleto`, dado que se le fue asignada una función, es de hecho un método. Para ejecutarlo, debemos acceder a él agregando paréntesis como una función cualquiera:
+
+```js
+var nombreYApellido = persona.nombreCompleto();
+```
+
+Por supuesto, podemos asignar funciones anónimas a una propiedad directamente:
+
+```js
+persona.nombreCompleto = function () {
+  return "Jeremías Quiróz";
+}
+```
+
+El método que acabamos de definir en el ejemplo no es muy útil. Siempre mostrará el mismo `string` aún si asignamos un valor diferente a las propiedades nombre y apellido del objeto persona. Sería útil tener un modo de mostrar el valor actual de las propiedades.
+
+JavaScript nos permite conseguirlo a través de la palabra reservada `this`. `this` representa al objeto cuando el método es invocado. Entonces, podemos rescribir nuestro método de la siguiente manera:
+
+```js
+persona.nombreCompleto = function() {
+  return this.nombre + " " + this.apellido;
+};
+```
+
+Esto nos garantisa mostrar el valor actual de nuestrar propiedades del objeto que estemos utilizando.
+
+## Object constructors
+
+La creación de un objeto, como vimos en los ejemplos, es muy fácil si utilizamos la notación literal. No necesitamos definir una clase, sólo creamos directamente el objeto cuando lo necesitamos, y afortunadamente podemos cambair su estructura durante la ejecución de nuestro script.
+
+Ahora, supangamos que necesitamos múltiples objetos que tengan el mismo tipo, por ejemplo más objetos personas, que compartan la misma estructura.
+
+Utilizando la notación literal, tendremos que repetir la definición por cada objeto que queramos crear, lo cuál es esencial para identificar a una persona en particular pero innecesariamente repetitivo para miembros constantes como los métodos. En otras palabras, utilizando la notación literal tendremos un resultado no reutilizable. Por ejemplo, si queremos crear dos objetos persona, necesitamos escribir el siguiente código:
+
+```js
+var jeremíasQuiróz = {
+  nombre: "Jeremías",
+  apellido: "Quiróz",
+  direccion:  {
+    calle: "De Jeremáis",
+    ciudad: "Donde Vive Jeremías"
+  },
+  mostrarNombreCompleto = function() {
+    return this.nombre + " " + this.apellido
+  }
+};
+var marioOzalba = {
+  nombre: "Mario",
+  apellido: "Ozalba",
+  direccion:  {
+    calle: "De Mario",
+    ciudad: "Donde Vive Mario"
+  },
+  mostrarNombreCompleto = function() {
+    return this.nombre + " " + this.apellido
+  }
+};
+```
+
+Por lo tanto, para poder evitar definir objetos con la misma estructura desde 0, podemos utilizar un **constructor** - una función de JavaScript que se invoka utilizando el operador `new`. Veamos como podemos crear un constructor para el objeto persona:
+
+```js
+function Persona() {
+  this.nombre = "";
+  this.apellido = "";
+  this.direccion = "";
+  this.correoElectronico = "";
+  this.mostrarNombreCompleto = function() {...};
+}
+```
+
+Esta función define las propiedades de nuestro objeto asignandolas a la palabra reservada `this` y asignando valores por defecto. Aún cuando este constructor pueda parecer innecesario dado que asigna sólo strings vacíos a las propiedades, también define una estructura en común para cualquier objeto creado por este constructor. Así que, para crear un objeto de tipo `persona`, debemos llamar la función utilizando el operador `new` antes:
+
+```js
+var jeremíasQuiróz = new Persona();
+jeremíasQuiróz.nombre = "Jeremías";
+jeremíasQuiróz.apellido = "Quiróz";
+
+var marioOzalba = new Persona();
+marioOzalba.nombre = "Mario";
+marioOzalba.apellido = "Ozalba";
+```
+
+De esta manera, cuando queramos crear múltiples objetos con la misma estructura, nos limitaremos a nosotros mismos a asignar sólo los valores específicos que distinguen uno de nuestros objetos de los demás.
+
+Como podemos observar, el nombre dato a nuestro constructor empieza con mayúscula. Esto no es necesario para JavaScript, pero es una convención utilizada para ayudar a distinguie las funciones regulares de los constructores.
+
+En la definición de un constructor, podemos esperar la presencia de parametros que puedan ser utilizados para inicializar nuestro objeto. Por ejemplo:
+
+```js
+function Persona(nombre, apellido) {
+  this.nombre = nombre;
+  this.apellido = apellido;
+  this.direccion = "";
+  this.correoElectronico = "";
+  this.mostrarNombreCompleto = function () {...};
+}
+```
+
+Esto nos permite crear e inicializar un objeto especificando valores directamente en la llamada del constructor:
+
+```js
+var jeremíasQuiróz = new Persona("Jeremías", "Quiróz");
+var marioOzalba = new Persona("Mario", "Ozalba");
+```
+
+Es muy importante utilizar el operador `new` cuando creamos un objeto a través de un constructor. En realidad, si olvidamos utilizarlo, lo que obtendremos no será la creación de un objeto, pero la ejecución de una función, con resultados impredecibles. Por ejemplo, supongamos que intentamos crear una objeto persona omitiendo el operador `new`:
+
+```js
+var jeremíasQuiróz = Persona();
+```
+
+El valor de la variable `jeremíasQuiróz` será `undefined`, dado que la función Person() no regresa ningún valor. Además, todas las propiedades y métodos definidos en el cuerpo de la función serán asignados a un objeto representado por la palabra reservada `this` en la ejecución del contexto de la función, lo que podría ser por ejemplo el objeto global `window` de nuestro navegador. Esta asignación puede redefinir valores de variables con el mismo nombre causando efectos adversos que dificulten la predictibilidad al momento de depurar nuestro código.
+
+Podemos reducir este riesgo adverso utilizando `strict mode`:
+
+```js
+function Persona() {
+  "use strict";
+  ...
+}
+```
+
+En `strict mode`, el valor del objeto representado por la palabra reservada `this` es `undefined` durante la ejecución de la función. Esto genera un error en tiempo de ejecución cuando intentamos acceder a la propiedad de un objeto cuando no existe, así evitamos invocaciones no deseadas al constructor.
+
+Desafortunadamente, esta forma no es suficiente cuando el constructor está definido dentro de un `namespace`:
+
+```js
+var humanidad = {
+  ...
+  Persona: function(nombre, apellido) {
+    'use strict';
+    this.nombre = nombre;
+    this.apellido = apellido;
+  }
+};
+
+var jeremíasQuiróz = humanidad.Persona("Jeremías", "Quiróz");
+```
+
+En este caso, la palabra reservada `this` representa al objeto `humanidad`, así que no tendremos un error en tiempo de ejecución que nos advierta sobre el uso incorrecto del construcotr, sino que las propiedades `nombre` y `apellido` serán asignada al objeto `humanidad`.
+
+## El constructor Object()
+
+
+
+<Cta></Cta>
