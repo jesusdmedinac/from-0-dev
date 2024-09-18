@@ -7,6 +7,7 @@ import "@fontsource-variable/inter/index.css";
 
 export interface Props {
   title: string;
+  maxisterEnabled: boolean;
 }
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site).toString();
@@ -16,7 +17,7 @@ const resolvedImageWithDomain = new URL(
   Astro.site
 ).toString();
 
-const { title } = Astro.props;
+const { title, maxisterEnabled = false } = Astro.props;
 
 const makeTitle = title
   ? title
@@ -58,7 +59,7 @@ const makeTitle = title
     <Navbar />
     <slot />
     <Footer />
-    <ChatAccess client:load/>
+    { maxisterEnabled && <ChatAccess client:load/>}
     {/*
     <div class="fixed bottom-16 left-16 z-999 border rounded-lg">
       <script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="jesusdmedinac" data-color="#ffffff" data-emoji="☕"  data-font="Comic" data-text="Invítame un café" data-outline-color="#000000" data-font-color="#000000" data-coffee-color="#FFDD00" ></script>

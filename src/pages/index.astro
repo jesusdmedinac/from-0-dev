@@ -16,7 +16,7 @@ import Stage from "@components/stages/stage.astro"
 import Testimonies from "@components/testimonies.astro";
 ---
 <script type="module" src="https://cdn.jsdelivr.net/npm/@justinribeiro/lite-youtube@1.5.0/lite-youtube.js"></script>
-<Layout title="Desde0">
+<Layout title="Desde0" maxisterEnabled={true}>
   <Container>
     <Hero
       title="Tu carrera en tecnología comienza aquí"
@@ -50,6 +50,7 @@ import Testimonies from "@components/testimonies.astro";
     >
       <Link href="https://tally.so/r/wv2l84" style="inverted" class="rounded-full">Contrata talento gratis</Link>
     </Cta>
+    <iframe class="airtable-embed" src="https://airtable.com/embed/appb6Vz7zTl8XL3Iy/shrer32dR4rvJClre" width="100%" height="564vh" style="background: transparent; border: 1px solid #ccc;"></iframe>
     <Stages
       title="Conoce las etapas de aprendizaje">
       <Stage
