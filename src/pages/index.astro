@@ -16,11 +16,23 @@ import Stage from "@components/stages/stage.astro"
 import Testimonies from "@components/testimonies.astro";
 ---
 <script type="module" src="https://cdn.jsdelivr.net/npm/@justinribeiro/lite-youtube@1.5.0/lite-youtube.js"></script>
-<Layout title="Desde0" maxisterEnabled={true}>
+<Layout maxisterEnabled={true} seoProps={{
+  title: "Taller de programación Desde0 a experto.",
+  description: "Taller de programación Desde0 a experto.",
+  canonical: "https://programaciondesde0.com",
+  openGraph: {
+    basic: {
+      title: "Taller de programación Desde0 a experto.",
+      url: "https://programaciondesde0.com",
+      type: "website",
+      image: "https://programaciondesde0.com/index.png",
+    },
+  }
+}}>
   <Container>
     <Hero
       title="Tu carrera en tecnología comienza aquí"
-      subtitle="Taller de programación desde 0 a experto."
+      subtitle="Taller de programación Desde0 a experto."
       heroImage={heroImage}
       heroAlt="Instructor Jesús Daniel Medina Cruz"
     >
