@@ -298,6 +298,229 @@ En este caso, la palabra reservada `this` representa al objeto `humanidad`, así
 
 ## El constructor Object()
 
+Hemos visto como el uso de un constructor nos ofrece un alto nivel de abstracción en la creación de objetos. En esta sección, exploraremos un constructor particular proveniente de JavaScript, el constructor `Object()`.
 
+Este constructor nos permite crear un objeto genérico:
+
+```js
+var persona = new Object();
+persona.name = "Francisco";
+persona.apellido = "Lainez";
+```
+
+En este ejemplo, utilizamos el operador `new`para crear una instancia de un objeto vacío y luego creamos propiedades asignandole valores, así como en la notación literal.
+
+De hecho, al crear un objeto utilizando la notación literal o creandolo a través del constructor `Object()` es lo mismo. Cada objeto creado utilizando la notación literal utiliza `Object()` de forma implicita. Podemos comprobarlo accediendo la propiedad `constructor`de cada objeto:
+
+```js
+var persona = {};
+console.log(persona.constructor === Object); // true
+```
+
+El constructor `Object()` también es capaz de generar intancias de objetos desde cualquier expresión JavaScript:
+
+```js
+var numero = new Object(100);
+var otroNumero = new Object(2*2);
+var texto = new Object("Hola mundo");
+var persona = new Object({ nombre: "Francisco", apellido: "Lainez" });
+```
+
+A diferencia de la última sentencia, la es equivalente a la creación de un objeto a través de su representación literal, las primeras tres sentencias crean un objeto desde un tipo de dato primitivo, como un número o un texto. El resultado no es solo un valor numérico o de texto, sino un objeto especializado en manejar valores numericos y de texto.
+
+Para entender más a profundidad el constructor `Object()`, podemos revisar su definición en [MDN](https://developer.mozilla.org/es/docs/Web/JavaScript/Reference/Global_Objects/Object).
+
+## Prototypes de Object
+
+La flexibilidad de los objetos en JavaScript es expresada principalmente a través de la capacidad de cambiar su estructura aún después de su creación. Aún utilizando un constructor para crear un objeto, seguimos tenidno esta posibilidad. Por ejemplo, podemos escribir el siguiente código:
+
+```js
+var franciscoLainez = new Persona("Francisco", "Lainez");
+var marioOzalba = new Persona("Mario", "Ozalba");
+
+franciscoLainez.saludos = function() {
+  console.log("Hola " + this.name + " " + this.apellido);
+};
+```
+
+Este código creará un nuevo método `saludos()` para el objeto `franciscoLainez` sin afectar la estructura de `marioOzalba`.
+
+Básicamente, al crear objetos, podemos comenzar desde una estructura común definida por su constructor y luego personalizarla a nuestras necesidades.
+
+Pero, ¿cómo podemos cambiar la estructura de todos los objetos creados utilizando un constructor? Por ejemplo, supongamos que después de crear un objeto utilizando el constructor `Persona()`, queremos que todas las intancias de `Persona` tengan un método llamado `saludos()`. Podemos lograrlo a través de una de las funciones más interesantes de la programación orientada a objetos en JavaScript, el `prototype`.
+
+En nuestro caso, lo haremos de la siguiente manera:
+
+```js
+Persona.prototype.saludos = function() {
+  console.log("Hola " + this.name + " " + this.apellido);
+};
+```
+
+Esta sentencia indica que todos los objetos creados utilizando el constructor `Persona()` tendrán instantáneamente disponible también el método `saludos()`.
+
+Para ser precisos, el nuevo método no se añade directamente a cada objeto, sino que es accesible como si fuera su método. Esto es posible gracias al mecanismo de `prototipos` de JavaScript. Este mecanismo es la base de la herencia en Programación Orientada a Objetos en JavaScript.
+
+En JavaScript, el `prototype` de un objeto es un tipo de referencia de otro objeto. Los objetos creados a través de la notación literal referencian implícitamente al constructor `Object()` como su prototipo.
+
+Cuando creamos un objeto utilizando un constructor, su objeto prototipo es el prototipo del constructor.
+
+Si intentamos acceder a una propiedad o método de un objeto que el objeto por si mismo no tiene, JavaScript lo buscará en las propiedades y métodos de su `prototype`. Por ejemplo, en nuestro ejemplo anterior, si intentamos acceder al método `saludos()` de nuestro objeto `marioOzalba`, JavaScript no lo encuentra entre los métodos, pero lo encontrará entre los métodos de su `prototype`.
+
+El `prototype` de un objeto puede a su vez tener otro `prototype`. En este caso, la búsqueda de una propiedad o método va a seguir la cadena de prototipos hasta que se encuentre o hasta que se llegue al final de la cadena.
+
+Los objetos nativos de JavaScript tienen una referencia a su `prototype` también. En la mayoría de los casos, su manejo es muy similar al manejo de prototipos de objetos creados a través de constructores. Esto nos permite extender funcionalidades no propias de los objetos nativos de una forma muy elegante.
+
+Por ejemplo, si queremos crear un método para agregar un espacio disponible para todos los objetos de tipo `String`, podemos hacerlo de la siguiente manera:
+
+```js
+String.prototype.espacioALaIzquierda = function(ancho, caracter) {
+  var resultado = this;
+  caracter = caracter || ' ';
+  
+  if (this.length < ancho) {
+    resultado = new Array(ancho - this.length + 1).join(caracter) + this;
+  }
+  return resultado;
+}
+```
+
+Con esta definición podemos utilizar `espacioALaIzquierda()` en cualquier string de JavaScript:
+
+```js
+var texto = "Hola";
+var textoConEspacio = texto.espacioALaIzquierda(10, "0");
+console.log(textoConEspacio); // "000000Hola"
+```
+
+## Utilizando clases
+
+Hasta ahora, hemos creado objetos utilizando dos mecanismos: La notación literal y los constructores. Ambos mecanismos nos permiten crear objetos de una forma muy sencilla, sin muchas formalidades.
+
+Sin embargo, la mayoría de los desarrolladores están acostumbrados a crear objetos desde el constructor de una clase. El hecho es que muchos lenguajes de Programación Orientada a Objetos permiten que los desarrolladores definan clases y creen objetos utilizando esas clases.
+
+Las especificaciones de ECMAScript 2015 (También conocidas como ECMAScript 6 o ES6) introdujeron el constructor `class`en JavaScript también. Sin embargo, este constructor no tiene nada que ver con las clases tradicionales del paradigma de Programación Orientada a Objetos.
+
+Mientras que en otros lenguajes, como Java o C#, una clase es una representación abstracta de la estructura de un objeto, en JavaScript, el contructor `class` es solo una simplificación sintáctica para crear objetos de la forma que ya vimos anteriormente. El constructor `class` de JavaScript provee una sintaxis más simple y clara de manejar constructores, prototipos y herencia.
+
+El nuevo constructor `class` crea un orden entre las diferentes formas de crear objetos y nos insita a aplicar mejores prácticas el manejo de prototipos.
+
+Veamos como definir una clase utilizando el constructor `class`:
+
+```js
+class Persona {
+  constructor(nombre, apellido) {
+    this.nombre = nombre;
+    this.apellido = apellido;
+  }
+}
+```
+
+Esta clase define un constructor para objetos de tipo `Persona`. Esto es totalmente equivalente con el viejo estilo de JavaScript:
+
+```js
+function Persona(nombre, apellido) {
+  "use strict";
+  this.nombre = nombre;
+  this.apellido = apellido;
+}
+```
+
+Si utilizamos la sentencia `typeof` podemos comprobar que `Persona` sigue siendo una función:
+
+```js
+console.log(typeof Persona); // "function"
+```
+
+Podemos crear un objeto utilizando la clase `Persona` de la misma manera que lo hacemos con los constructores tradicionales:
+
+```js
+var franciscoLainez = new Persona("Francisco", "Lainez");
+```
+
+Sin embargo, a diferencia de un constructor, no podemos invocar una clase como una función:
+
+```js
+var persona = Persona("Francisco", "Lainez"); // TypeError: Class constructor Persona cannot be invoked without 'new'
+```
+
+Esto asegura que no tengamos el riesgo de los efectos adversos que afectan a los constructores tradicionales.
+
+Podemos asignar la definición de una clase a una variable y después utilizar la variable como un constructor:
+
+```js
+const Persona = class {
+  constructor(nombre, apellido) {
+    this.nombre = nombre;
+    this.apellido = apellido;
+  }
+}
+```
+
+Desde un punto de vista sintáctico, una clase es una colección de métodos dentro de un bloque `{}` identificado por su nombre.
+
+Uno de estos métodos es el `constructor()`, cuya tarea es definir e inicializar las propiedades del objeto:
+
+```js
+class miClase {
+  constructor(valor1, valor2) {
+    this.valor1 = valor1;
+    this.valor2 = valor2;
+    this.valor3 = "";
+  }
+
+  metodo1() {
+    ...
+  }
+
+  metodo2() {
+    ...
+  }
+}
+```
+
+El constructor de una clase es un método con el nombre reservado `constructor`. No puedes tener más de un método constructor por clase.
+
+El método constructor retorna, por defecto, la nueva instancia si no tiene un `return` explícito, como un constructor tradicional en JavaScript. Sin embargo, es posible sobreescribir el comportamiento por defecto insertando un `return` el el cuerpo del constructor:
+
+```js
+class MiClase {
+  constructor(valor) {
+    this.valor = valor;
+    return { propiedad1: valor, propiedad2: "" };
+  }
+}
+
+var instancia = new MiClase("Hola");
+```
+
+Todos los métodos definidos en una clase se añaden a su `prototype`. La propiedad `prototype` de una clase es el prototipo que los objetos creados con dicha clase heredarán.
+
+La elección de agregar métodos al `prototype` de una clase es el resultado de aplicar una mejor práctica común. Dado que usualmente métodos no son dinámicamente actualizados, al agregarlos al `prototype`, esto nos permite optimizar el manejo de memoria. De hecho, si los métodos no son agregados al `prototype`, entonces deben de ser replicados en cada nuevo objeto creado con una necesidad de memoria proporcional. Los métodos agregados al `prototype` asegura que solo tengamos una sola copia de los métodos en memoria.
+
+A diferencia de las funcioens, las clases no son `hoisted`. Esto significa que mientras que una función puede ser utilizada antes de su definición, una clase no:
+
+```js
+var persona = new Persona(); // ReferenceError: Persona is not defined
+
+class Persona {
+  constructor(nombre, apellido) {
+    this.nombre = nombre;
+    this.apellido = apellido;
+  }
+}
+```
+
+Estas funcionalidades de las clases descritas son las básicas. Si quieres aprender más sobre clases en JavaScript, puedes revisar la documentación oficial de [MDN](https://developer.mozilla.org/es/docs/Web/JavaScript/Reference/Classes).
+
+# Resumen
+
+En esta clase hemos visto algunos conceptos relacionados con la administración de objetos en JavaScript.
+
+Exploramos dos formas de crear objetos: La notación literal y los constructores. El primero es muy simple pero no tan práctico cuando necesitamos generalización, mientras que el segundo es un poco más completo pero efectivo.
+
+También vimos el nuevo constructor `class` y analizamos como simplifica la definición de constructores de objetos y el uso de prototipos.
+
+Ahora estás listo para explorar más a fondo los objetos en JavaScript. En las siguientes clases utilizaremos lo aprendido, así que siempre puedes volver a este tema para repasar los conceptos.
 
 <Cta></Cta>

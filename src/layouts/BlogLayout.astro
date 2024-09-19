@@ -6,7 +6,19 @@ import Layout from "@layouts/Layout.astro";
 const { frontmatter } = Astro.props;
 ---
 
-<Layout title={frontmatter.title} maxisterEnabled={false}>
+<Layout maxisterEnabled={false} seoProps={{
+  title: frontmatter.title,
+  description: frontmatter.description,
+  canonical: frontmatter.canonical,
+  openGraph: {
+    basic: {
+      title: frontmatter.title,
+      url: frontmatter.canonical,
+      type: "website",
+      image: frontmatter.image,
+    },
+  }
+}}>
   <Container>
     <div class="mx-auto max-w-[735px] mt-14">
       <span class="text-blue-400 uppercase tracking-wider text-sm font-medium">
