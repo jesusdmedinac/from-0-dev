@@ -1,12 +1,274 @@
 ---
 title: Desarrollo Frontend
-description: WIP
+description: El desarrollo Frontend es una parte esencial del desarrollo de aplicaciones modernas. Se centra en la creación de interfaces de usuario atractivas y funcionales que interactúan con el usuario final.
 ---
 
 import Cta from '@components/cta/para-principiantes/cta.astro';
+import { Aside } from '@astrojs/starlight/components';
 
 <Cta></Cta>
 
-WIP
+El desarrollo Frontend es una parte esencial del desarrollo de aplicaciones modernas. Se centra en la creación de interfaces de usuario atractivas y funcionales que interactúan con el usuario final.
+
+Gracias al DOM (Document Object Model), el navegador puede representar y interactuar con el contenido web. Sin embargo, el DOM no es parte de la especificación de JavaScript, sino más bien una API proporcionada por los navegadores web.
+
+DOM sigue el paradigma de programación imperativa, lo que significa que se centra en describir los pasos que el navegador debe seguir para realizar una tarea específica. Esto hace que el DOM sea fácil de entender y depurar, pero puede volverse ineficiente para grandes aplicaciones web.
+
+En lugar de eso, el desarrollo Frontend se ha vuelto más dinámico y modular, utilizando frameworks como React, Vue y Angular. Estos frameworks utilizan el paradigma de programación declarativa, lo que significa que se centra en describir lo que se quiere, en lugar de cómo hacerlo. Esto hace que los desarrolladores Frontend puedan crear interfaces de usuario más complejas y dinámicas con menos código.
+
+Además, el desarrollo Frontend se ha vuelto más interactivo y en tiempo real, utilizando tecnologías como WebSockets y Server-Sent Events. Esto permite que las aplicaciones web sean más interactivas y en tiempo real, lo que es esencial para aplicaciones como juegos y chat en vivo.
+
+En conclusión, el desarrollo Frontend es una parte esencial del desarrollo de aplicaciones modernas. Se centra en la creación de interfaces de usuario atractivas y funcionales que interactúan con el usuario final. Utilizando el DOM, frameworks como React, Vue y Angular, y tecnologías como WebSockets y Server-Sent Events, los desarrolladores Frontend pueden crear aplicaciones web más dinámicas, interactivas y en tiempo real.
+
+# Frontend Frameworks
+
+Existen múltiples alternativas para el desarrollo de aplicaciones Frontend, cada una con sus propias características y ventajas. A continuación, se presentan algunas de las más populares:
+
+## React
+
+React es una biblioteca de JavaScript para construir interfaces de usuario. Fue desarrollado por Facebook y es actualmente mantenido por Meta. React utiliza el paradigma de programación declarativa, lo que significa que se centra en describir lo que se quiere, en lugar de cómo hacerlo. Esto hace que los desarrolladores Frontend puedan crear interfaces de usuario más complejas y dinámicas con menos código.
+
+React utiliza un sistema de componentes para organizar el código, lo que permite la reutilización de código y la creación de interfaces de usuario más fácilmente. Además, React utiliza un sistema de estado para mantener la sincronización entre el estado del componente y la interfaz de usuario.
+
+## Vue
+
+Vue es un framework progresivo de JavaScript para construir interfaces de usuario. Fue desarrollado por Evan You y es actualmente mantenido por Meta. Vue utiliza el paradigma de programación declarativa, lo que significa que se centra en describir lo que se quiere, en lugar de cómo hacerlo. Esto hace que los desarrolladores Frontend puedan crear interfaces de usuario más complejas y dinámicas con menos código.
+
+Vue utiliza un sistema de componentes para organizar el código, lo que permite la reutilización de código y la creación de interfaces de usuario más fácilmente. Además, Vue utiliza un sistema de estado para mantener la sincronización entre el estado del componente y la interfaz de usuario.
+
+## Angular
+
+Angular es un framework de JavaScript para construir aplicaciones web. Fue desarrollado por Google y es actualmente mantenido por Meta. Angular utiliza el paradigma de programación declarativa, lo que significa que se centra en describir lo que se quiere, en lugar de cómo hacerlo. Esto hace que los desarrolladores Frontend puedan crear interfaces de usuario más complejas y dinámicas con menos código.
+
+Angular utiliza un sistema de componentes para organizar el código, lo que permite la reutilización de código y la creación de interfaces de usuario más fácilmente. Además, Angular utiliza un sistema de estado para mantener la sincronización entre el estado del componente y la interfaz de usuario.
+
+## Otros
+
+Tardaríamos mucho tiempo hablando de cada framework, pero aquí tienes una lista de otros frameworks que puedes explorar:
+
+- [Svelte](https://svelte.dev/)
+- [Ember](https://emberjs.com/)
+- [Preact](https://preactjs.com/)
+- [Solid](https://solidjs.com/)
+- [Qwik](https://qwik.builder.io/)
+- [Astro](https://astro.build/)
+- [Remix](https://remix.run/)
+- [Next](https://nextjs.org/)
+- [Nuxt](https://nuxtjs.org/)
+
+# React para principiantes
+
+<Aside title="Nota">Una de las mejores maneras de aprender React es aprender cada concepto paso a paso. Si prefieres aprender haciendo y quieres ver algo tangible de manera rápida, consulta el siguiente tutorial oficial de React: [Tutorial: Tres en línea](https://es.react.dev/learn/tutorial-tic-tac-toe)</Aside>
+
+En esta sección aprenderás a crear, adaptar y mostrar de forma condicional componentes de React.
+
+## Mi primer componente
+
+Las aplicaciones de React se construyen a partir de piezas independientes de UI llamadas componentes. Un componente de React es una función de JavaScript a la que le puedes agregar un poco de marcado (Algo parecido a HTML pero con JSX). Los componentes pueden ser tan pequeños como un botón, o tan grandes como una página entera. En el siguiente ejemplo podemos ver un componente `Gallery` que renderiza tres componentes `ProfileCard` en una lista.
+
+```js
+function Profile() {
+  return (
+    <img
+      src="https://i.pravatar.cc/128"
+      alt="Pravater"
+    />
+  );
+}
+
+export default function Gallery() {
+  return (
+    <section>
+      <h1>Personas</h1>
+      <Profile />
+      <Profile />
+      <Profile />
+    </section>
+  );
+}
+```
+
+![gallery example](../../../../assets/gallery-personas.png)
+
+Veamos como podemos construir nuestro primer componente.
+
+### Commponentes: Elementos básicos para construir UIs
+
+En la Web, HTML nos permite crear documentos estructurados con su conjunto integrado de etiquetas como `<h1>` o `<div>`:
+
+```html
+<article>
+  <h1>Un componente</h1>
+  <ol>
+    <li>Componentes: Bloques de construcción de la UI</li>
+    <li>Definiendo un componente</li>
+    <li>Usando un componente</li>
+  </ol>
+</article>
+```
+
+Este marcado representa un artículo `<article>`, su encabezado `<h1>`, y una lista `<ol>` con tres elementos `<li>`. Un marcado HTML como este, combinado con CSS para los estilos y JavaScript para la interactividad, están detrás de cada barra lateral, avatar, modal, menú desplegable y cualquier elemento de UI que existe en la web.
+
+React permite combinar HTML, CSS y JavaScript en "componentes" personalizados, **elementos reutilizables de UI para nuestras aplicaciones**. El código de la lista de contenidos que vimos anteriormente pudo haberse transformado en un componente `<TableOfContents>`que podríamos renderizar en cada página. Por detrás, seguiría utilizando las mismas etiquetas HTML como `<article>`, `<h1>`, etc.
+
+De la misma forma que con las etiquetas HTML, podemos componer, ordenar y anidar componentes para diseñar páginas completas.
+
+En la medida en que nuestro proyecto crece, notaremos que muchos de nuestros diseños se pueden componer mediante la reutilización de componentes que ya escribiste, acelerando el desarrollo. ¡Nuestra lista de contenido de arriba podría añadirse a cualquier página con `<TableOfContents />`! Incluso podemos crear nuestros proyectos reutilizando componentes de la comunidad de código abierto como [Chakra UI](https://chakra-ui.com/) o [Material UI](https://material-ui.com/).
+
+### Definir un componente
+
+Tradicionalmente, cuando se creaban páginas web, los desarrolladores web usaban lenguaje de marcado para describir el contenido y luego añadían interacción agregando un poco de JavaScript. Esto funcionaba perfectamente cuando las interacciones eran algo deseable, pero no imprescindible en la web. Ahora es algo que se espera de muchos sitios y de todas las aplicaciones. React pone la interactividad primero usando aún la misma tecnología: **un componente de React es una función de JavaScript a la que puedes agregar HTML**:
+
+<iframe src="https://codesandbox.io/embed/23s5qc?view=editor+%2B+preview&module=%2Fsrc%2FApp.tsx"
+  style="width:100%; height: 500px; border:0; border-radius: 4px; overflow:hidden;"
+  title="para-principiantes-definir-un-componente"
+  allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
+  sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
+></iframe>
+
+Veamos paso a paso como construir un componente:
+
+#### Paso 1: Exporta el componente
+
+El prefijo `export default` es parte de la sintaxis [estándar de JavaScript](https://developer.mozilla.org/docs/web/javascript/reference/statements/export) (no es específico de React). Te permite marcar la función principal en un archivo para que luego puedas importarlas en otros archivos. (Puedes leer más sobre [importar y exportar componentes](https://es.react.dev/learn/importing-and-exporting-components)).
+
+#### Paso 2: Define la función
+
+Con `function Profile() { }`, estamos definiendo una función llamada `Profile`.
+
+<Aside type="caution" title="Atención">
+  En React, las funciones que definen componentes deben comenzar con una letra mayúscula. Esto es para diferenciarlos de las funciones regulares de JavaScript y los objetos. Si no lo haces, no funcionará.
+</Aside>
+
+#### Paso 3: Agrega HTML
+
+El componente devuelve una etiqueta `<img />` con atributos `src`y `alt`, `<img />`se escribe como en HTML, ¡pero en realidad es JavaScript por detrás! Esta sintaxis se llama [JSX](https://es.react.dev/learn/writing-markup-with-jsx), y te permite incorporar marcado dentro de javascript.
+
+Las sentencias `return` se pueden escribir todo en una línea:
+
+```js
+return <img src="https://i.pravatar.cc/128" alt="Pravatar" />;
+```
+
+O en múltiples líneas utilizando paréntesis:
+
+```js
+return (
+  <img
+    src="https://i.pravatar.cc/128"
+    alt="Pravatar"
+  />
+);
+```
+
+<Aside type="caution" title="Atención">
+  ¡Sin paréntesis, todo el código que está en la líneas posteriores al `return` [serán ignoradas](https://stackoverflow.com/questions/2846283/what-are-the-rules-for-javascripts-automatic-semicolon-insertion-asi)!
+</Aside>
+
+### Usar un componente
+
+Ahora que hemos definido nuestro componente `Profile`, podemos anidarlo dentro de otros componentes. Por ejemplo, podemos exportar un componente Gallery que utilice múltiples componentes `Profile`:
+
+<iframe src="https://codesandbox.io/embed/4jzx8j?view=editor+%2B+preview&module=%2Fsrc%2FApp.tsx"
+  style="width:100%; height: 500px; border:0; border-radius: 4px; overflow:hidden;"
+  title="para-principiantes-usar-un-componente"
+  allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
+  sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
+></iframe>
+
+#### Lo que el navegador ve
+
+Nota la diferencia de mayúsculas y minúsculas:
+- `<section>` está en minúsculas, por lo que React sabe que nos referimos a una etiqueta HTML.
+– `<Profile />` comienza con una `P` mayúscula, por lo que React sabe que queremos usar nuestro componente `Profile`.
+
+Y `Profile` contiene aún más HTML: `<img />`. Al final lo que el navegador ve es esto:
+
+```html
+<section>
+  <h1>Personas increíbles</h1>
+  <img src="https://i.pravatar.cc/128" alt="¨Pravatar">
+  <img src="https://i.pravatar.cc/128" alt="¨Pravatar">
+  <img src="https://i.pravatar.cc/128" alt="¨Pravatar">
+</section>
+```
+
+#### Anidar y organizar componentes
+
+Los componentes son funciones regulares de JavaScript, por lo que puedes tener múltiples componentes en el mismo archivo. Esto es conveniente cuando los componentes son relativamente pequeños o están estrechamente relacionados entre sí. Si el archivo comienza a tener demasiados componentes, siempre podemos moverlos a un archivo separado. Puedes leer más sobre [importar y exportar componentes](https://es.react.dev/learn/importing-and-exporting-components).
+
+Dado que los componentes `Profile` se renderizan dentro de `Gallery` (¡Incluso varias veces!) podemos decir que Gallery es un **componente padre**, que renderiza cada `Profile` como un "hijo". Esto es lo que hace que React sea tan interesante: puedes definir un componente una sola vez y reutilizarlo cuantas veces necesites, incluso en diferentes partes de tu aplicación.
+
+<Aside type="caution" title="Atención">
+  Los componentes pueden renderizar otros componentes, pero **nunca debemos anidar sus definiciones**:
+  ```js
+  export default function Gallery() {
+    // 🔴 ¡Nunca definas un componente dentro de otro componente!
+    function Profile() {
+      // ...
+    }
+    // ...
+  }
+  ```
+
+  El fragmento de código de arriba es [muy lento y causa errores](https://es.react.dev/learn/preserving-and-resetting-state#different-components-at-the-same-position-reset-state). En lugar de eso, define cada componente en el primer nivel:
+
+  ```js
+  export default function Gallery() {
+    // ...
+  }
+
+  // ✅ Declara los componentes en el primer nivel
+  function Profile() {
+    // ...
+  }
+  ```
+
+  Cuando un componente hijo necesita datos de su padre, [podemos pasarlos utilizando props](https://es.react.dev/learn/passing-props-to-a-component) en lugar de anidar las definiciones.
+</Aside>
+
+<Aside type="tip" title="Profundizando">
+  Nuestra aplicación React comienza en un componente "root" (raíz). Normalmente, se crea automáticamente al iniciar un nuevo proyecto. Por ejemplo, si usas [CodeSandbox](https://codesandbox.io/) o si usas el framework [Next.js](https://nextjs.org/), el componente root se define en pages/index.js.
+
+  La mayoría de las aplicaciones React usan componentes root. Esto significa que no solo utilizaremos componentes para piezas reutilizables como botones, sino también para piezas más grandes como barras laterales, listas y, en última instancia, ¡páginas completas! Los componentes son una forma práctica de organizar el código de UI y el HTML, incluso si algunos de ellos solo se utilicen una vez.
+
+  [Los frameworks basados en React](https://es.react.dev/learn/start-a-new-react-project) llevan esto un paso más allá. En lugar de utilizar un archivo HTML vacío y dejar que React "se encargue" de gestionar la página con JavaScript, también generan el HTML automáticamente a partir de tus componentes React. Esto permite que tu aplicación muestre algún contenido antes de que se cargue el código JavaScript.
+
+  Aún así, muchos sitios web sólo usan React [para añadir interactividad a páginas HTML existentes](https://es.react.dev/learn/add-react-to-an-existing-project#using-react-for-a-part-of-your-existing-page). Tienen muchos componentes root en lugar de uno solo para toda la página. Podemos utilizar la cantidad de React que necesitemos.
+</Aside>
+
+## Recapitulando
+
+- React nos permite crear componentes, **elementos reutilizables de UI para nuestras aplicaciones**.
+- En una aplicación de React, cada pieza de UI es un componente.
+- Los componentes de React son funciones regulares de JavaScript excepto que:
+  1. Sus nombres siempre empiezan con mayúscula.
+  2. Devuelven marcado JSX.
+
+# Proyecto
+
+Como parte de este curso, vamos a construir una aplicación Fullstack desde cero.
+
+Puedes encontrar ideas de proyectos en [Ideas de Proyectos Midudev](https://midu.dev/proyectos2024.png) o [Project Ideas and Resources ⚡💙⚡
+](https://github.com/The-Cool-Coders/Project-Ideas-And-Resources).
+
+El objetivo es agregar tu proyecto a tu portafolio y añadirlo a tu CV.
+
+Vamos a desarrollar el proyecto a lo largo de cada clase. Para esta clase desarrollaremos la parte del frontend. Y dependiendo de la clase contruiremos lo siguiente:
+
+- Desarrollo Frontend (Este módulo)
+- [Desarrollo Backend](/roadmap/para-principiantes/4)
+- [Bases de Datos](/roadmap/para-principiantes/5)
+- [Integración Frontend y Backend](/roadmap/para-principiantes/6)
+- [Control de versiones con Git](/roadmap/para-principiantes/7)
+- [Uso de la Terminal y Sistemas Operativos](/roadmap/para-principiantes/8)
+- [DevOps](/roadmap/para-principiantes/9)
+- [Desarrollo de Aplicaciones Móviles](/roadmap/para-principiantes/10)
+- [Metodologías Ágiles y Buenas Prácticas](/roadmap/para-principiantes/11)
+- [Proyecto Final y Preparación para el Empleo](/roadmap/para-principiantes/12)
+
+<Aside title="Nota">
+  En las últimas dos clases vamos a terminar de desarrollar el proyecto. No es necesario que el proyecto sea perfecto, pero debe ser usable y tener todas las funcionalidades que se han desarrollado en las clases.
+</Aside>
 
 <Cta></Cta>
