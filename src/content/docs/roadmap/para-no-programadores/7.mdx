@@ -1,12 +1,139 @@
 ---
 title: Backend
-description: WIP
+description: En esta clase aprenderemos los fundamentos del desarrollo backend,  qué es un API, qué es un endpoint y cómo implementarlo en nuestro ejemplo de ShortenURL.
 ---
 
+import { Aside } from '@astrojs/starlight/components';
 import Cta from '@components/cta/para-no-programadores/cta.astro';
 
 <Cta></Cta>
 
-WIP
+<Aside title="Referencia">Tanto el front end como el back end son aspectos críticos de cualquier aplicación. El front end es aquello que ven los usuarios e incluye elementos visuales, como botones, casillas de verificación, gráficos y mensajes de texto. Permite a los usuarios interactuar con la aplicación. El back-end son los datos y la infraestructura que permiten que la aplicación funcione. Almacena y procesa los datos de las aplicaciones para los usuarios. - [AWS](https://aws.amazon.com/es/compare/the-difference-between-frontend-and-backend/)</Aside>
+
+En esta clase aprenderemos los fundamentos del desarrollo backend,  qué es un API, qué es un endpoint y cómo implementarlo en nuestro ejemplo de ShortenURL.
+
+# ¿Qué es el Backend?
+
+El Backend es la parte de la aplicación con la que interactúa el Frontend. Esto puede incluir autenticación de usuarios, gestión de base de datos, almacenamiento de recursos, etc.
+
+Al igual que en el Frontend, podemos utilizar JavaScript en el Backend, sólo que necesitamos una herramienta más para lograr ejecutarlo en nuestro servidor. Para ello utilizaremos Node.js.
+
+# API y Endpoints
+
+<Aside>
+La API RESTful es una interfaz que dos sistemas de computación utilizan para intercambiar información de manera segura a través de Internet. La mayoría de las aplicaciones para empresas deben comunicarse con otras aplicaciones internas o de terceros para llevar a cabo varias tareas. Por ejemplo, para generar nóminas mensuales, su sistema interno de cuentas debe compartir datos con el sistema bancario de su cliente para automatizar la facturación y comunicarse con una aplicación interna de planillas de horarios. Las API RESTful admiten este intercambio de información porque siguen estándares de comunicación de software seguros, confiables y eficientes. - [¿Qué es una API RESTful?](https://aws.amazon.com/es/what-is/restful-api/)
+</Aside>
+
+## ¿Qué es una API?
+
+API significa **Application Programming Interface**. Es un conjunto de reglas que permiten a diferentes sistemas comunicarse entre sí. Las APIs son esenciales en el Backend, ya que proporcionan una forma estándar de interacción entre el cliente (Frontend) y el servidor (Backend).
+
+## ¿Qué es un endpoint?
+
+Un **endpoint** es una de las rutas que proporciona la API para que un cliente interactúe con ella. Cada endpoint está asociado con una URL específica que recibe solicitudes y devuelve una respuesta. Los endpoints son responsables de manejar las acciones o datos solicitados por el usuario.
+
+## El protocolo HTTP
+
+Los desarrolladores suelen implementar API RESTful mediante el uso del protocolo de transferencia de hipertexto (HTTP). Un método de HTTP informa al servidor lo que debe hacer con el recurso. Los métodos más comunos son:
+
+- ***GET***: Los clientes utilizan GET para acceder a los recursos que están ubicados en el URL especificado en el servidor.
+Pueden almacenar en caché las solicitudes GET y enviar parámetros en la solicitud dela API RESTful para indicar al servidor que filtre los datos antes de enviarlos.
+
+- ***POST***: Los clientes usan POST para enviar datos al servidor. Incluyen la representación de los datos con la solicitud. Enviar la misma solicitud POST varias veces produce el efecto secundario de crear el mismo recurso varias veces.
+
+- ***PUT***: Los clientes utilizan PUT para actualizar los recursos existentes en el servidor. A diferencia de POST, el envío de lamisma solicitud PUT varias veces en un servicio web RESTful da el mismo resultado.
+
+- ***DELETE***: Los clientes utilizan la solicitud DELETE para eliminar el recurso. Una solicitud DELETE puede cambiar el estado del servidor. Sin embargo, si el usuario no cuenta con la autenticación  adecuada, la solicitud fallará.
+
+## Encabezados de HTTP
+
+Los encabezados de solicitudes son los metadatos que se intercambian entre el cliente y el servidor. Por ejemplo, el encabezado de la solicitud indica el formato de la solicitud y la respuesta, proporciona información sobre el estado de la solicitud, etc.
+
+- ***Datos***: Las solicitudes de la API REST pueden incluir datos para que los métodos POST, PUT y otros métodos HTTP funcionen de manera correcta.
+
+- ***Parámetros***: Las solicitudes de la API RESTful pueden incluir parámetro que brindan al servidor más detalles sobre lo que se debe hacer. A continuación, se indican algunos tipos de parámetros:
+  - Los parámetros de ruta especifican los detalles del URL.
+  - Los parámetros de consulta solicitan más información acerca del recurso.
+  - Los parámetros de cookie autentican a los clientes con rapidez.
+
+# NodeJS
+
+<Aside title="Referencia">Node.js usa un modelo basado en eventos y no bloqueante, lo que lo convierte en una opción ideal para aplicaciones que requieren un rendimiento eficiente, como aplicaciones en tiempo real o APIs RESTful. Más información: [Node.js](https://nodejs.org/es/).</Aside>
+
+Node.js es un entorno de JavaScript de código abierto y multiplataforma.
+
+Una aplicación Node.js se ejecuta en un proceso único, lo que permite que no se creen nuevos hilos por cada solicitud.
+
+## Una aplicación de ejemplo con Node.js
+
+El ejemplo más común de Node.js es crear un Hola Mundo desde un servidor web:
+
+<iframe src="https://codesandbox.io/p/devbox/qwxhs3?embed=1&file=%2Findex.js"
+  style="width:100%; height: 500px; border:0; border-radius: 4px; overflow:hidden;"
+  title="hello-world-nodejs"
+  allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
+  sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
+></iframe>
+
+Para ejecutar el código, puedes copiarlo y guardarlo en un archivo llamado `server.js` y ejecutar el comando `node server.js` en tu terminal.
+
+También puedes ejecutar `node server.js` desde la terminal del Sandbox.
+
+Expliquemos el código línea por línea:
+```js
+// Importamos la función createServer de la librería nativa de Node.js
+const { createServer } = require('node:http');
+
+// Definimos el nombre de nuestro anfitrión
+// Es decir, en donde se ejecutará nuestro servidor
+const hostname = '127.0.0.1';
+// Definimos el puerto de nuestro servicio
+const port = 3000;
+
+// Ejecutamos la función create server y la almacenamos en la constante server
+const server = createServer(
+  // Agregamos como argumento a la función server
+  // Una función que se ejecutará cada vez que envíen una
+  // solicitud al servidor
+  // La función recibe dos objetos, un req y un res
+  (req, res) => {
+    // Utilizamos el objeto res para generar la respuesta
+    // Asignamos el status de la respuesta
+    res.statusCode = 200;
+    // Asignamos el header de la respuesta
+    res.setHeader('Content-Type', 'text/plain');
+    // Y terminamos de procesar la respuesta
+    res.end('Hello World');
+  }
+);
+
+// Finalmente, ejecutamos la función listen para agregar
+// una función que nos permita monitorear nuestro servidor
+server.listen(port, hostname, () => {
+  console.log(`Server running at http://${hostname}:${port}/`);
+});
+```
+
+# ShortenURL API
+
+En la clase [Stacks](/roadmap/para-no-programadores/5) creamos un servidor web con Node.js que nos permitía guardar los URLs que queríamos acortar y nos permitía redirigir a los usuarios que utilizaran los URLs generados.
+
+En esta clase quiero que mejoremos el código de nuestro Backend de la siguiente manera:
+
+```js title="server.js"
+const http = require('http');
+const { onRequest } = require('./actions');
+
+const server = http.createServer(onRequest);
+
+const PORT = 3000;
+server.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+});
+```
+
+Para hacer que nuestro servidor web funcione, simplificamos el código de nuestro archivo `server.js` para que sea más fácil de leer. Sin embargo, ahora dependemos de una función llamada `onRequest`. Tu desafío será implementar dicha función para que acorte los URLs y redirija al usuario.
+
+Intenta resolverlo a tu manera, y revisa el [repositorio del proyecto terminado](https://github.com/desde0/shorturl-example).
 
 <Cta></Cta>
