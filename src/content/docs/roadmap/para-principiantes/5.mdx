@@ -1,12 +1,390 @@
 ---
 title: Bases de Datos
-description: WIP
+description: Almacenar, administrar y compartir datos es cricial para cualquier sistema de información. En esta clase aprenderemos el lenguaje más utilizado para manejar bases de datos, SQL.
 ---
 
 import Cta from '@components/cta/para-principiantes/cta.astro';
+import { Aside } from '@astrojs/starlight/components';
 
 <Cta></Cta>
 
-WIP
+<Aside>
+Una base de datos es una recopilación organizada de información o datos estructurados, que normalmente se almacena de forma electrónica en un sistema informático. Normalmente, una base de datos está controlada por un sistema de gestión de bases de datos (DBMS). En conjunto, los datos y el DBMS, junto con las aplicaciones asociadas a ellos, reciben el nombre de sistema de bases de datos, abreviado normalmente a simplemente base de datos. - [¿Qué es una base de datos?](https://www.oracle.com/mx/database/what-is-database/)
+</Aside>
+
+Almacenar, administrar y compartir datos es cricial para cualquier sistema de información. En esta clase aprenderemos el lenguaje más utilizado para manejar bases de datos, SQL.
+
+# DBMS
+
+Un sistema de gestión de bases de datos (DBMS) es un software esencial que actúa como intermediario entre una base de datos y sus administradores. Permite a los administradores interactuar con la base de datos para recuperar, actualizar y administrar la información de manera eficiente. Además, proporciona herramientas administrativas para optimizar el rendimiento, realizar copias de seguridad y recuperar datos.
+
+Algunos DBMS populares son MySQL, PostgreSQL, SQL Server, etc.
+
+# MySQL
+
+MySQL es una de las bases de datos de código abierto más popular del mundo, conocida por su rendimiento, fiabilidad y facilidad de uso. Es una opción popular para aplicaciones web, incluyendo gigantes como Facebook, Twitter y YouTube.  Oracle impulsa la innovación de MySQL, añadiendo nuevas funciones para la web, la nube, las aplicaciones móviles y las integradas.
+
+Instalar un servidor MySQL local y un cliente te permite crear y gestionar bases de datos en tu propia computadora.
+
+## ¿Por qué necesitas instalar ambos?
+
+- Servidor MySQL: Es el "almacén" donde se guardan nuestras bases de datos. Es el programa principal que se encarga de gestionar toda la información.
+- Cliente MySQL: Es la herramienta que nos permite interactuar con el servidor. Podemos usarla para crear bases de datos, añadir información, hacer consultas, etc.
+
+Puedes explorar cómo instalar MySQL en la lección [Introducción y Configuración del Entorno](/roadmap/para-principiantes/1).
+
+## SQL en MySQL
+
+<Aside>
+Esta sección está basada en el tutorial oficial de MySQL: https://dev.mysql.com/doc/mysql-tutorial-excerpt/8.0/en/
+</Aside>
+
+MySQL está basado en SQL. Exploremos el lenguaje para entender qué podemos hacer con él.
+
+Puedes utilizar MySQL Workbench, tu terminal o los sandbox en cada ejercicio para practicar.
+
+<Aside type="note">Asegúrate de crear una base de datos antes de probar los siguientes ejemplos</Aside>
+
+### MySQL CLI
+
+El cliente de MySQL nos permite ejecutar comando de MySQL desde la terminal:
+
+```shell
+mysql --help
+```
+
+<Aside type="note">
+En Macos, asegúrate de agregar exportar el ejecutable de mysql en tu configuración de la terminal:
+```shell
+# MySQL
+export PATH=${PATH}:/usr/local/mysql/bin/
+```
+</Aside>
+
+#### Conectarse y desconectarse del servidor
+
+Para conectarte al servidor, necesitamos proveer a nuestros clientes con un usuario y contraseña. Al instalar MySQL server nosotros asignamos un nombre de usuario y contraseña. Por defecto el nombre de usuario `roo` y la contraseña de 8 dígitos. Si olvidamos qué usuario y contraseña tenemos, tendremos que reinstalar nuestro servidor o recurrir a otras técnicas.
+
+Si ya tienes tu usuario y contraseña, podemos conectarnos a MySQL con el siguiente comando:
+
+```shell
+mysql -h localhost -u user -p
+```
+
+***localhost*** y ***user*** representan el nombre del host y el usuario del servidor MySQL al que estamos intentando acceder. Al ejecutar este comando nos pedirá ingresar la contraseña.
+
+Si el comando funciona correctamente, veremos un mensaje como el siguiente:
+
+```shell
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 25338 to server version: 8.0.39-standard
+Type 'help;' or '\h' for help. Type '\c' to clear the buffer.
+mysql>
+```
+
+La cláusula `mysql>` nos indica que estamos dentro del servidor de MySQL y estamos listos para ingresar comandos de SQL.
+
+Si intentamos conectarnos a nuestro servidor de MySQL desde la misma computadora, podemos omitir el host:
+
+```shell
+mysql -u user -p
+```
+
+Si intentamos conectarnos y recibimos un error como el siguiente ***ERROR 2002 (HY000): Can't connect to local MySQL server through socket '/tmp/mysql.sock' (2)***, significa que el servidor de MySQL no se está ejecutando.
+
+Algunas instalaciones de MySQL permiten la conección de usuarios anónimos:
+
+```shell
+mysql
+```
+
+Para desconectarnos del servidor de MySQL, solo basta con ejecutar el siguiente comando:
+
+```shell
+mysql> QUIT
+```
+
+En sistemas basados en UNIX (Como MaxOS), también podemos desconectarnos oprimiendo `control+D`.
+
+#### Consultas (Queries)
+
+Antes de crear tablas, intentemos familiarizarnos con las consultas, que llamaremos queries a partir de aquí.
+
+Basta con utilizar el comando `SELECT` para realizar una query. En el siguiente ejemplo consultamos la versión y la fecha actual de la base de datos:
+
+```sql
+SELECT VERSION(), CURRENT_DATE;
+```
+```shell
++-----------+--------------+
+| VERSION() | CURRENT_DATE |
++-----------+--------------+
+| 9.0.1     | 2024-10-04   |
++-----------+--------------+
+1 row in set (0.00 sec)
+```
+
+<Aside type="note">No existe ninguna regla sobre utilizar mayúsculas o minúsculas.</Aside>
+
+Incluso podemos realizar cálculos matemáticos con una query.
+
+```sql
+SELECT SIN(PI()/4), (4+1)*5;
+```
+
+<Aside type="note">
+También podemos ejecutar múltiples queries en la misma línea:
+```sql
+SELECT VERSION(); SELECT NOW();
+```
+O un solo query en múltiples líneas:
+```sql
+SELECT
+USER()
+,
+CURRENT_DATE;
+```
+</Aside>
+
+#### Creando una Base de datos
+
+Antes de crear una base de datos, consultemos las bases de datos que tenemos actualmente en nuestro servidor:
+
+```sql
+SHOW DATABASES;
+```
+
+Si tenemos una base de datos llamada test, vamos a utilizarla:
+
+```sql
+USE test
+```
+
+<Aside>USE, así como QUIT, no requiere `;`</Aside>
+
+Cuando un usuario no tiene permisos para administrar una base de datos, podemos asignarle permisos:
+
+```sql
+GRANT ALL ON menagerie.* TO 'username'@'host';
+```
+
+No olvidemos reemplazar `username` por el nombre del usuario al que le queremos dar permisos y `host` por el host de nuestro servidor.
+
+Para crear una base de datos podemos utilizar el siguiente comando:
+
+```sql
+CREATE DATABASE animales;
+```
+
+<Aside>En Unix, los nombres de las bases de datos son sensibles a mayúsculas y minúsculos, por lo que debemos elegir bien el nombre porque siempre será igual cuando querramos utilizar la base de datos.</Aside>
+
+Una vez creamos la base de datos, debemos ejecutar el comando `USE` para poder utilizarla:
+
+```sql
+USE animales
+```
+
+#### Creando tablas
+
+También podemos consultar la lista de tablas creadas en nuestra base de datos:
+
+```sql
+SHOW TABLES;
+```
+
+Para crear una tabla debemos elegir cuidadosamente las columnas y tipos de datos que necesitamos. Porque, aún cuando podemos alterar la base de datos al inicio, entre más datos tenemos resulta peligroso alterar las tablas.
+
+MySQL tiene una serie de [tipos datos](https://dev.mysql.com/doc/refman/8.4/en/data-types.html) para nuestras columnas.
+
+Para nuestro ejemplo crearemos una tabla para almacenar mascotas:
+
+```sql
+CREATE TABLE mascotas(
+  nombre VARCHAR(20), 
+  dueño VARCHAR(20), 
+  especie VARCHAR(20), 
+  sexo CHAR(1), 
+  nacimiento DATE,
+  muerte DATE
+);
+```
+
+Una vez creada la base de datos, podemos consultar la lista de tablas en  nuestra base de datos para confirmar que se creó:
+
+```sql
+SHOW TABLES;
+```
+
+Y podemos confirmar la escructura de nuestra table con:
+
+```sql
+DESCRIBE mascotas;
+```
+
+#### Cargar datos en una tabla
+
+Después de crear una tabla, podemos agregarle registros. Existen dos maneras para hacerlo, `LOAD DATA` y `INSERT`.
+
+Por ejemplo, supongamos que queremos insertar los siguientes datos a nuestra tabla:
+
+| nombre | dueño | especie | sexo | nacimiento | muerte |
+| --- | --- | --- | --- | --- | --- |
+| Firulais | Roberto | perro | m | 19993-02-04 | |
+| Felix | Ana | gato | m | 1994-03-17 | |
+| Spyro |	Javier | perro | f | 1989-05-13 | |
+| Doggy | Bernardo | perro | m | 1990-08-27 | |
+| Cuatro patas | Diana | perro | m | 1979-08-31 | 1995-07-29 |
+| Birdy | Ana | ave | f | 1998-09-11 | |
+| Flygon | Javier | ave | | 1997-12-09 | |
+| Silver | Bernardo | serpiente | m | 1996-04-29 | |
+
+Aprovechando que la tabla está vacía, podemos crear un archivo llamado `mascotas.csv` que contenga los datos de nuestra tabla:
+
+```csv
+nombre,dueño,especie,sexo,nacimiento,muerte
+Firulais,Roberto,perro,m,1993-02-04,
+Felix,Ana,gato,m,1994-03-17,
+Spyro,Javier,perro,f,1989-05-13,
+Doggy,Bernardo,perro,m,1990-08-27,
+Cuatro patas,Diana,perro,m,1979-08-31,1995-07-29
+Birdy,Ana,ave,f,1998-09-11,
+Flygon,Javier,ave,,1997-12-09,
+Silver,Bernardo,serpiente,m,1996-04-29,
+```
+
+Para poder utilizar `LOAD DATA` debemos permitir que mysql pueda acceder a nuestros archivos locales:
+
+1. Nos conectamos a mysql: `mysql -u root -p`.
+2. Asignamos la variable global `local_infile=1`: `SET GLOBAL local_infile=1;`
+3. Salimos de mysql: `quit`.
+4. Nos volvemos a conectar utilizando el comando: `mysql --local-infile=1 -u root -p`.
+5. Utilizamos la base de datos: `USE animales`.
+
+Gracias a esto, ahora podemos ejecutar el siguiente comando:
+
+```sql
+LOAD DATA 
+LOCAL INFILE 'mascotas.csv' 
+INTO TABLE mascotas 
+FIELDS TERMINATED BY ',' 
+LINES TERMINATED BY '\n' 
+IGNORE 1 LINES;
+```
+
+Y podemos confirmar nuestros datos:
+```sql
+SELECT * FROM mascotas;
+```
+
+Sin embargo, lo normal es insertar un dato a la vez. Para lograrlo utilizaremos `INSERT`:
+
+```sql
+INSERT INTO mascotas VALUES ('Pitbul', 'Juan', 'perro', 'm', '1999-01-01', NULL);
+```
+
+#### Entendiendo las queries
+
+`SELECT` se utiliza para obtener información desde una tabla:
+
+```sql
+SELECT columnas
+FROM tabla
+WHERE condiciones;
+```
+
+Podemos obtener todos los registros de una tabla:
+
+```sql
+SELECT * FROM mascotas;
+```
+
+Cuando consultamos los datos, podría ser que queramos corregir algún registro. Una forma poco eficiente de hacerlo podría ser:
+
+1. Modificar nuestro archivo `mascotas.csv`.
+2. Eliminar todos los datos de la tabla: `DELETE FROM mascotas;`.
+3. Volver a cargar los datos desde el archivo: `LOAD DATA LOCAL INFILE 'mascotas.csv' INTO TABLE mascotas FIELDS TERMINATED BY ',' LINES TERMINATED BY '\n' IGNORE 1 LINES;`.
+
+La mejor forma de corregir un solo registro es la siguiente:
+
+```sql
+UPDATE mascotas SET nacimiento = '1994-02-04' WHERE nombre = 'Firulais';
+```
+
+Gracias al comando WHERE podemos actualizar solo los registros que coinciden con la condición.
+
+<Aside type="danger">
+Ejecutar UPDATE o DELETE sin utilizar WHERE puede modificar o eliminar una tabla completa.
+</Aside>
+
+#### Aprendiendo a hacer queries
+
+SQL es muy popular por su capacidad para hacer queries de una forma súper eficiente. Podemos buscar datos específicos en una tabla con tan solo utilizar un `WHERE`:
+
+```sql
+SELECT * FROM mascotas WHERE nombre = 'Birdy';
+```
+
+Podemos especificar condiciones con cualquier columna:
+```sql
+SELECT * FROM mascotas WHERE nacimiento >= '1998-01-01';
+```
+
+También podemos combinar condiciones:
+
+```sql
+SELECT * FROM mascotas WHERE especie = 'perro' AND sexo = 'm';
+```
+
+Puedes consultar el listado de operadores lógicos de MySQL en el siguiente enlace:
+https://dev.mysql.com/doc/refman/8.4/en/logical-operators.html
+
+#### Eligiendo las columnas en tus queries
+
+`SELECT` nos permite elegir qué columnas nos interesan en nuestras queries y así personalizar nuestras respuestas:
+
+```sql
+SELECT nombre, nacimiento FROM mascotas;
+```
+
+Podríamos consultar a los dueños de mascotas solamente:
+
+```sql
+SELECT dueño FROM mascotas;
+```
+
+Incluso podemos pedir que solo nos de resultados sin repetir:
+
+```sql
+SELECT DISTINCT dueño FROM mascotas;
+```
+
+#### Ordenando registros
+
+Podemos ordenar nuestras mascotas por fecha de nacimiento:
+
+```sql
+SELECT nombre, nacimiento FROM mascotas ORDER BY nacimiento;
+```
+
+Por defecto, el ordenamiento es ascendente, si queremos que se ordene de forma descendente debemos utilizar `DESC`:
+
+```sql
+SELECT nombre, nacimiento FROM mascotas ORDER BY nacimiento DESC;
+```
+
+Incluso podemos ordenar múltiples columnas:
+
+```sql
+SELECT nombre, especie, nacimiento FROM mascotas ORDER BY especie, nacimiento DESC;
+```
+
+### Siguientes pasos
+
+El tutorial oficial de MySQL existe una sección de ejemplos de queries comunes, toma un tiempo para practicar los que más te interesen:
+https://dev.mysql.com/doc/mysql-tutorial-excerpt/8.0/en/examples.html
+
+# Práctica
+
+Crea una base de datos y tablas para tu proyecto.
 
 <Cta></Cta>
