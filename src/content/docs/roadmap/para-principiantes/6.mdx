@@ -4,9 +4,239 @@ description: WIP
 ---
 
 import Cta from '@components/cta/para-principiantes/cta.astro';
+import { Aside } from '@astrojs/starlight/components';
 
 <Cta></Cta>
 
-WIP
+El desarrollo de software ha evolucionado de tal manera que las tecnologías son cada vez más robustas. Por lo tanto, delegar responsabilidades es fundamental para el desarrollod de software. Por un lado, el Frontend siendo el responsable de entregar una experiencia para los usuarios inolvidable y el Backend, siendo la pieza más abstracta para los no-programadores, creando experiencias easy-to-use para los desarrolladores Frontend.
+
+Podríamos considerar que desarrollar sistemas fullstack consiste en conectar el Frontend con el Backend. Para propósitos de esta clase nos enfocaremos en un tipo de Fullstack, el que presenta un cliente como Frontend y un servidor como Backend cuya comunicación está basada en HTTP a través de un API REST.
+
+# Cliente y Servidor HTTP
+
+El protocolo HTTP es el protocolo que predomina en la web. Es el encargado de enviar paquetes de datos con la información necesaria para generar sitios web de todo tipo.
+
+En este sentido, tanto el Frontend como el Backend requieren ser servidos por un servidor a través de la web. Es decir, cuando nuestros usuarios acceden a nuestro domionio `desde0.jesusdmedinac.com`, el navegador se comunica con el servidor para descargar la primer página de nuestro sitio web. Esta página web es estática, es decir, sólo muestra información que no se actualiza o se toma de ninguna base de datos.
+
+Pero, ¿Cómo podemos hacer para que nuetro sitio web muestra diferente información dependiendo de una base de datos? La forma ideal es que nuestro sitio web o aplicación web utilice HTTP para comunicarse con un API. Es decir, nuestro Frontend funcionaría como un navegador web. A esto se le conoce como cliente HTTP.
+
+## Cliente HTTP
+
+JavaScript cuenta con varias herramientas para crear un cliente HTTP, siendo [fetch](https://developer.mozilla.org/es/docs/Web/API/Window/fetch) la más popular.
+
+Fetch genera una solicitud HTTP, lo cuál devuelve una promesa de JavaScript. Si resolvemos la promesa obtenemos un objeto Response que representa la respuesta del API.
+
+<iframe src="https://codesandbox.io/embed/hhzvky?view=editor+%2B+preview&module=%2Fscript.js"
+  style="width:100%; height: 500px; border:0; border-radius: 4px; overflow:hidden;"
+  title="fetch-example"
+  allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
+  sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
+></iframe>
+
+Analicemos un poco más a profundidad el método `fetch`:
+
+### Fetch
+
+El métod `fetch` puede recibir dos parámetros, el primero llamado `input`, que es obligatorio y representa el recurso que solicitamos y el segundo es el `init`, que es opcional. `init` es un objeto de opciones de configuración para personalizar nuestra solicitud. Consulta las opciones completas en https://developer.mozilla.org/es/docs/Web/API/Window/fetch#init.
+
+### Otras librerías
+
+`fetch` es la forma nativa de JavaScript para realizar solicitudes HTTP, pero también existen otras opciones que podrían ser más interesantes dependiendo del tipo de proyecto que estemos creando: https://www.webdevstory.com/javascript-http-requests-libraries/
+
+## Servidor HTTP
+
+<Aside>
+Un **servidor web** o **servidor HTTP** es un programa informático que procesa una aplicación del lado del servidor, realizando conexiones bidireccionales o unidireccionales y síncronas o asíncronas con el cliente y generando o cediendo una respuesta en cualquier lenguaje o aplicación del lado del cliente - [Servidor Web Wikipedia](https://es.wikipedia.org/wiki/Servidor_web)
+</Aside>
+
+Como vimos en la clase de Backend, las aplicaciones de Backend permiten al Frontend acceder a recursos del serivdor de forma segura y controlada a través de una API. En el caso del ejemplo de `fetch`, estamos accediendo a un recurso a través del url [https://fakestoreapi.com/products](https://fakestoreapi.com/products). El cliente HTTP sólo puede ver la repuesta generada por el servidor, pero veamos cómo podemos generar una respuesta nosotros mismos.
+
+<iframe src="https://codesandbox.io/p/devbox/zm3vnv?embed=1&file=%2Findex.ts"
+  style="width:100%; height: 500px; border:0; border-radius: 4px; overflow:hidden;"
+  title="servidor-http-example"
+  allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
+  sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
+></iframe>
+
+En este ejemplo estamos cargando la respuesta desde un API y generando nuestra respusta. Estamos generando un API desde otro API.
+
+Igualmente podemos generar respuestas desde una base de datos. Pongamos a prueba todo lo aprendido en el siguiente ejercicio:
+
+# Mascotas
+
+Vamos a crear una aplicación Fullstack para mostrar nuestro listado de mascotas paso a paso.
+
+## Preparamos el entorno
+
+Abrimos nuestra terminal y nos dirigimos a la ruta en donde queramos trabajar. Ahí crearemos una carpeta llamada `mascotas` y, dentro de ella, otras dos carpetas llamadas `backend` y `frontend`. Después sólo tenemos que abrir nuestro editor de código. Yo utilizaré cursor.
+
+```shell
+mkdir mascotas
+cd mascotas
+mkdir frontend
+mkdir backend
+cursor .
+```
+
+## Backend
+
+En nuestro editor de código, abrimos la terminal y entramos a la carpeta de backend, inicializamos el proyecto y agregamos nuestras dependencias:
+
+```shell
+cd backend
+pnpm init
+pnpm add express
+pnpm add mysql2
+pnpm add cors
+```
+
+Los comandos de `pnpm add` modificarán nuestro archivo `package.json`.
+
+```diff lang="json" title="package.json"
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+-  "license": "ISC"
++  "license": "ISC",
++  "dependencies": {
++    "cors": "^2.8.5",
++    "express": "^4.21.1",
++    "mysql2": "^3.11.3"
++  }
+}
+```
+
+Ahora creamos nuestro archivo `index.js`:
+
+```js title='index.js'
+const express = require("express");
+const cors = require("cors");
+const app = express();
+const port = 3000;
+const mysql = require("mysql2/promise");
+
+app.use(cors({
+  origin: "*",
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  allowedHeaders: ["Content-Type"],
+}));
+
+app.get("/", (req, res) => {
+  res.send("API Mascotas");
+});
+
+app.get("/mascotas", async (req, res) => {
+  onGETMascotas(res);
+});
+
+async function mysqlConnection() {
+  try {
+    return await mysql.createConnection({
+      host: 'localhost',
+      user: 'root',
+      password: '12341234',
+      database: 'animales'
+    });
+  } catch (error) {
+    throw new Error(`Error al conectar a la base de datos: ${error.message}`);
+  }
+}
+
+async function getMascotas() {
+  try {
+    const connection = await mysqlConnection();
+    const [results] = await connection.query('SELECT * FROM mascotas');
+    connection.end();
+    return results;
+  } catch (error) {
+    throw new Error(`Error al obtener las mascotas: ${error.message}`);
+  }
+}
+
+async function onGETMascotas(res) {
+  try {
+    const mascotas = await getMascotas();
+    res.json(mascotas);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+}
+
+app.listen(port, () => {
+  console.log(`Sandbox listening on port ${port}`);
+});
+```
+
+## Frontend
+
+Vamos a hacer nuestra aplicación de mascotas utilizando HTML y JavaScript básico:
+
+```html title='index.html'
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mascotas</title>
+</head>
+<body onload="onLoad()">
+  <div id="root"></div>
+  <script src="script.js"></script>
+</body>
+</html>
+```
+
+```js title='script.js'
+const root = document.getElementById("root");
+
+async function onLoad() {
+  const mascotas = await getMascotas();
+  bindRoot(mascotas);
+}
+
+async function getMascotas() {
+  const response = await fetch('http://localhost:3000/mascotas');
+  return await response.json();
+}
+
+function bindRoot(mascotas) {
+  root.innerHTML = "";
+  const table = document.createElement("table");
+  const tableHead = document.createElement("tr");
+  tableHead.innerHTML = `
+    <th>Nombre</th>
+    <th>Dueño</th>
+    <th>Especia</th>
+    <th>Sexo</th>
+    <th>Nacimiento</th>
+    <th>Muerte</th>
+  `;
+  table.appendChild(tableHead);
+  for (let mascota of mascotas) {
+    const tableRow = document.createElement("tr");
+    tableRow.innerHTML = `
+      <td>${mascota.nombre}</td>
+      <td>${mascota.dueño}</td>
+      <td>${mascota.especie}</td>
+      <td>${mascota.sexo}</td>
+      <td>${mascota.nacimiento}</td>
+      <td>${mascota.muerte}</td>
+    `;
+    table.appendChild(tableRow);
+  }
+  root.appendChild(table);
+}
+```
+
+# Ejercicio
+
+Crear nuestra aplicación Fullstack de Mascotas utilizando Next.js.
 
 <Cta></Cta>
