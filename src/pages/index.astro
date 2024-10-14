@@ -3,7 +3,7 @@ import Container from "@components/container.astro";
 import Cta from "@components/cta.astro";
 import Hero from "@components/hero.astro";
 import Layout from "@layouts/Layout.astro";
-import heroImage from "assets/jesus-medina.jpg";
+import heroImage from "assets/hero-talent.png";
 import paraNoProgramadoresLogo from "assets/logos-desde0/para-no-programadores.png";
 import paraPrincipiantesLogo from "assets/logos-desde0/para-principiantes.png";
 import stackPersonalizadoLogo from "assets/logos-desde0/stack-personalizado.png";
@@ -16,7 +16,7 @@ import Stage from "@components/stages/stage.astro"
 import Testimonies from "@components/testimonies.astro";
 ---
 <script type="module" src="https://cdn.jsdelivr.net/npm/@justinribeiro/lite-youtube@1.5.0/lite-youtube.js"></script>
-<Layout maxisterEnabled={true} seoProps={{
+<Layout maxisterEnabled={false} seoProps={{
   title: "Taller de programación Desde0 a experto.",
   description: "Taller de programación Desde0 a experto.",
   canonical: "https://programaciondesde0.com",
@@ -25,47 +25,33 @@ import Testimonies from "@components/testimonies.astro";
       title: "Taller de programación Desde0 a experto.",
       url: "https://programaciondesde0.com",
       type: "website",
-      image: "https://programaciondesde0.com/index.png",
+      image: "/hero-talent.png",
     },
   }
 }}>
   <Container>
     <Hero
-      title="Tu carrera en tecnología comienza aquí"
-      subtitle="Taller de programación Desde0 a experto."
+      title="🚀 Desarrollo de sitios web y apps móviles GRATIS 💻📱"
+      subtitle="¿Tienes una idea o proyecto y necesitas ayuda para hacerlo realidad? Desde nuestra Academia Desde0, te conectamos con practicantes talentosos que están listos para desarrollar tus sitios web y apps móviles sin costo."
       heroImage={heroImage}
-      heroAlt="Instructor Jesús Daniel Medina Cruz"
+      heroAlt="Talento en Desde0"
     >
       <Link
-        href="https://tally.so/r/3lA8G5"
+        href="https://tally.so/r/wv2l84"
         class="bg-paradiso text-white flex gap-1 items-center justify-center rounded-full"
         rel="noopener">
-        Registrarme
+        Contratar talento gratis
         <Icon class="text-white w-5 h-5" name="right-arrow" />
       </Link>
-      <Link
-        size="lg"
-        style="outline"
-        rel="noopener"
-        href="/roadmap"
-        class="border-charlotte bg-charlotte text-paradiso flex gap-1 items-center justify-center rounded-full">
-        Conoce las rutas de aprendizaje
-        <Icon class="w-4 h-4" name="seti:notebook" />
-      </Link>
     </Hero>
-    <lite-youtube class="pt-16 w-full aspect-[16/9] rounded-lg" videoid="hluYBL87HJY">
-      <a class="lite-youtube-fallback" href="https://www.youtube.com/watch?v=hluYBL87HJY">Ver en YouTube: "Demo ¿Ya platicaste con Bubble?"</a>
-    </lite-youtube>
-    <iframe class="airtable-embed" src="https://airtable.com/embed/appb6Vz7zTl8XL3Iy/shrAl2w21XaUPZcBl" width="100%" height="564vh" style="background: transparent; border: 1px solid #ccc;"></iframe>
     <Cta
       title="Desarrollo de sitios web y apps móviles gratis"
       message="Consigue practicantes para tus proyectos e ideas"
     >
-      <Link href="/talento" style="inverted" class="rounded-full">Contrata talento gratis</Link>
+      <Link href="https://tally.so/r/wv2l84" style="inverted" class="rounded-full">Contrata talento gratis</Link>
     </Cta>
-    <iframe class="airtable-embed" src="https://airtable.com/embed/appb6Vz7zTl8XL3Iy/shrer32dR4rvJClre" width="100%" height="564vh" style="background: transparent; border: 1px solid #ccc;"></iframe>
     <Stages
-      title="Conoce las etapas de aprendizaje">
+      title="Talleres de programación para todos los niveles">
       <Stage
           title="Para no programadores"
           description="Da tus primeros pasos en el desarrollo de software. Construye unas bases sólidas para poder elegir correctamente sólo integrarlo en tu día a día y decide si quieres dedicarte tiempo completo al desarrollo de software."
@@ -128,14 +114,8 @@ import Testimonies from "@components/testimonies.astro";
       title="Desarrollo de sitios web y apps móviles gratis"
       message="Consigue practicantes para tus proyectos e ideas"
     >
-      <Link href="/talento" style="inverted" class="rounded-full">Contrata talento gratis</Link>
+      <Link href="https://tally.so/r/wv2l84" style="inverted" class="rounded-full">Contrata talento gratis</Link>
     </Cta>
-    <Testimonies></Testimonies>
-    <Cta
-      title="¿Necesitas talento tech?"
-      message="Entrena a tu equipo en las últimas tecnologías"
-    >
-      <Link href="https://tally.so/r/wv2l84" style="inverted" class="rounded-full">Transforma tu talento</Link>
-    </Cta>
+    <!-- <Testimonies></Testimonies>-->
   </Container>
 </Layout>
