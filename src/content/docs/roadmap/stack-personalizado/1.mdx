@@ -1,12 +1,191 @@
 ---
-title: Introducción y Objetivos de carrera
-description: WIP
+title: 'Antes de empezar: ¡Bienvenida y definición de tu Stack Personalizado!'
+description: 'Todo lo que necesitas saber antes de empezar: requisitos, estructura del taller y las preguntas más frecuentes. Además, comenzaremos a definir tus metas para crear tu ruta de aprendizaje ideal.'
 ---
 
 import Cta from '@components/cta/stack-personalizado/cta.astro';
+import { Aside } from '@astrojs/starlight/components';
+import Link from '@components/ui/link.astro';
 
 <Cta></Cta>
 
-WIP
+## Requisitos del taller
+
+Esta ruta está diseñada para acelerar el crecimiento de quienes ya dieron sus primeros pasos. Para aprovecharla al máximo, deberías cumplir con el siguiente perfil:
+
+- **Experiencia Fundamental en Programación:** Debes sentirte cómodo con los conceptos básicos de al menos un lenguaje de programación (variables, estructuras de control, funciones, estructuras de datos). Idealmente, ya has construido algún proyecto pequeño por tu cuenta.
+
+- **Entorno de Desarrollo Funcional:** Necesitas tener un editor de código como VS Code instalado y configurado a tu gusto (Encontrarás un listado más abajo). El uso de la terminal para moverte entre archivos y ejecutar comandos debe ser algo familiar para ti.
+
+- **Manejo Básico de Git:** Debes tener Git instalado y una cuenta de GitHub. Se espera que sepas cómo clonar un repositorio, hacer `add`, `commit`, y `push` a tus cambios.
+
+- **Autonomía y Mentalidad de Crecimiento:** El requisito más importante. Debes estar listo para investigar, depurar código por tu cuenta y tomar las riendas de tu aprendizaje. Este taller es una guía estructurada, no un manual de instrucciones paso a paso.
+
+## Estructura del taller y temario
+
+Cada semana veremos un tema nuevo por lo que es crucial seguir el orden y estudiar en casa.
+
+### La sesión en vivo/presencial estará organizada de la siguiente manera:
+
+- **Preguntas y respuestas del tema anterior y conclusiones:** Comenzaremos con una revisión del tema previo, resolviendo dudas y resumiendo los puntos clave aprendidos.
+  
+- **Introducción al nuevo tema y definición de objetivos:** Presentaremos el nuevo tema de la semana, estableciendo metas claras para la sesión y los conocimientos a adquirir.
+
+- **Práctica semanal asistida:** Realizaremos ejercicios prácticos sobre el tema, con asistencia y guía del instructor para asegurar la correcta aplicación de los conceptos.
+
+- **Exposición de resultados y preguntas:** Los participantes mostrarán los resultados de sus prácticas, seguidos de una sesión de preguntas y retroalimentación.
+
+- **Definición de práctica en casa:** Se asignarán tareas para realizar en casa, diseñadas para reforzar el aprendizaje y preparar a los estudiantes para la siguiente sesión.
+
+### Temario:
+
+El temario de la ruta "Stack Personalizado" es flexible y se adapta a tus metas. Sin embargo, sigue una estructura progresiva para asegurar que construyas una base sólida antes de especializarte.
+
+1.  **Introducción y Objetivos de carrera:** Definirás tus metas profesionales y personales para crear una ruta de aprendizaje a tu medida. ¡Es lo que estás haciendo ahora!
+2.  **Planeación y Estimación:** Aprenderás a traducir requisitos de negocio en tareas técnicas, a estimar el esfuerzo usando metodologías ágiles y a planificar el desarrollo de un proyecto de forma profesional.
+3.  **Diseño y Arquitectura de Aplicaciones:** Irás más allá de solo "hacer que funcione". Explorarás patrones de diseño (monolitos, microservicios, serverless) para construir aplicaciones escalables, mantenibles y robustas.
+4.  **Backend Development: RESTful y GraphQL:** Construirás el cerebro de tus aplicaciones. Aprenderás a diseñar APIs eficientes y seguras, manejando la lógica de negocio y decidiendo entre arquitecturas como REST y GraphQL.
+5.  **Frontend Development: UI/UX y Componentes Reutilizables:** Crearás interfaces que los usuarios amen. Te enfocarás en la experiencia de usuario (UX), el diseño de interfaces (UI), la gestión de estado y la creación de sistemas de componentes que aceleren tu desarrollo.
+6.  **Base de datos y ORM:** Aprenderás a modelar datos de forma efectiva, a elegir la base de datos correcta para cada caso de uso (SQL vs. NoSQL) y a interactuar con ella de forma segura y eficiente usando ORMs (Object-Relational Mapping).
+7.  **Integración Continua y Despliegue Automatizado (CI/CD):** Automatizarás tu flujo de trabajo. Configurarás pipelines que compilen, prueben y desplieguen tu código automáticamente, permitiéndote entregar valor de forma más rápida y segura.
+8.  **Testing: Unitario, Integración y End-to-End:** Escribirás código a prueba de fallos. Dominarás la pirámide de testing para crear pruebas unitarias, de integración y E2E que garanticen la calidad y estabilidad de tu aplicación.
+9.  **Seguridad de Aplicaciones Web:** Aprenderás a pensar como un hacker para proteger tus aplicaciones. Cubriremos desde el OWASP Top 10 hasta la implementación de autenticación y autorización seguras.
+10. **Optimización de Rendimiento:** Harás que tus aplicaciones vuelen. Aprenderás a identificar cuellos de botella, optimizar consultas a la base de datos, implementar estrategias de caché y mejorar la velocidad de carga en el frontend.
+11. **Despliegue en Producción:** Pondrás tus proyectos en el mundo real. Explorarás servicios en la nube (AWS, Vercel, etc.), aprenderás a empaquetar tu aplicación con Docker y a gestionar tu infraestructura como código.
+12. **Monitoreo y Mantenimiento:** Asegurarás la salud a largo plazo de tus aplicaciones. Implementarás sistemas de logging, monitoreo y alertas para detectar y solucionar problemas antes de que impacten a tus usuarios.
+
+## Preguntas frecuentes
+
+1. **¿Qué tipo de computadora necesito para tomar el taller?**
+   Solo necesitas una computadora con un navegador web y conexión a internet. Cualquier computadora moderna debería ser suficiente.
+
+2. **¿Es necesario tener conocimientos previos de programación?**
+   Si bien esta ruta está diseñada para ser exhaustiva, es ideal para quienes ya tienen una idea básica de lo que es programar o han intentado aprender por su cuenta. Lo más importante no es la experiencia previa, sino una fuerte motivación para dirigir tu propio aprendizaje y construir un camino a tu medida.
+
+3. **¿Cuánto tiempo tomará completar el taller?**
+   El tiempo varía según tu ritmo de aprendizaje. Se estima que puedes completarlo en 12 semanas dedicando 8 horas por semana.
+
+4. **¿Recibiré un certificado al finalizar el taller?**
+   Sí, recibirás un certificado de finalización al completar todas las lecciones y ejercicios.
+
+5. **¿Qué herramientas de software necesitaré instalar?**
+   A diferencia de otras rutas, aquí la instalación de software es una parte clave del aprendizaje. Empezarás con herramientas universales como un editor de código (VS Code), Git y la terminal. A medida que definas tu stack, instalarás lenguajes de programación, frameworks y bases de datos específicas para tu ruta.
+
+6. **¿Hay soporte disponible si tengo preguntas o problemas durante el taller?**
+   Sí, tendrás acceso a soporte a través de foros, sesiones en línea y contacto directo con el instructor.
+
+7. **¿Puedo tomar el taller a mi propio ritmo?**
+   Sí, puedes avanzar a tu propio ritmo. Sin embargo, es recomendable asistir a las sesiones en vivo para aprovechar al máximo el taller.
+
+8. **¿Se abordan conceptos avanzados de programación?**
+   Sí. El objetivo de esta ruta es llevarte a un nivel profesional en el stack que elijas. Empezaremos con los fundamentos, pero progresivamente abordaremos temas más avanzados como arquitectura de software, patrones de diseño y despliegue en producción, siempre aplicados a tus metas.
+
+9. **¿Qué lenguajes de programación se enseñan en el taller?**
+   ¡Esa es la pregunta clave y el corazón de esta ruta! En lugar de imponerte un lenguaje, te guiaremos para que elijas el más adecuado para tus objetivos (sea JavaScript, Python, Go, Rust, etc.). Luego, las lecciones se adaptarán para que aprendas a dominar ese lenguaje y su ecosistema.
+
+10. **¿Es este taller adecuado para alguien que quiere cambiar de carrera hacia la tecnología?**
+    Sí, es ideal para quienes desean comenzar una carrera en tecnología y ya tienen un objetivo claro, proporcionando una ruta directa y personalizada para alcanzarlo.
+
+¡Qué emoción tenerte aquí! Si estás en esta ruta de "Stack Personalizado", es porque no buscas un camino genérico. Buscas construir algo a tu medida, una ruta de aprendizaje que te lleve exactamente a donde quieres llegar. ¡Y esa es la mejor forma de empezar!
+
+Imagina que eres un chef. En lugar de seguir una receta al pie de la letra, hoy vas a diseñar tu propio platillo estrella. Nosotros te daremos los ingredientes y las técnicas, pero tú decidirás el sabor final.
+
+En esta primera sesión, nos enfocaremos en lo más importante: **tú**. Antes de escribir una sola línea de código, vamos a construir tu mapa.
+
+### El "Porqué" - Tu Pasión y Curiosidad
+
+Para que el viaje sea sostenible, tiene que apasionarte. No te preocupes si aún no sabes qué tecnología te gusta, empecemos por lo que ya conoces.
+
+<Aside title="Actividad 1: Brainstorming de Intereses">
+En tu editor de preferencia (Puedes utilizar cualquiera del listado sugerido a continuación) crea un proyecto nuevo y tómate un tiempo para responder con calma a estas preguntas. No hay respuestas correctas o incorrectas.
+
+1.  **¿Qué aplicaciones usas todos los días?** (Redes sociales, juegos, herramientas de productividad, etc.). ¿Qué te gusta de ellas? ¿Qué mejorarías?
+2.  **Piensa en un problema, pequeño o grande.** Puede ser algo de tu día a día ("Ojalá tuviera una forma más fácil de organizar mis recetas") o algo más global. ¿Cómo podría la tecnología ayudar a resolverlo?
+3.  **¿Qué te llama la atención?** ¿El diseño visual de una página web? ¿Cómo funcionan los pagos en línea? ¿La inteligencia artificial que te recomienda series? ¿Los videojuegos?
+4.  **¿Disfrutas más creando cosas visuales o solucionando problemas lógicos?** ¿O quizás te gusta organizar sistemas complejos?
+
+Guarda estas respuestas. Son el primer borrador de tu mapa.
+</Aside>
+
+<Aside title="Editores sugeridos">
+-   [Visual Studio Code](https://code.visualstudio.com/)
+-   [windsurf](https://windsurf.com/)
+-   [Antigravity](https://antigravity.google/)
+-   [Cursor](https://cursor.com/)
+-   [Trae.AI](https://www.trae.ai/)
+
+</Aside>
+
+#### ¿Qué es un "Stack Tecnológico"?
+
+Quizás has oído este término. Un **stack tecnológico** (o pila de tecnologías) no es más que el conjunto de herramientas que un desarrollador usa para construir algo.
+
+> **Analogía**: Piensa en el taller de un carpintero. Tiene martillos (un lenguaje de programación), sierras (un framework), y clavos (una base de datos). Dependiendo de si quiere construir una silla o una casa, usará un conjunto de herramientas diferente. Ese conjunto es su "stack".
+
+Tener un objetivo claro nos ayuda a elegir las herramientas correctas desde el principio, en lugar de acumular herramientas que no usaremos.
+
+### El "Qué" - Explorando los Caminos Profesionales
+
+Ahora que has reflexionado sobre tus intereses, veamos cómo se conectan con roles reales en la industria del software. Aquí te presentamos los más comunes.
+
+<Aside title="Actividad 2: Investigando Roles (60 min)">
+Usa los siguientes perfiles como punto de partida. Dedica al menos 10 minutos a cada uno. Lee descripciones de puestos en <Link href="https://www.linkedin.com/jobs/">LinkedIn Jobs</Link> o mira videos de "un día en la vida de un..." en YouTube para cada rol.
+
+Anota cuál o cuáles te generan más curiosidad y por qué, conectándolos con tu brainstorming anterior.
+</Aside>
+
+-   **Frontend Developer**: Es el arquitecto de la experiencia del usuario. Construye todo lo que ves y con lo que interactúas en una página web o aplicación. Si te apasiona lo visual, el diseño y cómo se siente un producto, este puede ser tu camino.
+-   **Backend Developer**: Es el ingeniero que construye el motor. Trabaja en el servidor, las bases de datos y la lógica que hace que todo funcione "detrás de cámaras". Si disfrutas con la lógica, la eficiencia y los sistemas complejos, aquí hay un mundo por descubrir.
+-   **Full-Stack Developer**: Es el "todoterreno". Entiende tanto el Frontend como el Backend, y puede construir una aplicación completa de principio a fin. Es un rol muy demandado que requiere una gran versatilidad.
+-   **Mobile Developer**: Se especializa en crear aplicaciones para dispositivos móviles, ya sea para iOS (con Swift) o Android (con Kotlin). Es un campo con un impacto directo en la vida diaria de millones de personas.
+-   **Data Scientist / Data Engineer**: Son los detectives de los datos. Crean sistemas para recopilar, procesar y analizar grandes volúmenes de información para encontrar patrones, predecir tendencias o alimentar modelos de inteligencia artificial.
+-   **DevOps Engineer**: Es el director de orquesta de la infraestructura. Se asegura de que el código que escriben los desarrolladores se pueda desplegar, escalar y mantener de forma segura y eficiente en la nube.
+
+### Hora 3: El "Cómo" - Definiendo Metas Inteligentes
+
+"Quiero aprender a programar" es un deseo, no una meta. Para que tu esfuerzo tenga frutos, necesitas un objetivo claro. Usaremos la metodología **SMART**.
+
+> **Definición**: Una meta SMART es **Específica** (Specific), **Medible** (Measurable), **Alcanzable** (Achievable), **Relevante** (Relevant) y **con Plazo** (Time-bound).
+
+-   **Mal ejemplo**: "Quiero ser desarrollador web".
+-   **Buen ejemplo**: "En los próximos 3 meses (Plazo), voy a construir un portafolio web personal (Específico y Alcanzable) usando HTML, CSS y JavaScript para mostrar mis proyectos (Relevante). Sabré que lo he logrado cuando esté online y tenga al menos 3 proyectos listados (Medible)".
+
+<Aside title="Actividad 3: Tu Primera Meta SMART (60 min)" type="tip">
+Volviendo a tus notas, es hora de definir tu Norte. Redacta dos metas:
+
+1.  **Tu Meta a Corto Plazo (1-3 meses)**: ¿Qué proyecto tangible quieres construir al finalizar los primeros módulos de este curso? Sé específico. Ej: "Crear un clon básico de la página de inicio de Netflix" o "Desarrollar una app de lista de tareas".
+2.  **Tu Meta a Largo Plazo (1 año)**: ¿Qué gran objetivo profesional te gustaría alcanzar? Ej: "Conseguir mi primer trabajo como Frontend Developer Junior" o "Publicar mi primera aplicación en la App Store".
+
+Esta será tu brújula. Cuando te sientas perdido o desmotivado, vuelve a leerla.
+</Aside>
+
+### Hora 4: El "Ahora" - Tu Plan de Acción Inmediato
+
+Ya tienes el mapa y el destino. Ahora, preparemos la mochila para el primer día de caminata.
+
+#### La Consistencia es tu Superpoder
+
+Aprender a programar es como aprender un idioma o un instrumento musical. Es mucho más efectivo practicar **30 minutos todos los días** que darse un atracón de 4 horas un solo día a la semana. Tu cerebro necesita tiempo para asimilar los conceptos y crear conexiones.
+
+#### Herramientas Esenciales del Desarrollador
+
+Independientemente del camino que elijas, hay tres herramientas que todo desarrollador necesita. Te recomendamos que las instales y te familiarices con ellas esta semana.
+
+1.  **Un Editor de Código**: Es tu procesador de texto para programar. Te recomendamos <Link href="https://code.visualstudio.com/">Visual Studio Code</Link>, es gratis, potente y el estándar de la industria.
+2.  **Git y GitHub**: Git es un sistema de control de versiones (como un historial de cambios superpotente para tu código). GitHub es la plataforma social donde guardas y colaboras en tus proyectos usando Git. <Link href="https://github.com/">Crea tu cuenta de GitHub</Link> hoy mismo.
+3.  **La Terminal o Línea de Comandos**: Es esa "pantalla negra" que ves en las películas. Es una forma directa y poderosa de comunicarte con tu computadora. No le tengas miedo, pronto será tu mejor amiga.
+
+### Conclusión de la Sesión
+
+¡Felicidades por completar esta primera sesión! Puede que no hayas escrito código, pero has hecho algo mucho más importante: has creado un **plan**.
+
+-   Sabes **por qué** estás aquí, conectado con tus pasiones.
+-   Has explorado **qué** caminos existen y cuál te atrae más.
+-   Has definido **cómo** vas a empezar, con una meta clara y tangible.
+-   Y sabes **ahora** cuáles son los siguientes pasos prácticos.
+
+Eres el arquitecto de tu carrera. En la próxima lección, empezaremos a poner los primeros ladrillos de ese proyecto que definiste en tu meta a corto plazo.
+
+¡Prepárate, porque lo que viene es emocionante!
 
 <Cta></Cta>
