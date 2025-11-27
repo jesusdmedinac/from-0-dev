@@ -49,7 +49,7 @@ Este documento muestra el estado de redacción de todas las lecciones en las dif
 
 ## Ruta: Ingeniería de software
 
-- [ ] Lección 1: Introducción a la Ingeniería de Software
+- [x] Lección 1: Introducción a la Ingeniería de Software
 - [ ] Lección 2: Requisitos de Software
 - [ ] Lección 3: Diseño de Software
 - [ ] Lección 4: Metodologías de Desarrollo

@@ -52,7 +52,7 @@ La plataforma utiliza Astro con el tema Starlight, lo que permite contenido en f
 ### 5. **Ruta: "Ingeniería de software" (`/software-engineering`)**
 
 -   **Público Objetivo**: Probablemente desarrolladores con más experiencia.
--   **Contenido**: Actualmente, todos los archivos son marcadores de posición ("WIP"). Los títulos sugieren un enfoque en temas teóricos y de alto nivel como metodologías de desarrollo, arquitectura de software, pruebas, mantenimiento y seguridad.
+-   **Contenido**: La primera lección de esta ruta ya ha sido desarrollada. Los títulos sugieren un enfoque en temas teóricos y de alto nivel como metodologías de desarrollo, arquitectura de software, pruebas, mantenimiento y seguridad.
 
 ---
 
