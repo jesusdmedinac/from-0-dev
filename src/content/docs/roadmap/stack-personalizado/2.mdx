@@ -1,12 +1,201 @@
 ---
-title: Planeación y Estimación
-description: WIP
+title: "Planeación y Estimación: El Mapa del Tesoro del Desarrollador"
+description: "En esta sesión de 4 horas, dominarás el arte de transformar ideas de negocio en planes técnicos sólidos. Aprenderás a crear historias de usuario, estimar con Story Points, y planificar Sprints para construir software de manera predecible y profesional."
 ---
 
 import Cta from '@components/cta/stack-personalizado/cta.astro';
+import { Aside } from '@astrojs/starlight/components';
 
 <Cta></Cta>
 
-WIP
+¡Bienvenido de nuevo, arquitecto de tu carrera! En la sesión anterior, trazaste tu mapa personal: tu "porqué", tu "qué" y tu "cómo". Ahora que tienes un destino, es hora de aprender a dibujar el mapa para cualquier proyecto: el plano que te guiará del caos a la claridad.
+
+Imagina que quieres construir un rascacielos. No empezarías a soldar vigas de acero al azar. Necesitarías un plano arquitectónico, un plan de ingeniería, un cronograma. En software, es algo similar. Un proyecto sin un plan sólido está destinado al fracaso, sin importar cuán brillante sea el código.
+
+En esta sesión intensiva de 4 horas, nos pondremos el casco de Jefe de Proyecto. Dominarás las habilidades que distinguen a un desarrollador senior: la capacidad de liderar, planificar y entregar valor de forma predecible.
+
+### Objetivos de la Sesión
+
+Al finalizar este taller, serás capaz de:
+- Identificar y evitar las trampas comunes que llevan a los proyectos al fracaso.
+- Convertir requisitos de negocio ambiguos en Historias de Usuario claras y accionables usando criterios profesionales (INVEST).
+- Desglosar Historias de Usuario en tareas técnicas específicas.
+- Estimar el esfuerzo de un proyecto usando Story Points y la técnica de Planning Poker, abandonando para siempre las estimaciones en horas.
+- Priorizar el trabajo utilizando matrices de Valor vs. Esfuerzo.
+- Estructurar un proyecto en Sprints y gestionar el flujo de trabajo en un tablero Kanban.
+
+---
+
+## Módulo 1: El Costo de la Improvisación
+
+Antes de ver las soluciones, debemos entender el problema. Muchos equipos operan en un "Ciclo del Caos" sin siquiera saberlo.
+
+> **El Ciclo del Caos**:
+> **Requisitos Vagos** ➔ **Scope Creep** (el proyecto crece sin control) ➔ **Plazos Irreales** ➔ **Presión y Burnout** ➔ **Deuda Técnica** (atajos y "chapuzas") ➔ **Producto Inestable** ➔ **Cliente Insatisfecho**.
+
+Este ciclo es la receta para el desastre. La planificación es el antídoto. Es nuestra herramienta para gestionar el riesgo, alinear las expectativas de los **stakeholders** (las partes interesadas: clientes, jefes, usuarios) y, sobre todo, proteger la salud mental y la calidad del trabajo del equipo.
+
+Un desarrollador junior codifica. Un desarrollador senior, además, protege el proyecto.
+
+<Aside title="Actividad Práctica 1: La Premortem de tu Proyecto (25 min)">
+Vamos a usar una técnica poderosa de gestión de riesgos.
+
+1.  **Visualiza el Futuro**: Imagina que han pasado 6 meses. El proyecto que definiste en tu meta SMART ha fracasado por completo. Es un desastre total.
+2.  **Diagnostica el Fracaso**: En un documento, escribe todas las razones posibles por las que el proyecto falló. Sé específico y pesimista.
+    -   *Ejemplo: "El cliente no paraba de pedir cambios pequeños que terminaron duplicando el trabajo", "Nunca supimos si estábamos progresando", "La funcionalidad clave que construimos resultó no ser la que los usuarios querían", "Nos quedamos atascados en un problema técnico por dos semanas".*
+3.  **Comparte tus Miedos**: Analiza tu lista. ¿Qué temas se repiten? Lo más probable es que identifiques problemas de comunicación, de requisitos y de estimación.
+
+Esta actividad no es para desmotivarte, sino para abrir los ojos a los dragones que debemos matar. Ahora, vamos a forjar las espadas para hacerlo.
+</Aside>
+
+---
+
+## Módulo 2: De la Idea a la Tarea
+
+La habilidad más crucial en la planificación es la **traducción**. Debes ser un traductor experto del lenguaje de negocio al lenguaje técnico.
+
+### Historias de Usuario Profesionales: El Criterio INVEST
+
+Ya conoces el formato "Como..., quiero..., para...". Ahora, vamos a añadirle un filtro de calidad: el acrónimo **INVEST**. Una buena historia de usuario es:
+
+-   **I - Independiente**: Debe poder desarrollarse sin depender de otra historia.
+-   **N - Negociable**: No es un contrato. Es el inicio de una conversación sobre la mejor forma de implementarla.
+-   **V - Valiosa**: Debe entregar valor tangible al usuario o al negocio.
+-   **E - Estimable**: El equipo debe tener suficiente información para estimar su tamaño.
+-   **S - Pequeña (Small)**: Debe ser lo suficientemente pequeña para completarse en un Sprint (idealmente en pocos días).
+-   **T - Testeable**: Debemos poder verificar que está completa y funciona.
+
+### Criterios de Aceptación: La "Definición de Hecho"
+
+¿Cómo sabemos que una historia está "terminada"? No es cuando "funciona en mi máquina". Es cuando cumple sus **Criterios de Aceptación (AC)**.
+
+> **Ejemplo:**
+> -   **Historia**: "Como usuario, quiero iniciar sesión con mi email y contraseña para acceder a mi perfil."
+> -   **Criterios de Aceptación**:
+>     1.  *Dado* que soy un usuario registrado, *cuando* ingreso mi email y contraseña correctos, *entonces* soy redirigido a `/dashboard`.
+>     2.  *Dado* que estoy en la página de login, *cuando* ingreso una contraseña incorrecta, *entonces* veo el mensaje de error "Email o contraseña incorrectos".
+>     3.  *Dado* que estoy en la página de login, *cuando* hago clic en el botón "Iniciar Sesión" sin llenar los campos, *entonces* los campos se marcan en rojo.
+
+Los AC eliminan la ambigüedad y son la base para las pruebas que escribirás más adelante.
+
+<Aside title="Actividad Práctica 2: Descomponiendo un Épico (35 min)">
+Es hora de ser arquitecto.
+
+1.  **Define tu Épico**: Toma la meta principal de tu proyecto personal (ej: "Construir una app de recetas"). Ese es tu Épico.
+2.  **Crea tu Backlog de Historias**: Desglosa ese Épico en **5 a 7 Historias de Usuario**. Asegúrate de que sean valiosas y (relativamente) pequeñas.
+    - *Ej: "Como cocinero, quiero buscar recetas por ingrediente...", "Como cocinero, quiero guardar mis recetas favoritas...", "Como cocinero, quiero ver los pasos de la receta claramente separados...".*
+3.  **Detalla los Criterios de Aceptación**: Elige **dos** de tus historias y escribe al menos **tres** Criterios de Aceptación para cada una, usando el formato "Dado/Cuando/Entonces".
+4.  **Desglosa a Tareas Técnicas**: Elige **una** de esas dos historias y divídela en las tareas técnicas concretas que necesitarías ejecutar.
+    - *Ej (para "buscar por ingrediente"): "Crear input de búsqueda en el frontend", "Diseñar endpoint GET /api/recipes?ingredient=", "Escribir query a la BBDD para filtrar recetas", "Crear componente para mostrar resultados de búsqueda".*
+
+Guarda este trabajo. Es el esqueleto de tu proyecto real.
+</Aside>
+
+---
+*(Descanso sugerido de 15 minutos)*
+---
+
+## Módulo 3: El Arte de Estimar sin Mentir (75 min)
+
+"¿Para cuándo está?" - la pregunta más temida. Estimar en horas es una receta para el fracaso. La solución es la **Estimación Relativa**.
+
+No preguntamos "¿cuántas horas?", sino "¿qué tan grande es esto comparado con aquello?".
+
+### Story Points: La Unidad de Esfuerzo
+
+Usamos **Story Points** con la secuencia Fibonacci (**1, 2, 3, 5, 8, 13, 21...**) para medir el esfuerzo. El número no representa horas, sino una mezcla de:
+-   **Complejidad**: ¿Qué tan difícil es de entender y resolver?
+-   **Incertidumbre**: ¿Cuántas cosas desconocemos? (¿Es una API nueva? ¿Una librería que no hemos usado?)
+-   **Volumen de Trabajo**: ¿Son muchos cambios pequeños o uno muy grande?
+
+La magia de Fibonacci es que la brecha entre números crece, reflejando que la incertidumbre se dispara con la complejidad. La diferencia entre un 1 y un 2 es pequeña; entre un 8 y un 13 es enorme. Una tarea de 13 o más puntos es una señal de alerta: **¡es demasiado grande, hay que dividirla!**
+
+### Planning Poker: La Sabiduría del Grupo
+
+Esta es la técnica para asignar los puntos.
+
+1.  **Lectura**: El equipo lee una historia de usuario y sus AC.
+2.  **Discusión**: Se aclaran dudas.
+3.  **Votación Secreta**: Cada miembro elige en privado una carta de Fibonacci que representa el esfuerzo.
+4.  **Revelación**: Todos muestran su carta a la vez.
+5.  **Conversación Clave**: Si hay votos muy dispares (un 3 y un 8), se abre la discusión más importante del día. El del 8 explica los riesgos que ve ("Esta API siempre falla, y hay que hacer 3 queries complejas"). El del 3 explica su visión ("Podemos reusar este componente y sale rápido"). Esta conversación saca a la luz suposiciones y conocimientos ocultos.
+6.  **Re-votación**: Se vuelve a votar hasta llegar a un consenso.
+
+Este proceso no busca la "estimación perfecta", busca el **entendimiento compartido**.
+
+<Aside type="caution" title="Actividad Práctica 3: Simulación de Planning Poker (45 min)">
+Vamos a estimar el backlog para una app de blog simple.
+
+**Línea Base**: Acordamos todos que la historia *"Como lector, quiero hacer clic en el título de un post para leerlo completo"* es un **2**. Es sencilla y la entendemos bien.
+
+**Tu Misión**: Estima las siguientes historias **en relación a nuestra línea base**. Anota el punto que le das y una **justificación de una línea** para tu estimación. Piensa en la complejidad, no en el tiempo.
+
+1.  **Historia A**: *Como lector, quiero ver los 5 posts más recientes en la página de inicio.*
+2.  **Historia B**: *Como autor, quiero escribir y publicar un nuevo post usando un editor de texto simple (título y cuerpo de texto).*
+3.  **Historia C**: *Como autor, quiero proteger con contraseña la página para escribir posts.*
+4.  **Historia D**: *Como autor, quiero poder añadir imágenes a mis posts.*
+5.  **Historia E**: *Como lector, quiero dejar comentarios en un post.*
+6.  **Historia F**: *Como administrador, quiero recibir una notificación por email cada vez que se publica un nuevo comentario.*
+
+**Reflexiona**:
+- ¿Por qué la historia D es probablemente más grande que la B? (Manejo de archivos, almacenamiento, etc.)
+- ¿Por qué la F tiene una alta incertidumbre para un desarrollador que nunca ha configurado un servicio de emails? (Podría ser un 8 por la incertidumbre, aunque el trabajo sea poco).
+- ¿Por qué la E es engañosamente compleja? (Spam, moderación, mostrar comentarios anidados...)
+</Aside>
+
+---
+
+## Módulo 4: Estrategia de Ejecución (45 min)
+
+Ya tenemos las tareas y su tamaño. Ahora, a la acción.
+
+### Sprints y Tableros Kanban
+
+Trabajamos en **Sprints**: ciclos cortos (1-2 semanas) con un objetivo claro. Al final de cada Sprint, debemos tener un **incremento de producto potencialmente entregable**.
+
+Visualizamos el trabajo en un **Tablero Kanban**, el cual nos da una vista clara del flujo de trabajo. Las columnas básicas son:
+-   **Backlog**: El universo de todas las tareas por hacer, priorizadas.
+-   **To Do (Sprint)**: Las tareas que el equipo se ha comprometido a hacer en el Sprint actual.
+-   **In Progress**: Lo que estás haciendo ahora. (¡Regla: una tarea por persona a la vez!)
+-   **In Review**: El código está terminado, esperando revisión por un compañero (Pull Request).
+-   **Done**: La tarea cumple todos los AC, ha sido probada y fusionada. ¡Celebración!
+
+### Priorización Avanzada: Matriz de Valor vs. Esfuerzo
+
+Con tu backlog estimado, ¿por dónde empezar? Usa una matriz 2x2.
+
+-   **Alto Valor, Bajo Esfuerzo (Quick Wins)**: ¡Haz esto primero! Genera impacto rápido.
+-   **Alto Valor, Alto Esfuerzo (Grandes Apuestas/Épicos)**: Son el corazón de tu producto. Planifícalos cuidadosamente.
+-   **Bajo Valor, Bajo Esfuerzo (Rellenos)**: Si sobra tiempo.
+-   **Bajo Valor, Alto Esfuerzo (Pozos sin fondo)**: ¡Evítalos a toda costa!
+
+Un desarrollador senior no solo coge la siguiente tarea de la lista; ayuda al equipo a elegir la tarea *correcta*.
+
+<Aside title="Actividad Práctica 4: Organiza tu Proyecto (15 min)">
+1.  **Crea tu Tablero**: Ve a [Trello](https://trello.com/) o [Notion](https://www.notion.so/) y crea un tablero Kanban para tu proyecto personal.
+2.  **Puebla tu Backlog**: Crea una tarjeta para cada una de las historias de usuario que escribiste y estimaste.
+3.  **Prioriza con MoSCoW**: Añade etiquetas (Must Have, Should Have, Could Have) a tus tarjetas.
+4.  **Planifica tu Primer Sprint**: Arrastra 2-3 historias "Must Have" a tu columna "To Do (Sprint)". Este es tu compromiso para las próximas semanas.
+
+¡Acabas de crear una hoja de ruta profesional para tu proyecto!
+</Aside>
+
+---
+
+## Conclusión y Próximos Pasos
+
+¡Felicidades! Has completado una de las sesiones más densas y más importantes de tu carrera. Hoy has aprendido que la construcción de software de calidad empieza mucho antes de escribir la primera línea de código.
+
+**Has pasado de ser un programador a ser un planificador.** Sabes cómo tomar una idea abstracta y convertirla en un plan de acción concreto, predecible y gestionable.
+
+### Tarea para Casa (Obligatoria)
+
+1.  **Finaliza tu Tablero**: Completa y pule tu tablero de Trello/Notion con todas tus historias, estimaciones y tu primer Sprint planificado. Este será un documento vivo que usarás durante todo el curso.
+2.  **Comparte tu Plan**: Publica el enlace a tu tablero en nuestro canal de la comunidad. Ver los planes de otros es increíblemente útil.
+3.  **Reflexiona**: Escribe una breve reflexión sobre tu mayor "¡ajá!" de esta sesión. ¿Qué concepto te ha cambiado más la perspectiva?
+
+Ahora que tenemos un plano maestro, la siguiente pregunta es: ¿cómo diseñamos el edificio para que no se derrumbe? En la próxima sesión, nos sumergiremos en el **Diseño y Arquitectura de Aplicaciones**.
+
+¡Prepárate para pensar en sistemas!
 
 <Cta></Cta>

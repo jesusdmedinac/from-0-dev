@@ -49,11 +49,11 @@ El contenido se divide en cuatro rutas, cada una dirigida a un público específ
 Para crear o modificar contenido, es crucial seguir las directrices de `CONTENT_STYLE.md`. Los puntos clave son:
 
 -   **Tono**: Alentador, empático y conversacional.
--   **Estructura de Lección**: Cada lección en `.mdx` debe incluir:
+-   **Estructura de Lección**: Cada lección en `.mdx` debe estar diseñada para una sesión de aprendizaje de aproximadamente **4 horas**. Esto requiere un desarrollo de contenido profundo y detallado, que incluya no solo la teoría principal, sino también múltiples actividades prácticas (`<Aside>`), ejemplos extendidos y discusiones teóricas. La estructura general debe incluir:
     1.  Frontmatter (título, descripción).
     2.  CTA (Call to Action) inicial.
     3.  Introducción y contenido principal dividido con `###`.
-    4.  Uso de componentes interactivos como `<Aside>`, `<LinkCard>` e `<iframe>` para sandboxes.
+    4.  Uso extensivo de componentes interactivos como `<Aside>`, `<LinkCard>` e `<iframe>`.
     5.  CTA final.
 -   **Formato**: Usar **negritas** para términos clave, comentar el código y hacer preguntas para fomentar la interacción.
 
