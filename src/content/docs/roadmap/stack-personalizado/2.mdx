@@ -112,18 +112,18 @@ A veces una historia es imposible de estimar porque es terreno desconocido. En l
 
 Incluir spikes en tu plan demuestra madurez: reconoces la incertidumbre y la controlas antes de comprometer fechas.
 
-### Ejemplo completo: de la idea al test
+### Plantilla completa: de la idea a la prueba
 
-| Nivel | Artefacto | Ejemplo | Entregable |
+| Nivel | Qué debes definir | Preguntas guía | Ejemplo (Registro de usuarios) |
 | --- | --- | --- | --- |
-| Épico | Objetivo | "Lanzar el checkout de mi curso" | Documenta la meta SMART en tu Notion |
-| Historia | User Story | "Como alumno, quiero pagar con tarjeta para inscribirme al curso" | Ticket en tu backlog |
-| AC | Gherkin | Respuestas exitosas/fallidas, recibo enviado, reintento | Lista de criterios "Dado/Cuando/Entonces" |
-| Tareas técnicas | Subtareas | Crear formulario, integrar API de pagos, guardar orden | Checklist en el ticket |
-| Spike | Investigación | "Comparar Stripe vs. Mercado Pago" (4h) | Doc corto con conclusiones |
-| Pruebas | QA/manual | Caso feliz, 2 errores, prueba de reintento | Casos en tu suite de tests o plan manual |
+| **Épico** | Meta SMART o Resultado esperado | ¿Qué cambio de negocio buscas? ¿Cómo lo medirás? | "Reducir abandono en registro en 20%" |
+| **Historia** | User Story alineada a INVEST | ¿Quién obtiene el valor? ¿Cuál es la acción? ¿Qué beneficio recibe? | "Como visitante, quiero crear una cuenta con mi email para guardar mi progreso" |
+| **AC** | Criterios `Dado/Cuando/Entonces` | ¿Cómo sabrás que funciona? ¿Qué errores debes mostrar? | Ingresar datos válidos crea la cuenta, email inválido muestra error, duplicados se bloquean |
+| **Tareas técnicas** | Pasos atómicos | ¿Qué debes construir en frontend, backend, pruebas y despliegue? | Formulario, endpoint `POST /users`, hash de contraseña, seed de datos |
+| **Spike** | Investigación acotada | ¿Qué no conoces aún? ¿Cuánto tiempo invertirás? | Evaluar proveedor de emails transaccionales (4h) |
+| **Pruebas** | Casos manuales o automatizados | ¿Qué validaciones cubrirás? ¿Dónde quedarán documentadas? | Test e2e de registro feliz, prueba de error, verificación de email |
 
-Cuando puedas llenar esta tabla para tu proyecto, sabrás que no dejaste huecos entre negocio y código.
+Usa la tabla como checklist. Sustituye el ejemplo por tu contexto y asegúrate de rellenar cada fila antes de dar por “listo” cualquier entregable.
 
 <Aside title="Actividad Práctica 2: Descomponiendo un Épico">
 Es hora de ser arquitecto.
@@ -241,18 +241,44 @@ Con tu backlog estimado, ¿por dónde empezar? Usa una matriz 2x2.
 Un desarrollador senior no solo coge la siguiente tarea de la lista; ayuda al equipo a elegir la tarea *correcta*.
 
 <Aside title="Actividad Práctica 4: Organiza tu Proyecto">
-1.  **Crea tu Tablero**: Ve a [Trello](https://trello.com/) o [Notion](https://www.notion.so/) y crea un tablero Kanban para tu proyecto personal.
-2.  **Puebla tu Backlog**: Crea una tarjeta para cada una de las historias de usuario que escribiste y estimaste.
-3.  **Prioriza con MoSCoW**: Añade etiquetas (Must Have, Should Have, Could Have) a tus tarjetas.
-4.  **Planifica tu Primer Sprint**: Arrastra 2-3 historias "Must Have" a tu columna "To Do (Sprint)". Este es tu compromiso para las próximas semanas.
+1.  **Elige tu formato**: Puede ser Trello, Notion, hoja de cálculo o un archivo Markdown en tu repositorio.
+2.  **Puebla tu Backlog**: Lista cada historia (una tarjeta o un encabezado) con sus puntos, tareas y estado.
+3.  **Prioriza con MoSCoW**: Usa etiquetas o texto para indicar Must/Should/Could. Si trabajas en Markdown, añade un campo `Prioridad`.
+4.  **Planifica tu Primer Sprint**: Mueve o marca 2-3 historias "Must" que quepan en tu capacidad calculada.
 
-¡Acabas de crear una hoja de ruta profesional para tu proyecto!
+Si eliges Markdown, inicia con esta estructura mínima y añade una subsección por historia para documentar sus criterios de aceptación y tareas técnicas:
+
+```md
+## Sprint 1 – Objetivo
+- Capacidad comprometida: 7 pts
+- Historias: US-01 (Must, 3 pts), US-02 (Must, 2 pts), US-05 (Should, 2 pts)
+
+### Tablero textual
+- **Backlog**: US-03, US-04
+- **To Do**: US-01
+- **In Progress**: US-02
+- **In Review**: _(vacío)_
+- **Done**: US-05
+
+### US-01 – Registro con email (3 pts)
+- **AC**: 
+  - Dado que ingreso un email válido, cuando envío el formulario, entonces recibo confirmación.
+  - Dado un email duplicado, cuando intento registrarme, entonces veo un error.
+- **Tareas técnicas**:
+  - Crear formulario de registro.
+  - Implementar endpoint `POST /users`.
+  - Escribir prueba e2e del caso feliz.
+
+### US-02 – ...
+```
+
+Lo importante es que toda historia tenga un lugar donde se describa lo acordado (AC) y lo que ejecutarás (tareas técnicas), aunque sea en texto plano.
 </Aside>
 
 <LinkCard
-  title="Plantilla Notion – Product Roadmap"
-  href="https://notion.notion.site/Product-roadmap-157e6ebe04774d08abed478000b63174"
-  description="Duplica esta plantilla y conecta tus historias, estimaciones y tableros en un único documento vivo."
+  title="Plantilla Notion – Roadmap Personal"
+  href="https://www.notion.so/templates/product-roadmap"
+  description="Duplica esta plantilla si prefieres Notion; si no, usa la estructura Markdown anterior como base."
 />
 
 ---
@@ -265,7 +291,7 @@ Un desarrollador senior no solo coge la siguiente tarea de la lista; ayuda al eq
 
 ### Tarea para Casa (Obligatoria)
 
-1.  **Finaliza tu Tablero**: Completa y pule tu tablero de Trello/Notion con todas tus historias, estimaciones y tu primer Sprint planificado. Este será un documento vivo que usarás durante todo el curso.
+1.  **Finaliza tu Tablero o Documento**: Completa y pule tu tablero (Trello/Notion) o tu plan en Markdown/hoja de cálculo con todas tus historias, estimaciones y tu primer Sprint planificado. Este será un documento vivo que usarás durante todo el curso.
 2.  **Comparte tu Plan**: Publica el enlace a tu tablero en nuestro canal de la comunidad. Ver los planes de otros es increíblemente útil.
 3.  **Reflexiona**: Escribe una breve reflexión sobre tu mayor "¡ajá!" de esta sesión. ¿Qué concepto te ha cambiado más la perspectiva?
 
