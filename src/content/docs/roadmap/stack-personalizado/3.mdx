@@ -1,12 +1,193 @@
 ---
-title: Diseño y Architectura de Aplicaciones
-description: WIP
+title: "Diseño y Arquitectura de Aplicaciones"
+description: "En esta sesión aprenderás a traducir tu roadmap en sistemas robustos: identificar límites de dominio, aplicar principios de diseño, elegir patrones arquitectónicos y documentar decisiones que sobreviven al paso del tiempo."
 ---
 
 import Cta from '@components/cta/stack-personalizado/cta.astro';
+import { Aside, LinkCard } from '@astrojs/starlight/components';
 
-<Cta></Cta>
+<Cta />
 
-WIP
+Venimos de dos sesiones donde definiste tu norte y construiste un plan realista. Ahora toca diseñar el sistema que hará posible ese plan. Esta clase es tu salto de "programador que arma features" a **arquitecto de producto personal**: alguien capaz de visualizar el todo, separar responsabilidades y anticipar el cambio.
 
-<Cta></Cta>
+Piensa en esta sesión como un taller de blueprinting. Saldrás con diagramas, acuerdos de arquitectura y una guía clara para implementar sin improvisar.
+
+### Objetivos de la Sesión
+
+Al terminar serás capaz de:
+- Identificar límites de dominio y representar tu sistema con el modelo C4 (Contexto, Contenedores, Componentes, Código).
+- Aplicar principios de diseño (SOLID, separación de capas, dependencias explícitas) sobre tu stack personalizado.
+- Evaluar patrones arquitectónicos (Monolito modular, Hexagonal, Microservicios tácticos) y elegir el adecuado según tus restricciones.
+- Documentar decisiones mediante ADRs y diagramas versionados, manteniendo la trazabilidad con tu backlog.
+- Incorporar atributos de calidad (observabilidad, seguridad básica, resiliencia) desde el diseño inicial.
+
+---
+
+## Módulo 1: Pensamiento Sistémico y Dominios
+
+Antes de elegir frameworks, define los límites de tu problema. Un sistema bien diseñado nace de un entendimiento claro del dominio.
+
+### Del backlog al mapa del sistema
+
+1. **Agrupa historias por resultado** (pago, autenticación, catálogo). Cada grupo es un *dominio funcional*.
+2. **Define actores y flujos**: ¿Quién interactúa con quién? ¿Hay servicios externos? ¿Qué datos cruzan los límites?
+3. **Dibuja un diagrama C4 de nivel Contexto**: muestra a tu aplicación como una caja y los sistemas/personas alrededor.
+
+<LinkCard
+  title="Guía oficial de C4"
+  href="https://c4model.com/"
+  description="Explicación completa del modelo C4 con ejemplos y plantillas."
+/>
+
+<Aside title="Actividad 1: Mapa de Contexto" type="note">
+1. Elige tu proyecto personal.
+2. Lista actores (usuarios, servicios de terceros, bots) y qué información comparten.
+3. Crea un diagrama C4 Nivel 1 (puede ser en papel, Excalidraw o texto) con flechas etiquetadas.
+4. Añade riesgos visibles en el diagrama ("Dependemos de Stripe", "Datos sensibles en tránsito").
+
+Guárdalo en tu repositorio; será el encabezado de tu documentación arquitectónica.
+</Aside>
+
+---
+
+## Módulo 2: Principios de Diseño Pragmáticos
+
+Tu objetivo no es diseñar la arquitectura más sofisticada, sino la más adaptable para tu caso.
+
+### SOLID aplicado a tu stack
+
+- **S**ingle Responsibility: cada módulo (feature folder) debe tener una razón de cambio.
+- **O**pen/Closed: evita tocar archivos centrales para cada feature; usa composición y configuración.
+- **L**iskov: diseña interfaces explícitas (ej. `AuthProvider`) y respeta sus contratos.
+- **I**nterface Segregation: expón interfaces chiquitas para tus servicios (ej. `PaymentGateway.charge()` y no un objeto gigante).
+- **D**ependency Inversion: tu dominio depende de abstracciones, no de implementaciones concretas (ej. repositorios).
+
+### Capas recomendadas
+
+| Capa | Responsabilidad | Ejemplo |
+| --- | --- | --- |
+| Presentación (UI/API) | Entradas/salidas, validaciones superficiales | Astro/React, endpoints HTTP |
+| Aplicación | Casos de uso, orquestación | Servicios que coordinan repositorios | 
+| Dominio | Reglas de negocio puras | Entidades, value objects |
+| Infraestructura | Implementaciones técnicas | ORM, SDK externos, adaptadores |
+
+<Aside title="Actividad 2: Refactor mental" type="caution">
+1. Toma una historia prioritaria.
+2. Escribe las clases/archivos que usarás y clasifícalos según la tabla de capas.
+3. Identifica dependencias peligrosas (UI que accede directo a DB) y propone cómo invertirlas usando interfaces o adaptadores.
+4. Documenta el cambio en una nota rápida; la usarás como guía de implementación.
+</Aside>
+
+---
+
+## Módulo 3: Patrones Arquitectónicos para tu proyecto
+
+No necesitas microservicios para todo. Usa esta tabla para evaluar opciones:
+
+| Patrón | Cuándo usarlo | Ventajas | Riesgos |
+| --- | --- | --- | --- |
+| **Monolito Modular** | MVP, equipo pequeño, despliegue sencillo | Menos DevOps, más fácil de depurar | Acoplamiento si no respetas módulos |
+| **Hexagonal (Ports & Adapters)** | Necesitas aislar dominio de infraestructura, planeas múltiples interfaces | Tests más simples, cambios de proveedores fáciles | Requiere disciplina y más código inicial |
+| **Microservicios tácticos** | Solo si una parte crece mucho y necesita escalar de forma independiente | Autonomía, despliegues independientes | Complejidad operativa, latencia, necesitas observabilidad sólida |
+
+<Aside title="Actividad 3: Patrón consciente">
+1. Revisa tu roadmap y detecta el módulo con mayor crecimiento esperado.
+2. Elige un patrón de la tabla y escribe un mini ADR con:
+   - Problema
+   - Alternativas
+   - Decisión
+   - Consecuencias
+3. Comparte el ADR con tu mentor o en la comunidad para validar.
+</Aside>
+
+<LinkCard
+  title="Plantilla ADR (MADR)"
+  href="https://adr.github.io/madr/"
+  description="Markdown Architecture Decision Records listos para duplicar."
+/>
+
+---
+
+## Módulo 4: Documentación Viva
+
+Diseñar no sirve si la información se pierde. Necesitas documentación ligera pero actualizable.
+
+### ADRs + Diagramas versionados
+
+- Crea una carpeta `/docs/architecture/` en tu repo.
+- Para cada decisión relevante (framework, proveedor, patrón) genera un archivo ADR.
+- Vincula los ADRs con los diagramas C4 y con las historias del backlog.
+
+```md
+# ADR-003 – Arquitectura Hexagonal para Pagos
+- Fecha: 2024-07-18
+- Estado: Aprobado
+- Contexto: Necesitamos integrar Stripe hoy y PayPal mañana.
+- Decisión: Implementar puertos (`PaymentGateway`) y adaptadores por proveedor.
+- Consecuencias: +Tiempo inicial, +Flexibilidad, Tests aislados del SDK.
+```
+
+<Aside title="Actividad 4: Documenta tu decisión">
+1. Elige una decisión tomada en los módulos anteriores.
+2. Escribe un ADR (usa la plantilla). Incluye link al diagrama o boceto.
+3. Publica el ADR en tu repositorio y agrega un enlace desde la historia relacionada.
+</Aside>
+
+---
+
+## Módulo 5: Atributos de Calidad desde el inicio
+
+Tu arquitectura debe garantizar más que funcionalidad. Considera estos atributos:
+
+### Observabilidad ligera
+
+- Define logs estructurados (nivel INFO para flujos principales, WARN/ERROR para fallos).
+- Agrega métricas básicas (tiempo de respuesta, tasa de error) usando herramientas gratuitas (Logtail, Grafana Cloud free tier).
+
+### Seguridad y resiliencia
+
+- Maneja secretos con variables de entorno `.env` y no los subas al repo.
+- Implementa *retry with backoff* y circuit breakers simples para servicios externos.
+- Añade pruebas de smoke antes de cada despliegue.
+
+<LinkCard
+  title="Checklist OWASP Top 10"
+  href="https://owasp.org/www-project-top-ten/"
+  description="Lista de riesgos de seguridad más comunes con mitigaciones prácticas."
+/>
+
+<Aside title="Actividad 5: Trade-offs conscientes" type="tip">
+Construye una tabla con tres atributos (ej. rendimiento, seguridad, rapidez de entrega) y describe qué compromisos harás en este lanzamientos. Ejemplo:
+
+| Atributo | Decisión | Seguimiento |
+| --- | --- | --- |
+| Rendimiento | Cachear respuestas de lectura crítica | Medir tiempo de respuesta con logs |
+| Seguridad | Forzar HTTPS y hashing de contraseñas | Revisar headers en staging |
+| Rapidez | Posponer multilenguaje | Revisar backlog en Sprint 4 |
+
+Compartirla con tu equipo te obliga a validar que todos entienden los riesgos.
+</Aside>
+
+<iframe
+  src="https://www.youtube.com/embed/4asWThJcQ-0"
+  title="Charla: Diseñar arquitecturas pragmáticas"
+  width="100%"
+  height="315"
+  loading="lazy"
+  allowfullscreen
+></iframe>
+
+---
+
+## Conclusión y Próximos Pasos
+
+Diseñar es decidir. Cada diagrama y ADR que generes hoy evitará horas de refactor mañana.
+
+### Checklist para cerrar la sesión
+
+1. **Diagrama C4 nivel Contexto y Contenedores** guardado en tu repositorio.
+2. **ADR principal** (patrón arquitectónico) publicado y vinculado a tu backlog.
+3. **Tabla de trade-offs** compartida con tu comunidad o mentor.
+4. **Plan de observabilidad** básico (logs + métricas) anotado en tu board.
+
+<Cta />
