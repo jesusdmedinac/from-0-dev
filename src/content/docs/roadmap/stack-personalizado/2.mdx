@@ -78,6 +78,26 @@ Ya conoces el formato "Como..., quiero..., para...". Ahora, vamos a añadirle un
 
 Los AC eliminan la ambigüedad y son la base para las pruebas que escribirás más adelante.
 
+### Tareas Técnicas: El Puente entre la Historia y el Código
+
+Cuando una historia ya está clara, todavía es demasiado grande para ponerla en "In Progress" tal cual. Necesitamos traducirla en **tareas técnicas**: acciones concretas, de bajo nivel, que normalmente puede ejecutar una sola persona en menos de un día.
+
+-   **Son atómicas**: "Configurar endpoint POST /sessions" es mejor que "Implementar login". Si no puedes describir la tarea con un verbo único (crear, configurar, probar), aún está muy grande.
+-   **Abarcan todo el flujo**: piensa en frontend, backend, pruebas automatizadas, documentación y despliegue. Una historia de login suele implicar tareas de UI, validaciones, hashing en backend y casos de prueba.
+-   **Se sustentan en los AC**: cada criterio suele traducirse al menos en una tarea. Si tienes un AC que habla de errores visibles, necesitas una tarea específica de manejo de errores.
+
+Esta descomposición permite distribuir el trabajo de forma justa, detectar dependencias técnicas y facilitar el seguimiento en tu tablero.
+
+### Spikes: Investigación con Fecha de Expiración
+
+A veces una historia es imposible de estimar porque es terreno desconocido. En lugar de adivinar, creamos un **spike**: una tarea de investigación acotada (normalmente 4-8 horas) cuyo objetivo es **aprender lo suficiente** para tomar una decisión o escribir una estimación informada.
+
+-   **Tienen entregables claros**: un documento con hallazgos, una prueba de concepto o una lista de opciones comparadas.
+-   **No son automatismos**: si conoces la solución, no necesitas un spike; simplemente crea tareas técnicas.
+-   **Se cierran con conclusiones**: al terminar debes responder "¿seguimos?", "¿cambiamos de librería?", o "¿dividimos la historia?".
+
+Incluir spikes en tu plan demuestra madurez: reconoces la incertidumbre y la controlas antes de comprometer fechas.
+
 <Aside title="Actividad Práctica 2: Descomponiendo un Épico">
 Es hora de ser arquitecto.
 
@@ -87,6 +107,7 @@ Es hora de ser arquitecto.
 3.  **Detalla los Criterios de Aceptación**: Elige **dos** de tus historias y escribe al menos **tres** Criterios de Aceptación para cada una, usando el formato "Dado/Cuando/Entonces".
 4.  **Desglosa a Tareas Técnicas**: Elige **una** de esas dos historias y divídela en las tareas técnicas concretas que necesitarías ejecutar.
     - *Ej (para "buscar por ingrediente"): "Crear input de búsqueda en el frontend", "Diseñar endpoint GET /api/recipes?ingredient=", "Escribir query a la BBDD para filtrar recetas", "Crear componente para mostrar resultados de búsqueda".*
+    - *Si en el desglose aparece algo totalmente desconocido, crea un spike independiente con su pregunta guía y tiempo límite.*
 
 Guarda este trabajo. Es el esqueleto de tu proyecto real.
 </Aside>
@@ -106,7 +127,7 @@ Usamos **Story Points** con la secuencia Fibonacci (**1, 2, 3, 5, 8, 13, 21...**
 -   **Incertidumbre**: ¿Cuántas cosas desconocemos? (¿Es una API nueva? ¿Una librería que no hemos usado?)
 -   **Volumen de Trabajo**: ¿Son muchos cambios pequeños o uno muy grande?
 
-La magia de Fibonacci es que la brecha entre números crece, reflejando que la incertidumbre se dispara con la complejidad. La diferencia entre un 1 y un 2 es pequeña; entre un 8 y un 13 es enorme. Una tarea de 13 o más puntos es una señal de alerta: **¡es demasiado grande, hay que dividirla!**
+La magia de Fibonacci es que la brecha entre números crece, reflejando que la incertidumbre se dispara con la complejidad. La diferencia entre un 1 y un 2 es pequeña; entre un 8 y un 13 es enorme. Una tarea de 13 o más puntos es una señal de alerta: **¡es demasiado grande, hay que dividirla!** Cuando el problema es que no conocemos la tecnología o el alcance, levantamos un spike para descubrir la información que nos falta y así poder trocear la historia en tareas técnicas reales.
 
 ### Planning Poker: La Sabiduría del Grupo
 
