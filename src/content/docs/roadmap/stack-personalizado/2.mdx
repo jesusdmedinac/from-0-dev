@@ -4,7 +4,7 @@ description: "En esta sesión de 4 horas, dominarás el arte de transformar idea
 ---
 
 import Cta from '@components/cta/stack-personalizado/cta.astro';
-import { Aside } from '@astrojs/starlight/components';
+import { Aside, LinkCard } from '@astrojs/starlight/components';
 
 <Cta></Cta>
 
@@ -36,6 +36,20 @@ Antes de ver las soluciones, debemos entender el problema. Muchos equipos operan
 Este ciclo es la receta para el desastre. La planificación es el antídoto. Es nuestra herramienta para gestionar el riesgo, alinear las expectativas de los **stakeholders** (las partes interesadas: clientes, jefes, usuarios) y, sobre todo, proteger la salud mental y la calidad del trabajo del equipo.
 
 Un desarrollador junior codifica. Un desarrollador senior, además, protege el proyecto.
+
+<LinkCard
+  title="THE CHAOS REPORT"
+  href="https://www.csus.edu/indiv/v/velianitis/161/chaosreport.pdf"
+  description="La investigación de Standish Group muestra que un asombroso 31,1% de los proyectos se cancelarán antes de ser finalizados. Además, los resultados indican que el 52,7% de los proyectos costarán un 189% de sus estimaciones iniciales."
+/>
+
+**Señales de que estás entrando al Ciclo del Caos:**
+
+- Tu backlog crece cada semana pero las demos muestran lo mismo: estás atrapado en scope creep.
+- Los stakeholders cambian los criterios después de cada entrega porque nunca acordaron qué significaba "terminado".
+- Tu equipo salta entre tareas sin cerrarlas; el WIP sube y la motivación baja.
+
+Si detectas una de estas señales en tu proyecto personal, esta sesión es tu momento de corregir el rumbo.
 
 <Aside title="Actividad Práctica 1: La Premortem de tu Proyecto">
 Vamos a usar una técnica poderosa de gestión de riesgos.
@@ -98,6 +112,19 @@ A veces una historia es imposible de estimar porque es terreno desconocido. En l
 
 Incluir spikes en tu plan demuestra madurez: reconoces la incertidumbre y la controlas antes de comprometer fechas.
 
+### Ejemplo completo: de la idea al test
+
+| Nivel | Artefacto | Ejemplo | Entregable |
+| --- | --- | --- | --- |
+| Épico | Objetivo | "Lanzar el checkout de mi curso" | Documenta la meta SMART en tu Notion |
+| Historia | User Story | "Como alumno, quiero pagar con tarjeta para inscribirme al curso" | Ticket en tu backlog |
+| AC | Gherkin | Respuestas exitosas/fallidas, recibo enviado, reintento | Lista de criterios "Dado/Cuando/Entonces" |
+| Tareas técnicas | Subtareas | Crear formulario, integrar API de pagos, guardar orden | Checklist en el ticket |
+| Spike | Investigación | "Comparar Stripe vs. Mercado Pago" (4h) | Doc corto con conclusiones |
+| Pruebas | QA/manual | Caso feliz, 2 errores, prueba de reintento | Casos en tu suite de tests o plan manual |
+
+Cuando puedas llenar esta tabla para tu proyecto, sabrás que no dejaste huecos entre negocio y código.
+
 <Aside title="Actividad Práctica 2: Descomponiendo un Épico">
 Es hora de ser arquitecto.
 
@@ -129,6 +156,20 @@ Usamos **Story Points** con la secuencia Fibonacci (**1, 2, 3, 5, 8, 13, 21...**
 
 La magia de Fibonacci es que la brecha entre números crece, reflejando que la incertidumbre se dispara con la complejidad. La diferencia entre un 1 y un 2 es pequeña; entre un 8 y un 13 es enorme. Una tarea de 13 o más puntos es una señal de alerta: **¡es demasiado grande, hay que dividirla!** Cuando el problema es que no conocemos la tecnología o el alcance, levantamos un spike para descubrir la información que nos falta y así poder trocear la historia en tareas técnicas reales.
 
+### Capacidad y velocidad para tu Sprint
+
+Con la estimación relativa lista, necesitas saber cuánto puedes comprometer.
+
+1. **Velocidad base**: toma los puntos completados en los últimos 2-3 Sprints personales (o usa una estimación conservadora de 8-10 puntos si estás empezando).
+2. **Reserva de riesgo (20%)**: descuéntala para absorber imprevistos.
+3. **Tiempo disponible**: ajusta según horas reales que tendrás (si solo puedes dedicar 6h/semana, quizá completes la mitad).
+
+```text
+Capacidad comprometida = (Velocidad Promedio x Disponibilidad Real) - Reserva de Riesgo
+```
+
+**Ejemplo**: Si en las últimas semanas completaste 12 puntos, pero esta vez tendrás solo el 75% del tiempo y quieres dejar 20% de colchón: `(12 x 0.75) - 2 ≈ 7 puntos`. Ese es tu límite para seleccionar historias.
+
 ### Planning Poker: La Sabiduría del Grupo
 
 Esta es la técnica para asignar los puntos.
@@ -142,7 +183,7 @@ Esta es la técnica para asignar los puntos.
 
 Este proceso no busca la "estimación perfecta", busca el **entendimiento compartido**.
 
-<Aside type="caution" title="Actividad Práctica 3: Simulación de Planning Poker">
+<Aside title="Actividad Práctica 3: Simulación de Planning Poker">
 Vamos a estimar el backlog para una app de blog simple.
 
 **Línea Base**: Acordamos todos que la historia *"Como lector, quiero hacer clic en el título de un post para leerlo completo"* es un **2**. Es sencilla y la entendemos bien.
@@ -162,6 +203,8 @@ Vamos a estimar el backlog para una app de blog simple.
 - ¿Por qué la E es engañosamente compleja? (Spam, moderación, mostrar comentarios anidados...)
 </Aside>
 
+<iframe width="1028" src="https://www.youtube.com/embed/ey6Pm46WXkY?si=Cfk90kqLkaeYBv1X" title="Story Points y Planning Poker en la práctica" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
 ---
 
 ## Módulo 4: Estrategia de Ejecución
@@ -178,6 +221,13 @@ Visualizamos el trabajo en un **Tablero Kanban**, el cual nos da una vista clara
 -   **In Progress**: Lo que estás haciendo ahora. (¡Regla: una tarea por persona a la vez!)
 -   **In Review**: El código está terminado, esperando revisión por un compañero (Pull Request).
 -   **Done**: La tarea cumple todos los AC, ha sido probada y fusionada. ¡Celebración!
+
+### Rituales y límites que evitan el caos
+
+-   **Definition of Ready (DoR)**: Ninguna historia entra a "To Do" sin AC claros, tareas técnicas listadas y dependencias resueltas.
+-   **Daily Focus (10 min)**: Cada día responde "¿qué cerré?, ¿qué desbloqueo hoy?, ¿qué me bloquea?". Si se vuelve más largo, agenda otra llamada.
+-   **Límites WIP**: Máximo 2 tarjetas por persona entre "In Progress" y "In Review". Si quieres empezar algo nuevo, primero termina o ayuda a cerrar otra tarjeta.
+-   **Review + Retro semanal**: Aunque trabajes solo, agenda una revisión contigo mismo o con un mentor para evaluar avances y aprendizajes.
 
 ### Priorización Avanzada: Matriz de Valor vs. Esfuerzo
 
@@ -198,6 +248,12 @@ Un desarrollador senior no solo coge la siguiente tarea de la lista; ayuda al eq
 
 ¡Acabas de crear una hoja de ruta profesional para tu proyecto!
 </Aside>
+
+<LinkCard
+  title="Plantilla Notion – Product Roadmap"
+  href="https://notion.notion.site/Product-roadmap-157e6ebe04774d08abed478000b63174"
+  description="Duplica esta plantilla y conecta tus historias, estimaciones y tableros en un único documento vivo."
+/>
 
 ---
 
