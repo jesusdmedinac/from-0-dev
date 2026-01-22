@@ -12,32 +12,112 @@ Venimos de dos sesiones donde definiste tu norte y construiste un plan realista.
 
 Piensa en esta sesión como un taller de blueprinting. Saldrás con diagramas, acuerdos de arquitectura y una guía clara para implementar sin improvisar.
 
+<Aside type="tip" title="¿Qué es un blueprint?">
+En construcción, un **blueprint** (plano) es el documento que muestra cómo se construirá un edificio antes de poner el primer ladrillo. En software, usamos diagramas y documentos de arquitectura con el mismo propósito: planificar antes de codificar.
+</Aside>
+
 ### Objetivos de la Sesión
 
 Al terminar serás capaz de:
-- Identificar límites de dominio y representar tu sistema con el modelo C4 (Contexto, Contenedores, Componentes, Código).
-- Aplicar principios de diseño (SOLID, separación de capas, dependencias explícitas) sobre tu stack personalizado.
-- Evaluar patrones arquitectónicos (Monolito modular, Hexagonal, Microservicios tácticos) y elegir el adecuado según tus restricciones.
-- Documentar decisiones mediante ADRs y diagramas versionados, manteniendo la trazabilidad con tu backlog.
-- Incorporar atributos de calidad (observabilidad, seguridad básica, resiliencia) desde el diseño inicial.
+- Identificar **límites de dominio** (las fronteras lógicas de tu sistema) y representar tu aplicación con el **modelo C4** (una técnica de diagramación en 4 niveles de detalle).
+- Aplicar **principios de diseño SOLID** (cinco reglas para escribir código mantenible) y organizar tu código en **capas** con responsabilidades claras.
+- Evaluar **patrones arquitectónicos** (formas probadas de estructurar aplicaciones) y elegir el adecuado para tu proyecto.
+- Documentar decisiones mediante **ADRs** (Architecture Decision Records: registros escritos de por qué tomaste cada decisión técnica).
+- Incorporar **atributos de calidad** (características no funcionales como seguridad, rendimiento y observabilidad) desde el diseño inicial.
 
 ---
 
 ## Módulo 1: Pensamiento Sistémico y Dominios
 
-Antes de elegir frameworks, define los límites de tu problema. Un sistema bien diseñado nace de un entendimiento claro del dominio.
+Antes de elegir frameworks, define los límites de tu problema. Un sistema bien diseñado nace de un entendimiento claro del **dominio**.
 
-### Del backlog al mapa del sistema
+### ¿Qué es un dominio?
 
-1. **Agrupa historias por resultado** (pago, autenticación, catálogo). Cada grupo es un *dominio funcional*.
-2. **Define actores y flujos**: ¿Quién interactúa con quién? ¿Hay servicios externos? ¿Qué datos cruzan los límites?
-3. **Dibuja un diagrama C4 de nivel Contexto**: muestra a tu aplicación como una caja y los sistemas/personas alrededor.
+Un **dominio** es el área de conocimiento o actividad que tu software intenta resolver. Por ejemplo:
+- Si construyes una tienda online, tu dominio es el **comercio electrónico**.
+- Si construyes una app de tareas, tu dominio es la **gestión de productividad**.
+
+Dentro de un dominio grande, existen **subdominios** o **dominios funcionales**: áreas más pequeñas con reglas propias. En una tienda online tendrías:
+- **Catálogo**: productos, categorías, búsqueda
+- **Carrito**: agregar/quitar items, calcular totales
+- **Pagos**: procesar transacciones, manejar errores
+- **Usuarios**: registro, login, perfiles
+
+<Aside type="note" title="¿Por qué importan los límites?">
+Definir límites claros entre dominios te ayuda a:
+- Saber qué código pertenece a cada parte
+- Evitar que un cambio en "pagos" rompa "catálogo"
+- Dividir el trabajo si trabajas en equipo
+- Decidir qué podría convertirse en un servicio separado en el futuro
+</Aside>
+
+### El Modelo C4: Diagramas en 4 niveles
+
+El **modelo C4** es una técnica creada por Simon Brown para visualizar arquitectura de software. Se llama C4 porque tiene **4 niveles de zoom**, como un mapa que puedes acercar o alejar:
+
+| Nivel | Nombre | ¿Qué muestra? | Analogía |
+| --- | --- | --- | --- |
+| 1 | **Contexto** | Tu sistema como una caja negra + usuarios y sistemas externos | Vista satelital de una ciudad |
+| 2 | **Contenedores** | Las partes ejecutables: apps, bases de datos, APIs | Vista de los edificios principales |
+| 3 | **Componentes** | Los módulos dentro de cada contenedor | Vista de los departamentos de un edificio |
+| 4 | **Código** | Clases y funciones específicas | Plano de una habitación |
+
+**Importante**: No necesitas crear los 4 niveles. Para la mayoría de proyectos personales, los niveles 1 (Contexto) y 2 (Contenedores) son suficientes.
+
+#### Nivel 1: Diagrama de Contexto
+
+Este es el diagrama más importante. Muestra:
+- **Tu sistema** como una caja en el centro
+- **Usuarios** (personas que usan tu app)
+- **Sistemas externos** (APIs de terceros, bases de datos externas, servicios de email, etc.)
+- **Flechas** que indican qué información fluye entre ellos
+
+```
+┌─────────────┐         ┌──────────────────┐         ┌─────────────┐
+│   Usuario   │────────▶│   Tu App         │────────▶│   Stripe    │
+│   (Actor)   │ usa     │   (Sistema)      │ paga    │   (Externo) │
+└─────────────┘         └──────────────────┘         └─────────────┘
+                               │
+                               │ envía emails
+                               ▼
+                        ┌─────────────┐
+                        │  SendGrid   │
+                        │  (Externo)  │
+                        └─────────────┘
+```
+
+#### Nivel 2: Diagrama de Contenedores
+
+Aquí "contenedor" no significa Docker. Un **contenedor** en C4 es cualquier cosa que ejecuta código o almacena datos:
+- Una aplicación web (frontend)
+- Una API (backend)
+- Una base de datos
+- Una app móvil
+- Un worker o job en background
+
+```
+┌────────────────────────────────────────────────────────┐
+│                      Tu Sistema                         │
+│  ┌──────────────┐    ┌──────────────┐    ┌──────────┐ │
+│  │   Frontend   │───▶│   API REST   │───▶│ Postgres │ │
+│  │   (React)    │    │   (Node.js)  │    │   (DB)   │ │
+│  └──────────────┘    └──────────────┘    └──────────┘ │
+└────────────────────────────────────────────────────────┘
+```
 
 <LinkCard
   title="Guía oficial de C4"
   href="https://c4model.com/"
-  description="Explicación completa del modelo C4 con ejemplos y plantillas."
+  description="Explicación completa del modelo C4 con ejemplos interactivos y plantillas descargables."
 />
+
+### Del backlog al mapa del sistema
+
+Ahora que entiendes C4, aplícalo a tu proyecto:
+
+1. **Agrupa historias por resultado** (pago, autenticación, catálogo). Cada grupo es un *dominio funcional*.
+2. **Define actores y flujos**: ¿Quién interactúa con quién? ¿Hay servicios externos? ¿Qué datos cruzan los límites?
+3. **Dibuja un diagrama C4 de nivel Contexto**: muestra a tu aplicación como una caja y los sistemas/personas alrededor.
 
 <Aside title="Actividad 1: Mapa de Contexto" type="note">
 1. Elige tu proyecto personal.
@@ -54,27 +134,210 @@ Guárdalo en tu repositorio; será el encabezado de tu documentación arquitect�
 
 Tu objetivo no es diseñar la arquitectura más sofisticada, sino la más adaptable para tu caso.
 
-### SOLID aplicado a tu stack
+### ¿Qué son los principios SOLID?
 
-- **S**ingle Responsibility: cada módulo (feature folder) debe tener una razón de cambio.
-- **O**pen/Closed: evita tocar archivos centrales para cada feature; usa composición y configuración.
-- **L**iskov: diseña interfaces explícitas (ej. `AuthProvider`) y respeta sus contratos.
-- **I**nterface Segregation: expón interfaces chiquitas para tus servicios (ej. `PaymentGateway.charge()` y no un objeto gigante).
-- **D**ependency Inversion: tu dominio depende de abstracciones, no de implementaciones concretas (ej. repositorios).
+**SOLID** es un acrónimo de cinco principios de diseño de software creados por Robert C. Martin (Uncle Bob). Estos principios te ayudan a escribir código que sea fácil de mantener, extender y probar. Veámoslos uno por uno con ejemplos concretos:
 
-### Capas recomendadas
+#### S - Single Responsibility (Responsabilidad Única)
 
-| Capa | Responsabilidad | Ejemplo |
+**Cada clase o módulo debe tener una sola razón para cambiar.**
+
+❌ Mal ejemplo:
+```typescript
+class UserManager {
+  createUser(data) { /* crea usuario */ }
+  sendWelcomeEmail(user) { /* envía email */ }
+  generatePDF(user) { /* genera reporte */ }
+  validateCreditCard(card) { /* valida tarjeta */ }
+}
+```
+
+✅ Buen ejemplo:
+```typescript
+class UserService { createUser(data) { /* solo gestión de usuarios */ } }
+class EmailService { sendWelcomeEmail(user) { /* solo emails */ } }
+class ReportService { generatePDF(user) { /* solo reportes */ } }
+class PaymentValidator { validateCreditCard(card) { /* solo pagos */ } }
+```
+
+**¿Por qué importa?** Si cambias cómo se envían emails, solo tocas `EmailService`. No arriesgas romper la creación de usuarios.
+
+#### O - Open/Closed (Abierto/Cerrado)
+
+**El código debe estar abierto para extensión pero cerrado para modificación.**
+
+Esto significa que puedes agregar nuevas funcionalidades sin modificar el código existente. La clave es usar **composición** (combinar piezas) en lugar de modificar archivos centrales.
+
+❌ Mal ejemplo:
+```typescript
+function calculateDiscount(type: string, price: number) {
+  if (type === 'student') return price * 0.2;
+  if (type === 'senior') return price * 0.3;
+  // Cada nuevo descuento = modificar esta función
+  if (type === 'veteran') return price * 0.25;
+}
+```
+
+✅ Buen ejemplo:
+```typescript
+interface DiscountStrategy {
+  calculate(price: number): number;
+}
+
+class StudentDiscount implements DiscountStrategy {
+  calculate(price: number) { return price * 0.2; }
+}
+
+class SeniorDiscount implements DiscountStrategy {
+  calculate(price: number) { return price * 0.3; }
+}
+
+// Agregar VeteranDiscount no requiere tocar código existente
+```
+
+#### L - Liskov Substitution (Sustitución de Liskov)
+
+**Si tienes una clase padre, cualquier clase hija debe poder usarse en su lugar sin romper nada.**
+
+Esto significa que las clases que heredan de otras deben respetar el "contrato" (las promesas) de la clase padre.
+
+❌ Mal ejemplo:
+```typescript
+class Bird {
+  fly() { return "volando..."; }
+}
+
+class Penguin extends Bird {
+  fly() { throw new Error("¡Los pingüinos no vuelan!"); }
+  // Rompe el contrato: quien use Bird espera que fly() funcione
+}
+```
+
+✅ Buen ejemplo:
+```typescript
+interface Bird { move(): string; }
+
+class Sparrow implements Bird {
+  move() { return "volando..."; }
+}
+
+class Penguin implements Bird {
+  move() { return "nadando..."; }
+}
+```
+
+#### I - Interface Segregation (Segregación de Interfaces)
+
+**Es mejor tener muchas interfaces pequeñas que una interfaz gigante.**
+
+❌ Mal ejemplo:
+```typescript
+interface Worker {
+  work(): void;
+  eat(): void;
+  sleep(): void;
+  attendMeeting(): void;
+  writeReport(): void;
+}
+
+// Un robot no come ni duerme, pero debe implementar todo
+class Robot implements Worker {
+  eat() { throw new Error("Robots don't eat"); } // Absurdo
+}
+```
+
+✅ Buen ejemplo:
+```typescript
+interface Workable { work(): void; }
+interface Eatable { eat(): void; }
+interface Sleepable { sleep(): void; }
+
+class Human implements Workable, Eatable, Sleepable { /* ... */ }
+class Robot implements Workable { /* solo lo que necesita */ }
+```
+
+#### D - Dependency Inversion (Inversión de Dependencias)
+
+**Tu código de alto nivel (reglas de negocio) no debe depender de código de bajo nivel (bases de datos, APIs). Ambos deben depender de abstracciones (interfaces).**
+
+❌ Mal ejemplo:
+```typescript
+class OrderService {
+  private database = new MySQLDatabase(); // Dependencia directa
+
+  saveOrder(order) {
+    this.database.insert('orders', order); // Atado a MySQL
+  }
+}
+```
+
+✅ Buen ejemplo:
+```typescript
+interface OrderRepository {
+  save(order: Order): void;
+}
+
+class OrderService {
+  constructor(private repository: OrderRepository) {} // Recibe abstracción
+
+  saveOrder(order) {
+    this.repository.save(order); // No sabe si es MySQL, Mongo o un archivo
+  }
+}
+
+// Puedes usar cualquier implementación:
+class MySQLOrderRepository implements OrderRepository { /* ... */ }
+class MongoOrderRepository implements OrderRepository { /* ... */ }
+class InMemoryOrderRepository implements OrderRepository { /* para tests */ }
+```
+
+<LinkCard
+  title="Principios SOLID en la práctica"
+  href="https://jesusdmedinac.notion.site/Principios-SOLID-2f011756a8d480e4bad2d8010932d521"
+  description="Ejemplos concretos de SOLID aplicados en desarrollo Android con Kotlin."
+/>
+
+<Aside type="tip" title="No te obsesiones">
+SOLID son guías, no leyes. En un proyecto pequeño, aplicar todos los principios puede ser excesivo. Úsalos cuando el código empiece a ser difícil de cambiar.
+</Aside>
+
+### Arquitectura en Capas
+
+Una forma común de organizar código es separarlo en **capas**, donde cada capa tiene una responsabilidad clara y solo puede comunicarse con capas específicas.
+
+```
+┌─────────────────────────────────────────┐
+│           PRESENTACIÓN (UI/API)         │  ← Lo que el usuario ve
+├─────────────────────────────────────────┤
+│              APLICACIÓN                  │  ← Coordina acciones
+├─────────────────────────────────────────┤
+│               DOMINIO                    │  ← Reglas de negocio
+├─────────────────────────────────────────┤
+│           INFRAESTRUCTURA               │  ← Detalles técnicos
+└─────────────────────────────────────────┘
+```
+
+**Regla de oro**: Las capas superiores pueden llamar a las inferiores, pero nunca al revés. El dominio NUNCA debe importar nada de infraestructura directamente.
+
+| Capa | Responsabilidad | Ejemplos concretos |
 | --- | --- | --- |
-| Presentación (UI/API) | Entradas/salidas, validaciones superficiales | Astro/React, endpoints HTTP |
-| Aplicación | Casos de uso, orquestación | Servicios que coordinan repositorios | 
-| Dominio | Reglas de negocio puras | Entidades, value objects |
-| Infraestructura | Implementaciones técnicas | ORM, SDK externos, adaptadores |
+| **Presentación** | Recibir input del usuario y mostrar output. Validaciones básicas (¿el email tiene @?) | Componentes React, páginas Astro, controladores de API, formularios |
+| **Aplicación** | Orquestar el flujo de un caso de uso. Coordinar llamadas entre servicios | `CreateOrderUseCase`, `AuthenticateUserService` |
+| **Dominio** | Reglas de negocio puras. No sabe nada de bases de datos ni HTTP | `Order`, `User`, `calculateTotal()`, `validateDiscount()` |
+| **Infraestructura** | Implementaciones técnicas específicas | Conexión a PostgreSQL, llamadas a Stripe API, envío de emails con SendGrid |
+
+#### Glosario de términos en la tabla
+
+- **ORM (Object-Relational Mapping)**: Herramienta que traduce entre objetos de tu código y tablas de base de datos. Ejemplos: Prisma, TypeORM, Sequelize.
+- **SDK (Software Development Kit)**: Librería oficial de un servicio para usarlo desde tu código. Ejemplo: el SDK de Firebase o el de Stripe.
+- **Entidades**: Objetos con identidad única que persisten en el tiempo. Un `User` con ID es una entidad.
+- **Value Objects**: Objetos definidos por sus valores, sin identidad. Un `Email` o `Money(100, 'USD')` son value objects.
+- **Adaptadores**: Clases que traducen entre tu código y sistemas externos (más detalle en Módulo 3).
 
 <Aside title="Actividad 2: Refactor mental" type="caution">
-1. Toma una historia prioritaria.
+1. Toma una historia prioritaria de tu backlog.
 2. Escribe las clases/archivos que usarás y clasifícalos según la tabla de capas.
-3. Identifica dependencias peligrosas (UI que accede directo a DB) y propone cómo invertirlas usando interfaces o adaptadores.
+3. Identifica dependencias peligrosas (por ejemplo: un componente React que hace `fetch` directamente a la base de datos) y propone cómo arreglarlo usando interfaces.
 4. Documenta el cambio en una nota rápida; la usarás como guía de implementación.
 </Aside>
 
@@ -82,22 +345,189 @@ Tu objetivo no es diseñar la arquitectura más sofisticada, sino la más adapta
 
 ## Módulo 3: Patrones Arquitectónicos para tu proyecto
 
-No necesitas microservicios para todo. Usa esta tabla para evaluar opciones:
+Un **patrón arquitectónico** es una solución probada para organizar un sistema de software. Es como un plano que otros desarrolladores han usado exitosamente y que puedes adaptar a tu proyecto.
+
+No necesitas microservicios para todo. Veamos las opciones más comunes y cuándo usar cada una.
+
+### Patrón 1: Monolito Modular
+
+Un **monolito** es una aplicación donde todo el código vive junto y se despliega como una sola unidad. Un **monolito modular** es un monolito bien organizado internamente en módulos independientes.
+
+```
+┌─────────────────────────────────────────────────┐
+│                  Tu Aplicación                   │
+│  ┌───────────┐  ┌───────────┐  ┌───────────┐   │
+│  │  Módulo   │  │  Módulo   │  │  Módulo   │   │
+│  │  Usuarios │  │  Pagos    │  │  Catálogo │   │
+│  └───────────┘  └───────────┘  └───────────┘   │
+│         └──────────────┼──────────────┘         │
+│                        ▼                         │
+│               Base de datos única                │
+└─────────────────────────────────────────────────┘
+```
+
+**Cuándo usarlo**:
+- Estás empezando un proyecto nuevo (MVP)
+- Equipo pequeño (1-5 personas)
+- Quieres desplegar rápido sin complicarte con infraestructura
+
+**Ventajas**: Un solo lugar para todo, fácil de depurar, sin latencia de red entre módulos.
+
+**Riesgos**: Si no mantienes disciplina, los módulos se mezclan y terminas con "código espagueti".
+
+### Patrón 2: Arquitectura Hexagonal (Ports & Adapters)
+
+La **Arquitectura Hexagonal** (también llamada **Ports and Adapters** o **Clean Architecture**) es un patrón que pone tu **lógica de negocio en el centro**, completamente aislada del mundo exterior.
+
+#### La metáfora del hexágono
+
+Imagina tu aplicación como un hexágono:
+- **El centro** contiene tu dominio puro (reglas de negocio)
+- **Los bordes** tienen "puertos" (interfaces) que definen cómo el mundo exterior puede comunicarse con el centro
+- **Fuera del hexágono** están los "adaptadores" que conectan puertos con tecnologías específicas
+
+```
+                    ┌─────────────────┐
+                    │   Adaptador     │
+                    │   HTTP/REST     │
+                    └────────┬────────┘
+                             │
+              ┌──────────────▼──────────────┐
+              │     Puerto: UserAPI         │
+              │  ┌───────────────────────┐  │
+              │  │                       │  │
+   Adaptador  │  │    DOMINIO            │  │  Adaptador
+   React UI ──┼──│                       │──┼── PostgreSQL
+              │  │  (Reglas de negocio   │  │
+              │  │   puras, sin imports  │  │
+              │  │   de frameworks)      │  │
+              │  │                       │  │
+              │  └───────────────────────┘  │
+              │     Puerto: UserRepo        │
+              └──────────────┬──────────────┘
+                             │
+                    ┌────────▼────────┐
+                    │   Adaptador     │
+                    │   SendGrid      │
+                    └─────────────────┘
+```
+
+#### ¿Qué son los Puertos?
+
+Un **puerto** es una interfaz (contrato) que define qué operaciones necesita o expone tu dominio.
+
+```typescript
+// Puerto de ENTRADA (lo que el mundo puede pedirle al dominio)
+interface UserService {
+  register(email: string, password: string): Promise<User>;
+  authenticate(email: string, password: string): Promise<Token>;
+}
+
+// Puerto de SALIDA (lo que el dominio necesita del mundo exterior)
+interface UserRepository {
+  save(user: User): Promise<void>;
+  findByEmail(email: string): Promise<User | null>;
+}
+
+interface EmailSender {
+  sendWelcomeEmail(to: string): Promise<void>;
+}
+```
+
+#### ¿Qué son los Adaptadores?
+
+Un **adaptador** es una implementación concreta de un puerto que conecta con una tecnología específica.
+
+```typescript
+// Adaptador para PostgreSQL (implementa el puerto UserRepository)
+class PostgresUserRepository implements UserRepository {
+  async save(user: User) {
+    await prisma.user.create({ data: user });
+  }
+
+  async findByEmail(email: string) {
+    return await prisma.user.findUnique({ where: { email } });
+  }
+}
+
+// Adaptador para testing (misma interfaz, diferente implementación)
+class InMemoryUserRepository implements UserRepository {
+  private users: User[] = [];
+
+  async save(user: User) {
+    this.users.push(user);
+  }
+
+  async findByEmail(email: string) {
+    return this.users.find(u => u.email === email) || null;
+  }
+}
+```
+
+**¿Por qué es poderoso?** Tu dominio no sabe si está hablando con PostgreSQL, MongoDB o un array en memoria. Puedes:
+- Cambiar de base de datos sin tocar reglas de negocio
+- Testear tu lógica sin necesitar una base de datos real
+- Agregar nuevas interfaces (CLI, GraphQL) sin modificar el núcleo
+
+**Cuándo usarlo**:
+- Tu proyecto tendrá múltiples interfaces (web, mobile, API pública)
+- Planeas cambiar de proveedor (hoy Stripe, mañana PayPal)
+- Valoras mucho los tests automatizados
+
+**Riesgos**: Requiere escribir más código inicial (interfaces, adaptadores). En proyectos pequeños puede ser excesivo.
+
+### Patrón 3: Microservicios
+
+Los **microservicios** dividen tu aplicación en múltiples servicios pequeños e independientes, cada uno con su propia base de datos y despliegue.
+
+```
+┌─────────────┐    ┌─────────────┐    ┌─────────────┐
+│  Servicio   │    │  Servicio   │    │  Servicio   │
+│  Usuarios   │◄──►│   Pagos     │◄──►│  Catálogo   │
+│             │    │             │    │             │
+│  [Postgres] │    │   [Mongo]   │    │   [Redis]   │
+└─────────────┘    └─────────────┘    └─────────────┘
+      ▲                   ▲                  ▲
+      └───────────────────┼──────────────────┘
+                          │
+                    ┌─────▼─────┐
+                    │  API      │
+                    │  Gateway  │
+                    └───────────┘
+```
+
+**Cuándo usarlo (y cuando NO)**:
+
+✅ Úsalo si:
+- Una parte de tu sistema necesita escalar independientemente (el servicio de videos crece 10x más que el resto)
+- Tienes equipos separados que necesitan autonomía
+- Ya tienes un monolito funcionando y quieres extraer una parte específica
+
+❌ NO lo uses si:
+- Estás empezando un proyecto nuevo
+- Eres un equipo pequeño
+- No tienes experiencia con sistemas distribuidos
+
+<Aside type="caution" title="Advertencia sobre microservicios">
+Los microservicios introducen complejidad enorme: latencia de red, fallos parciales, consistencia eventual, necesidad de observabilidad avanzada. La mayoría de startups exitosas empezaron con un monolito y solo migraron a microservicios cuando fue absolutamente necesario.
+</Aside>
+
+### Tabla comparativa
 
 | Patrón | Cuándo usarlo | Ventajas | Riesgos |
 | --- | --- | --- | --- |
 | **Monolito Modular** | MVP, equipo pequeño, despliegue sencillo | Menos DevOps, más fácil de depurar | Acoplamiento si no respetas módulos |
-| **Hexagonal (Ports & Adapters)** | Necesitas aislar dominio de infraestructura, planeas múltiples interfaces | Tests más simples, cambios de proveedores fáciles | Requiere disciplina y más código inicial |
-| **Microservicios tácticos** | Solo si una parte crece mucho y necesita escalar de forma independiente | Autonomía, despliegues independientes | Complejidad operativa, latencia, necesitas observabilidad sólida |
+| **Hexagonal** | Múltiples interfaces, cambios de proveedores, tests importantes | Tests simples, flexibilidad máxima | Más código inicial, requiere disciplina |
+| **Microservicios** | Escala independiente, equipos autónomos, sistema maduro | Autonomía, despliegues independientes | Complejidad operativa, latencia, debugging difícil |
 
-<Aside title="Actividad 3: Patrón consciente">
+<Aside title="Actividad 3: Elige tu patrón">
 1. Revisa tu roadmap y detecta el módulo con mayor crecimiento esperado.
-2. Elige un patrón de la tabla y escribe un mini ADR con:
-   - Problema
-   - Alternativas
-   - Decisión
-   - Consecuencias
-3. Comparte el ADR con tu mentor o en la comunidad para validar.
+2. Elige un patrón de la tabla.
+3. Escribe un mini **ADR** (lo aprenderás en el siguiente módulo) con:
+   - Problema: ¿Qué necesitas resolver?
+   - Alternativas: ¿Qué patrones consideraste?
+   - Decisión: ¿Cuál elegiste y por qué?
+   - Consecuencias: ¿Qué ganas y qué pierdes?
 </Aside>
 
 <LinkCard
@@ -112,60 +542,426 @@ No necesitas microservicios para todo. Usa esta tabla para evaluar opciones:
 
 Diseñar no sirve si la información se pierde. Necesitas documentación ligera pero actualizable.
 
-### ADRs + Diagramas versionados
+### ¿Qué es un ADR?
 
-- Crea una carpeta `/docs/architecture/` en tu repo.
-- Para cada decisión relevante (framework, proveedor, patrón) genera un archivo ADR.
-- Vincula los ADRs con los diagramas C4 y con las historias del backlog.
+Un **ADR (Architecture Decision Record)** es un documento corto que registra una decisión técnica importante. Es como un diario de tu arquitectura que responde: *"¿Por qué hicimos esto así?"*
 
-```md
-# ADR-003 – Arquitectura Hexagonal para Pagos
-- Fecha: 2024-07-18
-- Estado: Aprobado
-- Contexto: Necesitamos integrar Stripe hoy y PayPal mañana.
-- Decisión: Implementar puertos (`PaymentGateway`) y adaptadores por proveedor.
-- Consecuencias: +Tiempo inicial, +Flexibilidad, Tests aislados del SDK.
+#### ¿Por qué necesitas ADRs?
+
+- **Memoria**: En 6 meses olvidarás por qué elegiste PostgreSQL sobre MongoDB
+- **Onboarding**: Nuevos miembros del equipo entienden el contexto sin preguntarte todo
+- **Evitar repetir errores**: Si ya evaluaste una alternativa y la descartaste, queda documentado
+- **Trazabilidad**: Puedes vincular decisiones con historias de usuario o bugs
+
+#### Estructura de un ADR
+
+Un ADR típico tiene estas secciones:
+
+```markdown
+# ADR-001: Título descriptivo de la decisión
+
+## Estado
+Propuesto | Aceptado | Deprecado | Sustituido por ADR-XXX
+
+## Fecha
+2024-07-18
+
+## Contexto
+¿Cuál es el problema o situación que requiere una decisión?
+Describe el escenario sin incluir la solución aún.
+
+## Alternativas consideradas
+
+### Opción A: [Nombre]
+- Ventajas: ...
+- Desventajas: ...
+
+### Opción B: [Nombre]
+- Ventajas: ...
+- Desventajas: ...
+
+## Decisión
+Elegimos [Opción X] porque [razones claras].
+
+## Consecuencias
+
+### Positivas
+- Lo que ganamos con esta decisión
+
+### Negativas
+- Lo que perdemos o los riesgos que aceptamos
+
+### Neutras
+- Cambios que no son buenos ni malos, solo diferentes
 ```
 
-<Aside title="Actividad 4: Documenta tu decisión">
-1. Elige una decisión tomada en los módulos anteriores.
-2. Escribe un ADR (usa la plantilla). Incluye link al diagrama o boceto.
-3. Publica el ADR en tu repositorio y agrega un enlace desde la historia relacionada.
+#### Ejemplo real de ADR
+
+```markdown
+# ADR-003: Usar Arquitectura Hexagonal para el módulo de Pagos
+
+## Estado
+Aceptado
+
+## Fecha
+2024-07-18
+
+## Contexto
+Nuestro sistema necesita procesar pagos. Actualmente usamos Stripe, pero
+el equipo de producto planea agregar PayPal en Q4 y posiblemente MercadoPago
+para el mercado latinoamericano en 2025.
+
+El código actual tiene llamadas directas al SDK de Stripe esparcidas en
+varios componentes React y en el backend.
+
+## Alternativas consideradas
+
+### Opción A: Mantener integración directa
+- Ventajas: Menos código, más simple hoy
+- Desventajas: Cada nuevo proveedor requiere cambios en múltiples archivos
+
+### Opción B: Arquitectura Hexagonal con Puertos y Adaptadores
+- Ventajas: Agregar proveedores es crear un nuevo adaptador
+- Desventajas: Más código inicial, curva de aprendizaje
+
+### Opción C: Servicio de pagos separado (microservicio)
+- Ventajas: Aislamiento total
+- Desventajas: Complejidad operativa excesiva para nuestro equipo de 3
+
+## Decisión
+Elegimos **Opción B: Arquitectura Hexagonal** porque:
+1. El plan de producto confirma que habrá múltiples proveedores
+2. Nuestro equipo puede manejar la complejidad adicional
+3. Nos permite testear la lógica de pagos sin el SDK real
+
+## Consecuencias
+
+### Positivas
+- Agregar PayPal será crear `PayPalAdapter` implementando `PaymentGateway`
+- Tests unitarios del dominio de pagos sin mocks complicados
+- Cambiar de Stripe a otro proveedor no afecta reglas de negocio
+
+### Negativas
+- Necesitamos ~2 días extra de desarrollo inicial
+- Más archivos que mantener (puerto + adaptadores)
+
+### Neutras
+- El equipo necesita aprender el patrón (beneficio a largo plazo)
+
+## Enlaces relacionados
+- Diagrama C4: `/docs/architecture/diagrams/payments-container.png`
+- Historia de usuario: JIRA-456 "Agregar soporte PayPal"
+```
+
+### Organización de ADRs en tu repositorio
+
+```
+proyecto/
+├── docs/
+│   └── architecture/
+│       ├── decisions/
+│       │   ├── 001-usar-astro-framework.md
+│       │   ├── 002-postgres-como-base-de-datos.md
+│       │   └── 003-hexagonal-para-pagos.md
+│       ├── diagrams/
+│       │   ├── c4-context.png
+│       │   └── c4-containers.png
+│       └── README.md  ← Índice de ADRs
+└── src/
+```
+
+<Aside type="tip" title="ADRs versionados">
+Los ADRs viven en tu repositorio Git. Esto significa que:
+- Tienen historial de cambios
+- Se revisan en Pull Requests
+- Están junto al código que documentan
+</Aside>
+
+### Vincula todo: ADRs + Diagramas + Backlog
+
+Para que la documentación sea realmente útil:
+
+1. **En cada ADR**, incluye links a:
+   - Diagramas C4 relevantes
+   - Historias de usuario relacionadas (Jira, GitHub Issues, etc.)
+
+2. **En cada historia de usuario**, incluye link al ADR si hay una decisión arquitectónica
+
+3. **En el README de arquitectura**, mantén un índice:
+
+```markdown
+# Decisiones de Arquitectura
+
+| ID | Decisión | Estado | Fecha |
+|----|----------|--------|-------|
+| 001 | [Usar Astro como framework](decisions/001-usar-astro.md) | Aceptado | 2024-06 |
+| 002 | [PostgreSQL como BD principal](decisions/002-postgres.md) | Aceptado | 2024-06 |
+| 003 | [Hexagonal para pagos](decisions/003-hexagonal-pagos.md) | Aceptado | 2024-07 |
+```
+
+<Aside title="Actividad 4: Documenta tu primera decisión">
+1. Elige una decisión que tomaste en los módulos anteriores (patrón arquitectónico, estructura de capas, etc.)
+2. Crea la carpeta `docs/architecture/decisions/` en tu repositorio
+3. Escribe un ADR siguiendo la plantilla. Incluye:
+   - Al menos 2 alternativas que consideraste
+   - Consecuencias positivas Y negativas
+   - Link al diagrama C4 que creaste en el Módulo 1
+4. Haz commit y push del ADR
 </Aside>
 
 ---
 
 ## Módulo 5: Atributos de Calidad desde el inicio
 
-Tu arquitectura debe garantizar más que funcionalidad. Considera estos atributos:
+Tu arquitectura debe garantizar más que funcionalidad. Los **atributos de calidad** (también llamados requisitos no funcionales) definen *cómo* debe comportarse tu sistema, no *qué* debe hacer.
 
-### Observabilidad ligera
+### ¿Qué son los atributos de calidad?
 
-- Define logs estructurados (nivel INFO para flujos principales, WARN/ERROR para fallos).
-- Agrega métricas básicas (tiempo de respuesta, tasa de error) usando herramientas gratuitas (Logtail, Grafana Cloud free tier).
+| Atributo | Pregunta que responde | Ejemplo |
+| --- | --- | --- |
+| **Rendimiento** | ¿Qué tan rápido responde? | La página carga en menos de 2 segundos |
+| **Escalabilidad** | ¿Soporta más usuarios? | Funciona igual con 100 o 10,000 usuarios |
+| **Disponibilidad** | ¿Cuánto tiempo está activo? | 99.9% uptime (máximo 8 horas caído al año) |
+| **Seguridad** | ¿Qué tan protegido está? | Datos encriptados, autenticación robusta |
+| **Observabilidad** | ¿Puedo ver qué está pasando? | Logs, métricas, alertas |
+| **Mantenibilidad** | ¿Qué tan fácil es cambiar? | Código modular, tests, documentación |
+| **Resiliencia** | ¿Se recupera de fallos? | Si Stripe falla, el sistema no explota |
 
-### Seguridad y resiliencia
+### Observabilidad: Los tres pilares
 
-- Maneja secretos con variables de entorno `.env` y no los subas al repo.
-- Implementa *retry with backoff* y circuit breakers simples para servicios externos.
-- Añade pruebas de smoke antes de cada despliegue.
+**Observabilidad** es la capacidad de entender qué está pasando dentro de tu sistema mirando sus outputs. Tiene tres pilares:
+
+#### 1. Logs (Registros)
+
+Los **logs** son mensajes que tu aplicación escribe para registrar eventos. Los **logs estructurados** usan un formato consistente (generalmente JSON) en lugar de texto libre.
+
+❌ Log no estructurado:
+```
+Error al procesar pago del usuario 123 por $50
+```
+
+✅ Log estructurado:
+```json
+{
+  "timestamp": "2024-07-18T10:30:00Z",
+  "level": "ERROR",
+  "message": "Error al procesar pago",
+  "userId": 123,
+  "amount": 50,
+  "currency": "USD",
+  "provider": "stripe",
+  "errorCode": "card_declined"
+}
+```
+
+**¿Por qué estructurados?** Puedes buscar todos los errores de un usuario específico, o todos los fallos de Stripe, o calcular cuántos pagos fallaron ayer.
+
+**Niveles de log**:
+| Nivel | Cuándo usarlo |
+| --- | --- |
+| **DEBUG** | Detalles técnicos (solo en desarrollo) |
+| **INFO** | Flujos normales: "Usuario logueado", "Pago procesado" |
+| **WARN** | Algo raro pero no crítico: "Retry #2 a servicio externo" |
+| **ERROR** | Algo falló: "No se pudo procesar pago" |
+
+#### 2. Métricas
+
+Las **métricas** son números que miden el comportamiento de tu sistema a lo largo del tiempo.
+
+Métricas básicas que deberías tener:
+- **Tiempo de respuesta**: ¿Cuánto tarda cada endpoint? (promedio, p95, p99)
+- **Tasa de error**: ¿Qué porcentaje de requests fallan?
+- **Requests por segundo**: ¿Cuánto tráfico estás recibiendo?
+- **Saturación**: ¿Qué tan cerca estás de los límites? (CPU, memoria, conexiones DB)
+
+Herramientas gratuitas para empezar:
+- [Grafana Cloud](https://grafana.com/products/cloud/) (free tier generoso)
+- [Logtail](https://betterstack.com/logtail) (logs + métricas básicas)
+- [Axiom](https://axiom.co/) (logs estructurados)
+
+#### 3. Trazas (Traces)
+
+Las **trazas** siguen el camino de una request a través de tu sistema. Son especialmente útiles cuando tienes múltiples servicios.
+
+```
+Request: POST /api/checkout
+├── Frontend (50ms)
+├── API Gateway (5ms)
+├── Auth Service (30ms)
+├── Order Service (100ms)
+│   ├── Database query (40ms)
+│   └── Stripe API (200ms)  ← ¡Aquí está el cuello de botella!
+└── Total: 425ms
+```
+
+Para proyectos pequeños, los logs y métricas son suficientes. Las trazas son más importantes cuando creces.
+
+### Seguridad básica
+
+#### Manejo de secretos
+
+Los **secretos** son datos sensibles: contraseñas, API keys, tokens de acceso.
+
+**Regla de oro**: NUNCA subas secretos a Git.
+
+```bash
+# .env (archivo local, NUNCA en git)
+STRIPE_SECRET_KEY=sk_live_xxx
+DATABASE_URL=postgres://user:pass@host:5432/db
+JWT_SECRET=mi-secreto-super-largo
+```
+
+```bash
+# .gitignore
+.env
+.env.local
+.env.production
+```
+
+Usa variables de entorno para acceder a ellos:
+```typescript
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
+```
+
+<Aside type="caution" title="¿Subiste un secreto por error?">
+Si accidentalmente subiste un secreto a Git:
+1. El secreto está comprometido aunque lo borres (Git guarda historial)
+2. **Rota el secreto inmediatamente** (genera uno nuevo en el servicio)
+3. Usa herramientas como `git-secrets` para prevenir futuros accidentes
+</Aside>
+
+#### Checklist de seguridad mínima
+
+- [ ] HTTPS en producción (nunca HTTP)
+- [ ] Contraseñas hasheadas con bcrypt o argon2 (nunca en texto plano)
+- [ ] Tokens de sesión con expiración
+- [ ] Validación de inputs (nunca confíes en datos del usuario)
+- [ ] Headers de seguridad (CORS, CSP, X-Frame-Options)
 
 <LinkCard
   title="Checklist OWASP Top 10"
   href="https://owasp.org/www-project-top-ten/"
-  description="Lista de riesgos de seguridad más comunes con mitigaciones prácticas."
+  description="Los 10 riesgos de seguridad más comunes en aplicaciones web y cómo mitigarlos."
 />
 
-<Aside title="Actividad 5: Trade-offs conscientes" type="tip">
-Construye una tabla con tres atributos (ej. rendimiento, seguridad, rapidez de entrega) y describe qué compromisos harás en este lanzamientos. Ejemplo:
+### Resiliencia: Preparándote para fallos
 
-| Atributo | Decisión | Seguimiento |
+La **resiliencia** es la capacidad de tu sistema de seguir funcionando cuando algo falla. Los servicios externos FALLARÁN: Stripe tendrá downtime, tu base de datos será lenta, la API de emails no responderá.
+
+#### Patrón: Retry with Backoff
+
+**Retry** significa reintentar una operación fallida. **Backoff** significa esperar un poco más entre cada reintento.
+
+```typescript
+async function callExternalAPI(maxRetries = 3) {
+  for (let attempt = 1; attempt <= maxRetries; attempt++) {
+    try {
+      return await fetch('https://api.external.com/data');
+    } catch (error) {
+      if (attempt === maxRetries) throw error;
+
+      // Backoff exponencial: espera 1s, 2s, 4s...
+      const waitTime = Math.pow(2, attempt) * 1000;
+      console.log(`Intento ${attempt} falló. Reintentando en ${waitTime}ms...`);
+      await sleep(waitTime);
+    }
+  }
+}
+```
+
+**¿Por qué backoff?** Si un servicio está sobrecargado, bombardearlo con retries inmediatos lo empeora. Espaciar los reintentos le da tiempo de recuperarse.
+
+#### Patrón: Circuit Breaker
+
+Un **Circuit Breaker** (cortacircuitos) es como el breaker eléctrico de tu casa. Cuando detecta muchos fallos seguidos, "abre el circuito" y deja de intentar, evitando que tu sistema se quede esperando respuestas que no llegarán.
+
+```
+Estado CERRADO (normal)
+       ↓ muchos fallos
+Estado ABIERTO (bloquea llamadas, falla rápido)
+       ↓ después de un tiempo
+Estado SEMI-ABIERTO (permite una llamada de prueba)
+       ↓ si funciona → vuelve a CERRADO
+       ↓ si falla → vuelve a ABIERTO
+```
+
+```typescript
+class CircuitBreaker {
+  private failures = 0;
+  private lastFailure: Date | null = null;
+  private state: 'CLOSED' | 'OPEN' | 'HALF_OPEN' = 'CLOSED';
+
+  async call(fn: () => Promise<any>) {
+    if (this.state === 'OPEN') {
+      // Si pasaron 30 segundos, intentamos de nuevo
+      if (Date.now() - this.lastFailure!.getTime() > 30000) {
+        this.state = 'HALF_OPEN';
+      } else {
+        throw new Error('Circuit breaker is OPEN');
+      }
+    }
+
+    try {
+      const result = await fn();
+      this.reset();
+      return result;
+    } catch (error) {
+      this.recordFailure();
+      throw error;
+    }
+  }
+
+  private recordFailure() {
+    this.failures++;
+    this.lastFailure = new Date();
+    if (this.failures >= 5) {
+      this.state = 'OPEN';
+    }
+  }
+
+  private reset() {
+    this.failures = 0;
+    this.state = 'CLOSED';
+  }
+}
+```
+
+#### Smoke Tests (Pruebas de humo)
+
+Un **smoke test** es una prueba rápida que verifica que las funcionalidades básicas funcionan. El nombre viene de la electrónica: si enchufas un circuito nuevo y sale humo, algo está muy mal.
+
+```typescript
+// smoke-test.js - ejecutar antes/después de cada deploy
+async function smokeTest() {
+  // ¿La app responde?
+  const healthCheck = await fetch('https://miapp.com/health');
+  assert(healthCheck.ok, 'Health check failed');
+
+  // ¿La página principal carga?
+  const homePage = await fetch('https://miapp.com/');
+  assert(homePage.ok, 'Home page failed');
+
+  // ¿El login funciona? (con usuario de prueba)
+  const login = await fetch('https://miapp.com/api/login', {
+    method: 'POST',
+    body: JSON.stringify({ email: 'test@test.com', password: 'test123' })
+  });
+  assert(login.ok, 'Login failed');
+
+  console.log('✅ Smoke tests passed!');
+}
+```
+
+<Aside title="Actividad 5: Define tus trade-offs" type="tip">
+No puedes optimizar todo. Cada decisión tiene compromisos. Construye una tabla con tres atributos prioritarios para tu proyecto:
+
+| Atributo | Decisión para este lanzamiento | Cómo lo verificarás |
 | --- | --- | --- |
 | Rendimiento | Cachear respuestas de lectura crítica | Medir tiempo de respuesta con logs |
-| Seguridad | Forzar HTTPS y hashing de contraseñas | Revisar headers en staging |
-| Rapidez | Posponer multilenguaje | Revisar backlog en Sprint 4 |
+| Seguridad | Forzar HTTPS y hashear contraseñas | Revisar headers en staging |
+| Rapidez de entrega | Posponer soporte multilenguaje | Revisar backlog en Sprint 4 |
 
-Compartirla con tu equipo te obliga a validar que todos entienden los riesgos.
+Compartir esta tabla con tu equipo (o mentor) te obliga a validar que todos entienden los riesgos que están aceptando.
 </Aside>
 
 <iframe
