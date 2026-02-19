@@ -1,23 +1,29 @@
-Feature: Lección de Desarrollo Backend - RESTful vs GraphQL
+Feature: Lección Extendida de Desarrollo Backend - RESTful vs GraphQL (4 Horas)
 
-  Scenario: Explicación de Arquitectura RESTful
+  Scenario: Explicación de Arquitectura RESTful y Buenas Prácticas
     Given que el estudiante inicia la sección de REST
     Then debe encontrar los principios básicos (Recursos, Verbos HTTP, Stateless)
-    And una analogía del mundo real (ej. un menú de restaurante o biblioteca)
-    And un ejemplo de código de un endpoint REST bien diseñado
+    And aprender sobre Códigos de Estado HTTP (2xx, 4xx, 5xx)
+    And aprender técnicas de Paginación y Filtrado
+    And ver un ejemplo de respuesta de error estandarizada
 
-  Scenario: Explicación de GraphQL y su propuesta de valor
-    Given que el estudiante llega a la sección de GraphQL
-    Then debe entender el concepto de "Graph", Esquemas y Resolvers
-    And ver un ejemplo de cómo una sola consulta resuelve el problema de múltiples peticiones (N+1)
-    And un ejemplo de código de una Query y un Schema básico
+  Scenario: GraphQL Avanzado: Mutations y Real-time
+    Given que el estudiante conoce las Queries
+    Then debe aprender sobre Mutations para modificar datos
+    And conocer las Subscriptions para actualizaciones en tiempo real
+    And ver un ejemplo de manejo de errores específico de GraphQL
 
-  Scenario: Comparativa Estratégica para Toma de Decisiones
-    Given que el estudiante necesita elegir entre REST y GraphQL
-    Then la lección debe presentar una tabla comparativa (Overfetching, Versioning, Tooling)
-    And una guía de decisión basada en el tamaño del equipo y complejidad del frontend
+  Scenario: Seguridad y Comunicación entre Capas
+    Given que el estudiante va a exponer su API al mundo
+    Then debe entender el flujo de Autenticación con JWT
+    And conocer los conceptos de CORS y Rate Limiting para protección del servidor
 
-  Scenario: Elementos Interactivos y Práctica
-    Given la estructura de la lección de 4 horas
-    Then debe incluir un <Aside> con un reto de diseño de API
-    And <LinkCard> hacia playgrounds interactivos (ej. Apollo Explorer o JSONPlaceholder)
+  Scenario: Taller de Arquitectura: Sistema de E-commerce
+    Given un requerimiento de negocio complejo
+    Then el estudiante debe realizar un ejercicio guiado de diseño
+    And comparar cómo se vería la estructura de datos en REST vs GraphQL para el mismo problema
+
+  Scenario: Comparativa Estratégica y Herramientas
+    Given que el estudiante necesita elegir una herramienta
+    Then debe ver una tabla comparativa exhaustiva
+    And encontrar recursos de herramientas profesionales (Postman, Apollo, etc.)

@@ -55,6 +55,31 @@ Diseñar una API REST no es solo escupir JSON. La estructura importa:
 
 Observemos cómo el endpoint es un sustantivo (`libros`), usamos versiones (`v1`) y devolvemos hipervínculos para guiar al cliente (esto se conoce como HATEOAS).
 
+#### Más allá de los verbos: Códigos de Estado y Errores
+
+Un error común es devolver siempre `200 OK` incluso cuando algo sale mal. En REST, los códigos de estado HTTP son tu lenguaje:
+
+*   **2xx (Éxito)**: `200 OK` (éxito general), `201 Created` (tras un POST exitoso), `204 No Content` (tras un DELETE exitoso).
+*   **4xx (Error del Cliente)**: `400 Bad Request` (datos inválidos), `401 Unauthorized` (falta login), `403 Forbidden` (no tienes permiso), `404 Not Found`.
+*   **5xx (Error del Servidor)**: `500 Internal Server Error`.
+
+**Ejemplo de respuesta de error profesional:**
+```json
+{
+  "error": {
+    "code": "invalid_parameters",
+    "message": "El campo 'email' no tiene un formato válido.",
+    "request_id": "req_12345abc"
+  }
+}
+```
+
+#### Manejo de Grandes Volúmenes: Paginación y Filtrado
+
+Imagina que tienes 10,000 usuarios. No puedes devolverlos todos en un `GET /usuarios`.
+*   **Filtrado**: `GET /usuarios?rol=admin&activo=true`
+*   **Paginación**: `GET /usuarios?page=2&limit=50`
+
 ---
 
 ### 2. GraphQL: La Revolución de la Flexibilidad
@@ -118,9 +143,48 @@ type Query {
 }
 ```
 
+#### Más allá de las Consultas: Mutations y Subscriptions
+
+GraphQL no es solo para "leer".
+*   **Mutations**: Se usan para crear, actualizar o borrar datos. Equivale a los POST/PUT/DELETE de REST.
+*   **Subscriptions**: Permiten mantener una conexión abierta (vía WebSockets) para recibir actualizaciones en tiempo real cuando algo cambia en el servidor.
+
+```graphql
+# Ejemplo de Mutation para crear un comentario
+mutation AddComment($postId: ID!, $text: String!) {
+  createComment(postId: $postId, text: $text) {
+    id
+    createdAt
+    text
+  }
+}
+```
+
+<Aside title="Manejo de Errores en GraphQL" type="caution">
+A diferencia de REST, GraphQL casi siempre devuelve un código `200 OK`. Los errores vienen dentro del cuerpo de la respuesta en un array llamado `errors`. Esto requiere que tu frontend sea más cuidadoso al procesar la respuesta.
+</Aside>
+
 ---
 
-### 3. ¿REST o GraphQL? La Decisión Estratégica
+### 3. Seguridad: Protegiendo tu API
+
+No importa qué arquitectura elijas, si tu API es pública, alguien intentará romperla.
+
+#### Autenticación con JWT (JSON Web Tokens)
+
+El estándar de oro para aplicaciones modernas.
+1.  El usuario envía sus credenciales.
+2.  El servidor valida y devuelve un **Token** firmado.
+3.  El cliente guarda ese token (usualmente en `localStorage` o una cookie) y lo envía en el encabezado de cada petición: `Authorization: Bearer <token>`.
+
+#### CORS y Rate Limiting
+
+*   **CORS (Cross-Origin Resource Sharing)**: Es un mecanismo de seguridad de los navegadores que impide que un sitio web malicioso pida datos a tu API a menos que tú lo autorices explícitamente.
+*   **Rate Limiting**: Limita cuántas peticiones puede hacer un usuario en un tiempo determinado (ej. 100 peticiones por minuto) para evitar ataques de denegación de servicio (DoS).
+
+---
+
+### 4. ¿REST o GraphQL? La Decisión Estratégica
 
 No existe una "bala de plata". La elección depende totalmente del contexto de tu proyecto y de tu equipo.
 
@@ -149,13 +213,35 @@ No existe una "bala de plata". La elección depende totalmente del contexto de t
 
 ---
 
-### Ponlo en Práctica
+### Taller de Arquitectura: Diseñando un E-commerce
 
-<Aside title="Reto: Diseña tu API" type="caution">
-Imagina que estás construyendo tu proyecto personal.
-1.  **En REST**: ¿Cómo diseñarías los endpoints para obtener un componente de tu app? ¿Qué verbos usarías para crear, actualizar y eliminar?
-2.  **En GraphQL**: Define un esquema básico para tu proyecto. ¿Cómo pedirías en una sola consulta el nombre de tus componentes?
-</Aside>
+Para consolidar lo aprendido, vamos a diseñar la API de una tienda en línea. Necesitamos manejar **Productos**, **Categorías**, **Usuarios** y **Órdenes de Compra**.
+
+#### Fase 1: El Enfoque REST
+
+Diseña los endpoints para:
+1.  Ver la lista de productos de una categoría específica.
+2.  Ver el detalle de una orden de compra, incluyendo los datos del usuario que la hizo.
+3.  Crear una nueva orden.
+
+*Pista: Piensa en la jerarquía. ¿Usarías `/categorias/1/productos` o `/productos?categoria=1`?*
+
+#### Fase 2: El Enfoque GraphQL
+
+Diseña el esquema para el objeto `Order`. Una orden tiene:
+*   ID, fecha, total.
+*   Un `User` (dueño de la orden).
+*   Una lista de `Product` (items comprados).
+
+Escribe una **Query** que obtenga el total de la orden y el nombre del usuario en una sola petición.
+
+#### Fase 3: Análisis de Compromisos (Trade-offs)
+
+*   ¿Qué pasa si en el detalle del producto quieres mostrar "Productos Relacionados"?
+*   En REST, ¿harías una segunda petición o incluirías los relacionados en la respuesta inicial (causando overfetching si no siempre se necesitan)?
+*   En GraphQL, ¿cómo evitarías que un usuario pida "productos relacionados de los productos relacionados" infinitamente? (Investiga sobre *Query Depth Limiting*).
+
+---
 
 #### Recursos para seguir aprendiendo
 

@@ -40,10 +40,11 @@ Este documento muestra el estado de redacción de todas las lecciones y el progr
 - [x] Lección 2: Planeación y Estimación
 - [x] Lección 3: Diseño y Architectura de Aplicaciones
 - [ ] Lección 4: Backend Development - RESTful y GraphQL
-    - [x] Scenario: Explicación de Arquitectura RESTful
-    - [x] Scenario: Explicación de GraphQL y su propuesta de valor
-    - [x] Scenario: Comparativa Estratégica para Toma de Decisiones
-    - [x] Scenario: Elementos Interactivos y Práctica
+    - [x] Scenario: Explicación de Arquitectura RESTful y Buenas Prácticas
+    - [ ] Scenario: GraphQL Avanzado: Mutations y Real-time
+    - [ ] Scenario: Seguridad y Comunicación entre Capas
+    - [ ] Scenario: Taller de Arquitectura: Sistema de E-commerce
+    - [x] Scenario: Comparativa Estratégica y Herramientas
 - [ ] Lección 5: Frontend Development - UI/UX y Componentes Reutilizables
 - [ ] Lección 6: Base de datos y ORM
 - [ ] Lección 7: Integración Continua y Despliegue Automatizado (CI/CD)
