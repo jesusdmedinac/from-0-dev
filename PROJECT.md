@@ -14,6 +14,15 @@ El proyecto es una aplicación web construida con **Astro** que combina un sitio
 - **Lenguaje**: TypeScript.
 - **Paquete de Iconos**: `react-icons`.
 
+## Metodología de Desarrollo
+
+El proyecto se desarrolla siguiendo el **Proceso de Planificación de 5 Pasos** (ver `AI_PLANNING_PROCESS.md`), el cual se basa en:
+1. Definición de idea.
+2. Escenarios Gherkin.
+3. Persistencia en archivos `.feature`.
+4. Seguimiento en `PROGRESS.md`.
+5. Implementación iterativa y commits atómicos.
+
 ## Estructura del Proyecto
 
 ### Configuración

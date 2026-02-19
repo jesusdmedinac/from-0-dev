@@ -61,9 +61,20 @@ Para crear o modificar contenido, es crucial seguir las directrices de `CONTENT_
 
 El proyecto está en desarrollo activo. Muchas lecciones están incompletas y marcadas como "WIP" (Work in Progress). Para conocer el estado actual de cada lección, **consulta el archivo `PROGRESS.md`**.
 
-## 5. Instrucciones para el Agente
+## 5. Proceso de Desarrollo (AI Planning Process)
+
+Para cualquier tarea de desarrollo, refactorización o creación de nuevas funcionalidades, es **obligatorio** seguir el **Proceso de Planificación de 5 Pasos** detallado en `AI_PLANNING_PROCESS.md`:
+
+1.  **Definir la idea** en lenguaje natural.
+2.  **Generar Features y Escenarios** en formato **Gherkin**.
+3.  **Persistir Features** en archivos `.feature` (en `docs/features/`).
+4.  **Actualizar `PROGRESS.md`** con la lista de escenarios.
+5.  **Desarrollar escenario por escenario**, realizando commits atómicos por cada uno.
+
+## 6. Instrucciones para el Agente
 
 -   **Punto de Partida**: Utiliza este documento (`AGENTS.md`) como tu principal fuente de contexto sobre el proyecto.
+-   **Metodología**: Antes de escribir cualquier código, asegúrate de haber cumplido los pasos 1 al 4 del proceso de planificación.
 -   **Creación de Contenido**: Al generar nuevas lecciones o modificar existentes, adhiérete estrictamente a las guías en `CONTENT_STYLE.md` y replica la estructura y tono del contenido existente en `src/content/docs/roadmap/`.
 -   **Análisis Técnico**: Para entender la implementación de una característica, examina los archivos en `src/components/` (componentes reutilizables) y `src/pages/` (rutas y lógica de página).
 -   **Consultas Específicas**:
