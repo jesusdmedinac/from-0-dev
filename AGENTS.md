@@ -56,6 +56,7 @@ Para crear o modificar contenido, es crucial seguir las directrices de `CONTENT_
     4.  Uso extensivo de componentes interactivos como `<Aside>`, `<LinkCard>` e `<iframe>`.
     5.  CTA final.
 -   **Formato**: Usar **negritas** para términos clave, comentar el código y hacer preguntas para fomentar la interacción.
+-   **Referencias Cruzadas**: Al referenciar lecciones o entregables previos, usar el formato **(LX)** donde X es el número de lección (ej: **(L2)**) y debe incluir obligatoriamente un vínculo a dicha lección. (Ver `CONTENT_STYLE.md`).
 
 ### Estado de Avance
 
