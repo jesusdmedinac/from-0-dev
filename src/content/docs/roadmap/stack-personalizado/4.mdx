@@ -213,33 +213,33 @@ No existe una "bala de plata". La elección depende totalmente del contexto de t
 
 ---
 
-### Taller de Arquitectura: Diseñando un E-commerce
+### Taller de Implementación: La API de Tu Proyecto
 
-Para consolidar lo aprendido, vamos a diseñar la API de una tienda en línea. Necesitamos manejar **Productos**, **Categorías**, **Usuarios** y **Órdenes de Compra**.
+Es hora de aplicar todo este conocimiento al proyecto que vienes construyendo desde la primera lección. En la Lección 3 definiste tus capas y contenedores; ahora vamos a definir **cómo se comunican**.
 
-#### Fase 1: El Enfoque REST
+#### Fase 1: La Decisión (ADR)
+Basado en tu **Meta SMART (L1)** y el diseño de tus **Contenedores (L3)**, debes elegir formalmente cómo expondrás tus datos.
+1. Crea un nuevo archivo de decisión arquitectónica (**ADR**) en tu repositorio.
+2. Compara REST vs GraphQL específicamente para las necesidades de tu proyecto.
+3. Documenta tu elección final y las consecuencias (ej: "Elegimos GraphQL porque tendremos múltiples clientes móviles y web con necesidades de datos muy distintas").
 
-Diseña los endpoints para:
-1.  Ver la lista de productos de una categoría específica.
-2.  Ver el detalle de una orden de compra, incluyendo los datos del usuario que la hizo.
-3.  Crear una nueva orden.
+#### Fase 2: El Contrato Técnico
+Toma la **Historia de Usuario principal** de tu **Backlog (L2)** y diseña su interfaz de comunicación:
 
-*Pista: Piensa en la jerarquía. ¿Usarías `/categorias/1/productos` o `/productos?categoria=1`?*
+*   **Si elegiste REST**:
+    *   Define los endpoints necesarios (URL, Verbo).
+    *   Escribe el esquema del JSON de respuesta para el caso de éxito.
+    *   Define qué códigos de estado HTTP devolverás en caso de error.
+*   **Si elegiste GraphQL**:
+    *   Define los `Types` necesarios para esa funcionalidad.
+    *   Escribe la `Query` o `Mutation` que el frontend ejecutará.
+    *   Define los campos obligatorios (`!`).
 
-#### Fase 2: El Enfoque GraphQL
-
-Diseña el esquema para el objeto `Order`. Una orden tiene:
-*   ID, fecha, total.
-*   Un `User` (dueño de la orden).
-*   Una lista de `Product` (items comprados).
-
-Escribe una **Query** que obtenga el total de la orden y el nombre del usuario en una sola petición.
-
-#### Fase 3: Análisis de Compromisos (Trade-offs)
-
-*   ¿Qué pasa si en el detalle del producto quieres mostrar "Productos Relacionados"?
-*   En REST, ¿harías una segunda petición o incluirías los relacionados en la respuesta inicial (causando overfetching si no siempre se necesitan)?
-*   En GraphQL, ¿cómo evitarías que un usuario pida "productos relacionados de los productos relacionados" infinitamente? (Investiga sobre *Query Depth Limiting*).
+#### Fase 3: Políticas de Seguridad y Datos
+Define las reglas de juego para tu backend:
+1. **Autenticación**: ¿Qué endpoints serán públicos y cuáles requerirán un token JWT?
+2. **Volumen**: Si tu app maneja listas (ej: posts, tareas, productos), ¿qué estrategia de paginación usarás?
+3. **Validación**: Lista al menos 3 reglas de validación que tu backend debe ejecutar antes de guardar datos (ej: "El precio no puede ser negativo", "El nombre de usuario debe ser único").
 
 ---
 
@@ -267,6 +267,6 @@ Escribe una **Query** que obtenga el total de la orden y el nombre del usuario e
 
 Entender REST y GraphQL no se trata de elegir un "ganador", sino de tener más herramientas en tu cinturón de ingeniero de software. En el mundo real, muchos sistemas modernos son **híbridos**: usan REST para servicios internos o integraciones de terceros y GraphQL para alimentar su interfaz de usuario.
 
-¿Cuál encaja mejor con tu **Stack Personalizado**? ¡Tú decides!
+¿Cuál encaja mejor con el **proyecto personal** que estás construyendo? ¡Tú decides!
 
 <Cta></Cta>

@@ -18,10 +18,12 @@ Feature: Lección Extendida de Desarrollo Backend - RESTful vs GraphQL (4 Horas)
     Then debe entender el flujo de Autenticación con JWT
     And conocer los conceptos de CORS y Rate Limiting para protección del servidor
 
-  Scenario: Taller de Arquitectura: Sistema de E-commerce
-    Given un requerimiento de negocio complejo
-    Then el estudiante debe realizar un ejercicio guiado de diseño
-    And comparar cómo se vería la estructura de datos en REST vs GraphQL para el mismo problema
+  Scenario: Taller de Implementación: La API de Tu Proyecto Personal
+    Given que el estudiante ya tiene un Roadmap (L1), Backlog (L2) y Arquitectura (L3)
+    Then debe elegir formalmente entre REST o GraphQL mediante un ADR
+    And diseñar los endpoints o el Schema para su funcionalidad principal
+    And definir la estrategia de seguridad y errores para su propio sistema
+    And preparar la documentación técnica para la fase de construcción
 
   Scenario: Comparativa Estratégica y Herramientas
     Given que el estudiante necesita elegir una herramienta

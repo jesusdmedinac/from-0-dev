@@ -43,7 +43,7 @@ Este documento muestra el estado de redacción de todas las lecciones y el progr
     - [x] Scenario: Explicación de Arquitectura RESTful y Buenas Prácticas
     - [ ] Scenario: GraphQL Avanzado: Mutations y Real-time
     - [ ] Scenario: Seguridad y Comunicación entre Capas
-    - [ ] Scenario: Taller de Arquitectura: Sistema de E-commerce
+    - [ ] Scenario: Taller de Implementación: La API de Tu Proyecto Personal
     - [x] Scenario: Comparativa Estratégica y Herramientas
 - [ ] Lección 5: Frontend Development - UI/UX y Componentes Reutilizables
 - [ ] Lección 6: Base de datos y ORM
