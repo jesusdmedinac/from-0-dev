@@ -1,6 +1,8 @@
 # Estado de Avance del Contenido
 
-Este documento muestra el estado de redacción de todas las lecciones en las diferentes rutas de aprendizaje.
+Este documento muestra el estado de redacción de todas las lecciones y el progreso de las funcionalidades técnicas siguiendo el [Proceso de Planificación de 5 Pasos](./AI_PLANNING_PROCESS.md).
+
+---
 
 ## Ruta: Para no programadores
 
@@ -35,8 +37,8 @@ Este documento muestra el estado de redacción de todas las lecciones en las dif
 ## Ruta: Stack personalizado
 
 - [x] Lección 1: Antes de empezar: ¡Bienvenida y definición de tu Stack Personalizado!
-- [ ] Lección 2: Planeación y Estimación
-- [ ] Lección 3: Diseño y Architectura de Aplicaciones
+- [x] Lección 2: Planeación y Estimación
+- [x] Lección 3: Diseño y Architectura de Aplicaciones
 - [ ] Lección 4: Backend Development - RESTful y GraphQL
 - [ ] Lección 5: Frontend Development - UI/UX y Componentes Reutilizables
 - [ ] Lección 6: Base de datos y ORM

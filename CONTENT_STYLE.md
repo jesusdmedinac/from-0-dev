@@ -104,7 +104,17 @@ Cierra siempre con el componente de llamada a la acción.
 - **Interactividad**: Haz preguntas al lector para invitar a la reflexión ("¿Listo?", "¿Pudiste hacerlo?").
 - **Ejemplos Reales**: Usa ejemplos de código que sean funcionales y fáciles de entender.
 
-## 4. Ejemplo de Plantilla
+## 4. Planificación de Contenido Complejo
+
+Para lecciones extensas o complejas (que requieran múltiples actividades, ejemplos de código avanzados o integraciones), se recomienda seguir el **Proceso de Planificación de 5 Pasos** (ver `AI_PLANNING_PROCESS.md`):
+
+1.  **Definir el objetivo pedagógico** en lenguaje natural.
+2.  **Esbozar la estructura** y escenarios de aprendizaje en Gherkin.
+3.  **Validar la estructura** antes de redactar el contenido completo.
+4.  **Actualizar el progreso** en `PROGRESS.md`.
+5.  **Redactar sección por sección**, asegurando que cada una cumpla con su objetivo.
+
+## 5. Ejemplo de Plantilla
 
 ````mdx
 ---

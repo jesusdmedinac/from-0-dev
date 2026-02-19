@@ -49,6 +49,12 @@ All commands are run from the root of the project, from a terminal:
 | `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
 | `npm run astro -- --help` | Get help using the Astro CLI                     |
 
+## 🛠 Metodología de Desarrollo
+
+Este proyecto utiliza un **Proceso de Planificación de 5 Pasos** optimizado para el desarrollo asistido por IA. Todos los colaboradores (humanos y agentes) deben seguir este flujo para garantizar la trazabilidad y eficiencia.
+
+Puedes encontrar los detalles completos en [AI_PLANNING_PROCESS.md](./AI_PLANNING_PROCESS.md).
+
 ## 👀 Want to learn more?
 
 Check out [Starlight’s docs](https://starlight.astro.build/), read [the Astro documentation](https://docs.astro.build), or jump into the [Astro Discord server](https://astro.build/chat).
