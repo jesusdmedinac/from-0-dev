@@ -1,12 +1,187 @@
 ---
 title: Backend Development - RESTful y GraphQL
-description: WIP
+description: Domina las dos arquitecturas de API más importantes, aprende a elegir la correcta para tu proyecto y diseña backends escalables.
 ---
 
 import Cta from '@components/cta/stack-personalizado/cta.astro';
+import { Aside, LinkCard } from '@astrojs/starlight/components';
 
 <Cta></Cta>
 
-WIP
+El backend es el motor de tu aplicación, y la forma en que este motor se comunica con el mundo exterior (el frontend u otros servicios) define la robustez y escalabilidad de tu sistema. En la actualidad, el debate no es solo sobre qué lenguaje usar, sino sobre **cómo estructurar la comunicación**.
+
+En esta lección, exploraremos las dos filosofías predominantes: **REST**, el estándar de la industria por excelencia, y **GraphQL**, la alternativa flexible que revolucionó la forma en que consumimos datos.
+
+---
+
+### 1. Arquitectura RESTful: El Estándar Confiable
+
+REST (Representational State Transfer) no es un protocolo, sino un **estilo arquitectónico**. Se basa en el uso de los estándares de la Web, principalmente HTTP.
+
+#### Los Pilares de REST
+
+Para que una API sea verdaderamente "RESTful", debe seguir ciertos principios:
+
+1.  **Recursos (URIs)**: Todo es un recurso. No pides "ejecutar una función para borrar un usuario", sino que haces una petición al recurso `/usuarios/123`.
+2.  **Verbos HTTP**: Usamos los métodos estándar para indicar la acción:
+    *   `GET`: Obtener información.
+    *   `POST`: Crear algo nuevo.
+    *   `PUT`/`PATCH`: Actualizar algo existente.
+    *   `DELETE`: Eliminar.
+3.  **Stateless (Sin estado)**: Cada petición del cliente al servidor debe contener toda la información necesaria para entenderla. El servidor no "recuerda" quién eres entre peticiones (para eso usamos tokens).
+
+:::💡
+**Analogía: El Menú del Restaurante**
+Imagina un restaurante. Cada plato en el menú es un **Recurso**. Si quieres pedir una hamburguesa, vas a la sección de "Hamburguesas" (`/hamburguesas`). El camarero usa **Verbos** para entender tu pedido: "Tráeme" (`GET`), "Añade este nuevo plato al menú" (`POST`) o "Quita esto" (`DELETE`). No importa si es la primera vez que vas o la décima, cada pedido debe ser claro por sí mismo.
+:::
+
+#### Ejemplo de un Endpoint RESTful
+
+Diseñar una API REST no es solo escupir JSON. La estructura importa:
+
+```javascript
+// GET /api/v1/libros/978-3-16-148410-0
+// Respuesta: 200 OK
+{
+  "isbn": "978-3-16-148410-0",
+  "titulo": "Clean Code",
+  "autor": "Robert C. Martin",
+  "estado": "disponible",
+  "links": [
+    { "rel": "self", "href": "/api/v1/libros/978-3-16-148410-0" },
+    { "rel": "prestamo", "href": "/api/v1/libros/978-3-16-148410-0/prestar" }
+  ]
+}
+```
+
+Observemos cómo el endpoint es un sustantivo (`libros`), usamos versiones (`v1`) y devolvemos hipervínculos para guiar al cliente (esto se conoce como HATEOAS).
+
+---
+
+### 2. GraphQL: La Revolución de la Flexibilidad
+
+Si REST es un menú fijo, **GraphQL** es un buffet libre donde tú mismo te sirves exactamente lo que quieres. Fue creado por Facebook para solucionar los problemas de cargar datos complejos en aplicaciones móviles con conexiones lentas.
+
+#### El Concepto de "Grafo" y Esquemas
+
+A diferencia de REST, donde tienes múltiples endpoints, en GraphQL solo hay **uno** (normalmente `/graphql`). 
+
+*   **Esquema (Schema)**: Es el contrato. Define qué datos existen y cómo se relacionan. Es fuertemente tipado.
+*   **Consulta (Query)**: El cliente pide exactamente los campos que necesita. Ni uno más, ni uno menos.
+*   **Resolvers**: Son las funciones en el backend que saben cómo ir a buscar cada campo (de una DB, de otra API, etc.).
+
+#### Solucionando el Overfetching y Underfetching
+
+En REST, a veces pides un usuario y te llegan 50 campos cuando solo querías el nombre (**Overfetching**). O pides un post, y luego tienes que hacer 10 peticiones más para obtener los comentarios de ese post (**Underfetching** o problema N+1).
+
+GraphQL permite hacer esto en **una sola petición**:
+
+```graphql
+# Una sola Query para obtener Post y sus Comentarios
+query GetPostDetails($id: ID!) {
+  post(id: $id) {
+    title
+    content
+    author {
+      name
+      avatarUrl
+    }
+    comments(last: 5) {
+      text
+      user {
+        username
+      }
+    }
+  }
+}
+```
+
+#### Ejemplo de un Schema Básico
+
+```graphql
+type Post {
+  id: ID!
+  title: String!
+  content: String!
+  author: User!
+  comments: [Comment]
+}
+
+type User {
+  id: ID!
+  username: String!
+  email: String
+}
+
+type Query {
+  post(id: ID!): Post
+  recentPosts: [Post]
+}
+```
+
+---
+
+### 3. ¿REST o GraphQL? La Decisión Estratégica
+
+No existe una "bala de plata". La elección depende totalmente del contexto de tu proyecto y de tu equipo.
+
+| Característica | REST | GraphQL |
+| :--- | :--- | :--- |
+| **Flexibilidad** | Baja (Endpoints fijos) | Alta (El cliente decide) |
+| **Overfetching** | Común | Inexistente |
+| **Cache** | Excelente (Nativo de HTTP) | Complejo (Requiere herramientas como Apollo) |
+| **Curva de Aprendizaje** | Baja | Media / Alta |
+| **Versionado** | Por URL (`v1`, `v2`) | Sin versiones (Evolución del esquema) |
+| **Tooling** | Maduro (Postman, Swagger) | Moderno (GraphiQL, Apollo Studio) |
+
+#### Guía de Decisión Rápida
+
+**Elige REST si:**
+*   Tu aplicación es sencilla o basada principalmente en CRUD.
+*   Necesitas aprovechar al máximo el cache de HTTP y CDNs.
+*   Tu equipo ya tiene mucha experiencia con estándares web tradicionales.
+*   Vas a exponer una API pública para miles de desarrolladores externos (REST sigue siendo el estándar esperado).
+
+**Elige GraphQL si:**
+*   Tienes un frontend muy complejo con datos altamente relacionados (ej. una red social).
+*   Desarrollas para múltiples plataformas (Web, iOS, Android) con necesidades de datos diferentes.
+*   Quieres evitar hacer múltiples peticiones (N+1) para renderizar una sola vista.
+*   Tu equipo está dispuesto a invertir tiempo en aprender el ecosistema (Apollo, Relay, etc.).
+
+---
+
+### Ponlo en Práctica
+
+<Aside title="Reto: Diseña tu API" type="caution">
+Imagina que estás construyendo una aplicación de **Gestión de Proyectos** (estilo Trello).
+1.  **En REST**: ¿Cómo diseñarías los endpoints para obtener un proyecto y todas sus tareas? ¿Qué verbos usarías para mover una tarea de "Pendiente" a "Completada"?
+2.  **En GraphQL**: Define un esquema básico para un `Project` y un `Task`. ¿Cómo pedirías en una sola consulta el nombre del proyecto y solo los títulos de las tareas que te pertenecen a ti?
+</Aside>
+
+#### Recursos para seguir aprendiendo
+
+<LinkCard
+  title="JSONPlaceholder"
+  description="La API REST falsa más famosa para hacer pruebas y prototipos rápidamente."
+  href="https://jsonplaceholder.typicode.com/"
+/>
+
+<LinkCard
+  title="Apollo Explorer"
+  description="Prueba consultas GraphQL en vivo contra el gráfico de ejemplo de Apollo."
+  href="https://studio.apollographql.com/sandbox/explorer"
+/>
+
+<LinkCard
+  title="REST vs GraphQL: A guide"
+  description="Un análisis profundo de Postman sobre cuándo usar cada tecnología."
+  href="https://www.postman.com/state-of-the-api/rest-vs-graphql/"
+/>
+
+### Conclusión
+
+Entender REST y GraphQL no se trata de elegir un "ganador", sino de tener más herramientas en tu cinturón de ingeniero de software. En el mundo real, muchos sistemas modernos son **híbridos**: usan REST para servicios internos o integraciones de terceros y GraphQL para alimentar su interfaz de usuario.
+
+¿Cuál encaja mejor con tu **Stack Personalizado**? ¡Tú decides!
 
 <Cta></Cta>
