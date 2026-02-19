@@ -30,10 +30,9 @@ Para que una API sea verdaderamente "RESTful", debe seguir ciertos principios:
     *   `DELETE`: Eliminar.
 3.  **Stateless (Sin estado)**: Cada petición del cliente al servidor debe contener toda la información necesaria para entenderla. El servidor no "recuerda" quién eres entre peticiones (para eso usamos tokens).
 
-:::💡
-**Analogía: El Menú del Restaurante**
+<Aside title="Analogía: El Menú del Restaurante" type="note">
 Imagina un restaurante. Cada plato en el menú es un **Recurso**. Si quieres pedir una hamburguesa, vas a la sección de "Hamburguesas" (`/hamburguesas`). El camarero usa **Verbos** para entender tu pedido: "Tráeme" (`GET`), "Añade este nuevo plato al menú" (`POST`) o "Quita esto" (`DELETE`). No importa si es la primera vez que vas o la décima, cada pedido debe ser claro por sí mismo.
-:::
+</Aside>
 
 #### Ejemplo de un Endpoint RESTful
 
@@ -153,9 +152,9 @@ No existe una "bala de plata". La elección depende totalmente del contexto de t
 ### Ponlo en Práctica
 
 <Aside title="Reto: Diseña tu API" type="caution">
-Imagina que estás construyendo una aplicación de **Gestión de Proyectos** (estilo Trello).
-1.  **En REST**: ¿Cómo diseñarías los endpoints para obtener un proyecto y todas sus tareas? ¿Qué verbos usarías para mover una tarea de "Pendiente" a "Completada"?
-2.  **En GraphQL**: Define un esquema básico para un `Project` y un `Task`. ¿Cómo pedirías en una sola consulta el nombre del proyecto y solo los títulos de las tareas que te pertenecen a ti?
+Imagina que estás construyendo tu proyecto personal.
+1.  **En REST**: ¿Cómo diseñarías los endpoints para obtener un componente de tu app? ¿Qué verbos usarías para crear, actualizar y eliminar?
+2.  **En GraphQL**: Define un esquema básico para tu proyecto. ¿Cómo pedirías en una sola consulta el nombre de tus componentes?
 </Aside>
 
 #### Recursos para seguir aprendiendo
@@ -173,9 +172,9 @@ Imagina que estás construyendo una aplicación de **Gestión de Proyectos** (es
 />
 
 <LinkCard
-  title="REST vs GraphQL: A guide"
-  description="Un análisis profundo de Postman sobre cuándo usar cada tecnología."
-  href="https://www.postman.com/state-of-the-api/rest-vs-graphql/"
+  title="¿Cuál es la diferencia entre GraphQL y REST?"
+  description="GraphQL y REST son dos enfoques distintos para diseñar una API para el intercambio de datos a través de Internet. REST permite a las aplicaciones cliente intercambiar datos con un servidor mediante verbos HTTP, que es el protocolo de comunicación estándar de Internet."
+  href="https://aws.amazon.com/es/compare/the-difference-between-graphql-and-rest/"
 />
 
 ### Conclusión
