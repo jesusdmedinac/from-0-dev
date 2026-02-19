@@ -103,6 +103,8 @@ Cierra siempre con el componente de llamada a la acción.
 - **Énfasis**: Usa **negritas** para términos clave la primera vez que aparecen.
 - **Interactividad**: Haz preguntas al lector para invitar a la reflexión ("¿Listo?", "¿Pudiste hacerlo?").
 - **Ejemplos Reales**: Usa ejemplos de código que sean funcionales y fáciles de entender.
+- **Nomenclatura de ADRs**: Para documentar decisiones arquitectónicas, usa nombres semánticos en lugar de números.
+    - **Formato**: `ADR-[nombre-descriptivo].md` (ej: `ADR-frontend-framework.md`, `ADR-base-de-datos.md`).
 
 ## 4. Referencias Cruzadas (Nomenclatura LX)
 

@@ -56,6 +56,11 @@ Este documento muestra el estado de redacción de todas las lecciones y el progr
 - [ ] Scenario: Actualizar Lección 2 con referencias a L1 y vínculo a L3
 - [ ] Scenario: Actualizar Lección 3 con referencias a L1, L2 y vínculo a L4
 - [ ] Scenario: Verificación de consistencia global
+
+### Feature: Nomenclatura Semántica para ADRs
+- [ ] Scenario: Actualizar guías de estilo y agentes
+- [ ] Scenario: Refactorizar Lección 3 (Introducción a ADRs)
+- [ ] Scenario: Refactorizar Lección 4 (Taller Backend)
 - [ ] Lección 6: Base de datos y ORM
 - [ ] Lección 7: Integración Continua y Despliegue Automatizado (CI/CD)
 - [ ] Lección 8: Testing - Unitario, Integración y End-to-End
