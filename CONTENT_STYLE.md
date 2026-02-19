@@ -103,8 +103,23 @@ Cierra siempre con el componente de llamada a la acción.
 - **Énfasis**: Usa **negritas** para términos clave la primera vez que aparecen.
 - **Interactividad**: Haz preguntas al lector para invitar a la reflexión ("¿Listo?", "¿Pudiste hacerlo?").
 - **Ejemplos Reales**: Usa ejemplos de código que sean funcionales y fáciles de entender.
+- **Nomenclatura de ADRs**: Para documentar decisiones arquitectónicas, usa nombres semánticos en lugar de números.
+    - **Formato**: `ADR-[nombre-descriptivo].md` (ej: `ADR-frontend-framework.md`, `ADR-base-de-datos.md`).
 
-## 4. Planificación de Contenido Complejo
+## 4. Referencias Cruzadas (Nomenclatura LX)
+
+Para mantener la cohesión en las rutas de aprendizaje, especialmente cuando una lección depende de entregables de una anterior, se debe usar la siguiente nomenclatura:
+
+- **Formato**: `[Texto descriptivo (LX)](/ruta/a/leccion)`
+- **Uso**: Siempre que menciones un concepto, entregable o decisión tomada en una lección previa.
+- **Vínculos**: El vínculo es obligatorio. Usa rutas relativas de Starlight (ej: `/roadmap/stack-personalizado/2`).
+
+**Ejemplos:**
+- "...basado en tu [Roadmap (L1)](/roadmap/stack-personalizado/1)..."
+- "...tomando como base tu [Backlog (L2)](/roadmap/stack-personalizado/2)..."
+- "...según el diseño de tu [Arquitectura (L3)](/roadmap/stack-personalizado/3)..."
+
+## 5. Planificación de Contenido Complejo
 
 Para lecciones extensas o complejas (que requieran múltiples actividades, ejemplos de código avanzados o integraciones), se recomienda seguir el **Proceso de Planificación de 5 Pasos** (ver `AI_PLANNING_PROCESS.md`):
 

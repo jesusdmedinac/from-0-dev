@@ -1,12 +1,272 @@
 ---
 title: Backend Development - RESTful y GraphQL
-description: WIP
+description: Domina las dos arquitecturas de API más importantes, aprende a elegir la correcta para tu proyecto y diseña backends escalables.
 ---
 
 import Cta from '@components/cta/stack-personalizado/cta.astro';
+import { Aside, LinkCard } from '@astrojs/starlight/components';
 
 <Cta></Cta>
 
-WIP
+El backend es el motor de tu aplicación, y la forma en que este motor se comunica con el mundo exterior (el frontend u otros servicios) define la robustez y escalabilidad de tu sistema. En la actualidad, el debate no es solo sobre qué lenguaje usar, sino sobre **cómo estructurar la comunicación**.
+
+En esta lección, exploraremos las dos filosofías predominantes: **REST**, el estándar de la industria por excelencia, y **GraphQL**, la alternativa flexible que revolucionó la forma en que consumimos datos.
+
+---
+
+### 1. Arquitectura RESTful: El Estándar Confiable
+
+REST (Representational State Transfer) no es un protocolo, sino un **estilo arquitectónico**. Se basa en el uso de los estándares de la Web, principalmente HTTP.
+
+#### Los Pilares de REST
+
+Para que una API sea verdaderamente "RESTful", debe seguir ciertos principios:
+
+1.  **Recursos (URIs)**: Todo es un recurso. No pides "ejecutar una función para borrar un usuario", sino que haces una petición al recurso `/usuarios/123`.
+2.  **Verbos HTTP**: Usamos los métodos estándar para indicar la acción:
+    *   `GET`: Obtener información.
+    *   `POST`: Crear algo nuevo.
+    *   `PUT`/`PATCH`: Actualizar algo existente.
+    *   `DELETE`: Eliminar.
+3.  **Stateless (Sin estado)**: Cada petición del cliente al servidor debe contener toda la información necesaria para entenderla. El servidor no "recuerda" quién eres entre peticiones (para eso usamos tokens).
+
+<Aside title="Analogía: El Menú del Restaurante" type="note">
+Imagina un restaurante. Cada plato en el menú es un **Recurso**. Si quieres pedir una hamburguesa, vas a la sección de "Hamburguesas" (`/hamburguesas`). El camarero usa **Verbos** para entender tu pedido: "Tráeme" (`GET`), "Añade este nuevo plato al menú" (`POST`) o "Quita esto" (`DELETE`). No importa si es la primera vez que vas o la décima, cada pedido debe ser claro por sí mismo.
+</Aside>
+
+#### Ejemplo de un Endpoint RESTful
+
+Diseñar una API REST no es solo escupir JSON. La estructura importa:
+
+```javascript
+// GET /api/v1/libros/978-3-16-148410-0
+// Respuesta: 200 OK
+{
+  "isbn": "978-3-16-148410-0",
+  "titulo": "Clean Code",
+  "autor": "Robert C. Martin",
+  "estado": "disponible",
+  "links": [
+    { "rel": "self", "href": "/api/v1/libros/978-3-16-148410-0" },
+    { "rel": "prestamo", "href": "/api/v1/libros/978-3-16-148410-0/prestar" }
+  ]
+}
+```
+
+Observemos cómo el endpoint es un sustantivo (`libros`), usamos versiones (`v1`) y devolvemos hipervínculos para guiar al cliente (esto se conoce como HATEOAS).
+
+#### Más allá de los verbos: Códigos de Estado y Errores
+
+Un error común es devolver siempre `200 OK` incluso cuando algo sale mal. En REST, los códigos de estado HTTP son tu lenguaje:
+
+*   **2xx (Éxito)**: `200 OK` (éxito general), `201 Created` (tras un POST exitoso), `204 No Content` (tras un DELETE exitoso).
+*   **4xx (Error del Cliente)**: `400 Bad Request` (datos inválidos), `401 Unauthorized` (falta login), `403 Forbidden` (no tienes permiso), `404 Not Found`.
+*   **5xx (Error del Servidor)**: `500 Internal Server Error`.
+
+**Ejemplo de respuesta de error profesional:**
+```json
+{
+  "error": {
+    "code": "invalid_parameters",
+    "message": "El campo 'email' no tiene un formato válido.",
+    "request_id": "req_12345abc"
+  }
+}
+```
+
+#### Manejo de Grandes Volúmenes: Paginación y Filtrado
+
+Imagina que tienes 10,000 usuarios. No puedes devolverlos todos en un `GET /usuarios`.
+*   **Filtrado**: `GET /usuarios?rol=admin&activo=true`
+*   **Paginación**: `GET /usuarios?page=2&limit=50`
+
+---
+
+### 2. GraphQL: La Revolución de la Flexibilidad
+
+Si REST es un menú fijo, **GraphQL** es un buffet libre donde tú mismo te sirves exactamente lo que quieres. Fue creado por Facebook para solucionar los problemas de cargar datos complejos en aplicaciones móviles con conexiones lentas.
+
+#### El Concepto de "Grafo" y Esquemas
+
+A diferencia de REST, donde tienes múltiples endpoints, en GraphQL solo hay **uno** (normalmente `/graphql`). 
+
+*   **Esquema (Schema)**: Es el contrato. Define qué datos existen y cómo se relacionan. Es fuertemente tipado.
+*   **Consulta (Query)**: El cliente pide exactamente los campos que necesita. Ni uno más, ni uno menos.
+*   **Resolvers**: Son las funciones en el backend que saben cómo ir a buscar cada campo (de una DB, de otra API, etc.).
+
+#### Solucionando el Overfetching y Underfetching
+
+En REST, a veces pides un usuario y te llegan 50 campos cuando solo querías el nombre (**Overfetching**). O pides un post, y luego tienes que hacer 10 peticiones más para obtener los comentarios de ese post (**Underfetching** o problema N+1).
+
+GraphQL permite hacer esto en **una sola petición**:
+
+```graphql
+# Una sola Query para obtener Post y sus Comentarios
+query GetPostDetails($id: ID!) {
+  post(id: $id) {
+    title
+    content
+    author {
+      name
+      avatarUrl
+    }
+    comments(last: 5) {
+      text
+      user {
+        username
+      }
+    }
+  }
+}
+```
+
+#### Ejemplo de un Schema Básico
+
+```graphql
+type Post {
+  id: ID!
+  title: String!
+  content: String!
+  author: User!
+  comments: [Comment]
+}
+
+type User {
+  id: ID!
+  username: String!
+  email: String
+}
+
+type Query {
+  post(id: ID!): Post
+  recentPosts: [Post]
+}
+```
+
+#### Más allá de las Consultas: Mutations y Subscriptions
+
+GraphQL no es solo para "leer".
+*   **Mutations**: Se usan para crear, actualizar o borrar datos. Equivale a los POST/PUT/DELETE de REST.
+*   **Subscriptions**: Permiten mantener una conexión abierta (vía WebSockets) para recibir actualizaciones en tiempo real cuando algo cambia en el servidor.
+
+```graphql
+# Ejemplo de Mutation para crear un comentario
+mutation AddComment($postId: ID!, $text: String!) {
+  createComment(postId: $postId, text: $text) {
+    id
+    createdAt
+    text
+  }
+}
+```
+
+<Aside title="Manejo de Errores en GraphQL" type="caution">
+A diferencia de REST, GraphQL casi siempre devuelve un código `200 OK`. Los errores vienen dentro del cuerpo de la respuesta en un array llamado `errors`. Esto requiere que tu frontend sea más cuidadoso al procesar la respuesta.
+</Aside>
+
+---
+
+### 3. Seguridad: Protegiendo tu API
+
+No importa qué arquitectura elijas, si tu API es pública, alguien intentará romperla.
+
+#### Autenticación con JWT (JSON Web Tokens)
+
+El estándar de oro para aplicaciones modernas.
+1.  El usuario envía sus credenciales.
+2.  El servidor valida y devuelve un **Token** firmado.
+3.  El cliente guarda ese token (usualmente en `localStorage` o una cookie) y lo envía en el encabezado de cada petición: `Authorization: Bearer <token>`.
+
+#### CORS y Rate Limiting
+
+*   **CORS (Cross-Origin Resource Sharing)**: Es un mecanismo de seguridad de los navegadores que impide que un sitio web malicioso pida datos a tu API a menos que tú lo autorices explícitamente.
+*   **Rate Limiting**: Limita cuántas peticiones puede hacer un usuario en un tiempo determinado (ej. 100 peticiones por minuto) para evitar ataques de denegación de servicio (DoS).
+
+---
+
+### 4. ¿REST o GraphQL? La Decisión Estratégica
+
+No existe una "bala de plata". La elección depende totalmente del contexto de tu proyecto y de tu equipo.
+
+| Característica | REST | GraphQL |
+| :--- | :--- | :--- |
+| **Flexibilidad** | Baja (Endpoints fijos) | Alta (El cliente decide) |
+| **Overfetching** | Común | Inexistente |
+| **Cache** | Excelente (Nativo de HTTP) | Complejo (Requiere herramientas como Apollo) |
+| **Curva de Aprendizaje** | Baja | Media / Alta |
+| **Versionado** | Por URL (`v1`, `v2`) | Sin versiones (Evolución del esquema) |
+| **Tooling** | Maduro (Postman, Swagger) | Moderno (GraphiQL, Apollo Studio) |
+
+#### Guía de Decisión Rápida
+
+**Elige REST si:**
+*   Tu aplicación es sencilla o basada principalmente en CRUD.
+*   Necesitas aprovechar al máximo el cache de HTTP y CDNs.
+*   Tu equipo ya tiene mucha experiencia con estándares web tradicionales.
+*   Vas a exponer una API pública para miles de desarrolladores externos (REST sigue siendo el estándar esperado).
+
+**Elige GraphQL si:**
+*   Tienes un frontend muy complejo con datos altamente relacionados (ej. una red social).
+*   Desarrollas para múltiples plataformas (Web, iOS, Android) con necesidades de datos diferentes.
+*   Quieres evitar hacer múltiples peticiones (N+1) para renderizar una sola vista.
+*   Tu equipo está dispuesto a invertir tiempo en aprender el ecosistema (Apollo, Relay, etc.).
+
+---
+
+### Taller de Implementación: La API de Tu Proyecto
+
+Es hora de aplicar todo este conocimiento al proyecto que vienes construyendo desde la primera lección. En la [Lección 3 (L3)](/roadmap/stack-personalizado/3) definiste tus capas y contenedores; ahora vamos a definir **cómo se comunican**.
+
+#### Fase 1: La Decisión (ADR)
+Basado en tu [Meta SMART (L1)](/roadmap/stack-personalizado/1) y el diseño de tus [Contenedores (L3)](/roadmap/stack-personalizado/3), debes elegir formalmente cómo expondrás tus datos.
+1. Crea un nuevo archivo de decisión arquitectónica con un nombre semántico (ej: **ADR-comunicacion-backend.md**) en tu repositorio.
+2. Compara REST vs GraphQL específicamente para las necesidades de tu proyecto.
+3. Documenta tu elección final y las consecuencias (ej: "Elegimos GraphQL porque tendremos múltiples clientes móviles y web con necesidades de datos muy distintas").
+
+#### Fase 2: El Contrato Técnico
+Toma la **Historia de Usuario principal** de tu [Backlog (L2)](/roadmap/stack-personalizado/2) y diseña su interfaz de comunicación:
+
+*   **Si elegiste REST**:
+    *   Define los endpoints necesarios (URL, Verbo).
+    *   Escribe el esquema del JSON de respuesta para el caso de éxito.
+    *   Define qué códigos de estado HTTP devolverás en caso de error.
+*   **Si elegiste GraphQL**:
+    *   Define los `Types` necesarios para esa funcionalidad.
+    *   Escribe la `Query` o `Mutation` que el frontend ejecutará.
+    *   Define los campos obligatorios (`!`).
+
+#### Fase 3: Políticas de Seguridad y Datos
+Define las reglas de juego para tu backend:
+1. **Autenticación**: ¿Qué endpoints serán públicos y cuáles requerirán un token JWT?
+2. **Volumen**: Si tu app maneja listas (ej: posts, tareas, productos), ¿qué estrategia de paginación usarás?
+3. **Validación**: Lista al menos 3 reglas de validación que tu backend debe ejecutar antes de guardar datos (ej: "El precio no puede ser negativo", "El nombre de usuario debe ser único").
+
+---
+
+#### Recursos para seguir aprendiendo
+
+<LinkCard
+  title="JSONPlaceholder"
+  description="La API REST falsa más famosa para hacer pruebas y prototipos rápidamente."
+  href="https://jsonplaceholder.typicode.com/"
+/>
+
+<LinkCard
+  title="Apollo Explorer"
+  description="Prueba consultas GraphQL en vivo contra el gráfico de ejemplo de Apollo."
+  href="https://studio.apollographql.com/sandbox/explorer"
+/>
+
+<LinkCard
+  title="¿Cuál es la diferencia entre GraphQL y REST?"
+  description="GraphQL y REST son dos enfoques distintos para diseñar una API para el intercambio de datos a través de Internet. REST permite a las aplicaciones cliente intercambiar datos con un servidor mediante verbos HTTP, que es el protocolo de comunicación estándar de Internet."
+  href="https://aws.amazon.com/es/compare/the-difference-between-graphql-and-rest/"
+/>
+
+### Conclusión
+
+Entender REST y GraphQL no se trata de elegir un "ganador", sino de tener más herramientas en tu cinturón de ingeniero de software. En el mundo real, muchos sistemas modernos son **híbridos**: usan REST para servicios internos o integraciones de terceros y GraphQL para alimentar su interfaz de usuario.
+
+¿Cuál encaja mejor con el **proyecto personal** que estás construyendo? ¡Tú decides!
 
 <Cta></Cta>

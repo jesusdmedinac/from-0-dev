@@ -56,6 +56,7 @@ Para crear o modificar contenido, es crucial seguir las directrices de `CONTENT_
     4.  Uso extensivo de componentes interactivos como `<Aside>`, `<LinkCard>` e `<iframe>`.
     5.  CTA final.
 -   **Formato**: Usar **negritas** para términos clave, comentar el código y hacer preguntas para fomentar la interacción.
+-   **Referencias Cruzadas**: Al referenciar lecciones o entregables previos, usar el formato **(LX)** donde X es el número de lección (ej: **(L2)**) y debe incluir obligatoriamente un vínculo a dicha lección. (Ver `CONTENT_STYLE.md`).
 
 ### Estado de Avance
 
@@ -75,6 +76,7 @@ Para cualquier tarea de desarrollo, refactorización o creación de nuevas funci
 
 -   **Punto de Partida**: Utiliza este documento (`AGENTS.md`) como tu principal fuente de contexto sobre el proyecto.
 -   **Metodología**: Antes de escribir cualquier código, asegúrate de haber cumplido los pasos 1 al 4 del proceso de planificación.
+-   **Documentación de Decisiones (ADRs)**: Al sugerir o crear registros de decisión arquitectónica, utiliza **nombres semánticos** (ej: `ADR-backend-comunicacion.md`) en lugar de números secuenciales, siguiendo el formato definido en `CONTENT_STYLE.md`.
 -   **Creación de Contenido**: Al generar nuevas lecciones o modificar existentes, adhiérete estrictamente a las guías en `CONTENT_STYLE.md` y replica la estructura y tono del contenido existente en `src/content/docs/roadmap/`.
 -   **Análisis Técnico**: Para entender la implementación de una característica, examina los archivos en `src/components/` (componentes reutilizables) y `src/pages/` (rutas y lógica de página).
 -   **Consultas Específicas**:
