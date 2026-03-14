@@ -46,10 +46,10 @@ Este documento muestra el estado de redacción de todas las lecciones y el progr
     - [ ] Scenario: Taller de Implementación: La API de Tu Proyecto Personal
     - [x] Scenario: Comparativa Estratégica y Herramientas
 - [ ] Lección 5: Frontend Development - UI/UX y Componentes Reutilizables
-    - [ ] Scenario: Principios de UI/UX para Desarrolladores
-    - [ ] Scenario: Sistemas de Componentes y Reutilización
-    - [ ] Scenario: Gestión de Estado y Consumo de API (Mocking)
-    - [ ] Scenario: Taller: Maquetación del Proyecto Personal
+    - [x] Scenario: Principios de UI/UX para Desarrolladores
+    - [x] Scenario: Sistemas de Componentes y Reutilización
+    - [x] Scenario: Gestión de Estado y Consumo de API (Mocking)
+    - [x] Scenario: Taller: Maquetación del Proyecto Personal
 - [ ] Lección 6: Base de datos y ORM
     - [ ] Scenario: Modelado de Datos Profesional
     - [ ] Scenario: Implementación con ORMs

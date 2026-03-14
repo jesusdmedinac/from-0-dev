@@ -1,12 +1,142 @@
 ---
 title: Frontend Development - UI/UX y Componentes Reutilizables
-description: WIP
+description: Construye interfaces que los usuarios amen. Aprende principios de diseño, crea sistemas de componentes escalables y conecta tu frontend con datos simulados.
 ---
 
 import Cta from '@components/cta/stack-personalizado/cta.astro';
+import { Aside, LinkCard } from '@astrojs/starlight/components';
 
 <Cta></Cta>
 
-WIP
+El frontend es la cara visible de tu aplicación. Da igual cuán robusto sea tu backend, cuán optimizada esté tu base de datos o qué tan elegante sea tu arquitectura en la nube: **si el usuario no entiende cómo usar tu interfaz o se siente frustrado, tu producto fallará.**
+
+En esta lección, dejaremos de ver el frontend simplemente como "hacer que las cosas se vean bonitas" y adoptaremos una mentalidad de ingeniería de interfaces. Aprenderás a diseñar con propósito, a construir sistemas escalables y a preparar tu aplicación para el mundo real.
+
+---
+
+### 1. Principios de UI/UX para Desarrolladores
+
+No necesitas ser un diseñador gráfico profesional para crear buenas interfaces, pero sí necesitas entender los fundamentos de **UI (Interfaz de Usuario)** y **UX (Experiencia de Usuario)**.
+
+#### UX: Cómo Funciona (La Experiencia)
+La UX se trata de resolver los problemas del usuario de la forma más eficiente y placentera posible. 
+*   **Fricción**: ¿Cuántos clics necesita el usuario para completar su objetivo final? Tu misión es reducir este número al mínimo.
+*   **Feedback**: Si el usuario hace clic en un botón, *algo* debe suceder inmediatamente (un loader, un cambio de color, una animación). Si la aplicación parece "congelada", el usuario asumirá que está rota.
+*   **Accesibilidad (a11y)**: Tu aplicación debe poder ser usada por personas con discapacidades (ej. lectores de pantalla, buen contraste de colores).
+
+#### UI: Cómo se Ve (La Estética)
+La UI se trata de la presentación visual. Un buen diseño transmite profesionalismo y genera confianza.
+*   **Jerarquía Visual**: Ojos de arriba abajo, de grande a pequeño, de oscuro a claro. El elemento más importante en la pantalla debe ser el más llamativo.
+*   **Espaciado (White Space)**: Dale aire a tus elementos. No amontones el contenido. Agrupa las cosas que están relacionadas y separa las que no lo están.
+*   **Consistencia**: Si un botón primario es azul y rectangular, *todos* los botones primarios deben ser azules y rectangulares a lo largo de toda la aplicación.
+
+<Aside title="Herramientas de Prototipado" type="tip">
+Antes de escribir una sola línea de código (HTML/CSS/React), **dibuja tu aplicación**. Herramientas como [Figma](https://www.figma.com/) o [Penpot](https://penpot.app/) (Open Source) son el estándar de la industria. Te permiten iterar ideas rápidamente sin el coste de tener que reescribir código.
+</Aside>
+
+---
+
+### 2. Sistemas de Componentes y Reutilización
+
+En el desarrollo web moderno (React, Vue, Svelte, Angular), ya no pensamos en "páginas", pensamos en **Componentes**.
+
+Un componente es una pieza de UI aislada, reutilizable y que contiene su propia lógica y estilos.
+
+#### El Patrón: Atomic Design
+Para evitar el caos a medida que tu aplicación crece, es crucial organizar tus componentes. El **Atomic Design** (Diseño Atómico), creado por Brad Frost, es una excelente metodología:
+
+1.  **Átomos**: Los bloques de construcción básicos. Ej: Un `<Button />`, un `<Input />`, un `<Icon />`. No pueden ser divididos más.
+2.  **Moléculas**: Grupos de átomos que forman una unidad funcional simple. Ej: Un `<SearchBar />` (que contiene un `Input`, un `Icon` y un `Button`).
+3.  **Organismos**: Secciones complejas formadas por moléculas y átomos. Ej: Un `<Header />` o una `<ProductCard />`.
+4.  **Templates**: La estructura de la página (el layout) donde se colocarán los organismos.
+5.  **Páginas**: Instancias específicas de templates llenas de datos reales.
+
+<Aside title="DRY - Don't Repeat Yourself" type="caution">
+Si te encuentras copiando y pegando el mismo bloque de código HTML (con las mismas clases CSS) en tres lugares diferentes de tu aplicación, **detente**. Ese bloque de código pide a gritos convertirse en un Componente reutilizable.
+</Aside>
+
+#### Librerías vs. Componentes Propios
+Hoy en día no tienes que crear todo desde cero:
+*   **Tailwind CSS**: Excelente para dar estilos (utility-first) si quieres construir tus propios componentes desde cero y tener el control total del diseño.
+*   **Librerías de Componentes (shadcn/ui, MUI, Chakra)**: Te dan componentes pre-construidos (y accesibles) para que te enfoques en la lógica de negocio.
+
+---
+
+### 3. Gestión de Estado y Consumo de API (Mocking)
+
+Una aplicación frontend no es estática; vive, respira y cambia de **Estado**. 
+
+#### Estado Local vs Estado Global
+*   **Estado Local**: Datos que solo le importan a un componente específico. Ej: ¿El menú desplegable está abierto o cerrado?, ¿qué ha escrito el usuario en *este* input? (En React usamos `useState`).
+*   **Estado Global**: Datos que múltiples componentes de toda la aplicación necesitan conocer. Ej: ¿El usuario está autenticado?, ¿qué hay en el carrito de compras?, el tema oscuro/claro de la app. Para esto usamos Context API, Redux o Zustand.
+
+#### Empezando sin el Backend: El Arte del Mocking
+En la vida real, frontend y backend suelen desarrollarse en paralelo. ¿Qué haces si el backend aún no ha creado la API que diseñaste en la [Lección 4 (L4)](/roadmap/stack-personalizado/4)? 
+
+**Haces un Mocking (Simulación).**
+
+Un Mock Server intercepta las peticiones de tu frontend y devuelve datos falsos que tienen la misma estructura que esperarías del backend real. Esto te permite:
+1. Avanzar rápidamente en el frontend.
+2. Probar los tres estados cruciales de cualquier petición de datos:
+   *   **Loading State (Cargando)**: Mostrar un spinner o skeletons mientras llega la data.
+   *   **Success State (Éxito)**: Mostrar los datos reales al usuario.
+   *   **Error State (Error)**: Mostrar un mensaje amigable si el servidor falla (ej: "No pudimos cargar tus productos").
+
+*Herramienta Recomendada: [Mock Service Worker (MSW)](https://mswjs.io/) o [JSON Server](https://github.com/typicode/json-server).*
+
+---
+
+### Taller: Maquetación del Proyecto Personal
+
+Es la hora de darle una cara visual a nuestro sistema. Vas a tomar el [Backlog (L2)](/roadmap/stack-personalizado/2) que definiste y le darás vida.
+
+#### Fase 1: Maquetar la Vista Principal
+1. Elige una de las vistas principales de la funcionalidad clave de tu proyecto.
+2. Usando tu framework favorito (React, Astro, Vue, etc.) y CSS/Tailwind, **maqueta la interfaz**.
+3. **Regla de oro:** No crees un archivo gigante. Identifica los **Átomos** y **Moléculas** y extrae esos elementos a sus propios componentes (ej. crea un archivo `Button.jsx` en vez de escribir la etiqueta `<button>` repetidas veces con todas sus clases en la página principal).
+
+#### Fase 2: Conectar la UI con el Mock Server
+1. Imagina que ya tienes la API que diseñaste en el ADR de L4. 
+2. Crea un archivo JSON estático en tu código (o usa JSON Server/MSW) y define un array de datos de ejemplo.
+3. Haz que tus componentes "consuman" esos datos para renderizar listas o detalles dinámicos en vez de tener la información "quemada" (hard-coded) en el HTML.
+4. Asegúrate de implementar un estado de "Cargando..." artificial con `setTimeout` (para ver tu UI de loading momentáneamente).
+
+#### Fase 3: La Decisión de UI (ADR)
+Documentar la arquitectura frontend es tan importante como la del backend.
+1. Crea un nuevo archivo en tu repositorio: **`ADR-frontend-arquitectura.md`**.
+2. Documenta y justifica las decisiones que has tomado:
+   *   ¿Qué framework/librería principal elegiste (React, Angular, Vanilla)? ¿Por qué?
+   *   ¿Qué enfoque tomaste para los estilos (Tailwind, CSS Modules, Styled Components)?
+   *   ¿Cómo decidiste organizar la carpeta de componentes? ¿Seguirás un patrón parecido al Atomic Design?
+
+¡Enséñale a tu proyecto cómo quieres que el mundo lo vea!
+
+---
+
+#### Recursos para seguir aprendiendo
+
+<LinkCard
+  title="Refactoring UI"
+  description="El libro definitivo para desarrolladores que quieren aprender diseño. Lleno de reglas prácticas y fáciles de entender."
+  href="https://www.refactoringui.com/"
+/>
+
+<LinkCard
+  title="Atomic Design by Brad Frost"
+  description="El libro completo (gratuito para leer online) donde se explica la metodología Atomic Design a fondo."
+  href="https://atomicdesign.bradfrost.com/chapter-2/"
+/>
+
+<LinkCard
+  title="Zustand (State Management para React)"
+  description="Una alternativa moderna, pequeña y rápida a Redux para manejar el estado global."
+  href="https://zustand-demo.pmnd.rs/"
+/>
+
+### Conclusión
+
+El frontend moderno es una disciplina de ingeniería completa. Manejamos estado complejo, lidiamos con asincronía y diseñamos patrones reutilizables, todo mientras nos aseguramos de que el usuario final tenga una experiencia fluida de principio a fin.
+
+Una vez que tengas tu frontend mostrando datos simulados (macks), estarás listo para el siguiente paso lógico: **hacer que esos datos sean reales y persistentes.**
 
 <Cta></Cta>
