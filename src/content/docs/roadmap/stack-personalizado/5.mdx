@@ -19,10 +19,10 @@ En esta lección, dejaremos de ver el frontend simplemente como "hacer que las c
 No necesitas ser un diseñador gráfico profesional para crear buenas interfaces, pero sí necesitas entender los fundamentos de **UI (Interfaz de Usuario)** y **UX (Experiencia de Usuario)**.
 
 #### UX: Cómo Funciona (La Experiencia)
-La UX se trata de resolver los problemas del usuario de la forma más eficiente y placentera posible. 
+La UX se trata de resolver los problemas del usuario de la forma más eficiente y placentera posible. Según el [Nielsen Norman Group](https://www.nngroup.com/articles/), los creadores del término "Experiencia de Usuario":
 *   **Fricción**: ¿Cuántos clics necesita el usuario para completar su objetivo final? Tu misión es reducir este número al mínimo.
 *   **Feedback**: Si el usuario hace clic en un botón, *algo* debe suceder inmediatamente (un loader, un cambio de color, una animación). Si la aplicación parece "congelada", el usuario asumirá que está rota.
-*   **Accesibilidad (a11y)**: Tu aplicación debe poder ser usada por personas con discapacidades (ej. lectores de pantalla, buen contraste de colores).
+*   **Accesibilidad (a11y)**: Tu aplicación debe poder ser usada por personas con discapacidades (ej. lectores de pantalla, buen contraste de colores). [W3C - Web Accessibility Initiative](https://www.w3.org/WAI/) es el estándar de oro para aprender sobre esto.
 
 #### UI: Cómo se Ve (La Estética)
 La UI se trata de la presentación visual. Un buen diseño transmite profesionalismo y genera confianza.
@@ -43,7 +43,7 @@ En el desarrollo web moderno (React, Vue, Svelte, Angular), ya no pensamos en "p
 Un componente es una pieza de UI aislada, reutilizable y que contiene su propia lógica y estilos.
 
 #### El Patrón: Atomic Design
-Para evitar el caos a medida que tu aplicación crece, es crucial organizar tus componentes. El **Atomic Design** (Diseño Atómico), creado por Brad Frost, es una excelente metodología:
+Para evitar el caos a medida que tu aplicación crece, es crucial organizar tus componentes. El **Atomic Design** (Diseño Atómico), creado por Brad Frost ([atomicdesign.bradfrost.com](https://atomicdesign.bradfrost.com/chapter-2/)), es una metodología probada en la industria:
 
 1.  **Átomos**: Los bloques de construcción básicos. Ej: Un `<Button />`, un `<Input />`, un `<Icon />`. No pueden ser divididos más.
 2.  **Moléculas**: Grupos de átomos que forman una unidad funcional simple. Ej: Un `<SearchBar />` (que contiene un `Input`, un `Icon` y un `Button`).
@@ -52,7 +52,7 @@ Para evitar el caos a medida que tu aplicación crece, es crucial organizar tus 
 5.  **Páginas**: Instancias específicas de templates llenas de datos reales.
 
 <Aside title="DRY - Don't Repeat Yourself" type="caution">
-Si te encuentras copiando y pegando el mismo bloque de código HTML (con las mismas clases CSS) en tres lugares diferentes de tu aplicación, **detente**. Ese bloque de código pide a gritos convertirse en un Componente reutilizable.
+Si te encuentras copiando y pegando el mismo bloque de código HTML (con las mismas clases CSS) en tres lugares diferentes de tu aplicación, **detente**. Ese bloque de código pide a gritos convertirse en un Componente reutilizable. (Fuente: *The Pragmatic Programmer*).
 </Aside>
 
 #### Librerías vs. Componentes Propios
@@ -68,7 +68,7 @@ Una aplicación frontend no es estática; vive, respira y cambia de **Estado**.
 
 #### Estado Local vs Estado Global
 *   **Estado Local**: Datos que solo le importan a un componente específico. Ej: ¿El menú desplegable está abierto o cerrado?, ¿qué ha escrito el usuario en *este* input? (En React usamos `useState`).
-*   **Estado Global**: Datos que múltiples componentes de toda la aplicación necesitan conocer. Ej: ¿El usuario está autenticado?, ¿qué hay en el carrito de compras?, el tema oscuro/claro de la app. Para esto usamos Context API, Redux o Zustand.
+*   **Estado Global**: Datos que múltiples componentes de toda la aplicación necesitan conocer. Ej: ¿El usuario está autenticado?, ¿qué hay en el carrito de compras?, el tema oscuro/claro de la app. Para esto usamos Context API, Redux o bibliotecas ligeras como [Zustand](https://zustand-demo.pmnd.rs/).
 
 #### Empezando sin el Backend: El Arte del Mocking
 En la vida real, frontend y backend suelen desarrollarse en paralelo. ¿Qué haces si el backend aún no ha creado la API que diseñaste en la [Lección 4 (L4)](/roadmap/stack-personalizado/4)? 
@@ -76,13 +76,13 @@ En la vida real, frontend y backend suelen desarrollarse en paralelo. ¿Qué hac
 **Haces un Mocking (Simulación).**
 
 Un Mock Server intercepta las peticiones de tu frontend y devuelve datos falsos que tienen la misma estructura que esperarías del backend real. Esto te permite:
-1. Avanzar rápidamente en el frontend.
+1. Avanzar rápidamente en el frontend sin bloqueos.
 2. Probar los tres estados cruciales de cualquier petición de datos:
    *   **Loading State (Cargando)**: Mostrar un spinner o skeletons mientras llega la data.
    *   **Success State (Éxito)**: Mostrar los datos reales al usuario.
    *   **Error State (Error)**: Mostrar un mensaje amigable si el servidor falla (ej: "No pudimos cargar tus productos").
 
-*Herramienta Recomendada: [Mock Service Worker (MSW)](https://mswjs.io/) o [JSON Server](https://github.com/typicode/json-server).*
+*Herramienta Recomendada (Nivel Industria): [Mock Service Worker (MSW)](https://mswjs.io/) o una versión más simple como [JSON Server](https://github.com/typicode/json-server).*
 
 ---
 
@@ -113,25 +113,35 @@ Documentar la arquitectura frontend es tan importante como la del backend.
 
 ---
 
-#### Recursos para seguir aprendiendo
+### Referencias y Lecturas Recomendadas
+
+Para construir esta lección nos hemos basado en las prácticas estándar adoptadas por las principales empresas tecnológicas. Aquí tienes literatura adicional para profundizar:
 
 <LinkCard
-  title="Refactoring UI"
-  description="El libro definitivo para desarrolladores que quieren aprender diseño. Lleno de reglas prácticas y fáciles de entender."
+  title="Refactoring UI - Adam Wathan & Steve Schoger"
+  description="El libro definitivo para desarrolladores que quieren aprender diseño. Lleno de reglas prácticas sobre jerarquía visual, espaciado y consistencia."
   href="https://www.refactoringui.com/"
 />
 
 <LinkCard
-  title="Atomic Design by Brad Frost"
-  description="El libro completo (gratuito para leer online) donde se explica la metodología Atomic Design a fondo."
+  title="Atomic Design - Brad Frost"
+  description="La metodología estándar de la industria para crear sistemas de diseño y componentes escalables. Lectura obligatoria y gratuita (Capítulo 2)."
   href="https://atomicdesign.bradfrost.com/chapter-2/"
 />
 
 <LinkCard
-  title="Zustand (State Management para React)"
-  description="Una alternativa moderna, pequeña y rápida a Redux para manejar el estado global."
-  href="https://zustand-demo.pmnd.rs/"
+  title="Nielsen Norman Group - UX Articles"
+  description="Los investigadores más respetados del mundo en Experiencia de Usuario aportan cientos de artículos respaldados por datos de interacción reales."
+  href="https://www.nngroup.com/articles/"
 />
+
+<LinkCard
+  title="W3C Web Accessibility Initiative (WAI)"
+  description="Toda la documentación y los estándares oficiales que dictan cómo construir aplicaciones web accesibles (a11y) para todos."
+  href="https://www.w3.org/WAI/"
+/>
+
+---
 
 ### Conclusión
 

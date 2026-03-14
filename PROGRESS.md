@@ -101,6 +101,12 @@ Este documento muestra el estado de redacción de todas las lecciones y el progr
 - [ ] Scenario: Refactorizar Lección 3 (Introducción a ADRs)
 - [ ] Scenario: Refactorizar Lección 4 (Taller Backend)
 
+### Feature: Uso Obligatorio de Fuentes Confiables en Lecciones
+- [ ] Scenario: Actualizar lecciones de 'Para no programadores' con fuentes (L1 a L7)
+- [ ] Scenario: Actualizar lecciones de 'Para principiantes' con fuentes (L1 a L7)
+- [ ] Scenario: Actualizar lecciones de 'Stack personalizado' con fuentes (L1 a L4)
+- [ ] Scenario: Actualizar lecciones de 'Ingeniería de software' con fuentes (L1)
+
 ---
 
 ## Ruta: Ingeniería de software

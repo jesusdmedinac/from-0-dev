@@ -97,7 +97,15 @@ Cierra siempre con el componente de llamada a la acción.
 <Cta></Cta>
 ```
 
-## 3. Formato y Buenas Prácticas
+## 3. Citas y Fuentes Confiables
+
+Para asegurar la calidad y credibilidad del contenido, basamos nuestras enseñanzas en mejores prácticas de la industria de ingeniería de software.
+
+-   **Referencias y Lecturas Recomendadas**: Toda lección **debe** terminar (justo antes de la Conclusión o del CTA final) con una sección explícita de recursos utilizando el componente `<LinkCard>`. 
+-   **Fuentes Permitidas**: Enlaza a documentación oficial (e.g., React.dev, MDN), libros estándar (e.g., _Clean Code_, _Refactoring UI_), estándares (e.g., OWASP, W3C) o artículos técnicos de empresas reconocidas (e.g., AWS, Google Cloud, Figma, Vercel).
+-   **Notas en línea**: Cuando establezcas una regla estricta o hables de una práctica recomendada en el cuerpo del texto, considera agregar un enlace directo hacia la fuente que la respalda.
+
+## 4. Formato y Buenas Prácticas
 
 - **Código Comentado**: Comenta las líneas de código explicadas para reforzar el aprendizaje.
 - **Énfasis**: Usa **negritas** para términos clave la primera vez que aparecen.
@@ -106,7 +114,7 @@ Cierra siempre con el componente de llamada a la acción.
 - **Nomenclatura de ADRs**: Para documentar decisiones arquitectónicas, usa nombres semánticos en lugar de números.
     - **Formato**: `ADR-[nombre-descriptivo].md` (ej: `ADR-frontend-framework.md`, `ADR-base-de-datos.md`).
 
-## 4. Referencias Cruzadas (Nomenclatura LX)
+## 5. Referencias Cruzadas (Nomenclatura LX)
 
 Para mantener la cohesión en las rutas de aprendizaje, especialmente cuando una lección depende de entregables de una anterior, se debe usar la siguiente nomenclatura:
 
@@ -119,7 +127,7 @@ Para mantener la cohesión en las rutas de aprendizaje, especialmente cuando una
 - "...tomando como base tu [Backlog (L2)](/roadmap/stack-personalizado/2)..."
 - "...según el diseño de tu [Arquitectura (L3)](/roadmap/stack-personalizado/3)..."
 
-## 5. Planificación de Contenido Complejo
+## 6. Planificación de Contenido Complejo
 
 Para lecciones extensas o complejas (que requieran múltiples actividades, ejemplos de código avanzados o integraciones), se recomienda seguir el **Proceso de Planificación de 5 Pasos** (ver `AI_PLANNING_PROCESS.md`):
 
@@ -129,7 +137,7 @@ Para lecciones extensas o complejas (que requieran múltiples actividades, ejemp
 4.  **Actualizar el progreso** en `PROGRESS.md`.
 5.  **Redactar sección por sección**, asegurando que cada una cumpla con su objetivo.
 
-## 5. Ejemplo de Plantilla
+## 7. Ejemplo de Plantilla
 
 ````mdx
 ---
