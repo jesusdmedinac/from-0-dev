@@ -145,24 +145,90 @@ type Query {
 
 #### Más allá de las Consultas: Mutations y Subscriptions
 
-GraphQL no es solo para "leer".
-*   **Mutations**: Se usan para crear, actualizar o borrar datos. Equivale a los POST/PUT/DELETE de REST.
-*   **Subscriptions**: Permiten mantener una conexión abierta (vía WebSockets) para recibir actualizaciones en tiempo real cuando algo cambia en el servidor.
+GraphQL no es solo para "leer". Una aplicación real necesita escribir datos y reaccionar a cambios en tiempo real. Para eso usamos Mutations y Subscriptions.
+
+**1. Mutations (Mutaciones)**
+Las mutaciones son el equivalente a los métodos `POST`, `PUT`, `PATCH` y `DELETE` en REST. Se utilizan para modificar datos en el servidor. La sintaxis es muy similar a una query, con la ventaja de que puedes pedir datos de vuelta inmediatamente después de la modificación.
 
 ```graphql
 # Ejemplo de Mutation para crear un comentario
 mutation AddComment($postId: ID!, $text: String!) {
+  # Ejecutamos la acción
   createComment(postId: $postId, text: $text) {
+    # Y pedimos de vuelta los datos del nuevo comentario
     id
     createdAt
     text
+    user {
+      username
+    }
   }
 }
 ```
 
-<Aside title="Manejo de Errores en GraphQL" type="caution">
-A diferencia de REST, GraphQL casi siempre devuelve un código `200 OK`. Los errores vienen dentro del cuerpo de la respuesta en un array llamado `errors`. Esto requiere que tu frontend sea más cuidadoso al procesar la respuesta.
+<Aside title="¿Por qué pedir datos de vuelta?" type="tip">
+En GraphQL, es una buena práctica solicitar de vuelta el objeto que acabas de mutar. Esto permite a tu frontend actualizar su estado (el caché) de manera automática sin tener que hacer otra petición extra.
 </Aside>
+
+**2. Subscriptions (Suscripciones)**
+Mientras que las queries y mutations son operaciones de solicitud-respuesta (request-response), las **Subscriptions** mantienen una conexión abierta con el servidor, usualmente a través de WebSockets. 
+
+Esto permite al servidor hacer *push* de datos al cliente cada vez que ocurre un evento específico. Es ideal para notificaciones, chats en tiempo real o paneles de control en vivo.
+
+```graphql
+# Ejemplo de Subscription para escuchar nuevos comentarios
+subscription OnNewComment($postId: ID!) {
+  commentAdded(postId: $postId) {
+    id
+    text
+    createdAt
+    user {
+      username
+    }
+  }
+}
+```
+
+<Aside title="Actividad Práctica: Piensa en tu app" type="note">
+Toma el proyecto que definiste en la Lección 1. ¿Qué funcionalidad podría beneficiarse de las Subscriptions?
+- ¿Un chat entre usuarios?
+- ¿Una notificación cuando un pedido cambia de estado?
+- ¿Un dashboard que actualiza gráficos en vivo?
+Anota esa idea, podrías implementarla en la sección práctica.
+</Aside>
+
+#### Manejo de Errores Específico en GraphQL
+
+Una de las grandes diferencias (y a veces frustraciones iniciales) al pasar de REST a GraphQL es el manejo de errores.
+
+<Aside title="Manejo de Errores en GraphQL" type="caution">
+A diferencia de REST, donde un error 404 o 500 te dice qué pasó a nivel de HTTP, **GraphQL casi siempre devuelve un código `200 OK`**, incluso si hubo un error. 
+</Aside>
+
+En GraphQL, los errores vienen dentro del cuerpo de la respuesta en un array especial llamado `errors`, separado de la data. Una consulta puede devolver tanto datos exitosos como errores parciales.
+
+**Ejemplo de respuesta de error detallada en GraphQL:**
+
+```json
+{
+  "errors": [
+    {
+      "message": "No tienes permisos para realizar esta acción.",
+      "locations": [ { "line": 2, "column": 3 } ],
+      "path": [ "createComment" ],
+      "extensions": {
+        "code": "FORBIDDEN",
+        "timestamp": "2023-10-27T10:00:00Z"
+      }
+    }
+  ],
+  "data": {
+    "createComment": null
+  }
+}
+```
+
+Observa la propiedad `extensions`. Es el lugar ideal para que tu backend agregue campos personalizados (como un código de error específico `FORBIDDEN` o `VALIDATION_FAILED`) para que el frontend pueda reaccionar correctamente, mostrando mensajes adecuados al usuario en la UI.
 
 ---
 

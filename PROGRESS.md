@@ -41,7 +41,7 @@ Este documento muestra el estado de redacción de todas las lecciones y el progr
 - [x] Lección 3: Diseño y Architectura de Aplicaciones
 - [ ] Lección 4: Backend Development - RESTful y GraphQL
     - [x] Scenario: Explicación de Arquitectura RESTful y Buenas Prácticas
-    - [ ] Scenario: GraphQL Avanzado: Mutations y Real-time
+    - [x] Scenario: GraphQL Avanzado: Mutations y Real-time
     - [ ] Scenario: Seguridad y Comunicación entre Capas
     - [ ] Scenario: Taller de Implementación: La API de Tu Proyecto Personal
     - [x] Scenario: Comparativa Estratégica y Herramientas
