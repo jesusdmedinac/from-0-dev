@@ -41,11 +41,50 @@ Este documento muestra el estado de redacción de todas las lecciones y el progr
 - [x] Lección 3: Diseño y Architectura de Aplicaciones
 - [ ] Lección 4: Backend Development - RESTful y GraphQL
     - [x] Scenario: Explicación de Arquitectura RESTful y Buenas Prácticas
-    - [ ] Scenario: GraphQL Avanzado: Mutations y Real-time
+    - [x] Scenario: GraphQL Avanzado: Mutations y Real-time
     - [ ] Scenario: Seguridad y Comunicación entre Capas
     - [ ] Scenario: Taller de Implementación: La API de Tu Proyecto Personal
     - [x] Scenario: Comparativa Estratégica y Herramientas
 - [ ] Lección 5: Frontend Development - UI/UX y Componentes Reutilizables
+    - [x] Scenario: Principios de UI/UX para Desarrolladores
+    - [x] Scenario: Sistemas de Componentes y Reutilización
+    - [x] Scenario: Gestión de Estado y Consumo de API (Mocking)
+    - [x] Scenario: Taller: Maquetación del Proyecto Personal
+- [ ] Lección 6: Base de datos y ORM
+    - [ ] Scenario: Modelado de Datos Profesional
+    - [ ] Scenario: Implementación con ORMs
+    - [ ] Scenario: Capa de Persistencia y Repositorios
+    - [ ] Scenario: Taller: Persistencia de Mi Proyecto
+- [ ] Lección 7: Integración Continua y Despliegue Automatizado (CI/CD)
+    - [ ] Scenario: Automatización con GitHub Actions
+    - [ ] Scenario: Pipelines de Calidad (CI)
+    - [ ] Scenario: Estrategias de Despliegue (CD)
+    - [ ] Scenario: Taller: Mi Primer Pipeline Profesional
+- [ ] Lección 8: Testing - Unitario, Integración y End-to-End
+    - [ ] Scenario: La Pirámide de Testing
+    - [ ] Scenario: Pruebas de Lógica (Unit & Integration)
+    - [ ] Scenario: Pruebas de Interfaz (E2E)
+    - [ ] Scenario: Taller: Blindando Mi Proyecto
+- [ ] Lección 9: Seguridad de Aplicaciones Web
+    - [ ] Scenario: El Top 10 de OWASP
+    - [ ] Scenario: Autenticación y Autorización Robusta
+    - [ ] Scenario: Protección de la Infraestructura
+    - [ ] Scenario: Taller: Hardening de Mi Aplicación
+- [ ] Lección 10: Optimización de Rendimiento
+    - [ ] Scenario: Diagnóstico de Cuellos de Botella
+    - [ ] Scenario: Optimización en el Servidor (Backend & DB)
+    - [ ] Scenario: Optimización en el Cliente (Frontend)
+    - [ ] Scenario: Taller: Haciendo que Mi App Vuele
+- [ ] Lección 11: Despligue en Producción
+    - [ ] Scenario: Contenedores con Docker
+    - [ ] Scenario: Infraestructura en la Nube
+    - [ ] Scenario: Gestión de Dominios y SSL
+    - [ ] Scenario: Taller: Lanzamiento Oficial
+- [ ] Lección 12: Monitoreo y Mantenimiento
+    - [ ] Scenario: Observabilidad en Vivo
+    - [ ] Scenario: Análisis de Errores y Retrospectiva
+    - [ ] Scenario: El Futuro del Proyecto
+    - [ ] Scenario: Taller Final: Salud del Sistema
 
 ---
 
@@ -61,13 +100,14 @@ Este documento muestra el estado de redacción de todas las lecciones y el progr
 - [ ] Scenario: Actualizar guías de estilo y agentes
 - [ ] Scenario: Refactorizar Lección 3 (Introducción a ADRs)
 - [ ] Scenario: Refactorizar Lección 4 (Taller Backend)
-- [ ] Lección 6: Base de datos y ORM
-- [ ] Lección 7: Integración Continua y Despliegue Automatizado (CI/CD)
-- [ ] Lección 8: Testing - Unitario, Integración y End-to-End
-- [ ] Lección 9: Seguridad de Aplicaciones Web
-- [ ] Lección 10: Optimización de Rendimiento
-- [ ] Lección 11: Despligue en Producción
-- [ ] Lección 12: Monitoreo y Mantenimiento
+
+### Feature: Uso Obligatorio de Fuentes Confiables en Lecciones
+- [ ] Scenario: Actualizar lecciones de 'Para no programadores' con fuentes (L1 a L7)
+- [ ] Scenario: Actualizar lecciones de 'Para principiantes' con fuentes (L1 a L7)
+- [ ] Scenario: Actualizar lecciones de 'Stack personalizado' con fuentes (L1 a L4)
+- [ ] Scenario: Actualizar lecciones de 'Ingeniería de software' con fuentes (L1)
+
+---
 
 ## Ruta: Ingeniería de software
 
