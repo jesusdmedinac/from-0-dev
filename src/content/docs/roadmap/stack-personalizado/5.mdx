@@ -14,125 +14,112 @@ En esta lección, dejaremos de ver el frontend simplemente como "hacer que las c
 
 ---
 
-### 1. Principios de UI/UX para Desarrolladores
+### 1. Arquitectura de Información y Validación Heurística
 
-No necesitas ser un diseñador gráfico profesional para crear buenas interfaces, pero sí necesitas entender los fundamentos de **UI (Interfaz de Usuario)** y **UX (Experiencia de Usuario)**.
+El frontend moderno no comienza dibujando píxeles, comienza estructurando datos y flujos. Como ingenieros, debemos diseñar la **Arquitectura de Información (IA)** antes de preocuparnos por la estética. 
 
-#### UX: Cómo Funciona (La Experiencia)
-La UX se trata de resolver los problemas del usuario de la forma más eficiente y placentera posible. Según el [Nielsen Norman Group](https://www.nngroup.com/articles/), los creadores del término "Experiencia de Usuario":
-*   **Fricción**: ¿Cuántos clics necesita el usuario para completar su objetivo final? Tu misión es reducir este número al mínimo.
-*   **Feedback**: Si el usuario hace clic en un botón, *algo* debe suceder inmediatamente (un loader, un cambio de color, una animación). Si la aplicación parece "congelada", el usuario asumirá que está rota.
-*   **Accesibilidad (a11y)**: Tu aplicación debe poder ser usada por personas con discapacidades (ej. lectores de pantalla, buen contraste de colores). [W3C - Web Accessibility Initiative](https://www.w3.org/WAI/) es el estándar de oro para aprender sobre esto.
+#### Generación Estructural con Relume
+[Relume](https://www.relume.io/) ha transformado el proceso de wireframing. En lugar de usarlo como un simple "maquetador", interactuamos con él como un generador estructurado del DOM jerárquico. 
+Al alimentar a Relume con los requisitos de nuestro [Backlog (L2)](/roadmap/stack-personalizado/2), la IA propone un esqueleto semántico (Header, Hero, Features, Footer) pre-optimizado para conversión y accesibilidad. No estamos diseñando; estamos ensamblando lógica visual en minutos.
 
-#### UI: Cómo se Ve (La Estética)
-La UI se trata de la presentación visual. Un buen diseño transmite profesionalismo y genera confianza.
-*   **Jerarquía Visual**: Ojos de arriba abajo, de grande a pequeño, de oscuro a claro. El elemento más importante en la pantalla debe ser el más llamativo.
-*   **Espaciado (White Space)**: Dale aire a tus elementos. No amontones el contenido. Agrupa las cosas que están relacionadas y separa las que no lo están.
-*   **Consistencia**: Si un botón primario es azul y rectangular, *todos* los botones primarios deben ser azules y rectangulares a lo largo de toda la aplicación.
+#### Validación Predictiva con Pencil Dev
+Una vez estructurada la arquitectura, el diseño debe superar validaciones objetivas, no opiniones subjetivas. 
+En lugar de depender únicamente de pruebas de usuario iniciales, podemos utilizar herramientas como [Pencil Dev](https://www.pencil.dev/) (o suites de análisis heurístico similares de IA) para someter nuestros wireframes a análisis predictivos. La IA evalúa la fricción cognitiva:
+*   ¿Cumple la [Ley de Hick](https://lawsofux.com/hicks-law/) reduciendo la carga de decisión?
+*   ¿Garantiza [Visibilidad del estado del sistema](https://www.nngroup.com/articles/ten-usability-heuristics/)?
+*   ¿Es evidente la jerarquía antes de aplicar CSS?
 
-<Aside title="Herramientas de Prototipado" type="tip">
-Antes de escribir una sola línea de código (HTML/CSS/React), **dibuja tu aplicación**. Herramientas como [Figma](https://www.figma.com/) o [Penpot](https://penpot.app/) (Open Source) son el estándar de la industria. Te permiten iterar ideas rápidamente sin el coste de tener que reescribir código.
+<Aside title="El Rol del Arquitecto UI" type="tip">
+El objetivo en esta fase no es crear un diseño "bonito", sino asegurar que la estructura base sea indestructible. La IA actúa como un copiloto que valida nuestras hipótesis de arquitectura contra millones de patrones probados en la industria.
 </Aside>
 
 ---
 
-### 2. Sistemas de Componentes y Reutilización
+### 2. Diseño Sistémico y Consistencia Estandarizada
 
-En el desarrollo web moderno (React, Vue, Svelte, Angular), ya no pensamos en "páginas", pensamos en **Componentes**.
+La mayor fuente de deuda técnica en el frontend es la inconsistencia visual y funcional. Para evitarlo, pensamos en **Sistemas de Diseño**, no en páginas aisladas.
 
-Un componente es una pieza de UI aislada, reutilizable y que contiene su propia lógica y estilos.
+#### Componentización y Atomic Design
+El desarrollo profesional exige modularidad. El patrón **Atomic Design** ([atomicdesign.bradfrost.com](https://atomicdesign.bradfrost.com/chapter-2/)) divide la UI en:
+1.  **Átomos**: Los bloques inmutables (Tokens de color, `<Button />`, `<Input />`).
+2.  **Moléculas**: Agrupaciones funcionales (`<SearchBar />`).
+3.  **Organismos**: Secciones complejas (`<Header />`, `<DataTable />`).
 
-#### El Patrón: Atomic Design
-Para evitar el caos a medida que tu aplicación crece, es crucial organizar tus componentes. El **Atomic Design** (Diseño Atómico), creado por Brad Frost ([atomicdesign.bradfrost.com](https://atomicdesign.bradfrost.com/chapter-2/)), es una metodología probada en la industria:
+Esta modularidad respeta el principio **DRY** (*Don't Repeat Yourself*), fundamental en la ingeniería de software clásica como se expone en [*The Pragmatic Programmer*](https://pragprog.com/titles/tpp20/the-pragmatic-programmer-20th-anniversary-edition/).
 
-1.  **Átomos**: Los bloques de construcción básicos. Ej: Un `<Button />`, un `<Input />`, un `<Icon />`. No pueden ser divididos más.
-2.  **Moléculas**: Grupos de átomos que forman una unidad funcional simple. Ej: Un `<SearchBar />` (que contiene un `Input`, un `Icon` y un `Button`).
-3.  **Organismos**: Secciones complejas formadas por moléculas y átomos. Ej: Un `<Header />` o una `<ProductCard />`.
-4.  **Templates**: La estructura de la página (el layout) donde se colocarán los organismos.
-5.  **Páginas**: Instancias específicas de templates llenas de datos reales.
+#### Google Stitch: El Motor de Consistencia
+Para mantener un Design System a escala, integramos herramientas como **Google Stitch** (o ecosistemas de tokens de diseño gobernados por IA).
+El valor de Stitch radica en su pragmatismo: **La IA no inventa, la IA aplica estrictamente las reglas del Design System.**
 
-<Aside title="DRY - Don't Repeat Yourself" type="caution">
-Si te encuentras copiando y pegando el mismo bloque de código HTML (con las mismas clases CSS) en tres lugares diferentes de tu aplicación, **detente**. Ese bloque de código pide a gritos convertirse en un Componente reutilizable. (Fuente: *The Pragmatic Programmer*).
-</Aside>
-
-#### Librerías vs. Componentes Propios
-Hoy en día no tienes que crear todo desde cero:
-*   **Tailwind CSS**: Excelente para dar estilos (utility-first) si quieres construir tus propios componentes desde cero y tener el control total del diseño.
-*   **Librerías de Componentes (shadcn/ui, MUI, Chakra)**: Te dan componentes pre-construidos (y accesibles) para que te enfoques en la lógica de negocio.
+Stitch examina los diseños (provenientes de Figma o Relume) y los traduce matemáticamente en variables de diseño (Design Tokens) y documentación técnica lista para el desarrollador. Si un botón divergió 2 píxeles del estándar, el sistema lo corrige asegurando que la implementación consuma únicamente tokens centralizados.
 
 ---
 
-### 3. Gestión de Estado y Consumo de API (Mocking)
+### 3. Implementación: Prototipado en Código Vivo y Mocking
 
-Una aplicación frontend no es estática; vive, respira y cambia de **Estado**. 
+La separación entre "diseño" (PNGs) e "implementación" (Código) está desapareciendo. Hoy implementamos generando código directamente.
 
-#### Estado Local vs Estado Global
-*   **Estado Local**: Datos que solo le importan a un componente específico. Ej: ¿El menú desplegable está abierto o cerrado?, ¿qué ha escrito el usuario en *este* input? (En React usamos `useState`).
-*   **Estado Global**: Datos que múltiples componentes de toda la aplicación necesitan conocer. Ej: ¿El usuario está autenticado?, ¿qué hay en el carrito de compras?, el tema oscuro/claro de la app. Para esto usamos Context API, Redux o bibliotecas ligeras como [Zustand](https://zustand-demo.pmnd.rs/).
+#### Prototipado Técnico con v0.dev
+El verdadero salto de productividad ocurre al usar herramientas como [v0.dev](https://v0.dev/) de Vercel. 
+Le damos a v0.dev nuestra arquitectura pre-validada y nuestros requisitos de UI, y este genera **código funcional en React y Tailwind CSS**. 
+Lo crítico aquí no es la velocidad, sino la **calidad técnica**:
+*   Genera código que implementa por defecto atributos de accesibilidad como `aria-labels`, roles y navegación por teclado, cumpliendo estándares de la [WAI (W3C)](https://www.w3.org/WAI/).
+*   Se basa nativamente en componentes de nivel industrial como [shadcn/ui](https://ui.shadcn.com/) (construido sobre [Radix UI](https://www.radix-ui.com/)).
 
-#### Empezando sin el Backend: El Arte del Mocking
-En la vida real, frontend y backend suelen desarrollarse en paralelo. ¿Qué haces si el backend aún no ha creado la API que diseñaste en la [Lección 4 (L4)](/roadmap/stack-personalizado/4)? 
-
-**Haces un Mocking (Simulación).**
-
-Un Mock Server intercepta las peticiones de tu frontend y devuelve datos falsos que tienen la misma estructura que esperarías del backend real. Esto te permite:
-1. Avanzar rápidamente en el frontend sin bloqueos.
-2. Probar los tres estados cruciales de cualquier petición de datos:
-   *   **Loading State (Cargando)**: Mostrar un spinner o skeletons mientras llega la data.
-   *   **Success State (Éxito)**: Mostrar los datos reales al usuario.
-   *   **Error State (Error)**: Mostrar un mensaje amigable si el servidor falla (ej: "No pudimos cargar tus productos").
-
-*Herramienta Recomendada (Nivel Industria): [Mock Service Worker (MSW)](https://mswjs.io/) o una versión más simple como [JSON Server](https://github.com/typicode/json-server).*
+#### Desacoplando el Frontend: El Arte del Mocking
+Para implementar la UI generada sin depender del estado del Backend ([L4](/roadmap/stack-personalizado/4)), utilizamos el patrón de **Mocking**.
+Como se define en arquitecturas robustas ([AWS: Mock Integration](https://aws.amazon.com/es/api-gateway/api-mock/)), empleamos un Mock Server (ej. [Mock Service Worker (MSW)](https://mswjs.io/)) para interceptar peticiones a nivel de red.
+Esto nos permite programar los tres estados críticos de la UI asíncrona:
+1.  **Loading**: Mostrando [skeletons](https://ui.shadcn.com/docs/components/skeleton).
+2.  **Success**: Renderizando la data real simulada.
+3.  **Error**: Implementando fallbacks seguros ([OWASP Error Handling](https://owasp.org/www-community/Improper_Error_Handling)).
 
 ---
 
-### Taller: Maquetación del Proyecto Personal
+### Taller: Ingeniería de UI para el Proyecto Personal
 
-Es la hora de darle una cara visual a nuestro sistema. Vas a tomar el [Backlog (L2)](/roadmap/stack-personalizado/2) que definiste y le darás vida.
+Es momento de aplicar este flujo de trabajo de Arquitecto UI a tu proyecto.
 
-#### Fase 1: Maquetar la Vista Principal
-1. Elige una de las vistas principales de la funcionalidad clave de tu proyecto.
-2. Usando tu framework favorito (React, Astro, Vue, etc.) y CSS/Tailwind, **maqueta la interfaz**.
-3. **Regla de oro:** No crees un archivo gigante. Identifica los **Átomos** y **Moléculas** y extrae esos elementos a sus propios componentes (ej. crea un archivo `Button.jsx` en vez de escribir la etiqueta `<button>` repetidas veces con todas sus clases en la página principal).
+#### Fase 1: Arquitectura con IA (Relume + Pencil Dev)
+1. Toma el [Backlog (L2)](/roadmap/stack-personalizado/2) y genera un wireframe semántico inicial usando [Relume](https://www.relume.io/).
+2. Revisa la estructura. ¿Es la jerarquía del DOM lógica? ¿Refleja claramente las prioridades del usuario?
 
-#### Fase 2: Conectar la UI con el Mock Server
-1. Imagina que ya tienes la API que diseñaste en el ADR de L4. 
-2. Crea un archivo JSON estático en tu código (o usa JSON Server/MSW) y define un array de datos de ejemplo.
-3. Haz que tus componentes "consuman" esos datos para renderizar listas o detalles dinámicos en vez de tener la información "quemada" (hard-coded) en el HTML.
-4. Asegúrate de implementar un estado de "Cargando..." artificial con `setTimeout` (para ver tu UI de loading momentáneamente).
+#### Fase 2: Implementación Estricta (v0.dev + Componentes)
+1. Extrae secciones de tu wireframe (Moléculas/Organismos) y pide a [v0.dev](https://v0.dev/) que genere el código funcional base en React/Tailwind.
+2. Refactoriza el código generado integrándolo en tu estructura de componentes, asegurando que respeta tu Design System (Tokens).
 
-#### Fase 3: La Decisión de UI (ADR)
-Documentar la arquitectura frontend es tan importante como la del backend.
-1. Crea un nuevo archivo en tu repositorio: **`ADR-frontend-arquitectura.md`**.
-2. Documenta y justifica las decisiones que has tomado:
-   *   ¿Qué framework/librería principal elegiste (React, Angular, Vanilla)? ¿Por qué?
-   *   ¿Qué enfoque tomaste para los estilos (Tailwind, CSS Modules, Styled Components)?
-   *   ¿Cómo decidiste organizar la carpeta de componentes? ¿Seguirás un patrón parecido al Atomic Design?
-
-¡Enséñale a tu proyecto cómo quieres que el mundo lo vea!
+#### Fase 3: Documentación (ADR-frontend-arquitectura)
+El mayor beneficio de usar IA generativa es que puedes iterar enfoques arquitectónicos en segundos.
+1. Crea un `ADR-frontend-arquitectura.md`.
+2. Documenta **por qué** elegiste un framework específico.
+3. Documenta cómo estas herramientas de IA te permitieron validar tu enfoque y estructurar tus componentes. 
 
 ---
 
-### Referencias y Lecturas Recomendadas
-
-Para construir esta lección nos hemos basado en las prácticas estándar adoptadas por las principales empresas tecnológicas. Aquí tienes literatura adicional para profundizar:
+### Referencias y Lecturas Técnicas
 
 <LinkCard
-  title="Refactoring UI - Adam Wathan & Steve Schoger"
-  description="El libro definitivo para desarrolladores que quieren aprender diseño. Lleno de reglas prácticas sobre jerarquía visual, espaciado y consistencia."
-  href="https://www.refactoringui.com/"
+  title="v0 by Vercel"
+  description="Herramienta de IA generativa para prototipado en código vivo. Genera componentes React funcionales y accesibles."
+  href="https://v0.dev/"
+/>
+
+<LinkCard
+  title="Relume Library"
+  description="Motor y librería de componentes impulsada por IA, centrada en la generación estructurada de wireframes y jerarquía web."
+  href="https://www.relume.io/"
+/>
+
+<LinkCard
+  title="Mock Service Worker (MSW)"
+  description="Herramienta estándar de la industria para hacer mocking de APIs de forma limpia, interceptando requests a nivel de red."
+  href="https://mswjs.io/"
 />
 
 <LinkCard
   title="Atomic Design - Brad Frost"
-  description="La metodología estándar de la industria para crear sistemas de diseño y componentes escalables. Lectura obligatoria y gratuita (Capítulo 2)."
+  description="La metodología estándar de la industria para crear sistemas de diseño y componentes escalables. Lectura obligatoria."
   href="https://atomicdesign.bradfrost.com/chapter-2/"
-/>
-
-<LinkCard
-  title="Nielsen Norman Group - UX Articles"
-  description="Los investigadores más respetados del mundo en Experiencia de Usuario aportan cientos de artículos respaldados por datos de interacción reales."
-  href="https://www.nngroup.com/articles/"
 />
 
 <LinkCard
@@ -141,12 +128,31 @@ Para construir esta lección nos hemos basado en las prácticas estándar adopta
   href="https://www.w3.org/WAI/"
 />
 
+<LinkCard
+  title="The Pragmatic Programmer - David Thomas & Andrew Hunt"
+  description="Libro fundacional de ingeniería de software moderno, de donde provienen conceptos universales como DRY (Don't Repeat Yourself)."
+  href="https://pragprog.com/titles/tpp20/the-pragmatic-programmer-20th-anniversary-edition/"
+/>
+
+<LinkCard
+  title="Laws of UX - Jon Yablonski"
+  description="Una colección de principios clave que los ingenieros UI deben considerar al construir interfaces, basadas en la psicología."
+  href="https://lawsofux.com/"
+/>
+
+<LinkCard
+  title="Nielsen Norman Group - UX Articles"
+  description="Cientos de artículos respaldados por datos de interacción reales para basar decisiones de UI asíncrona."
+  href="https://www.nngroup.com/articles/"
+/>
+
 ---
 
 ### Conclusión
 
-El frontend moderno es una disciplina de ingeniería completa. Manejamos estado complejo, lidiamos con asincronía y diseñamos patrones reutilizables, todo mientras nos aseguramos de que el usuario final tenga una experiencia fluida de principio a fin.
+El Frontend Engineering moderno ha evolucionado. Ya no pasamos horas empujando píxeles ni escribiendo CSS manual repetitivo. 
+El rol del ingeniero se ha elevado hacia la **orquestación**: definir la arquitectura de información, gobernar los tokens del Design System, apalancar flujos de IA (como Relume y v0) para escribir código base estandarizado, y conectar estas interfaces de manera robusta y resiliente.
 
-Una vez que tengas tu frontend mostrando datos simulados (macks), estarás listo para el siguiente paso lógico: **hacer que esos datos sean reales y persistentes.**
+Una vez implementada la vista alimentada con datos simulados (MSW), estarás preparado para el siguiente nivel: **conectar tu aplicación a la persistencia y servidores reales.**
 
 <Cta></Cta>
