@@ -1,12 +1,181 @@
 ---
-title: Base de datos y ORM
-description: WIP
+title: "Base de Datos y ORM"
+description: "Aprende a modelar datos profesionalmente, elegir entre SQL y NoSQL, integrar ORMs modernos como Prisma y consolidar la capa de persistencia de tu proyecto."
 ---
 
 import Cta from '@components/cta/stack-personalizado/cta.astro';
+import { Aside, LinkCard } from '@astrojs/starlight/components';
 
-<Cta></Cta>
+<Cta />
 
-WIP
+Hasta ahora, nuestro proyecto tiene un esqueleto visual interactivo gracias a la [Lección 5 (L5)](/roadmap/stack-personalizado/5) y unas reglas de comunicación definidas en nuestra [API (L4)](/roadmap/stack-personalizado/4). Sin embargo, cada vez que recargamos la página, todo vuelve a cero. Nuestra aplicación sufre de amnesia.
 
-<Cta></Cta>
+En esta sesión de 4 horas, le daremos **memoria y persistencia** a tu proyecto. No nos limitaremos a escribir algunas consultas SQL al azar; aprenderemos a diseñar bases de datos robustas, a versionar los esquemas y a mantener nuestro código de base de datos estrictamente aislado de nuestra lógica de negocio empresarial.
+
+¡Es hora de construir los cimientos que sostendrán toda tu información!
+
+---
+
+## 1. Modelado de Datos Profesional
+
+Antes de elegir si usaremos Postgres, MySQL o MongoDB, necesitamos entender la forma de nuestra información basándonos en los requerimientos que documentaste en tu [Backlog (L2)](/roadmap/stack-personalizado/2).
+
+### SQL vs NoSQL: La Decisión Estratégica
+
+En el mundo del almacenamiento, existen dos filosofías principales:
+
+*   **SQL (Relacionales)**: Bases de datos como PostgreSQL o MySQL. La información se guarda en tablas estrictamente definidas (filas y columnas). Son ideales cuando tus datos tienen relaciones complejas y necesitas garantizar integridad absoluta (ej. sistemas financieros, inventarios).
+*   **NoSQL (No Relacionales)**: Bases de datos como MongoDB o DynamoDB. Guardan la información en documentos flexibles (usualmente similares a JSON). Son excelentes para desarrollo rápido, esquemas que cambian constantemente o aplicaciones de lectura masiva rápida.
+
+<Aside title="¿Qué elijo para mi proyecto?">
+Como regla general de la industria moderna: **Empieza siempre con una base de datos relacional (SQL) como PostgreSQL**, a menos que tengas un caso de uso *muy* específico que demande las ventajas técnicas de NoSQL. SQL te forzará a estructurar mejor tus ideas y cubre el 95% de los escenarios de las aplicaciones modernas.
+</Aside>
+
+### Normalización de Datos
+
+Si eliges una base de datos relacional (SQL), debes evitar la redundancia. La **Normalización** es el proceso de organizar los datos para minimizar la duplicación.
+
+*   **Mala práctica (Desnormalizado)**: Guardar el `"Nombre del Autor"` en cada uno de los artículos del blog. Si el autor cambia su nombre, ¡tendrás que actualizar mil artículos!
+*   **Buena práctica (Normalizado)**: Guardar un `autor_id` en el artículo, y tener una tabla separada de `Autores`. Si el autor cambia su nombre, solo actualizas un registro.
+
+### Diagrama Entidad-Relación (ERD)
+
+Un buen arquitecto no crea tablas directamente en código. Primero, genera un **Diagrama Entidad-Relación (ERD)**, que es una representación visual de cómo se conectan los conceptos del negocio. Existen herramientas gratuitas como [dbdiagram.io](https://dbdiagram.io/) que te permiten generar el modelo visual escribiendo pseudocódigo.
+
+---
+
+## 2. Implementación con ORMs
+
+Años atrás, los desarrolladores escribían código SQL crudo mezclado dentro de su lógica backend. Hoy en día, utilizamos **ORMs (Object-Relational Mapping)**.
+
+Un ORM (como Prisma, TypeORM o Mongoose) es una librería que traduce tablas de base de datos a objetos en tu lenguaje de programación (ej. clases o interfaces de TypeScript) automáticamente.
+
+### ¿Por qué Prisma es el estándar moderno para SQL?
+
+En el ecosistema de TypeScript y Node.js para bases de datos relacionales, [Prisma](https://www.prisma.io/) ha dominado el mercado porque ofrece:
+1.  **Tipado Seguro Absoluto**: Autocompletado en tu editor para las consultas en la base de datos.
+2.  **Esquema Declarativo**: Describes tu base de datos en un solo archivo `schema.prisma` legible.
+3.  **Migraciones Automáticas**: Genera los scripts SQL para modificar la base de datos sin romperla.
+
+### Migraciones Seguras
+
+Las **migraciones** son como el "Git" de tu base de datos. Cada vez que añades una nueva columna o cambias una tabla, el ORM crea un archivo de migración que cuenta la historia de lo que cambió. Esto es crítico: **nunca debes modificar la base de datos de producción a mano**. Tu código de migración debe ser el encargado de evolucionar el esquema.
+
+### Data Seeding
+
+Tener la base de datos vacía en el entorno local (desarrollo) ralentiza muchísimo la verificación y el maquetado. El **Data Seeding** (o sembrado de datos) consiste en tener un pequeño script que infla automáticamente tu base de datos local con "datos falsos o simulados" (Usuarios ficticios de prueba, tareas por defecto, etc.) para que puedas desarrollar la UI localmente al instante y probar flujos de interfaz con datos.
+
+---
+
+## 3. Capa de Persistencia y Repositorios
+
+En la lección sobre [Arquitectura (L3)](/roadmap/stack-personalizado/3), aprendimos sobre la Arquitectura Hexagonal y la separación estricta de capas. Ahora implementaremos esa teoría en la práctica.
+
+### Aislando el Dominio
+
+Un error clásico es acoplar la base de datos, literalmente, en medio de la regla de negocio.
+
+❌ **Mal ejemplo (Muy Acoplado):** Acoplando la lógica de la API REST o Resolvers GraphQL directamente a la sintaxis del ORM. Si mañana dejamos de usar Prisma para usar TypeORM, habrá que reescribir toda la aplicación.
+```typescript
+// Controlador / Endpoint REST muy acoplado al detalle de Infraestructura
+async function crearPost(req, res) {
+  // Regla de Negocio:
+  if (req.body.title.length < 5) return res.status(400); 
+  
+  // Detalle de Infraestructura mezclado:
+  const nuevoPost = await prisma.post.create({ data: req.body });
+  return res.json(nuevoPost);
+}
+```
+
+### El Patrón Repository
+
+Para corregirlo, usamos el patrón **Repository**. Un repositorio actúa como un mediador silencioso. Nuestra lógica principal llama al Repositorio pidiéndole datos, y el Repositorio, de puertas para adentro, averigua cómo usar Prisma o cualquier ORM para traerlos.
+
+✅ **Buen Ejemplo (Desacoplado):**
+```typescript
+// 1. EL CONTRATO (Puerto)
+interface PostRepository {
+  crear(post: PostEntity): Promise<PostEntity>;
+}
+
+// 2. EL ADAPTADOR (Infraestructura de DB usando Prisma en este caso)
+class PrismaPostRepository implements PostRepository {
+  async crear(post) {
+     return await prisma.post.create({ data: post });
+  }
+}
+
+// 3. LA LÓGICA DE NEGOCIO EN LA API (L4), totalmente ignorante de Prisma
+class PostService {
+  constructor(private postRepo: PostRepository) {} // Inyectamos la Interfaz
+
+  async crearPost(datos) {
+    if (datos.title.length < 5) throw new Error("Título muy corto");
+    return await this.postRepo.crear(datos);
+  }
+}
+```
+
+Si adoptas esta separación garantizamos que los Controladores (API REST) o Resolvers (GraphQL) de tu [API (L4)](/roadmap/stack-personalizado/4) jamás se enteren de qué ORM usas debajo, manteniendo el corazón de tu aplicación completamente a salvo de la evolución incesante de frameworks o tecnologías externas.
+
+---
+
+## 4. Taller: Persistencia de Mi Proyecto
+
+Llegó el momento de darle permanencia a tu proyecto personal de las semanas previas.
+
+### Fase 1: Toma de Decisión (ADR)
+Revisa tus apuntes, requisitos y notas de [Arquitectura (L3)](/roadmap/stack-personalizado/3) y asegúrate de elegir el motor correcto. 
+Crea un archivo llamado `ADR-seleccion-bbdd.md` en tu carpeta local `/docs/architecture/decisions/` justificando técnicamente tu elección de Motor de Base de Datos y tu tecnología como ORM. *(Ejemplo de resolución del documento: PostgreSQL + Prisma debido a sus robustas migraciones)*.
+
+### Fase 2: Configuración Inicial
+1.  Define un plan local usando contenedores. Levanta un contenedor Docker con tu motor de base de datos elegido o créate una instancia gratuita en la nube usando plataformas como [Supabase](https://supabase.com/) o PlanetScale.
+2.  Instala y provee de su configuración tu ORM elegido dentro del código.
+
+### Fase 3: La Primera Entidad y Migración
+1.  De las historias priorizadas del [Backlog (L2)](/roadmap/stack-personalizado/2), identifica tu Entidad Core número 1. 
+2.  Traduce y define el esquema de esa entidad, estableciendo las columnas, restricciones (`Not Nulls`) y tipos para reflejar un Modelado de datos Profesional.
+3.  Corre tu primera **migración de esquema** para forjar las tablas físicas de forma segura.
+4.  Crea un pequeño script de **Seeding** para insertarte a ti mismo como tu usuario maestro o como primer recurso, corriendo la data por defecto directamente.
+
+### Fase 4: Conexión Integral Frontend-Backend
+Es tu momento crucial de orquestación.
+
+1.  Usa los Resolvers o Controladores estipulados de tu [API (L4)](/roadmap/stack-personalizado/4) e inyecta el `Repository` para apuntarlo no más a datos duros en memoria, sino a la base de datos real.
+2.  Inicia el Frontend y Backend locales. Navega en la interfaz gráfica que pulimos usando componentes en la [Lección 5 (L5)](/roadmap/stack-personalizado/5). 
+3.  Trata de mutar y crear la entidad directamente desde tu formulario UI, comprueba mirando en tu base de datos que la persistencia se logró.
+
+¡Felicidades, la ilusión del software cobra sustancia, tu plataforma final está cobrando vida persistente!
+
+---
+
+## Referencias y Lecturas Recomendadas
+
+Para afinar tus nuevos dotes como Ingeniero de Datos en Software y tu Arquitectura Backend, explora los siguientes materiales estándar:
+
+<LinkCard
+  title="Entender la Diferencia entre SQL y NoSQL"
+  description="Excelente comparativa técnica provista por la arquitectura oficial en la nube de Amazon Web Services (AWS) para aprender qué elegir bajo qué condiciones de negocio."
+  href="https://aws.amazon.com/es/relational-database/sql-vs-nosql/"
+/>
+
+<LinkCard
+  title="Normalización de Base de Datos"
+  description="Una explicación inmejorable de Microsoft Learn sobre las formas normales en Bases de Datos Relacionales para impedir redundancias y la temida corrupción de datos."
+  href="https://learn.microsoft.com/es-es/office/troubleshoot/access/database-normalization-description"
+/>
+
+<LinkCard
+  title="Prisma ORM Documentation"
+  description="La casa y manual de instrucciones principal para entender cómo implementar Type-Safe ORMs a alta escala con NodeJS."
+  href="https://www.prisma.io/docs/getting-started"
+/>
+
+<LinkCard
+  title="Patrón Repository según Martin Fowler"
+  description="El ensayo principal redactado por uno de los padres del diseño de software detallando el poder fundamental de este patrón central para escudar al dominio (Lógica empresarial) de la base misma."
+  href="https://martinfowler.com/eaaCatalog/repository.html"
+/>
+
+<Cta />
