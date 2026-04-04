@@ -79,18 +79,18 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Usuario {
+model User {
   id        Int      @id @default(autoincrement())
   email     String   @unique
-  nombre    String?
-  articulos Articulo[] // Prisma maneja esta relación "1 a muchos" por ti
+  name      String?
+  posts     Post[]   // Prisma maneja esta relación "1 a muchos" por ti
 }
 
-model Articulo {
+model Post {
   id        Int     @id @default(autoincrement())
-  titulo    String
-  autorId   Int
-  autor     Usuario @relation(fields: [autorId], references: [id])
+  title     String
+  authorId  Int
+  author    User    @relation(fields: [authorId], references: [id])
 }
 ```
 
@@ -113,17 +113,17 @@ async function main() {
   console.log('🌱 Sembrando base de datos...')
   
   // Borramos datos viejos para evitar duplicados en local
-  await prisma.articulo.deleteMany()
-  await prisma.usuario.deleteMany()
+  await prisma.post.deleteMany()
+  await prisma.user.deleteMany()
 
   // Insertamos data simulada
-  await prisma.usuario.create({
+  await prisma.user.create({
     data: {
       email: 'test@desde0.com',
-      nombre: 'Estudiante',
-      articulos: {
+      name: 'Student',
+      posts: {
          create: [
-           { titulo: 'Aprender Programación 2024' }
+           { title: 'Learn Programming 2024' }
          ]
       }
     }
@@ -146,13 +146,13 @@ Un error clásico es acoplar la base de datos, literalmente, en medio de la regl
 ❌ **Mal ejemplo (Muy Acoplado):** Acoplando la lógica de la API REST o Resolvers GraphQL directamente a la sintaxis del ORM. Si mañana dejamos de usar Prisma para usar TypeORM, habrá que reescribir toda la aplicación.
 ```typescript
 // Controlador / Endpoint REST muy acoplado al detalle de Infraestructura
-async function crearPost(req, res) {
+async function createPost(req, res) {
   // Regla de Negocio:
   if (req.body.title.length < 5) return res.status(400); 
   
   // Detalle de Infraestructura mezclado:
-  const nuevoPost = await prisma.post.create({ data: req.body });
-  return res.json(nuevoPost);
+  const newPost = await prisma.post.create({ data: req.body });
+  return res.json(newPost);
 }
 ```
 
@@ -164,12 +164,12 @@ Para corregirlo, usamos el patrón **Repository**. Un repositorio actúa como un
 ```typescript
 // 1. EL CONTRATO (Puerto)
 interface PostRepository {
-  crear(post: PostEntity): Promise<PostEntity>;
+  create(post: PostEntity): Promise<PostEntity>;
 }
 
 // 2. EL ADAPTADOR (Infraestructura de DB usando Prisma en este caso)
 class PrismaPostRepository implements PostRepository {
-  async crear(post) {
+  async create(post) {
      return await prisma.post.create({ data: post });
   }
 }
@@ -178,9 +178,9 @@ class PrismaPostRepository implements PostRepository {
 class PostService {
   constructor(private postRepo: PostRepository) {} // Inyectamos la Interfaz
 
-  async crearPost(datos) {
-    if (datos.title.length < 5) throw new Error("Título muy corto");
-    return await this.postRepo.crear(datos);
+  async createPost(data) {
+    if (data.title.length < 5) throw new Error("Title too short");
+    return await this.postRepo.create(data);
   }
 }
 ```
