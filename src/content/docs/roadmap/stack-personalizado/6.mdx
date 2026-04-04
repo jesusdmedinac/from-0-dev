@@ -56,7 +56,15 @@ También existen plataformas gratuitas en la web como [database.build](https://d
 
 Años atrás, los desarrolladores escribían código SQL crudo mezclado dentro de su lógica backend. Hoy en día, utilizamos **ORMs (Object-Relational Mapping)**.
 
-Un ORM (como Prisma, TypeORM o Mongoose) es una librería que traduce tablas de base de datos a objetos en tu lenguaje de programación (ej. clases o interfaces de TypeScript) automáticamente.
+Un ORM (como Prisma o TypeORM) es una librería que traduce tablas de base de datos a objetos en tu lenguaje de programación (ej. clases o interfaces de TypeScript) automáticamente.
+
+<Aside title="Cultura General: ¿ORM o ODM?" type="note">
+**ORM (Object-Relational Mapping)**: Se usa exclusivamente para bases de datos **relacionales** (SQL). Mapea objetos a tablas y filas. Ejemplos: Prisma, TypeORM o *Room* en Android.
+
+**ODM (Object-Document Mapper)**: Se usa para bases de datos **NoSQL** orientadas a documentos. Mapea objetos a documentos (JSON). Ejemplo: *Mongoose* para MongoDB.
+
+**¿Y Firebase Firestore?** No es ninguno de los dos. Es una Base de Datos como Servicio (BaaS) cuyo SDK te permite recuperar documentos y convertirlos a clases u objetos *(Serialización)*, pero no automatiza mapeos de relaciones como lo haría un ORM o un ODM puro.
+</Aside>
 
 ### ¿Por qué Prisma es el estándar moderno para SQL?
 
