@@ -39,13 +39,13 @@ Este documento muestra el estado de redacción de todas las lecciones y el progr
 - [x] Lección 1: Antes de empezar: ¡Bienvenida y definición de tu Stack Personalizado!
 - [x] Lección 2: Planeación y Estimación
 - [x] Lección 3: Diseño y Architectura de Aplicaciones
-- [ ] Lección 4: Backend Development - RESTful y GraphQL
+- [x] Lección 4: Backend Development - RESTful y GraphQL
     - [x] Scenario: Explicación de Arquitectura RESTful y Buenas Prácticas
     - [x] Scenario: GraphQL Avanzado: Mutations y Real-time
-    - [ ] Scenario: Seguridad y Comunicación entre Capas
-    - [ ] Scenario: Taller de Implementación: La API de Tu Proyecto Personal
+    - [x] Scenario: Seguridad y Comunicación entre Capas
+    - [x] Scenario: Taller de Implementación: La API de Tu Proyecto Personal
     - [x] Scenario: Comparativa Estratégica y Herramientas
-- [ ] Lección 5: Frontend Development - UI/UX y Componentes Reutilizables
+- [x] Lección 5: Frontend Development - UI/UX y Componentes Reutilizables
     - [x] Scenario: Principios de UI/UX para Desarrolladores
     - [x] Scenario: Sistemas de Componentes y Reutilización
     - [x] Scenario: Gestión de Estado y Consumo de API (Mocking)
