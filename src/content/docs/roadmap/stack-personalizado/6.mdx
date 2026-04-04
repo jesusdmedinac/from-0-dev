@@ -70,7 +70,30 @@ Un ORM (como Prisma o TypeORM) es una librería que traduce tablas de base de da
 
 En el ecosistema de TypeScript y Node.js para bases de datos relacionales, [Prisma](https://www.prisma.io/) ha dominado el mercado porque ofrece:
 1.  **Tipado Seguro Absoluto**: Autocompletado en tu editor para las consultas en la base de datos.
-2.  **Esquema Declarativo**: Describes tu base de datos en un solo archivo `schema.prisma` legible.
+2.  **Esquema Declarativo**: Describes tu base de datos en un solo archivo `schema.prisma` legible, en lugar de decenas de consultas para crear tablas.
+
+```prisma
+// Ejemplo de un archivo schema.prisma
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Usuario {
+  id        Int      @id @default(autoincrement())
+  email     String   @unique
+  nombre    String?
+  articulos Articulo[] // Prisma maneja esta relación "1 a muchos" por ti
+}
+
+model Articulo {
+  id        Int     @id @default(autoincrement())
+  titulo    String
+  autorId   Int
+  autor     Usuario @relation(fields: [autorId], references: [id])
+}
+```
+
 3.  **Migraciones Automáticas**: Genera los scripts SQL para modificar la base de datos sin romperla.
 
 ### Migraciones Seguras
@@ -80,6 +103,35 @@ Las **migraciones** son como el "Git" de tu base de datos. Cada vez que añades 
 ### Data Seeding
 
 Tener la base de datos vacía en el entorno local (desarrollo) ralentiza muchísimo la verificación y el maquetado. El **Data Seeding** (o sembrado de datos) consiste en tener un pequeño script que infla automáticamente tu base de datos local con "datos falsos o simulados" (Usuarios ficticios de prueba, tareas por defecto, etc.) para que puedas desarrollar la UI localmente al instante y probar flujos de interfaz con datos.
+
+```typescript
+// Ejemplo de script: seed.ts
+import { PrismaClient } from '@prisma/client'
+const prisma = new PrismaClient()
+
+async function main() {
+  console.log('🌱 Sembrando base de datos...')
+  
+  // Borramos datos viejos para evitar duplicados en local
+  await prisma.articulo.deleteMany()
+  await prisma.usuario.deleteMany()
+
+  // Insertamos data simulada
+  await prisma.usuario.create({
+    data: {
+      email: 'test@desde0.com',
+      nombre: 'Estudiante',
+      articulos: {
+         create: [
+           { titulo: 'Aprender Programación 2024' }
+         ]
+      }
+    }
+  })
+}
+
+main().finally(async () => await prisma.$disconnect())
+```
 
 ---
 
