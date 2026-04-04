@@ -195,11 +195,19 @@ Llegó el momento de darle permanencia a tu proyecto personal de las semanas pre
 
 ### Fase 1: Toma de Decisión (ADR)
 Revisa tus apuntes, requisitos y notas de [Arquitectura (L3)](/roadmap/stack-personalizado/3) y asegúrate de elegir el motor correcto. 
-Crea un archivo llamado `ADR-seleccion-bbdd.md` en tu carpeta local `/docs/architecture/decisions/` justificando técnicamente tu elección de Motor de Base de Datos y tu tecnología como ORM. *(Ejemplo de resolución del documento: PostgreSQL + Prisma debido a sus robustas migraciones)*.
+Crea un archivo llamado `ADR-seleccion-bbdd.md` en tu carpeta local `/docs/architecture/decisions/` justificando técnicamente tu elección de Motor de Base de Datos y tu tecnología como ORM.
+
+<Aside title="¿Qué escribir en mi ADR?" type="tip">
+Un buen ADR no tiene que ser largo, pero debe responder: **1.** ¿Qué opciones evaluaste? (ej. MySQL vs Postgres, Prisma vs TypeORM) **2.** ¿Por qué elegiste la ganadora? (Costo, experiencia de desarrollo, rendimiento) **3.** ¿Qué desventajas asumes con esta decisión?
+</Aside>
 
 ### Fase 2: Configuración Inicial
 1.  Define un plan local usando contenedores. Levanta un contenedor Docker con tu motor de base de datos elegido o créate una instancia gratuita en la nube usando plataformas como [Supabase](https://supabase.com/) o PlanetScale.
 2.  Instala y provee de su configuración tu ORM elegido dentro del código.
+
+<Aside title="¡Cuidado con tus llaves!" type="caution">
+El 90% de los errores en este paso son por strings de conexión (`DATABASE_URL`) mal escritas, puertos bloqueados o credenciales erróneas. Además, **asegúrate siempre de colocar tus credenciales en un archivo `.env` agregado a tu `.gitignore`**. ¡NUNCA subas contraseñas reales de bases de datos a GitHub!
+</Aside>
 
 ### Fase 3: La Primera Entidad y Migración
 1.  De las historias priorizadas del [Backlog (L2)](/roadmap/stack-personalizado/2), identifica tu Entidad Core número 1. 
@@ -212,7 +220,11 @@ Es tu momento crucial de orquestación.
 
 1.  Si lograste avanzar con tu [API (L4)](/roadmap/stack-personalizado/4), usa esos Resolvers o Controladores e inyecta el `Repository` para apuntarlos a la base de datos real.
 2.  Inicia tus servidores locales. Si lograste construir parte de la interfaz en la [Lección 5 (L5)](/roadmap/stack-personalizado/5), intenta navegar por ella. 
-3.  Trata de mutar y crear la entidad directamente desde tu formulario UI (o usando alguna herramienta como Postman). Comprueba mirando en tu base de datos que la persistencia se logró.
+3.  Trata de mutar y crear la entidad directamente desde tu formulario UI (o usando alguna herramienta como Postman).
+
+<Aside title="Visualizando la Magia" type="tip">
+"Mirar en tu base de datos" usando solo la terminal puede ser intimidante. Te recomendamos enfáticamente abrir herramientas cliente visuales (como **Prisma Studio**, **DBeaver**, o los paneles web de Supabase) para experimentar el placer de ver cómo tus acciones en el navegador se materializan en registros reales.
+</Aside>
 
 Si llegaste hasta aquí logrando persistir datos, ¡felicidades por tu esfuerzo constante! La ilusión del software ahora tiene sustancia y tu plataforma está cobrando vida de forma real. Y recuerda: no pasa nada si no has terminado todos los talleres anteriores, lo verdaderamente importante es que vayas entendiendo pacientemente cómo cada una de estas piezas encaja en el gran rompecabezas.
 
