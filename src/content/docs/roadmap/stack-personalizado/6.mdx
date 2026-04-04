@@ -8,9 +8,9 @@ import { Aside, LinkCard } from '@astrojs/starlight/components';
 
 <Cta />
 
-Hasta ahora, nuestro proyecto tiene un esqueleto visual interactivo gracias a la [Lección 5 (L5)](/roadmap/stack-personalizado/5) y unas reglas de comunicación definidas en nuestra [API (L4)](/roadmap/stack-personalizado/4). Sin embargo, cada vez que recargamos la página, todo vuelve a cero. Nuestra aplicación sufre de amnesia.
+Si pudiste completar los talleres anteriores, nuestro proyecto ya debería contar con un esqueleto visual interactivo gracias a la [Lección 5 (L5)](/roadmap/stack-personalizado/5) y unas reglas de comunicación estructuradas en tu [API (L4)](/roadmap/stack-personalizado/4). Sin embargo, habrás notado que cada vez que recargamos la página, todo vuelve a cero. Nuestra aplicación sufre de amnesia temporal.
 
-En esta sesión de 4 horas, le daremos **memoria y persistencia** a tu proyecto. No nos limitaremos a escribir algunas consultas SQL al azar; aprenderemos a diseñar bases de datos robustas, a versionar los esquemas y a mantener nuestro código de base de datos estrictamente aislado de nuestra lógica de negocio empresarial.
+En esta sesión le daremos **memoria y persistencia** a nuestro proyecto. No nos limitaremos a escribir algunas consultas SQL al azar; aprenderemos a diseñar bases de datos robustas, a versionar los esquemas y a mantener nuestro código de base de datos estrictamente aislado de nuestra lógica de negocio empresarial.
 
 ¡Es hora de construir los cimientos que sostendrán toda tu información!
 
@@ -40,7 +40,15 @@ Si eliges una base de datos relacional (SQL), debes evitar la redundancia. La **
 
 ### Diagrama Entidad-Relación (ERD)
 
-Un buen arquitecto no crea tablas directamente en código. Primero, genera un **Diagrama Entidad-Relación (ERD)**, que es una representación visual de cómo se conectan los conceptos del negocio. Existen herramientas gratuitas como [dbdiagram.io](https://dbdiagram.io/) que te permiten generar el modelo visual escribiendo pseudocódigo.
+Un buen arquitecto no crea tablas directamente en código. Primero, genera un **Diagrama Entidad-Relación (ERD)**, que es una representación visual de cómo se conectan los conceptos del negocio. Existen herramientas gratuitas como [dbdiagram.io](https://dbdiagram.io/) o [planttext](https://www.planttext.com/) que te permiten generar el modelo visual escribiendo pseudocódigo.
+
+<Aside title="Herramientas con IA" type="tip">
+Hoy en día puedes acelerar este proceso utilizando herramientas impulsadas por Inteligencia Artificial como [Eraser.io](https://www.eraser.io/) o [ChartAI](https://chartai.io/), que pueden generar tu diagrama inicial simplemente describiéndolo en texto natural o proporcionando tus historias de usuario.
+</Aside>
+
+<Aside title="SQL sin instalar nada" type="note">
+También existen plataformas gratuitas en la web como [database.build](https://database.build/) que te permiten crear esquemas de base de datos directamente en el navegador utilizando Inteligencia artificial, ejecutar consultas en tiempo real y compartir tus bases de datos SQLite y PostgreSQL desde la web sin necesidad de configuraciones locales complejas.
+</Aside>
 
 ---
 
@@ -69,7 +77,7 @@ Tener la base de datos vacía en el entorno local (desarrollo) ralentiza muchís
 
 ## 3. Capa de Persistencia y Repositorios
 
-En la lección sobre [Arquitectura (L3)](/roadmap/stack-personalizado/3), aprendimos sobre la Arquitectura Hexagonal y la separación estricta de capas. Ahora implementaremos esa teoría en la práctica.
+Como exploramos en la lección teórica sobre [Arquitectura (L3)](/roadmap/stack-personalizado/3), la Arquitectura Hexagonal nos invita a mantener una separación estricta de capas. Si aquel concepto te pareció un poco abstracto en su momento, ¡no te preocupes! Ahora visualizaremos e implementaremos exactamente esa teoría en la práctica.
 
 ### Aislando el Dominio
 
@@ -142,11 +150,11 @@ Crea un archivo llamado `ADR-seleccion-bbdd.md` en tu carpeta local `/docs/archi
 ### Fase 4: Conexión Integral Frontend-Backend
 Es tu momento crucial de orquestación.
 
-1.  Usa los Resolvers o Controladores estipulados de tu [API (L4)](/roadmap/stack-personalizado/4) e inyecta el `Repository` para apuntarlo no más a datos duros en memoria, sino a la base de datos real.
-2.  Inicia el Frontend y Backend locales. Navega en la interfaz gráfica que pulimos usando componentes en la [Lección 5 (L5)](/roadmap/stack-personalizado/5). 
-3.  Trata de mutar y crear la entidad directamente desde tu formulario UI, comprueba mirando en tu base de datos que la persistencia se logró.
+1.  Si lograste avanzar con tu [API (L4)](/roadmap/stack-personalizado/4), usa esos Resolvers o Controladores e inyecta el `Repository` para apuntarlos a la base de datos real.
+2.  Inicia tus servidores locales. Si lograste construir parte de la interfaz en la [Lección 5 (L5)](/roadmap/stack-personalizado/5), intenta navegar por ella. 
+3.  Trata de mutar y crear la entidad directamente desde tu formulario UI (o usando alguna herramienta como Postman). Comprueba mirando en tu base de datos que la persistencia se logró.
 
-¡Felicidades, la ilusión del software cobra sustancia, tu plataforma final está cobrando vida persistente!
+Si llegaste hasta aquí logrando persistir datos, ¡felicidades por tu esfuerzo constante! La ilusión del software ahora tiene sustancia y tu plataforma está cobrando vida de forma real. Y recuerda: no pasa nada si no has terminado todos los talleres anteriores, lo verdaderamente importante es que vayas entendiendo pacientemente cómo cada una de estas piezas encaja en el gran rompecabezas.
 
 ---
 
