@@ -86,6 +86,25 @@ export default defineConfig({
           ]
         },
         {
+          label: 'IA: El Director de Orquesta',
+          collapsed: true,
+          items: [
+            { label: 'Introducción', link: '/roadmap/ia-para-desarrolladores/' },
+            { label: 'L1: El Nuevo Paradigma (Arquitecto de Orquestación)', link: '/roadmap/ia-para-desarrolladores/1' },
+            { label: 'L2: Ingeniería de Prompts de Alto Valor', link: '/roadmap/ia-para-desarrolladores/2' },
+            { label: 'L3: Aprendizaje Acelerado con IA (RAG & NotebookLM)', link: '/roadmap/ia-para-desarrolladores/3' },
+            { label: 'L4: Vibe Coding vs. Ingeniería de Software', link: '/roadmap/ia-para-desarrolladores/4' },
+            { label: 'L5: Spec-Driven Development (SDD)', link: '/roadmap/ia-para-desarrolladores/5' },
+            { label: 'L6: AI-First IDEs (Cursor & Plan Mode)', link: '/roadmap/ia-para-desarrolladores/6' },
+            { label: 'L7: Terminales Agénticas (Claude Code)', link: '/roadmap/ia-para-desarrolladores/7' },
+            { label: 'L8: Control del Contexto y MCP', link: '/roadmap/ia-para-desarrolladores/8' },
+            { label: 'L9: Agent Rules (AGENT.md)', link: '/roadmap/ia-para-desarrolladores/9' },
+            { label: 'L10: Human in the Loop (HITL) & Multi-Agent', link: '/roadmap/ia-para-desarrolladores/10' },
+            { label: 'L11: Testing y Seguridad Agéntica', link: '/roadmap/ia-para-desarrolladores/11' },
+            { label: 'L12: El Ciclo de Vida Autónomo y Despliegue', link: '/roadmap/ia-para-desarrolladores/12' },
+          ]
+        },
+        {
           label: 'Kotlin Multiplatform',
           link: 'https://kmp.jesusdmedinac.com/'
         }

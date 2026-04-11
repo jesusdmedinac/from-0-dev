@@ -123,3 +123,23 @@ Este documento muestra el estado de redacción de todas las lecciones y el progr
 - [ ] Lección 10: Ingeniería de la Usabilidad y Experiencia de Usuario
 - [ ] Lección 11: Ingeniería de la Confiabilidad y Rendimiento
 - [ ] Lección 12: Tendencias y Futuro de la Ingeniería de Software
+
+---
+
+## Ruta: IA para Desarrolladores
+
+- [ ] Escenario: Crear estructura de directorios y archivos base
+- [ ] Escenario: Integrar la ruta en la navegación global (astro.config.mjs)
+- [ ] Escenario: Crear placeholders para las 12 lecciones
+- [ ] Lección 1: El Nuevo Paradigma (Arquitecto de Orquestación)
+- [ ] Lección 2: Ingeniería de Prompts de Alto Valor
+- [ ] Lección 3: Aprendizaje Acelerado con IA (RAG & NotebookLM)
+- [ ] Lección 4: Vibe Coding vs. Ingeniería de Software
+- [ ] Lección 5: Spec-Driven Development (SDD)
+- [ ] Lección 6: AI-First IDEs (Cursor & Plan Mode)
+- [ ] Lección 7: Terminales Agénticas (Claude Code)
+- [ ] Lección 8: Control del Contexto y MCP
+- [ ] Lección 9: Agent Rules (AGENT.md)
+- [ ] Lección 10: Human in the Loop (HITL) & Multi-Agent
+- [ ] Lección 11: Testing y Seguridad Agéntica
+- [ ] Lección 12: El Ciclo de Vida Autónomo y Despliegue
