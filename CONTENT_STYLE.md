@@ -65,9 +65,9 @@ Divide el contenido en secciones claras usando encabezados de nivel 3 (`###`).
 - **Imágenes**: Usa el componente `<Image />` para diagramas explicativos.
 - **Callouts**: Usa bloques especiales para notas o definiciones importantes.
   ```markdown
-  :::💡
+  <Aside type="note">
   **Definición**: Texto de la definición.
-  :::
+  </Aside>
   ```
   o
   ```jsx
