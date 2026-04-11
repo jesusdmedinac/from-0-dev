@@ -6,11 +6,12 @@
 
 ### Masterclass: IA para Desarrolladores (El Director de Orquesta)
 - [x] Módulo 1: El Cambio de Mindset (30 min)
-- [ ] Módulo 2: Metodología SDD & Contexto (30 min)
-    - [ ] Escenario: Introducción al Spec-Driven Development (SDD)
-    - [ ] Escenario: Estructura de un spec.md profesional
-    - [ ] Escenario: Dominio de Contexto y AGENT.md
+- [x] Módulo 2: Metodología SDD & Contexto (30 min)
 - [ ] Módulo 3: Orquestación Agéntica en Vivo (30 min)
+    - [ ] Escenario: Chatbot vs. Agente
+    - [ ] Escenario: Plan Mode en Cursor
+    - [ ] Escenario: Claude Code (CLI Agéntica)
+- [ ] Módulo 4: Blindaje y Entrega (30 min)
 - [ ] Módulo 4: Blindaje y Entrega (30 min)
 
 ### Masterclass: Kotlin Multiplatform (La Cima)

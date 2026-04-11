@@ -1,15 +1,100 @@
 ---
-title: "Módulo 3: IA para Desarrolladores (Masterclass)"
-description: "Parte 3 de la Masterclass de 2 horas sobre IA y Orquestación."
+title: "Módulo 3: Orquestación Agéntica en Vivo (Masterclass IA)"
+description: "De Chatbots a Agentes: Aprende a orquestar herramientas de élite como Cursor y Claude Code para ejecutar tus especificaciones."
 ---
 
-import { Steps, Aside } from '@astrojs/starlight/components';
+import { Steps, Aside, LinkCard } from '@astrojs/starlight/components';
 import Cta from "@components/cta/para-no-programadores/cta.astro";
 
 <Cta></Cta>
 
-## Módulo 3: Intensivo de 30 Minutos
+## El Salto Cualitativo: De Chatbot a Agente
 
-Próximamente...
+Para un profesional, usar un chatbot convencional (como el chat web de ChatGPT o Claude) para programar es una **ineficiencia estratégica**. Es lento, requiere copiar y pegar, y la IA no tiene acceso a tu sistema. 
+
+En 2026, el salto cualitativo hacia los **flujos agénticos** permite que operes en un nivel de abstracción superior. Un **Agente Cognitivo** es un sistema que puede percibir, decidir y actuar para cumplir un objetivo.
+
+<Aside type="note" title="Diferencia Clave">
+- **Chatbot**: Responde preguntas (Pregunta → Respuesta).
+- **Agente**: Resuelve tareas (Tarea → Planificación → Ejecución → Validación).
+</Aside>
+
+### 1. El AI-First IDE: Maestría en Cursor
+
+Cursor no es un editor con un plugin de IA; es un editor donde el **LLM es el núcleo** de la arquitectura. Su mayor potencia reside en dos funcionalidades que debes dominar:
+
+#### Contexto Completo (@Codebase)
+A diferencia de otros editores, Cursor "ve" todo tu proyecto. Al usar el símbolo `@Codebase`, el agente busca en todo tu repositorio para entender cómo encaja el cambio que pides en la arquitectura global.
+
+#### Plan Mode: El Arma Secreta
+Para tareas complejas (refactors, nuevas funcionalidades), Cursor ofrece el **Plan Mode**. 
+
+<Steps>
+
+1.  **Redacción**: Pides el cambio basándote en tu `spec.md`.
+2.  **Planificación**: El agente elabora un plan detallado de qué archivos va a modificar y por qué.
+3.  **Aprobación**: Tú revisas el plan. **Como Director de Orquesta, aquí es donde aportas el valor estratégico**.
+4.  **Ejecución**: El agente aplica los cambios coordinados en múltiples archivos a la vez.
+
+</Steps>
+
+### 2. La Revolución de la Terminal: Claude Code (CLI)
+
+Claude Code es la herramienta de Anthropic que vive directamente en tu terminal. Es ideal para tareas que requieren **autonomía mecánica** pero supervisión técnica.
+
+<Aside type="tip" title="Cuándo usar la CLI">
+Usa Claude Code para:
+- Ejecutar y arreglar tests que fallan.
+- Buscar y corregir errores en los logs del sistema.
+- Tareas repetitivas que afecten a decenas de archivos.
+</Aside>
+
+Claude Code no solo sugiere código; **ejecuta comandos de shell**, lee la salida de los tests y decide por sí mismo cómo arreglar el problema hasta que la suite de pruebas pase a verde.
+
+### El Rol del Orquestador: Validar, no Corregir
+
+Al usar estas herramientas, tu trabajo cambia de "escribir líneas de código" a **"validar intenciones"**.
+
+- No corriges la sintaxis; corriges la **estrategia**.
+- No te fijas si falta un punto y coma; te fijas si el cambio respeta la **Arquitectura de Software** que definiste.
+- Eres el **Humano en el Bucle (Human in the Loop)**: la IA propone y ejecuta, pero tú decides si el resultado es profesional y sostenible.
+
+---
+
+### Recursos y Lecturas Recomendadas
+
+<LinkCard
+  title="Guía de Usuario de Cursor"
+  description="Domina el Plan Mode y la edición multi-archivo coordinada."
+  href="https://cursor.com/features"
+/>
+
+<LinkCard
+  title="Claude Code: CLI Agéntica"
+  description="Aprende a delegar tareas complejas desde la terminal de forma segura."
+  href="https://code.claude.com/docs/en/overview"
+/>
+
+<LinkCard
+  title="Gemini CLI"
+  description="Alternativa de Google para la orquestación agéntica."
+  href="https://geminicli.com/"
+/>
+
+<LinkCard
+  title="Open Code"
+  description="Alternativa open source de Claude Code o Gemini CLI"
+  href="https://opencode.ai/"
+/>
+
+<LinkCard
+  title="Antigravity"
+  description="Alternativa de Google para Cursor"
+  href="https://antigravity.google/"
+/>
+
+### Conclusión del Módulo 3
+
+Ya tienes las herramientas y sabes cómo orquestarlas. Sin embargo, la velocidad masiva de generación de código trae consigo un riesgo sistémico: el código que "funciona" no siempre es código "seguro" o "correcto". En el último módulo, aprenderemos a **blindar** nuestra entrega mediante el testing y la seguridad agéntica.
 
 <Cta></Cta>
