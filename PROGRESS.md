@@ -1,6 +1,20 @@
 # Estado de Avance del Contenido
 
-Este documento muestra el estado de redacción de todas las lecciones y el progreso de las funcionalidades técnicas siguiendo el [Proceso de Planificación de 5 Pasos](./AI_PLANNING_PROCESS.md).
+---
+
+## Masterclasses (Intensivas 2h)
+
+### Masterclass: IA para Desarrolladores (El Director de Orquesta)
+- [ ] Módulo 1: El Cambio de Mindset (30 min)
+- [ ] Módulo 2: Metodología SDD & Contexto (30 min)
+- [ ] Módulo 3: Orquestación Agéntica en Vivo (30 min)
+- [ ] Módulo 4: Blindaje y Entrega (30 min)
+
+### Masterclass: Kotlin Multiplatform (La Cima)
+- [ ] Módulo 1: La Promesa de KMP (30 min)
+- [ ] Módulo 2: Arquitectura de Conexión (30 min)
+- [ ] Módulo 3: UI Universal con Compose (30 min)
+- [ ] Módulo 4: Delivery & Interop (30 min)
 
 ---
 

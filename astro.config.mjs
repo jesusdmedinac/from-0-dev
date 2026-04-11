@@ -18,6 +18,30 @@ export default defineConfig({
       ],
 			sidebar: [
         {
+          label: 'Masterclasses (Intensivas 2h)',
+          collapsed: false,
+          items: [
+            {
+              label: 'IA para Desarrolladores',
+              items: [
+                { label: 'Módulo 1: El Cambio de Mindset', link: '/masterclass/ia-desarrolladores/modulo-1' },
+                { label: 'Módulo 2: Metodología SDD & Contexto', link: '/masterclass/ia-desarrolladores/modulo-2' },
+                { label: 'Módulo 3: Orquestación Agéntica', link: '/masterclass/ia-desarrolladores/modulo-3' },
+                { label: 'Módulo 4: Blindaje y Entrega', link: '/masterclass/ia-desarrolladores/modulo-4' },
+              ]
+            },
+            {
+              label: 'Kotlin Multiplatform',
+              items: [
+                { label: 'Módulo 1: La Promesa de KMP', link: '/masterclass/kotlin-multiplatform/modulo-1' },
+                { label: 'Módulo 2: Arquitectura de Conexión', link: '/masterclass/kotlin-multiplatform/modulo-2' },
+                { label: 'Módulo 3: UI Universal con Compose', link: '/masterclass/kotlin-multiplatform/modulo-3' },
+                { label: 'Módulo 4: Delivery & Interop', link: '/masterclass/kotlin-multiplatform/modulo-4' },
+              ]
+            }
+          ]
+        },
+        {
           label: 'Para no programadores',
           items: [
             { label: 'Antes de empezar', link: '/roadmap/para-no-programadores/1' },
