@@ -1,15 +1,78 @@
 ---
-title: "Módulo 2: IA para Desarrolladores (Masterclass)"
-description: "Parte 2 de la Masterclass de 2 horas sobre IA y Orquestación."
+title: "Módulo 2: Metodología SDD & Contexto (Masterclass IA)"
+description: "Aprende el lenguaje del control: de pedir favores a la IA a diseñar especificaciones que actúen como contratos para tus agentes."
 ---
 
-import { Steps, Aside } from '@astrojs/starlight/components';
+import { Steps, Aside, LinkCard } from '@astrojs/starlight/components';
 import Cta from "@components/cta/para-no-programadores/cta.astro";
 
 <Cta></Cta>
 
-## Módulo 2: Intensivo de 30 Minutos
+## El Lenguaje del Director: Spec-Driven Development (SDD)
 
-Próximamente...
+En el módulo anterior vimos que el mayor peligro actual es el **Vibe Coding**. Pero, ¿cómo lo evitamos? La respuesta es el **Spec-Driven Development (SDD)**. 
+
+El SDD es la metodología definitiva que devuelve el control al ingeniero. Desplaza el foco de la "escritura manual de código" hacia la **"validación de la intención"**. En este flujo, tú actúas como el Validador de Intentos, mientras que el código se convierte en un artefacto transitorio y derivado de tu especificación.
+
+<Aside type="note" title="La Única Fuente de Verdad">
+En SDD, el código **no es** la verdad. Tu archivo de especificación (`spec.md`) es la única fuente de verdad. Si el código no coincide con el `spec.md`, el código está mal.
+</Aside>
+
+### Anatomía de un `spec.md` Profesional
+
+No le pidas a la IA "hazme un login". Diseña un contrato que no pueda romper. Una especificación profesional debe articularse bajo cinco ejes fundamentales:
+
+1.  **Rol**: Define el nivel de experiencia y la especialidad de la IA (ej: "Actúa como un experto en Backend Senior en Rust").
+2.  **Contexto**: Explica de qué trata el proyecto, qué tecnologías ya existen y cuál es el problema general.
+3.  **Tarea Exacta**: Sé específico. En lugar de pedir un "sistema", pide una funcionalidad concreta.
+4.  **Restricciones o Reglas**: Indica convenciones de código, estándares de seguridad y límites técnicos.
+5.  **Formato de Salida**: Cómo quieres recibir la información (ej: "Solo el código, sin explicaciones, estructurado en módulos").
+
+#### Ejemplo Práctico: Spec para un Componente
+
+```markdown
+# SPEC: Componente de Registro
+
+- **Rol**: Frontend Engineer experto en Astro y React.
+- **Contexto**: Formulario de registro para la plataforma "Desde0".
+- **Tarea**: Crear un componente de React con validación de campos (email y password).
+- **Restricciones**: Usar Tailwind CSS para estilos, nada de librerías externas para el estado.
+- **Output**: Archivo .tsx listo para importar en Astro.
+```
+
+### Controlar el Contexto es Clave para ser Eficientes
+
+La memoria de las IA es grande, pero limitada. A medida que tu proyecto crece, el coste y la latencia se disparan, y la IA empieza a sufrir de **amnesia** u **olvido de requisitos**. 
+
+Para utilizar la IA en sus máximas capacidades, debemos dominar la gestión de contexto a través de tres pilares:
+
+#### 1. AGENT.md: Las Reglas de Oro
+Un archivo `AGENT.md` (o `.cursorrules`) actúa como un **System Prompt Persistente**. Contiene las convenciones de tu proyecto que el agente debe leer **antes** de actuar. Evita que tengas que repetir "usa Tailwind" o "no uses clases de CSS" en cada chat.
+
+#### 2. Model Context Protocol (MCP)
+El **MCP** es el estándar de comunicación que permite a tu IA "ver" herramientas externas: bases de datos, sistemas de archivos, APIs o incluso tu gestor de tareas. Es lo que convierte a un modelo de lenguaje en un **Agente con herramientas**.
+
+#### 3. Compresión de Contexto
+Aprende a enviar solo lo necesario. Un Director de Orquesta no le da a los músicos toda la historia de la música; les da la **partitura** de la obra que van a tocar.
+
+---
+
+### Recursos y Lecturas Recomendadas
+
+<LinkCard
+  title="Guía Oficial de Spec-Driven Development"
+  description="Conceptos avanzados sobre cómo liderar el desarrollo agéntico mediante especificaciones."
+  href="https://martinfowler.com/articles/exploring-gen-ai/sdd-3-tools.html"
+/>
+
+<LinkCard
+  title="Explora Model Context Protocol (MCP)"
+  description="Aprende a conectar tus herramientas favoritas con tus agentes de IA."
+  href="https://modelcontextprotocol.io"
+/>
+
+### Conclusión del Módulo 2
+
+Ahora que sabes cómo hablar el lenguaje del control (SDD) y cómo mantener el contexto de tu proyecto a salvo (AGENT.md), es hora de ver estas herramientas en acción. En el próximo módulo, entraremos en la **Orquestación Agéntica en Vivo** usando Cursor y Claude Code.
 
 <Cta></Cta>
