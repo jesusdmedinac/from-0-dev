@@ -86,7 +86,26 @@ export default defineConfig({
           ]
         },
         {
-          label: 'IA: El Director de Orquesta',
+          label: 'Kotlin Multiplatform (La Cima)',
+          collapsed: true,
+          items: [
+            { label: 'Introducción', link: '/roadmap/kotlin-multiplatform/' },
+            { label: 'L1: La Cima: ¿Por qué KMP es el paso final?', link: '/roadmap/kotlin-multiplatform/1' },
+            { label: 'L2: Kotlin Multiplatform Foundation (Compartiendo lógica)', link: '/roadmap/kotlin-multiplatform/2' },
+            { label: 'L3: Arquitectura Limpia en KMP (Aplicando Ingeniería)', link: '/roadmap/kotlin-multiplatform/3' },
+            { label: 'L4: Compose Multiplatform para UI Universal', link: '/roadmap/kotlin-multiplatform/4' },
+            { label: 'L5: Networking y Serialización Multiplataforma', link: '/roadmap/kotlin-multiplatform/5' },
+            { label: 'L6: Persistencia Local con SQLDelight', link: '/roadmap/kotlin-multiplatform/6' },
+            { label: 'L7: Inyección de Dependencias Avanzada', link: '/roadmap/kotlin-multiplatform/7' },
+            { label: 'L8: Testing Multiplataforma (Calidad)', link: '/roadmap/kotlin-multiplatform/8' },
+            { label: 'L9: CI/CD para iOS, Android y Web', link: '/roadmap/kotlin-multiplatform/9' },
+            { label: 'L10: Interoperabilidad con Swift y JavaScript', link: '/roadmap/kotlin-multiplatform/10' },
+            { label: 'L11: Optimización y Rendimiento', link: '/roadmap/kotlin-multiplatform/11' },
+            { label: 'L12: Proyecto Final: La Súper-App (El Gran Reto)', link: '/roadmap/kotlin-multiplatform/12' },
+          ]
+        },
+        {
+          label: 'IA: El Director de Orquesta (Alternativa)',
           collapsed: true,
           items: [
             { label: 'Introducción', link: '/roadmap/ia-para-desarrolladores/' },
@@ -104,10 +123,6 @@ export default defineConfig({
             { label: 'L12: El Ciclo de Vida Autónomo y Despliegue', link: '/roadmap/ia-para-desarrolladores/12' },
           ]
         },
-        {
-          label: 'Kotlin Multiplatform',
-          link: 'https://kmp.jesusdmedinac.com/'
-        }
 			],
       social: {
         youtube: 'https://www.youtube.com/@jesusdmedinac',

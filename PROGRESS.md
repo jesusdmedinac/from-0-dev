@@ -126,6 +126,26 @@ Este documento muestra el estado de redacción de todas las lecciones y el progr
 
 ---
 
+## Ruta: Kotlin Multiplatform (La Cima)
+
+- [ ] Escenario: Convertir enlace externo en ruta nativa
+- [ ] Escenario: Redactar Index estratégico con narrativa de "Cúspide"
+- [ ] Escenario: Generar 12 lecciones de integración total
+- [ ] Lección 1: La Cima: ¿Por qué KMP es el paso final?
+- [ ] Lección 2: Kotlin Multiplatform Foundation (Compartiendo lógica)
+- [ ] Lección 3: Arquitectura Limpia en KMP (Aplicando Ingeniería)
+- [ ] Lección 4: Compose Multiplatform para UI Universal
+- [ ] Lección 5: Networking y Serialización Multiplataforma
+- [ ] Lección 6: Persistencia Local con SQLDelight
+- [ ] Lección 7: Inyección de Dependencias Avanzada
+- [ ] Lección 8: Testing Multiplataforma (Validando la Calidad)
+- [ ] Lección 9: CI/CD para iOS, Android y Web
+- [ ] Lección 10: Interoperabilidad con Swift y JavaScript
+- [ ] Lección 11: Optimización y Rendimiento de Aplicaciones Multiplataforma
+- [ ] Lección 12: Proyecto Final: La Súper-App (El Gran Reto)
+
+---
+
 ## Ruta: IA para Desarrolladores
 
 - [ ] Escenario: Crear estructura de directorios y archivos base
