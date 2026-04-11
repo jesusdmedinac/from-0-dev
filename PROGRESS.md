@@ -6,6 +6,9 @@
 
 ### Masterclass: IA para Desarrolladores (El Director de Orquesta)
 - [ ] Módulo 1: El Cambio de Mindset (30 min)
+    - [ ] Escenario: Introducción Estratégica y Realidad 2026
+    - [ ] Escenario: Vibe Coding vs. Ingeniería de Software
+    - [ ] Escenario: Bucle del Agente y Responsabilidad Profesional
 - [ ] Módulo 2: Metodología SDD & Contexto (30 min)
 - [ ] Módulo 3: Orquestación Agéntica en Vivo (30 min)
 - [ ] Módulo 4: Blindaje y Entrega (30 min)
