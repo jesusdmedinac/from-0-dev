@@ -1,15 +1,99 @@
 ---
-title: "Módulo 4: IA para Desarrolladores (Masterclass)"
-description: "Parte 4 de la Masterclass de 2 horas sobre IA y Orquestación."
+title: "Módulo 4: Blindaje y Entrega (Masterclass IA)"
+description: "Aprende a asegurar la calidad y automatizar la entrega de tu software en un entorno dominado por la generación masiva de código."
 ---
 
-import { Steps, Aside } from '@astrojs/starlight/components';
+import { Steps, Aside, LinkCard } from '@astrojs/starlight/components';
 import Cta from "@components/cta/para-no-programadores/cta.astro";
 
 <Cta></Cta>
 
-## Módulo 4: Intensivo de 30 Minutos
+## Más IA = Más Velocidad = Más Riesgo Oculto
 
-Próximamente...
+La capacidad de generar código a velocidades masivas mediante agentes es una **ventaja competitiva brutal**, pero también es un riesgo sistémico si no se gestiona correctamente. El código que "funciona" no siempre es código profesional, seguro o sostenible.
+
+Como Director de Orquesta, tu labor no es solo que la música suene, sino que la ejecución sea perfecta y no haya fallos catastróficos.
+
+<Aside type="danger" title="El Riesgo de la Amnesia">
+La IA genera código rápido, pero no conoce tu negocio profundamente ni comprende las ramificaciones de seguridad de cada línea que escribe. El código sin tests es **deuda técnica por diseño**.
+</Aside>
+
+### 1. Testing: La Barrera Crítica de Defensa
+
+En un flujo donde el código se autogenera, los tests son la primera y más crítica barrera de defensa. Ignorar el testing es aceptar un caos técnico inevitable.
+
+#### ¿Qué delegar a la IA?
+- **Happy Paths**: Puedes pedirle a la IA que genere la suite de pruebas básica para funciones simples.
+- **Tests de Utilidades**: Delega la redacción mecánica de tests para helpers y funciones puras.
+
+#### ¿Qué validar tú mismo?
+- **Escenarios de Borde (Edge Cases)**: Tú debes definir los casos en los que el sistema podría fallar.
+- **Lógica de Negocio Crítica**: No delegues la validación de la lógica que hace que tu producto sea valioso.
+
+:::tip[Responsabilidad Profesional]
+Un gran poder conlleva una gran responsabilidad. El desarrollador es el **único responsable legal y técnico** del código en producción. La IA es el brazo ejecutor, pero tú eres el responsable de la firma final.
+:::
+
+### 2. Security Review Automático con Agentes
+
+La seguridad no es un añadido; es un requisito arquitectónico. En cada Pull Request (PR), puedes y debes integrar revisiones automáticas de seguridad mediante agentes de IA.
+
+Herramientas como `claude-code-security-review` (GitHub Action oficial de Anthropic) pueden:
+- Analizar cada PR automáticamente.
+- Detectar inyecciones (SQL, XSS).
+- Identificar autenticación débil o exposición de secretos.
+- Dejar comentarios directamente en el código para que tú decidas cómo proceder.
+
+### 3. CI/CD Inteligente: La Entrega Continua
+
+Para mantener el ritmo de desarrollo agéntico, necesitas una infraestructura que no te detenga. El **CI/CD** (Integración Continua / Entrega Continua) es el guardián automático de tu producción.
+
+#### Flujo de Oro del CI/CD:
+<Steps>
+
+1.  **Pull Request**: Toda funcionalidad entra vía PR a la rama principal.
+2.  **Checks Automáticos**: Se ejecutan linters, tests unitarios y análisis de seguridad.
+3.  **Code Review**: Un agente de IA realiza una primera revisión crítica antes de que un humano lo vea.
+4.  **Release Please**: Una herramienta de automatización (como la de Google) gestiona el versionado y genera notas de lanzamiento automáticamente.
+
+</Steps>
+
+---
+
+### Recursos y Lecturas Recomendadas
+
+<LinkCard
+  title="Release Please: Automatización de Lanzamientos"
+  description="Aprende a automatizar el versionado y los changelogs de tus proyectos."
+  href="https://github.com/googleapis/release-please"
+/>
+
+<LinkCard
+  title="OWASP: Seguridad en Aplicaciones Web"
+  description="Conoce los estándares de seguridad que debes exigir a tus agentes de IA."
+  href="https://owasp.org/www-project-top-ten/"
+/>
+
+<LinkCard
+  title="CodeRabbit"
+  description="CodeRabbit es una herramienta de revisión de código impulsada por IA que ayuda a los desarrolladores a mejorar la calidad de su código."
+  href="https://coderabbit.ai/"
+/>
+
+<LinkCard
+  title="Gemini Code Assistant"
+  description="Acelera las revisiones de código y mejora la calidad del código"
+  href="https://github.com/marketplace/gemini-code-assist"
+/>
+
+### Conclusión de la Masterclass: IA para Desarrolladores
+
+Has llegado al final de estos 120 minutos de inmersión intensa. Has pasado de entender el **Mindset** de orquestación a dominar la **Metodología SDD**, a manejar **Herramientas Agénticas** y a establecer un **Blindaje Profesional**.
+
+En 2026, la IA no ha eliminado al desarrollador; ha eliminado la mediocridad técnica. La tecnología se encarga de la mecánica, pero la **responsabilidad de la visión, la ética y la calidad final** recae en el humano.
+
+:::tip[El Futuro es Tuyo]
+El éxito radica en dejar de ser un artesano del código para convertirse en un **Arquitecto de Orquestación**. ¡Felicidades, Director de Orquesta!
+:::
 
 <Cta></Cta>

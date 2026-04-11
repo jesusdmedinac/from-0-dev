@@ -7,12 +7,11 @@
 ### Masterclass: IA para Desarrolladores (El Director de Orquesta)
 - [x] Módulo 1: El Cambio de Mindset (30 min)
 - [x] Módulo 2: Metodología SDD & Contexto (30 min)
-- [ ] Módulo 3: Orquestación Agéntica en Vivo (30 min)
-    - [ ] Escenario: Chatbot vs. Agente
-    - [ ] Escenario: Plan Mode en Cursor
-    - [ ] Escenario: Claude Code (CLI Agéntica)
+- [x] Módulo 3: Orquestación Agéntica en Vivo (30 min)
 - [ ] Módulo 4: Blindaje y Entrega (30 min)
-- [ ] Módulo 4: Blindaje y Entrega (30 min)
+    - [ ] Escenario: Testing en flujos agénticos
+    - [ ] Escenario: Security Review automático
+    - [ ] Escenario: CI/CD y Release Please
 
 ### Masterclass: Kotlin Multiplatform (La Cima)
 - [ ] Módulo 1: La Promesa de KMP (30 min)
