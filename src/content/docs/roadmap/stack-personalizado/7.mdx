@@ -107,4 +107,53 @@ Ellas escuchan el evento de GitHub, jalan tu código, ejecutan tu `npm run build
 Para tu [API (L4)](/roadmap/stack-personalizado/4) o base de datos, solemos usar plataformas como Render o Railway. Para tu [Frontend (L5)](/roadmap/stack-personalizado/5) (React, Astro), Vercel o Netlify son los reyes indiscutibles del mercado por su extrema velocidad y simplicidad.
 </Aside>
 
+## 4. Taller: Mi Primer Pipeline Profesional
+
+Es momento de automatizar el despliegue de tu proyecto personal. Ya sea que estés construyendo solo el Frontend o un Fullstack, seguiremos estos pasos:
+
+### Fase 1: Toma de Decisión (ADR)
+Crea un archivo llamado `ADR-estrategia-despliegue.md` en tu carpeta `docs/architecture/decisions/`. Documenta allí:
+1.  **Herramienta CI:** ¿Por qué elegiste GitHub Actions frente a GitLab CI o Jenkins?
+2.  **Plataforma CD:** ¿Dónde alojarás tu Frontend (ej. Vercel) y tu Backend (ej. Railway)?
+(Si no recuerdas cómo hacer un ADR, revisa la [Arquitectura (L3)](/roadmap/stack-personalizado/3)).
+
+### Fase 2: Configurar el Pipeline de Calidad (CI)
+1.  En la raíz de tu proyecto, crea la carpeta `.github/workflows/` y dentro un archivo `ci.yml`.
+2.  Configura el workflow para que se ejecute en los `pull_request` hacia la rama `main`.
+3.  Añade los pasos para instalar dependencias (`npm install`), revisar el linter (`npm run lint` si lo tienes configurado) y hacer el build de prueba (`npm run build`).
+4.  Crea una nueva rama, haz un cambio pequeño, súbelo a GitHub y abre un Pull Request. ¡Observa cómo GitHub Actions comienza a trabajar automáticamente!
+
+### Fase 3: Configurar el Auto-Deploy (CD)
+1.  Crea una cuenta en [Vercel](https://vercel.com/) (si tu proyecto es frontend) o en [Railway](https://railway.app/) (si tiene backend/base de datos).
+2.  Conecta tu cuenta de GitHub y selecciona el repositorio de tu proyecto personal.
+3.  Las plataformas modernas detectarán automáticamente si usas Astro, React, Node, etc., y configurarán los comandos por defecto.
+4.  Una vez conectado, fusiona el Pull Request que abriste en la Fase 2 hacia tu rama `main`.
+5.  ¡Magia! Entra al panel de tu plataforma elegida y mira cómo tu código se despliega automáticamente en una URL pública.
+
+¡Felicidades! Has evolucionado de un desarrollador manual a uno automatizado. Ahora, cada vez que presiones el botón de "Merge", tu código validado volará directamente hacia tus usuarios.
+
+---
+
+## Referencias y Lecturas Recomendadas
+
+Para dominar las tuberías de entrega continua y las mejores prácticas de la industria, consulta estas fuentes oficiales:
+
+<LinkCard
+  title="Documentación Oficial de GitHub Actions"
+  description="La guía oficial de GitHub para aprender a automatizar, personalizar y ejecutar flujos de desarrollo de software directamente en tu repositorio."
+  href="https://docs.github.com/es/actions"
+/>
+
+<LinkCard
+  title="Continuous Integration (CI) por Martin Fowler"
+  description="El artículo fundamental de uno de los padres del desarrollo moderno sobre la teoría y la importancia crítica de la Integración Continua en los equipos de alto rendimiento."
+  href="https://martinfowler.com/articles/continuousIntegration.html"
+/>
+
+<LinkCard
+  title="Vercel: Guía de Despliegues y CD"
+  description="Aprende cómo funciona el despliegue automático impulsado por Git desde la plataforma líder mundial para frameworks frontend."
+  href="https://vercel.com/docs/deployments/git"
+/>
+
 <Cta />

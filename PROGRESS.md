@@ -72,11 +72,11 @@
     - [x] Scenario: Implementación con ORMs
     - [x] Scenario: Capa de Persistencia y Repositorios
     - [x] Scenario: Taller: Persistencia de Mi Proyecto
-- [ ] Lección 7: Integración Continua y Despliegue Automatizado (CI/CD)
+- [x] Lección 7: Integración Continua y Despliegue Automatizado (CI/CD)
     - [x] Scenario: Automatización con GitHub Actions
     - [x] Scenario: Pipelines de Calidad (CI)
     - [x] Scenario: Estrategias de Despliegue (CD)
-    - [ ] Scenario: Taller: Mi Primer Pipeline Profesional
+    - [x] Scenario: Taller: Mi Primer Pipeline Profesional
 - [ ] Lección 8: Testing - Unitario, Integración y End-to-End
     - [ ] Scenario: La Pirámide de Testing
     - [ ] Scenario: Pruebas de Lógica (Unit & Integration)
