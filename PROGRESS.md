@@ -67,11 +67,11 @@
     - [x] Scenario: Sistemas de Componentes y Reutilización
     - [x] Scenario: Gestión de Estado y Consumo de API (Mocking)
     - [x] Scenario: Taller: Maquetación del Proyecto Personal
-- [ ] Lección 6: Base de datos y ORM
-    - [ ] Scenario: Modelado de Datos Profesional
-    - [ ] Scenario: Implementación con ORMs
-    - [ ] Scenario: Capa de Persistencia y Repositorios
-    - [ ] Scenario: Taller: Persistencia de Mi Proyecto
+- [x] Lección 6: Base de datos y ORM
+    - [x] Scenario: Modelado de Datos Profesional
+    - [x] Scenario: Implementación con ORMs
+    - [x] Scenario: Capa de Persistencia y Repositorios
+    - [x] Scenario: Taller: Persistencia de Mi Proyecto
 - [ ] Lección 7: Integración Continua y Despliegue Automatizado (CI/CD)
     - [ ] Scenario: Automatización con GitHub Actions
     - [ ] Scenario: Pipelines de Calidad (CI)

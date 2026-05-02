@@ -1,12 +1,65 @@
 ---
-title: Integración Continua y Despliegue Automatizado (CI/CD)
-description: WIP
+title: "Integración Continua y Despliegue Automatizado (CI/CD)"
+description: "Aprende a automatizar la validación y el lanzamiento de tu código mediante pipelines profesionales. Transforma el proceso de entrega de algo manual a un flujo automático."
 ---
 
 import Cta from '@components/cta/stack-personalizado/cta.astro';
+import { Aside, LinkCard } from '@astrojs/starlight/components';
 
-<Cta></Cta>
+<Cta />
 
-WIP
+Si lograste llegar hasta aquí con tu proyecto, deberías tener una [API conectada a tu frontend (L5)](/roadmap/stack-personalizado/5) y [datos persistiendo en tu base de datos (L6)](/roadmap/stack-personalizado/6). ¡Excelente! Sin embargo, hasta este momento todo vive en tu computadora local. "Funciona en mi máquina" es la frase más peligrosa en el desarrollo de software.
 
-<Cta></Cta>
+En esta lección aprenderemos a configurar un salvavidas automatizado que revisará nuestro código antes de mezclarlo y nos enseñará cómo enviar nuestra aplicación hacia la nube para que el mundo entero pueda utilizarla. Bienvenido al mundo de **CI/CD** (Integración Continua y Despliegue Continuo).
+
+---
+
+## 1. Automatización con GitHub Actions
+
+La automatización comienza reconociendo que los humanos cometemos errores. En lugar de ejecutar manualmente nuestros tests, validar el formato o construir el proyecto, le delegaremos esta responsabilidad a un servidor robótico: **El Runner**.
+
+En el ecosistema actual, **GitHub Actions** es la herramienta estándar para proyectos modernos. Nos permite definir un conjunto de pasos (un "Workflow") que se ejecutarán automáticamente cada vez que ocurra un evento en nuestro repositorio.
+
+### ¿Qué es un Workflow?
+
+Un Workflow es simplemente un archivo de configuración escrito en formato YAML (`.yml`) que vive en una carpeta especial de tu proyecto llamada `.github/workflows/`.
+
+Este archivo le dice a GitHub: *"Cada vez que alguien haga un 'push' o abra un 'Pull Request' hacia la rama `main`, levanta una computadora virtual, clona mi código, instala las dependencias y ejecuta estos comandos por mí"*.
+
+```yaml
+# Ejemplo: .github/workflows/main.yml
+name: Integración Continua
+
+# 1. Los Triggers (¿Cuándo se ejecuta?)
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+# 2. Los Trabajos (¿Qué vamos a hacer?)
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest # Nuestra máquina virtual
+
+    steps:
+    - name: Clonar el código
+      uses: actions/checkout@v4
+
+    - name: Instalar Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: 18
+
+    - name: Instalar dependencias
+      run: npm install
+
+    - name: Verificar errores de formato (Linting)
+      run: npm run lint
+```
+
+<Aside title="YAML: Cuidado con los espacios" type="caution">
+Los archivos `.yml` son extremadamente sensibles a la indentación (espacios). Asegúrate de usar espacios en lugar de tabulaciones y de alinear correctamente cada nivel, o el workflow fallará silenciosamente antes de empezar.
+</Aside>
+
+<Cta />
