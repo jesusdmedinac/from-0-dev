@@ -75,7 +75,7 @@
 - [ ] Lección 7: Integración Continua y Despliegue Automatizado (CI/CD)
     - [x] Scenario: Automatización con GitHub Actions
     - [x] Scenario: Pipelines de Calidad (CI)
-    - [ ] Scenario: Estrategias de Despliegue (CD)
+    - [x] Scenario: Estrategias de Despliegue (CD)
     - [ ] Scenario: Taller: Mi Primer Pipeline Profesional
 - [ ] Lección 8: Testing - Unitario, Integración y End-to-End
     - [ ] Scenario: La Pirámide de Testing

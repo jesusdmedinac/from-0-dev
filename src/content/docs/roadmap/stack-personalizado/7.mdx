@@ -80,4 +80,31 @@ En un flujo profesional, bloqueamos la rama `main` para que nadie pueda hacer ca
 Un pipeline de CI está diseñado para fallar. Su propósito es atrapar los errores antes de que lleguen a tus usuarios. Si tu pipeline falla, celébralo: acaba de salvarte de un desastre en producción.
 </Aside>
 
+## 3. Estrategias de Despliegue (CD)
+
+Una vez que el Pipeline de Integración Continua (CI) pasa todas las pruebas con luz verde, el código está listo. Pero, ¿listo para qué? Para ser entregado a los usuarios. Aquí es donde entra el **Despliegue Continuo (CD - Continuous Deployment/Delivery)**.
+
+### Entornos: Staging vs Producción
+
+En el desarrollo profesional, rara vez subimos los cambios directamente al servidor final. Utilizamos "entornos" separados:
+
+*   **Staging (Pre-producción):** Es una copia exacta de tu aplicación real, pero oculta al público. Sirve para que tú, tu equipo o tus clientes prueben la nueva funcionalidad en un ambiente idéntico a la realidad antes del lanzamiento oficial.
+*   **Producción:** Es el entorno real. Donde viven tus usuarios y tus datos verdaderos. ¡Aquí no se juega!
+
+La estrategia más común es:
+1. Todo cambio fusionado en la rama `develop` o al abrir un Pull Request se despliega automáticamente en **Staging**.
+2. Todo cambio fusionado en la rama `main` se despliega automáticamente en **Producción**.
+
+### Plataformas de Auto-Deploy
+
+Hace una década, desplegar implicaba conectarse por SSH a un servidor Linux, descargar el código, instalar dependencias manualmente y reiniciar servicios. Hoy, gracias a plataformas de la nube, esto ocurre con la magia del **Serverless y PaaS (Platform as a Service)**.
+
+Herramientas como **Vercel**, **Netlify** o **Railway** se conectan directamente a tu repositorio de GitHub. 
+* *"¿Hubo un cambio en la rama main? ¡Yo me encargo!"*, dicen estas plataformas. 
+Ellas escuchan el evento de GitHub, jalan tu código, ejecutan tu `npm run build` y en cuestión de segundos, tu aplicación está en vivo en una URL pública con certificado SSL de seguridad incluido.
+
+<Aside title="Frontend vs Backend" type="note">
+Para tu [API (L4)](/roadmap/stack-personalizado/4) o base de datos, solemos usar plataformas como Render o Railway. Para tu [Frontend (L5)](/roadmap/stack-personalizado/5) (React, Astro), Vercel o Netlify son los reyes indiscutibles del mercado por su extrema velocidad y simplicidad.
+</Aside>
+
 <Cta />
