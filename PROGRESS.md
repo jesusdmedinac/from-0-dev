@@ -73,8 +73,8 @@
     - [x] Scenario: Capa de Persistencia y Repositorios
     - [x] Scenario: Taller: Persistencia de Mi Proyecto
 - [ ] Lección 7: Integración Continua y Despliegue Automatizado (CI/CD)
-    - [ ] Scenario: Automatización con GitHub Actions
-    - [ ] Scenario: Pipelines de Calidad (CI)
+    - [x] Scenario: Automatización con GitHub Actions
+    - [x] Scenario: Pipelines de Calidad (CI)
     - [ ] Scenario: Estrategias de Despliegue (CD)
     - [ ] Scenario: Taller: Mi Primer Pipeline Profesional
 - [ ] Lección 8: Testing - Unitario, Integración y End-to-End

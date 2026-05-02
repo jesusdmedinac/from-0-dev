@@ -62,4 +62,22 @@ jobs:
 Los archivos `.yml` son extremadamente sensibles a la indentación (espacios). Asegúrate de usar espacios en lugar de tabulaciones y de alinear correctamente cada nivel, o el workflow fallará silenciosamente antes de empezar.
 </Aside>
 
+## 2. Pipelines de Calidad (CI)
+
+Imagina que estás construyendo una pared de ladrillos. ¿No sería ideal revisar que cada ladrillo esté recto antes de poner el cemento final? Eso es exactamente la Integración Continua (CI).
+
+El objetivo principal de un **Pipeline de CI** no es solo construir el código, sino **validar la calidad** y garantizar que nadie en el equipo rompa la aplicación por error.
+
+### La Barrera de Entrada
+
+En un flujo profesional, bloqueamos la rama `main` para que nadie pueda hacer cambios directos en ella. Todos los cambios deben pasar por un "Pull Request". Cuando se abre este PR, nuestro Runner entra en acción y ejecuta:
+
+1.  **Linters (Formato y Sintaxis):** Revisa que no haya variables sin usar, que los espacios sean correctos y que se sigan las reglas del equipo (usualmente con herramientas como ESLint o Prettier).
+2.  **Pruebas (Testing Automático):** Si escribiste pruebas unitarias o de integración, el Runner las ejecutará todas. Si una falla, la mezcla se detiene.
+3.  **Build (Compilación):** Intenta convertir tu código en los archivos finales que entenderá el servidor o navegador. Si hay un error de tipado o un módulo faltante, fallará.
+
+<Aside title="Fallar es Bueno" type="tip">
+Un pipeline de CI está diseñado para fallar. Su propósito es atrapar los errores antes de que lleguen a tus usuarios. Si tu pipeline falla, celébralo: acaba de salvarte de un desastre en producción.
+</Aside>
+
 <Cta />
