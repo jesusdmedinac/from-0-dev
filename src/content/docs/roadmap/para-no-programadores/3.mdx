@@ -85,13 +85,17 @@ const mensajeLimpio = mensaje.trim();
 
 // 2. Transformar a mayúsculas o minúsculas para comparaciones seguras
 const enMinusculas = mensajeLimpio.toLowerCase();
+// Resultado: "¡aprender javascript en desde0 es genial!"
 const enMayusculas = mensajeLimpio.toUpperCase();
+// Resultado: "¡APRENDER JAVASCRIPT EN DESDE0 ES GENIAL!"
 
 // 3. Preguntar si contiene una palabra clave (devuelve true o false)
 const contieneJavaScript = mensajeLimpio.includes("JavaScript"); // true
+// Resultado: true
 
 // 4. Reemplazar partes del texto
 const mensajeAdaptado = mensajeLimpio.replace("Genial", "Transformador");
+// Resultado: "¡Aprender JavaScript en Desde0 es Transformador!"
 ```
 
 ---
@@ -146,10 +150,15 @@ const catalogo = [
 ];
 
 // Accedemos a la propiedad de un elemento específico
-console.log(catalogo[0].titulo); // "Curso de Frontend"
+console.log(catalogo[0].titulo);
+// Resultado: "Curso de Frontend"
 
 // Combinamos arreglos y objetos con filter:
 const disponibles = catalogo.filter(curso => curso.disponible);
+// Resultado: [
+//   { id: 1, titulo: "Curso de Frontend", precio: 150, disponible: true },
+//   { id: 3, titulo: "Taller de Bases de Datos", precio: 120, disponible: true }
+// ]
 ```
 
 ---
