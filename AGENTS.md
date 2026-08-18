@@ -72,20 +72,25 @@ Para crear o modificar contenido, es **obligatorio** seguir las directrices de `
 
 El proyecto está en desarrollo activo. Para conocer el estado actual de cada lección, **consulta el archivo `PROGRESS.md`**.
 
-## 5. Proceso de Desarrollo (AI Planning Process)
+## 5. Proceso de Desarrollo y Auditoría (AI Planning & Quality Process)
 
-Para cualquier tarea de desarrollo, refactorización o creación de nuevas funcionalidades, es **obligatorio** seguir el **Proceso de Planificación de 5 Pasos** detallado en `AI_PLANNING_PROCESS.md`:
+Para cualquier tarea de desarrollo, refactorización o creación de nuevas funcionalidades, es **obligatorio** seguir el **Proceso de Planificación y Calidad de 6 Pasos**:
 
 1.  **Definir la idea** en lenguaje natural.
 2.  **Generar Features y Escenarios** en formato **Gherkin**.
 3.  **Persistir Features** en archivos `.feature` (en `docs/features/`).
 4.  **Actualizar `PROGRESS.md`** con la lista de escenarios.
 5.  **Desarrollar escenario por escenario**, realizando commits atómicos por cada uno.
+6.  **Auditoría de Calidad y Registro Obligatorio**:
+    - Validar la compilación estática (`pnpm exec astro build`).
+    - Actualizar la matriz de cumplimiento específica en `docs/audit/<curso>.md` verificando los 9 criterios de calidad.
+    - Actualizar el porcentaje global en el tablero principal `AUDIT.md`.
 
 ## 6. Instrucciones para el Agente
 
--   **Punto de Partida**: Utiliza este documento (`AGENTS.md`) y `CONTENT_STYLE.md` como tu principal fuente de contexto sobre el proyecto.
+-   **Punto de Partida**: Utiliza este documento (`AGENTS.md`), `CONTENT_STYLE.md` y `AUDIT.md` como tu principal fuente de contexto y gobernanza sobre el proyecto.
 -   **Metodología de Contenido**: Toda nueva lección o modificación debe cumplir con el estándar de **4 horas en 5 fases**, **tiempos invisibles en comentarios MDX/JSX `{/* ... */}`**, **primera persona inclusiva** y **retos prácticos guiados**.
+-   **Control de Calidad Obligatorio**: Ninguna tarea de contenido se considera terminada sin haber auditado el archivo en `docs/audit/<curso>.md` y actualizado `AUDIT.md`.
 -   **Documentación de Decisiones (ADRs)**: Al sugerir o crear registros de decisión arquitectónica, utiliza **nombres semánticos** (ej: `ADR-backend-comunicacion.md`) en lugar de números secuenciales, siguiendo el formato definido en `CONTENT_STYLE.md`.
 -   **Creación de Contenido y Uso de Fuentes**:
     -   Al generar nuevas lecciones o modificar existentes, adhiérete estrictamente a las guías en `CONTENT_STYLE.md` y replica la estructura y tono del contenido existente.
@@ -95,5 +100,6 @@ Para cualquier tarea de desarrollo, refactorización o creación de nuevas funci
     -   **Stack y dependencias**: `package.json`.
     -   **Objetivos y público del contenido**: `ANALYSIS.md`.
     -   **Estado de las lecciones**: `PROGRESS.md`.
+    -   **Tablero de Calidad y Auditoría**: `AUDIT.md` y `docs/audit/`.
     -   **Configuración del proyecto**: `astro.config.mjs`.
 -   **Comandos**: Los comandos básicos del proyecto (`dev`, `build`, etc.) se encuentran en `README.md`.
