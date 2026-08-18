@@ -3,19 +3,23 @@ title: Antes de empezar
 description: Desarrollar software nunca había sido tan sencillo. Cada día contamos con más herramientas que eliminan las barreras para resolver problemas complejos. Gracias a la IA, muchas personas creen que ya no es necesario aprender a programar. Sin embargo, los que sabemos programar entendemos que la IA nos facilita el aprendizaje, pero aún necesitamos una base sólida.
 ---
 
+import { Aside, CardGrid, LinkCard } from '@astrojs/starlight/components';
 import Cta from '@components/cta/para-no-programadores/cta.astro';
 
 <Cta></Cta>
 
 Desarrollar software nunca había sido tan sencillo. Cada día contamos con más herramientas que eliminan las barreras para resolver problemas complejos. Gracias a la IA, muchas personas creen que ya no es necesario aprender a programar. Sin embargo, los que sabemos programar entendemos que la IA nos facilita el aprendizaje, pero aún necesitamos una base sólida.
 
-Este taller no te convertirá en un desarrollador de software, pero te dará los fundamentos necesarios para que puedas construir cualquier carrera en la industria de la tecnología. Solo necesitas una computadora con acceso a internet. Con mi ayuda como [instructor](https://jesusdmedinac.com/about/), avanzarás paso a paso en cada uno de los temas que he preparado para ti.
+Este taller no te convertirá de la noche a la mañana en un desarrollador de software senior, pero te dará los **fundamentos necesarios** para que puedas construir cualquier carrera en la industria de la tecnología. Solo necesitas una computadora con acceso a internet. Con mi ayuda como [instructor](https://jesusdmedinac.com/about/), avanzarás paso a paso en cada uno de los temas que he preparado para ti.
 
 ## Requisitos del taller
 
-- **Un computador con un navegador web:** (Puedes encontrar algunos ejemplos de navegadores web en este [artículo](https://jesusdmedinac.notion.site/C-mo-puedo-empezar-a-programar-2cac38be0050444cba099b1e3b21b029)).
-- **Una conexión a internet:** Es esencial contar con una conexión estable.
-- **Conocimiento de computación básica:** Deberías saber cómo usar una computadora, navegar por internet, usar aplicaciones de escritorio y gestionar archivos y carpetas.
+- **Un computador con un navegador web:** Google Chrome, Mozilla Firefox, Microsoft Edge, Safari o Brave (puedes encontrar algunos ejemplos en este [artículo](https://jesusdmedinac.notion.site/C-mo-puedo-empezar-a-programar-2cac38be0050444cba099b1e3b21b029)).
+- **Una conexión a internet:** Esencial para acceder a las herramientas en línea y recursos.
+- **Conocimiento de computación básica:** Saber cómo usar una computadora, navegar por internet, usar aplicaciones y gestionar archivos y carpetas.
+- **Curiosidad y persistencia:** El ingrediente más importante para aprender algo nuevo.
+
+---
 
 ## Estructura del taller y temario
 
@@ -24,52 +28,137 @@ Cada semana veremos un tema nuevo por lo que es crucial seguir el orden y estudi
 ### La sesión en vivo/presencial estará organizada de la siguiente manera:
 
 - **Preguntas y respuestas del tema anterior y conclusiones:** Comenzaremos con una revisión del tema previo, resolviendo dudas y resumiendo los puntos clave aprendidos.
-  
 - **Introducción al nuevo tema y definición de objetivos:** Presentaremos el nuevo tema de la semana, estableciendo metas claras para la sesión y los conocimientos a adquirir.
-
 - **Práctica semanal asistida:** Realizaremos ejercicios prácticos sobre el tema, con asistencia y guía del instructor para asegurar la correcta aplicación de los conceptos.
-
 - **Exposición de resultados y preguntas:** Los participantes mostrarán los resultados de sus prácticas, seguidos de una sesión de preguntas y retroalimentación.
-
 - **Definición de práctica en casa:** Se asignarán tareas para realizar en casa, diseñadas para reforzar el aprendizaje y preparar a los estudiantes para la siguiente sesión.
 
-### Temario:
+### Temario general (12 semanas):
 
-1. **Antes de empezar:** Abordaremos todas las dudas sobre el taller y escribiremos nuestra primera línea de código.
-2. **Conceptos básicos:** Introducción a los fundamentos de la programación, como variables, tipos de datos, estructuras de control y funciones.
-3. **Language Tour:** Recorrido por las características y sintaxis del lenguaje de programación que utilizaremos.
-4. **Paradigmas:** Exploración de paradigmas de programación, como la programación orientada a objetos, funcional y reactiva.
-5. **Stacks:** Revisión de las tecnologías y herramientas más populares.
-6. **Frontend:** Desarrollo de interfaces de usuario con HTML, CSS, y JavaScript.
-7. **Backend:** Creación de aplicaciones del lado del servidor usando Node.js.
-8. **Base de datos:** Fundamentos de bases de datos relacionales y no relacionales, y cómo interactuar con ellas mediante consultas.
-9. **Uso de terminal:** Comandos básicos y avanzados para la gestión eficiente del entorno de desarrollo.
-10. **Controles de versión:** Uso de sistemas de control de versiones como Git.
-11. **Sistemas operativos:** Conocimiento esencial sobre Linux, macOS y Windows.
-12. **DevOps:** Prácticas y herramientas para integración y entrega continua, automatización de procesos y gestión de infraestructura.
+1. **Antes de empezar (L1):** Bienvenida, mentalidad, despeje de dudas y tu primera línea de código en vivo.
+2. **Conceptos básicos (L2):** Variables, tipos de datos, operadores, estructuras de control, funciones y algoritmos.
+3. **Language Tour (L3):** Recorrido por la sintaxis y características principales de JavaScript.
+4. **Paradigmas (L4):** Programación estructurada, orientada a objetos, funcional y asíncrona.
+5. **Stacks (L5):** Qué es un stack tecnológico e inicio de nuestro proyecto: **ShortURL**.
+6. **Frontend (L6):** Desarrollo de interfaces web interactivas con HTML, CSS y JavaScript.
+7. **Backend (L7):** Servidores web, protocolo HTTP y APIs con Node.js.
+8. **Base de datos (L8):** Almacenamiento persistente y consultas con SQLite.
+9. **Uso de terminal (L9):** Comandos esenciales para moverte como pez en el agua en tu sistema.
+10. **Controles de versión (L10):** Gestión del código con Git y colaboración en GitHub.
+11. **Sistemas operativos (L11):** Fundamentos de Linux, macOS, Windows y variables de entorno.
+12. **DevOps (L12):** Despliegue en la nube y puesta en producción de tu aplicación.
+
+---
+
+## ⚡ Tu Primer "Quick Win": Escribiendo tu primera línea de código
+
+No tienes que esperar a instalar editores de texto complicados ni configuraciones difíciles para empezar a programar. **Tu navegador web ya tiene un motor de programación completo esperándote.**
+
+Vamos a ejecutar tu primera instrucción en JavaScript ahora mismo:
+
+### Paso 1: Abre la Consola de Desarrollador
+
+1. En esta misma ventana de tu navegador, haz **clic derecho** en cualquier espacio vacío de la página.
+2. Selecciona la opción **"Inspeccionar"** (o *Inspect*).
+3. Se abrirá un panel lateral o inferior con herramientas técnicas. En la barra superior de ese panel, haz clic en la pestaña **"Consola"** (o *Console*).
+
+<Aside type="tip" title="Atajo de teclado">
+- En **Windows / Linux**: Presiona `F12` o la combinación `Ctrl + Shift + J`.
+- En **macOS**: Presiona la combinación `Cmd + Option + J`.
+</Aside>
+
+### Paso 2: Envía un mensaje a la consola
+
+En la línea donde parpadea el cursor junto al símbolo `>`, escribe exactamente lo siguiente y presiona la tecla **Enter**:
+
+```javascript
+console.log("¡Hola Mundo! Estoy aprendiendo a programar en Desde0.");
+```
+
+Verás cómo la consola responde inmediatamente imprimiendo tu mensaje. `console.log` es la función estándar que usamos los programadores para pedirle a la computadora que muestre un dato o resultado en pantalla.
+
+### Paso 3: Crea una ventana interactiva emergente
+
+Ahora prueba escribir esta otra instrucción y presiona **Enter**:
+
+```javascript
+alert("¡Felicidades! Acabas de ejecutar tu primer script interactivo.");
+```
+
+¡Verás aparecer una ventana emergente en tu navegador con tu mensaje!
+
+### Paso 4: Usa la consola como calculadora inteligente
+
+La computadora procesa operaciones matemáticas al instante. Prueba escribir:
+
+```javascript
+(2026 - 1995) * 12
+```
+
+<Aside type="note" title="¡Acabas de dar tu primer paso!">
+Felicidades, acabas de escribir y ejecutar código real en JavaScript. Has roto la barrera más difícil: **el miedo a empezar**.
+</Aside>
+
+---
 
 ## Preguntas frecuentes
 
-1. **¿Qué tipo de computadora necesito para tomar el taller?** Solo necesitas una computadora con un navegador web y conexión a internet. Cualquier computadora moderna debería ser suficiente.
+1. **¿Qué tipo de computadora necesito para tomar el taller?**  
+   Solo necesitas una computadora con un navegador web moderno (Chrome, Edge, Firefox, Safari) y conexión a internet.
 
-2. **¿Es necesario tener conocimientos previos de programación?** No, este taller está diseñado para principiantes. No necesitas tener experiencia previa.
+2. **¿Es necesario tener conocimientos previos de programación?**  
+   No. Este taller está diseñado desde cero absoluto. No necesitas saber nada de código previo.
 
-3. **¿Cuánto tiempo tomará completar el taller?** El tiempo varía según tu ritmo de aprendizaje. Se estima que puedes completarlo en 12 semanas dedicando 8 horas por semana.
+3. **¿Cuánto tiempo tomará completar el taller?**  
+   El taller está pensado para completarse en 12 semanas dedicando aproximadamente entre 4 y 8 horas por semana (sesión asistida + práctica personal).
 
-4. **¿Recibiré un certificado al finalizar el taller?** Sí, recibirás un certificado de finalización al completar todas las lecciones y ejercicios.
+4. **¿Recibiré un certificado al finalizar el taller?**  
+   Sí, recibirás un certificado de finalización al completar todas las lecciones y los entregables del proyecto.
 
-5. **¿Qué herramientas de software necesitaré instalar?** Principalmente trabajarás con herramientas basadas en web. No se requerirá la instalación de software específico.
+5. **¿Qué herramientas de software necesitaré instalar?**  
+   Comenzaremos enteramente con herramientas en el navegador. Más adelante te guiaremos paso a paso para instalar Node.js y un editor de código gratuito como VS Code.
 
-6. **¿Hay soporte disponible si tengo preguntas o problemas durante el taller?** Sí, tendrás acceso a soporte a través de foros, sesiones en línea y contacto directo con el instructor.
+6. **¿Hay soporte disponible si tengo dudas o me quedo atascado?**  
+   Sí, tendrás acceso a la comunidad, foros de soporte y acompañamiento directo del instructor.
 
-7. **¿Puedo tomar el taller a mi propio ritmo?** Sí, puedes avanzar a tu propio ritmo. Sin embargo, es recomendable asistir a las sesiones en vivo para aprovechar al máximo el taller.
+7. **¿Puedo tomar el taller a mi propio ritmo?**  
+   Sí. Las lecciones están disponibles en esta plataforma para que avances a tu velocidad, aunque se recomienda la constancia semanal.
 
-8. **¿Se abordan conceptos avanzados de programación?** El taller se centra en los fundamentos. Aunque no cubre conceptos avanzados, te preparará para seguir aprendiendo.
+---
 
-9. **¿Qué lenguajes de programación se enseñan en el taller?** El taller enseña conceptos básicos aplicables a múltiples lenguajes de programación.
+## 📚 Referencias y Lecturas Recomendadas
 
-10. **¿Es este taller adecuado para alguien que quiere cambiar de carrera hacia la tecnología?** Sí, es ideal para quienes desean comenzar una carrera en tecnología, proporcionando los fundamentos necesarios.
+Para complementar lo aprendido hoy con fuentes oficiales y de alta calidad técnica, te recomendamos explorar:
 
-¿Estás listo para comenzar tu viaje en el mundo de la programación? ¡Inscríbete ahora y empieza a aprender!
+<CardGrid>
+  <LinkCard
+    title="MDN Web Docs: ¿Qué es JavaScript?"
+    href="https://developer.mozilla.org/es/docs/Learn/JavaScript/First_steps/What_is_JavaScript"
+    description="Una introducción clara y accesible por Mozilla sobre cómo funciona el lenguaje de la web."
+  />
+  <LinkCard
+    title="Chrome DevTools: Primeros pasos con la Consola"
+    href="https://developer.chrome.com/docs/devtools/console/javascript?hl=es"
+    description="Guía oficial de Google para experimentar y ejecutar código JavaScript directamente en tu navegador."
+  />
+  <LinkCard
+    title="CS50: Introducción a las Ciencias de la Computación"
+    href="https://pll.harvard.edu/course/cs50-introduction-computer-science"
+    description="El legendario curso introductorio de Harvard sobre pensamiento computacional y fundamentos."
+  />
+  <LinkCard
+    title="W3C: Introducción a los Estándares Web"
+    href="https://www.w3.org/standards/"
+    description="Conoce el organismo internacional que define las reglas y el funcionamiento de la World Wide Web."
+  />
+</CardGrid>
+
+---
+
+## 🚀 Conclusión y Próximos Pasos
+
+¡Felicidades por completar la primera lección! Ya conoces la ruta, tienes tu entorno listo y has escrito tus primeras líneas de código.
+
+¿Listo para el siguiente paso? En la **[Lección 2: Conceptos básicos (L2)](/roadmap/para-no-programadores/2)** aprenderemos qué son las variables, cómo almacenar datos en la memoria y cómo enseñarle a una computadora a tomar decisiones con algoritmos y lógica.
 
 <Cta></Cta>
