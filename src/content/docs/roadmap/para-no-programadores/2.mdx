@@ -1,6 +1,6 @@
 ---
 title: Conceptos básicos
-description: Una sesión de aprendizaje de 4 horas para dominar los 5 bloques fundamentales de cualquier software - variables, tipos de datos, operadores, estructuras de control y funciones.
+description: Guía y cuaderno de trabajo para una sesión intensiva de 4 horas. Domina los 5 bloques constructivos de cualquier lenguaje - variables, tipos de datos, operadores, estructuras de control y funciones.
 ---
 
 import { Aside, CardGrid, LinkCard } from '@astrojs/starlight/components';
@@ -8,7 +8,7 @@ import Cta from '@components/cta/para-no-programadores/cta.astro';
 
 <Cta></Cta>
 
-En la **[Lección 1: Antes de empezar (L1)](/roadmap/para-no-programadores/1)** dimos nuestros primeros pasos abriendo la consola del navegador y ejecutando instrucciones interactivas. Hoy nos adentraremos en el núcleo de la programación: los **5 bloques constructivos** con los que se crea cualquier aplicación en el mundo.
+En la **[Lección 1: Antes de empezar (L1)](/roadmap/para-no-programadores/1)** dimos nuestros primeros pasos abriendo la consola del navegador y ejecutando instrucciones interactivas. Hoy nos adentraremos en el corazón de la programación: los **5 bloques constructivos** con los que se crea cualquier aplicación en el mundo.
 
 Esta sesión de **4 horas** está diseñada para que entiendas la teoría a través de analogías claras y la apliques inmediatamente con retos de programación en vivo.
 
@@ -18,322 +18,381 @@ Esta sesión de **4 horas** está diseñada para que entiendas la teoría a trav
 
 ```
 Sesión de 4 Horas: Conceptos Básicos
-├── 1. Revisión del Tema Anterior y Dudas (30 min)
-├── 2. Introducción Teórica y Objetivos (45 min)
-├── 3. Práctica Asistida en Vivo (90 min)
-├── 4. Exposición, Debate y Debugging (45 min)
-└── 5. Reto Semanal y Práctica en Casa (30 min)
+├── ☕ Fase 1: Revisión del Tema Anterior y Conclusiones (30 min)
+├── 🎯 Fase 2: Introducción al Tema y Fundamentos (45 min)
+├── 💻 Fase 3: Práctica Asistida en Vivo (90 min)
+├── 🗣️ Fase 4: Exposición, Debate y Debugging (45 min)
+└── 🏠 Fase 5: Reto Semanal y Práctica en Casa (30 min)
 ```
 
 ---
 
-## ☕ Fase 1: Revisión del Tema Anterior y Dudas (30 min)
+## ☕ Fase 1: Revisión del Tema Anterior y Conclusiones (30 min)
 
-Comenzamos la sesión revisando el reto dejado en la Lección 1 y resolviendo inquietudes comunes.
+Comenzamos la sesión revisando el proyecto realizado en casa y conectándolo con los temas de hoy.
 
-### Puesta en Común del Reto de la Lección 1
-En la sesión anterior construimos un calculador interactivo de edad con `prompt()`, `alert()` y `Number()`.
-- ¿Pudiste probar tu script con diferentes años de nacimiento?
-- ¿Qué ocurrió si el usuario escribió letras en vez de números? (Apareció `NaN` o *Not a Number*, un concepto que profundizaremos hoy).
-- ¿Cómo te sentiste al interactuar directamente con la consola?
+### 1. Puesta en Común del Reto de la Lección 1 (15 min)
 
-<Aside type="tip" title="Conclusión de la revisión">
-La consola del navegador es nuestro laboratorio de pruebas rápido. Hoy dejaremos de escribir líneas sueltas y comenzaremos a estructurar lógica completa.
+En la sesión anterior construimos un calculador interactivo de tiempo de vida con `prompt()`, `alert()` y `Number()`.
+* **Discusión en grupo:** ¿Qué ocurrió cuando ingresaste letras o dejaste el campo vacío en lugar de escribir un año numérico?  
+  *(Apareció `NaN` o "Not a Number", porque JavaScript no puede restar letras de un número).*
+* **¿Qué aprendimos?** Las computadoras son extremadamente estrictas con los tipos de datos que reciben.
+
+### 2. El Puente Conceptual: ¿Por qué necesitamos variables y lógica? (15 min)
+
+En la Lección 1 escribimos líneas de código independientes. El problema es que una vez que terminaba la línea, **la información se desvanecía en el aire**.
+
+Para construir aplicaciones reales (como una tienda online, un chat o un videojuego), necesitamos que el programa sea capaz de:
+1. **Recordar datos** a lo largo del tiempo (Variables y Memoria).
+2. **Clasificar la información** correctamente (Tipos de datos).
+3. **Calcular y comparar** valores (Operadores).
+4. **Tomar caminos distintos** según la situación (Condicionales).
+5. **Automatizar repeticiones** sin cansarse (Bucles).
+6. **Empaquetar tareas** para no repetir código (Funciones).
+
+---
+
+## 🎯 Fase 2: Introducción al Tema y Fundamentos Teóricos (45 min)
+
+En esta fase exploraremos los 5 pilares fundamentales de la programación mediante analogías y ejemplos directos en JavaScript.
+
+---
+
+### 1. Variables: Las Cajas Etiquetadas de la Memoria (10 min)
+
+Imagina que la memoria RAM de tu computadora es un almacén gigante con millones de estanterías numeradas. Para no tener que recordar que tu dato está en la estantería `#0x7FFF5FBFFD98`, el lenguaje te permite tomar una **caja**, pegarle una **etiqueta con un nombre claro** y guardar un **valor dentro**.
+
+```javascript
+/* 1. Declaración */ let /* 2. Nombre */ puntosJugador /* 3. Asignación */ = /* 4. Valor */ 100;
+```
+
+#### La diferencia moderna: `let` vs `const`
+
+* **`let` (Variable reasignable):** Se utiliza cuando el valor **puede cambiar** con el tiempo.
+  ```javascript
+  let vidas = 3;
+  vidas = 2; // ¡Correcto! El jugador perdió una vida.
+  ```
+* **`const` (Constante inmutable):** Se utiliza cuando el valor **es fijo y nunca debe cambiar accidentalmente**.
+  ```javascript
+  const pi = 3.1416;
+  const fechaNacimiento = "15/08/1995";
+  // Si intentas hacer: fechaNacimiento = "otra fecha"; -> JavaScript arrojará un error.
+  ```
+
+<Aside type="note" title="¿Qué pasó con 'var'?">
+En tutoriales antiguos de internet verás la palabra `var`. En el JavaScript moderno ya **no se recomienda usar `var`** porque permite errores silenciosos de duplicación. La regla de oro en la industria es: **Usa `const` por defecto; si el valor necesita cambiar, usa `let`**.
 </Aside>
 
----
-
-## 🎯 Fase 2: Introducción Teórica y Objetivos (45 min)
-
-En esta fase exploraremos los 5 pilares fundamentales de la programación mediante ejemplos prácticos en JavaScript.
-
-### Objetivos de Aprendizaje de Hoy
-
-1. **Variables (`let` y `const`):** Guardar y recuperar datos en la memoria de la computadora.
-2. **Tipos de Datos:** Identificar texto (`string`), números (`number`), decisiones (`boolean`), listas (`array`) y objetos (`object`).
-3. **Operadores:** Realizar cálculos matemáticos y comparaciones lógicas.
-4. **Estructuras de Control:** Enseñar al programa a tomar decisiones (`if / else`) y a repetir tareas (`for / while`).
-5. **Funciones:** Encapsular código en bloques reutilizables para no repetirnos.
+#### Reglas para nombrar variables:
+1. Usa **camelCase** (comienza en minúscula y cada nueva palabra empieza con mayúscula): `nombreCompleto`, `precioTotal`.
+2. Sé descriptivo: es mejor `precioConDescuento` que solo `p` o `x`.
+3. Prohibido usar espacios, guiones o tildes en los nombres de variables.
 
 ---
 
-### 1. Variables: Las cajas de la memoria
+### 2. Tipos de Datos: La Naturaleza de la Información (10 min)
 
-Imagina que la memoria de tu computadora es una habitación llena de estanterías vacías. Para guardar algo y encontrarlo después con facilidad, tomas una **caja**, le pegas una **etiqueta con un nombre** y colocas un **valor dentro**.
+No todos los datos se procesan igual en la memoria. JavaScript clasifica la información en categorías fundamentales:
 
 ```javascript
-/* 1 */ let /* 2 */ nombreUsuario /* 3 */ = /* 4 */ "Ada Lovelace";
-```
+// 1. String (Cadena de texto): Siempre entre comillas dobles "" o simples ''
+const saludo = "Bienvenido a Desde0";
 
-* **`let` / `const`:** Avisa a JavaScript que reservamos memoria. Usamos `let` cuando el dato puede cambiar (ej. el nivel de un juego) y `const` cuando es un valor fijo e inmutable (ej. tu fecha de nacimiento).
-* **Nombre de la variable:** Usamos la convención `camelCase` (ej. `precioProducto`, `estaAutenticado`).
-* **`=` (Asignación):** Guarda el dato de la derecha en la variable de la izquierda.
+// 2. Number (Número): Enteros o decimales, siempre sin comillas
+const precioCafe = 45.50;
+const cantidad = 2;
 
----
+// 3. Boolean (Booleano): Solo dos valores posibles (true o false)
+const estaDisponible = true;
+const esFinDeSemana = false;
 
-### 2. Tipos de Datos Fundamentales
+// 4. Array (Arreglo o Lista): Una colección ordenada de elementos entre corchetes []
+const listaCompras = ["Manzanas", "Pan", "Leche", "Huevos"];
 
-```javascript
-// Texto (String): Siempre entre comillas
-let ciudad = "Ciudad de México";
-
-// Número (Number): Enteros o decimales, sin comillas
-let temperatura = 23.5;
-
-// Booleano (Boolean): Solo true (verdadero) o false (falso)
-let esDiaSoleado = true;
-
-// Lista (Array): Colección ordenada entre corchetes
-let amigos = ["Carlos", "Diana", "Sebastián"];
-
-// Objeto (Object): Ficha de datos estructurada entre llaves
-let producto = {
-  nombre: "Café de Especialidad",
-  precio: 75,
-  disponible: true
+// 5. Object (Objeto o Ficha): Un conjunto de propiedades organizadas entre llaves {}
+const usuario = {
+  nombre: "Diana",
+  edad: 28,
+  rol: "Estudiante"
 };
 ```
 
 ---
 
-### 3. Operadores Esenciales
+### 3. Operadores: El Motor de Cálculo y Comparación (10 min)
 
-* **Aritméticos:** `+` (suma), `-` (resta), `*` (multiplicación), `/` (división), `%` (módulo o residuo).
-* **Comparación:** `===` (¿es idéntico?), `!==` (¿es diferente?), `>` (mayor), `<` (menor), `>=` (mayor o igual).
-* **Lógicos:** `&&` (AND: ambas condiciones deben ser verdaderas), `||` (OR: al menos una condición debe cumplirse), `!` (NOT: invierte el valor).
+Los operadores nos permiten combinar, transformar y evaluar variables:
+
+#### Aritméticos (Cálculos):
+* `+` (Suma y concatenación de texto)
+* `-` (Resta)
+* `*` (Multiplicación)
+* `/` (División)
+* `%` (**Módulo o residuo:** Devuelve lo que sobra de una división entera. Ej: `10 % 3` da `1` porque 3 cabe tres veces en 10 y sobra 1).
+
+#### Comparación (Preguntas lógicas que devuelven `true` o `false`):
+* `===` (Igualdad estricta: ¿es exactamente el mismo valor y tipo?).
+* `!==` (Desigualdad estricta: ¿es diferente?).
+* `>`, `<`, `>=`, `<=` (Mayor, menor, mayor o igual, menor o igual).
+
+#### Lógicos (Combinación de decisiones):
+* `&&` (**AND / Y además:** Da `true` solo si **ambas** condiciones son verdaderas).
+* `||` (**OR / O bien:** Da `true` si **al menos una** condición es verdadera).
+* `!` (**NOT / Negación:** Invierte el valor; `!true` se convierte en `false`).
 
 ---
 
-### 4. Estructuras de Control: Decisiones y Bucles
+### 4. Estructuras de Control y Funciones (15 min)
 
-#### Decisiones (`if / else if / else`)
-Permiten que el programa elija qué bloque de código ejecutar según una condición:
+#### La Toma de Decisiones (`if`, `else if`, `else`)
+Permite que el código elija qué camino seguir según la situación:
 
 ```javascript
-let saldo = 120;
-let costoProducto = 100;
+const edadCliente = 20;
 
-if (saldo >= costoProducto) {
-  console.log("¡Compra exitosa! Disfruta tu producto.");
+if (edadCliente >= 18) {
+  console.log("Acceso autorizado al recinto 🟢");
 } else {
-  console.log("Saldo insuficiente. Por favor recarga fondos.");
+  console.log("Acceso denegado: Se requiere ser mayor de edad 🔴");
 }
 ```
 
-#### Bucles (`for` y `while`)
-Permiten repetir una acción automáticamente sin copiar y pegar código:
+#### La Automatización con Bucles (`for` y `while`)
+Permite repetir una tarea tantas veces como sea necesario en un abrir y cerrar de ojos:
 
 ```javascript
-// Repite exactamente 5 veces
-for (let i = 1; i <= 5; i++) {
-  console.log("Empaquetando caja número:", i);
+// Bucle FOR: Ideal cuando sabemos cuántas veces queremos repetir algo
+for (let vuelta = 1; vuelta <= 3; vuelta++) {
+  console.log("Dando la vuelta número:", vuelta);
 }
 ```
 
----
-
-### 5. Funciones: Máquinas de código reutilizable
-
-Una función es como una cafetera: le introduces ingredientes (parámetros), ejecuta un proceso interno y te devuelve un resultado (`return`).
+#### Funciones: Mini-fábricas reutilizables
+Una función es un bloque de instrucciones que recibe entradas (*parámetros*), hace un cálculo interno y devuelve una salida (*`return`*):
 
 ```javascript
-function calcularTotal(precio, cantidad) {
-  return precio * cantidad;
+function calcularPrecioFinal(precio, porcentajeIva) {
+  const impuesto = precio * (porcentajeIva / 100);
+  return precio + impuesto;
 }
 
-let totalCompra1 = calcularTotal(50, 3); // 150
-let totalCompra2 = calcularTotal(12, 10); // 120
+const totalProducto1 = calcularPrecioFinal(100, 16); // 116
+const totalProducto2 = calcularPrecioFinal(250, 16); // 290
 ```
 
 ---
 
 ## 💻 Fase 3: Práctica Semanal Asistida en Vivo (90 min)
 
-Realizaremos 4 retos progresivos en la consola de tu navegador acompañados por el instructor.
+Abriremos la consola de nuestro navegador y construiremos 4 retos guiados paso a paso con el instructor.
 
 ---
 
-### 🧩 Reto 1: Calculadora de Cuentas y Propinas (20 min)
+### 🧩 Reto 1: La Calculadora de Cuentas y Propinas (20 min)
 
-**Objetivo:** Dominar variables `let`/`const`, tipos numéricos y operaciones aritméticas.
+**Objetivo:** Combinar variables `const`, operadores matemáticos y formateo de texto para resolver un problema cotidiano.
+
+Imagina que saliste a cenar con 3 amigos y quieren calcular la cuenta total con propina incluida y saber cuánto debe aportar cada uno.
 
 Escribe y ejecuta en tu consola:
 
 ```javascript
-// 1. Datos iniciales
-const totalCuenta = 480; // Costo de la cena en el restaurante
-const porcentajePropina = 0.15; // 15% de propina
-const numeroPersonas = 4; // Amigos en la mesa
+// 1. Variables base
+const cuentaComida = 680;
+const porcentajePropina = 15; // 15%
+const totalComensales = 4;
 
-// 2. Cálculos
-const montoPropina = totalCuenta * porcentajePropina;
-const totalConPropina = totalCuenta + montoPropina;
-const pagoPorPersona = totalConPropina / numeroPersonas;
+// 2. Operaciones lógicas
+const valorPropina = cuentaComida * (porcentajePropina / 100);
+const granTotal = cuentaComida + valorPropina;
+const cuotaIndividual = granTotal / totalComensales;
 
-// 3. Resultados en consola
-console.log("Total de la comida: $" + totalCuenta);
-console.log("Propina sugerida (15%): $" + montoPropina);
-console.log("Total a pagar: $" + totalConPropina);
-console.log("Cada persona paga: $" + pagoPorPersona);
+// 3. Imprimimos el desglose
+console.log("--- 🧾 CUENTA DEL RESTAURANTE ---");
+console.log("Consumo: $" + cuentaComida);
+console.log("Propina (" + porcentajePropina + "%): $" + valorPropina);
+console.log("Total con propina: $" + granTotal);
+console.log("Cada persona aporta: $" + cuotaIndividual);
 ```
 
 ---
 
-### 🧩 Reto 2: El Portero Virtual / Control de Acceso (`if / else`) (25 min)
+### 🧩 Reto 2: El Portero Virtual / Control de Acceso con `if/else` (25 min)
 
-**Objetivo:** Practicar condicionales y operadores lógicos combinados (`&&`, `||`).
+**Objetivo:** Dominar condicionales anidados y operadores lógicos booleanos (`&&`, `||`).
 
-Vamos a simular el acceso a un evento exclusivo:
+Vamos a programar las reglas de acceso de un club nocturno:
+1. Debe tener al menos 18 años.
+2. Si tiene boleto VIP o está en la lista de invitados, entra directo a la zona preferencial.
+3. Si es mayor de edad pero no tiene VIP, entra a la zona general.
+4. Si es menor de 18 años, acceso denegado.
 
 ```javascript
-let edad = 20;
+let edadUsuario = 19;
 let tieneBoletoVip = false;
-let estaEnListaDeInvitados = true;
+let estaEnListaInvitados = true;
 
-if (edad >= 18 && (tieneBoletoVip || estaEnListaDeInvitados)) {
-  console.log("🟢 ¡Bienvenido al evento! Pasa a la zona preferencial.");
-} else if (edad >= 18 && !tieneBoletoVip) {
-  console.log("🟡 Eres mayor de edad pero necesitas adquirir tu boleto VIP en taquilla.");
+console.log("--- 🚪 CONTROL DE ACCESO ---");
+
+if (edadUsuario >= 18) {
+  if (tieneBoletoVip || estaEnListaInvitados) {
+    console.log("🟢 ¡Bienvenido! Acceso a ZONA VIP.");
+  } else {
+    console.log("🟡 ¡Bienvenido! Acceso a ZONA GENERAL.");
+  }
 } else {
-  console.log("🔴 Acceso denegado: Evento exclusivo para mayores de 18 años.");
+  console.log("🔴 Acceso denegado: Eres menor de edad.");
 }
 ```
 
-*Prueba cambiar los valores de `edad`, `tieneBoletoVip` y `estaEnListaDeInvitados` para observar cómo cambia el veredicto del programa.*
+*Prueba cambiar los valores de `edadUsuario`, `tieneBoletoVip` y `estaEnListaInvitados` en la consola para ver cómo reacciona el portero virtual.*
 
 ---
 
-### 🧩 Reto 3: El Generador Automático de Tablas con Bucles (25 min)
+### 🧩 Reto 3: El Generador Automático de Tablas y Conteo con Bucles (25 min)
 
-**Objetivo:** Automatizar repeticiones con bucles `for` y `while`.
+**Objetivo:** Automatizar repeticiones con bucles `for` y recorrer arreglos de datos.
 
-Generemos la tabla de multiplicar del número 7 en 3 líneas de código:
-
+#### Ejercicio 3.1: Tabla de multiplicar instantánea con `for`
 ```javascript
-let numeroTabla = 7;
+const tablaDel = 8;
 
-console.log("--- Tabla del " + numeroTabla + " ---");
-for (let multiplicador = 1; multiplicador <= 10; multiplicador++) {
-  let resultado = numeroTabla * multiplicador;
-  console.log(numeroTabla + " x " + multiplicador + " = " + resultado);
+console.log("--- TABLA DEL " + tablaDel + " ---");
+for (let i = 1; i <= 10; i++) {
+  const resultado = tablaDel * i;
+  console.log(tablaDel + " x " + i + " = " + resultado);
 }
 ```
 
-Ahora un contador regresivo de lanzamiento espacial con `while`:
-
+#### Ejercicio 3.2: Recorrer una lista de alumnos con un bucle
 ```javascript
-let cuentaAtras = 5;
+const alumnos = ["Sebastián", "Valeria", "Mateo", "Camila", "Lucía"];
 
-while (cuentaAtras > 0) {
-  console.log("T-menos " + cuentaAtras + " segundos...");
-  cuentaAtras--; // Restamos 1 en cada vuelta
+console.log("--- LISTA DE ASISTENCIA (" + alumnos.length + " alumnos) ---");
+for (let i = 0; i < alumnos.length; i++) {
+  console.log("Alumno #" + (i + 1) + ": " + alumnos[i]);
 }
-
-console.log("🚀 ¡Despegue exitoso!");
 ```
 
 ---
 
 ### 🧩 Reto 4: La Fábrica de Funciones Reutilizables (20 min)
 
-**Objetivo:** Convertir nuestros retos anteriores en funciones modulares.
+**Objetivo:** Aprender a modularizar código para que sea limpio, mantenible y profesional.
+
+Vamos a transformar nuestras fórmulas en funciones reutilizables:
 
 ```javascript
-// Función para verificar si un número es par o impar
-function esPar(numero) {
-  return numero % 2 === 0;
+// 1. Función para calcular el descuento de cualquier producto
+function calcularDescuento(precioOriginal, porcentajeDescuento) {
+  const ahorro = precioOriginal * (porcentajeDescuento / 100);
+  return precioOriginal - ahorro;
 }
 
-// Función para calcular el descuento de una tienda
-function aplicarDescuento(precioOriginal, porcentajeDescuento) {
-  let descuento = precioOriginal * (porcentajeDescuento / 100);
-  return precioOriginal - descuento;
+// 2. Función para determinar si una persona es mayor de edad
+function esMayorDeEdad(edad) {
+  return edad >= 18;
 }
 
-console.log("¿El número 24 es par?", esPar(24)); // true
-console.log("¿El número 15 es par?", esPar(15)); // false
-console.log("Precio final con 20% de descuento:", "$" + aplicarDescuento(500, 20)); // $400
+// Probamos nuestras funciones con diferentes valores
+console.log("Laptop con 15% de descuento: $" + calcularDescuento(12000, 15));
+console.log("Audífonos con 30% de descuento: $" + calcularDescuento(1500, 30));
+console.log("¿Una persona de 17 años es mayor de edad?", esMayorDeEdad(17)); // false
+console.log("¿Una persona de 25 años es mayor de edad?", esMayorDeEdad(25)); // true
 ```
 
 ---
 
 ## 🗣️ Fase 4: Exposición de Resultados, Debate y Debugging (45 min)
 
-Compartimos pantallas, comparamos soluciones y analizamos las trampas clásicas del código en vivo.
+En esta fase los estudiantes muestran sus consolas, comparan cómo resolvieron los retos y analizamos las trampas más comunes del código en vivo.
 
-### 🐞 Los Errores Típicos en Conceptos Básicos
+### 🐞 Las 4 Trampas Clásicas de Principiantes (y cómo solucionarlas)
 
-#### 1. Confundir `=` (asignar) con `===` (comparar)
+#### 1. La trampa del igual solitario: `=` vs `===`
 * **El error:** Escribir `if (edad = 18)` en lugar de `if (edad === 18)`.
-* **Consecuencia:** `=` sobrescribe el valor de la variable en lugar de compararlo, provocando comportamientos inesperados.
+* **Consecuencia:** Un solo `=` **asigna** el valor a la variable en vez de compararla, haciendo que la condición siempre se evalúe como verdadera.
+* **Regla mnemotécnica:** `=` es para guardar; `===` es para preguntar.
 
-#### 2. El Bucle Infinito en `while`
-* **El error:** Olvidar la línea `contador++` o `cuentaAtras--` dentro del cuerpo de un `while`.
-* **Consecuencia:** La condición nunca deja de ser verdadera y el navegador se congela.  
-* *Tip de rescate:* Cierra la pestaña congelada con el administrador de tareas del navegador (`Shift + Esc` en Chrome).
+#### 2. El bucle infinito con `while`
+* **El error:** Escribir un bucle `while (contador <= 5)` y olvidar poner `contador++` dentro del bloque.
+* **Consecuencia:** El contador nunca sube, la condición jamás se apaga y el navegador se congela consumiendo el 100% de la CPU.
+* **Cómo salir:** Presiona `Shift + Esc` en Chrome para abrir el Administrador de Tareas del navegador y finalizar la pestaña congelada.
 
-#### 3. El Alcance de las Variables (*Scope*)
-* **El error:** Declarar una variable dentro de un bloque `if { let secreto = 123; }` e intentar leerla fuera de las llaves.
-* **Solución:** Las variables creadas con `let` dentro de `{ }` solo viven dentro de esas llaves.
+#### 3. El alcance de las variables (*Scope*)
+* **El error:** Crear una variable con `let` dentro de un `if { let mensaje = "Hola"; }` e intentar usarla fuera del `if`.
+* **Principio:** Las variables que nacen dentro de llaves `{ ... }` mueren al salir de esas llaves. Si necesitas usarla afuera, declárala antes del bloque.
+
+#### 4. El fantasma del `NaN` (*Not-a-Number*)
+* **El error:** Multiplicar una variable que contiene texto inválido (`"hola" * 5`).
+* **Solución:** Valida siempre que tus variables numéricas contengan números reales antes de operar con ellas.
 
 ---
 
 ## 🏠 Fase 5: Definición de Práctica en Casa / Reto Semanal (30 min)
 
-Para consolidar tu aprendizaje antes de la siguiente clase, desarrollarás tu primer mini-sistema comercial.
+Para consolidar tu pensamiento lógico y preparar el terreno para la Lección 3, desarrollarás tu primer sistema comercial interactivo.
 
-### 🏆 Reto Semanal: "El Asistente de Caja del Supermercado"
+### 🏆 Proyecto Semanal: "El Asistente de Facturación del Minimarket"
 
-**Descripción del Problema:**
-Crea un programa en la consola que simule el cobro de una compra en un supermercado con las siguientes reglas:
+**Descripción del Reto:**
+Crea un programa en la consola de JavaScript que calcule la factura de compra de un cliente en una tienda de abarrotes aplicando descuentos e impuestos según las siguientes especificaciones:
 
-1. Define un arreglo con los precios de 3 productos comprados: `let precios = [120, 45, 80];`
-2. Utiliza un bucle `for` para sumar el precio de todos los productos y obtener el `subtotal`.
-3. Crea una función llamada `calcularDescuento(monto)` que aplique las siguientes reglas con un `if/else`:
-   - Si el subtotal es mayor a `$200`, aplica un **10% de descuento**.
-   - Si el subtotal es menor o igual a `$200`, no aplica descuento (0%).
-4. Calcula el total final a pagar.
-5. Imprime en consola un ticket estructurado:
-   ```
-   ===============================
-   🧾 TICKET DE COMPRA
-   ===============================
-   Subtotal: $245
-   Descuento aplicado (10%): $24.50
-   TOTAL A PAGAR: $220.50
-   ===============================
-   ```
+#### Especificaciones Técnicas:
+1. **La canasta de compras:** Crea un arreglo llamado `preciosProductos` con los precios de 4 artículos (ej. `[45, 120, 85, 90]`).
+2. **El cálculo del subtotal:** Usa un bucle `for` para recorrer el arreglo y sumar el valor de todos los productos en una variable `subtotal`.
+3. **La función de descuento:** Crea una función llamada `aplicarDescuento(monto)` con estas reglas:
+   - Si el monto es mayor a `$300`, aplica un **15% de descuento**.
+   - Si el monto está entre `$150` y `$300`, aplica un **5% de descuento**.
+   - Si el monto es menor a `$150`, no aplica descuento (0%).
+4. **La función de impuestos:** Crea una función llamada `calcularIva(montoConDescuento)` que calcule el **16% de IVA** sobre el valor descontado.
+5. **Salida final formateada:** Imprime en la consola un ticket de compra con este formato:
 
-<Aside type="tip" title="Criterio de evaluación para casa">
-Prueba tu script cambiando los precios del arreglo: verifica que cuando la suma sea menor a $200 no se aplique descuento y que cuando supere $200 el descuento se calcule exactamente.
+```
+========================================
+🛒 MINIMARKET DESDE0 - TICKET DE COMPRA
+========================================
+• Subtotal de 4 productos: $340.00
+• Descuento especial: -$51.00
+• Subtotal con descuento: $289.00
+• IVA (16%): +$46.24
+----------------------------------------
+💳 TOTAL FINAL A PAGAR: $335.24
+========================================
+¡Gracias por su compra en Minimarket Desde0!
+```
+
+<Aside type="tip" title="Criterio de Entrega">
+Prueba tu programa con diferentes combinaciones de precios en el arreglo para asegurarte de que los 3 niveles de descuento (0%, 5% y 15%) se activen y calculen correctamente.
 </Aside>
 
 ---
 
 ## 📚 Recursos y Videos Recomendados
 
-Para reforzar estos conceptos con explicaciones visuales y directas:
+Para reforzar los conceptos aprendidos hoy con explicaciones visuales y amenas:
 
 <CardGrid>
   <LinkCard
     title="¿Qué son las Variables en Programación?"
     href="https://www.youtube.com/watch?v=F07pE99N7pE"
-    description="Una explicación visual de cómo se guardan los datos en la memoria de la computadora."
+    description="Una explicación visual de cómo se guardan y nombran los datos en la memoria de la computadora."
   />
   <LinkCard
     title="Condicionales y Bucles explicados para principiantes"
     href="https://www.youtube.com/watch?v=cFiB4v3Bdjo"
-    description="Aprende cómo los programas toman decisiones y automatizan tareas repetitivas."
+    description="Aprende cómo los programas toman decisiones con if/else y automatizan tareas repetitivas."
   />
   <LinkCard
     title="¿Qué es una Función y para qué sirve?"
     href="https://www.youtube.com/watch?v=Oqqxfr8WNlQ"
-    description="Comprende la importancia de encapsular y reutilizar código para crear programas ordenados."
+    description="Comprende la importancia de encapsular y reutilizar código para crear programas limpios y modulares."
   />
   <LinkCard
     title="El Secreto de los Algoritmos en la Vida Real"
     href="https://www.youtube.com/watch?v=kKRW_cUl2Ro"
-    description="Descubre cómo el pensamiento algorítmico te ayuda a resolver problemas cotidianos y de software."
+    description="Descubre cómo el pensamiento algorítmico y estructurado te ayuda a resolver cualquier problema."
   />
 </CardGrid>
 
@@ -341,8 +400,8 @@ Para reforzar estos conceptos con explicaciones visuales y directas:
 
 ## 🚀 Conclusión y Próximos Pasos
 
-¡Gran trabajo! En esta sesión de 4 horas has dominado los cinco bloques esenciales del desarrollo de software: **variables, tipos de datos, operadores, estructuras de control y funciones**.
+¡Extraordinario trabajo! En esta sesión intensiva de 4 horas has dominado los cinco pilares con los que se construye todo el software moderno: **variables, tipos de datos, operadores, estructuras de control y funciones**.
 
-En la próxima sesión exploraremos la sintaxis completa y las herramientas avanzadas de JavaScript en nuestra **[Lección 3: Language Tour (L3)](/roadmap/para-no-programadores/3)**.
+En la próxima sesión exploraremos el catálogo completo de herramientas y sintaxis de JavaScript en nuestra **[Lección 3: Language Tour (L3)](/roadmap/para-no-programadores/3)**.
 
 <Cta></Cta>

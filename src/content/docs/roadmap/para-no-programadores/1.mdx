@@ -1,6 +1,6 @@
 ---
 title: Antes de empezar
-description: Una sesión de aprendizaje de 4 horas para romper el hielo, entender cómo funciona el software, dominar las herramientas del navegador y escribir tus primeros programas en vivo.
+description: Guía y cuaderno de trabajo para una sesión de aprendizaje de 4 horas. Rompe el hielo, desmitifica el funcionamiento del software y escribe tus primeros programas interactivos en vivo.
 ---
 
 import { Aside, CardGrid, LinkCard } from '@astrojs/starlight/components';
@@ -10,94 +10,155 @@ import Cta from '@components/cta/para-no-programadores/cta.astro';
 
 Desarrollar software nunca había sido tan accesible como hoy. Cada día contamos con más herramientas que eliminan las barreras técnicas para resolver problemas complejos. Gracias a la inteligencia artificial, muchas personas creen erróneamente que ya no es necesario aprender a programar; sin embargo, quienes estamos en la industria sabemos que la IA es un copiloto extraordinario, pero **requiere que tú seas el director de orquesta con una base sólida de fundamentos**.
 
-Este taller está diseñado como una **experiencia formativa semanal estructurada en sesiones de 4 horas**, donde combinaremos teoría aplicada, programación en vivo, resolución de dudas y retos semanales.
+Este taller está diseñado como una **experiencia formativa semanal estructurada en sesiones intensivas de 4 horas**, donde combinaremos teoría dialogada, programación interactiva en vivo, análisis de errores y proyectos prácticos.
 
 ---
 
 ## ⏱️ Estructura de la Sesión de 4 Horas
 
-Cada una de nuestras sesiones semanales sigue una metodología pedagógica dividida en **5 fases**:
+Cada una de nuestras sesiones semanales sigue una metodología pedagógica dividida en **5 fases cronológicas**:
 
 ```
-Sesión de 4 Horas
-├── 1. Rompehielos y Expectativas (30 min)
-├── 2. Introducción al Tema y Objetivos (45 min)
-├── 3. Práctica Asistida en Vivo (90 min)
-├── 4. Exposición, Debate y Debugging (45 min)
-└── 5. Reto Semanal y Práctica en Casa (30 min)
+Sesión de 4 Horas: Antes de Empezar
+├── ☕ Fase 1: Rompehielos, Expectativas y Metodología (30 min)
+├── 🎯 Fase 2: Introducción al Tema y Fundamentos (45 min)
+├── 💻 Fase 3: Práctica Asistida en Vivo (90 min)
+├── 🗣️ Fase 4: Exposición, Debate y Debugging (45 min)
+└── 🏠 Fase 5: Reto Semanal y Práctica en Casa (30 min)
 ```
 
 ---
 
 ## ☕ Fase 1: Rompehielos, Expectativas y Metodología (30 min)
 
-Comenzamos la sesión conociéndonos, alineando metas y despejando cualquier duda inicial sobre la dinámica del taller.
+Comenzamos la sesión conociéndonos, alineando objetivos personales y derribando los mitos más comunes sobre la programación.
 
-### Tu Mentalidad de Inicio
+### 1. La Mentalidad de Inicio: Superando el Síndrome del Impostor (10 min)
 
-Aprender a programar es exactamente como aprender a tocar un instrumento musical o un nuevo idioma. No se trata de memorizar sintaxis compleja, sino de **entrenar a tu mente para razonar en pasos lógicos**.
+Aprender a programar es exactamente como aprender a tocar un instrumento musical o dominar un nuevo idioma. No se trata de tener un "talento innato para las matemáticas", sino de **entrenar a tu mente para razonar en pasos lógicos y tolerar la frustración inicial**.
 
-<Aside type="tip" title="Pregunta de reflexión para la sesión">
-Antes de escribir una sola línea de código, reflexiona: **¿Por qué quieres aprender a programar?**  
-¿Quieres crear una aplicación propia? ¿Buscas hacer una transición de carrera a la industria tecnológica? ¿Deseas automatizar tareas de tu trabajo actual? Tener claro tu objetivo será tu brújula en momentos desafiantes.
+* **La computadora no te juzga:** Cuando un programa falla, la computadora no está molesta contigo; simplemente te está diciendo *"no entendí esta instrucción específica"*.
+* **El código se aprende escribiendo código:** Nadie aprende a nadar leyendo un libro de natación. Aquí escribiremos código desde el primer día.
+
+<Aside type="tip" title="Dinámica de Reflexión Inicial">
+Antes de escribir una sola línea de código, responde mentalmente o comparte con el grupo:
+1. **¿Cuál es tu motivación principal?** (¿Crear un proyecto personal, cambiar de carrera o automatizar tu trabajo?).
+2. **¿Cuánto tiempo real puedes dedicarle a la semana?** (Recomendamos entre 4 y 8 horas adicionales de práctica).
+3. **¿Cuál es tu meta a 3 meses?**
 </Aside>
 
-### Requisitos Técnicos
+### 2. Requisitos Técnicos del Taller (10 min)
 
-Para este taller no necesitas equipos costosos ni configuraciones complejas:
-- **Computadora con cualquier sistema operativo:** Windows, macOS o Linux.
-- **Navegador web moderno:** Google Chrome, Mozilla Firefox, Microsoft Edge, Safari o Brave (puedes consultar más detalles en este [artículo de referencia](https://jesusdmedinac.notion.site/C-mo-puedo-empezar-a-programar-2cac38be0050444cba099b1e3b21b029)).
-- **Conexión a internet estable:** Para interactuar en las sesiones y acceder a los recursos en línea.
+Para este curso no necesitas comprar software costoso ni disponer de una supercomputadora:
+* **Computadora con cualquier sistema operativo:** Windows 10/11, macOS o cualquier distribución de Linux.
+* **Navegador web moderno:** Google Chrome, Mozilla Firefox, Microsoft Edge, Safari o Brave (puedes consultar una comparativa de navegadores en este [artículo de referencia](https://jesusdmedinac.notion.site/C-mo-puedo-empezar-a-programar-2cac38be0050444cba099b1e3b21b029)).
+* **Conexión a internet estable:** Para acceder a las herramientas en la nube y participar en las sesiones.
 
-### Mapa del Taller (Ruta de 12 Semanas)
+### 3. El Mapa de Ruta: Tu Viaje de 12 Semanas (10 min)
 
-1. **Antes de empezar (L1):** Fundamentos de la web, mentalidad y tu primer código en la consola.
-2. **[Conceptos básicos (L2)](/roadmap/para-no-programadores/2):** Variables, tipos, operadores, condicionales, bucles y funciones.
-3. **[Language Tour (L3)](/roadmap/para-no-programadores/3):** Recorrido panorámico por la sintaxis de JavaScript.
+Para no perderte en el camino, nuestro viaje está organizado de forma progresiva:
+
+1. **Antes de empezar (L1):** Fundamentos del software, la web y tus primeras líneas de código en consola.
+2. **[Conceptos básicos (L2)](/roadmap/para-no-programadores/2):** Variables, tipos de datos, operadores, condicionales, bucles y funciones.
+3. **[Language Tour (L3)](/roadmap/para-no-programadores/3):** Recorrido completo por la sintaxis moderna de JavaScript.
 4. **[Paradigmas (L4)](/roadmap/para-no-programadores/4):** Programación estructurada, orientada a objetos, funcional y asíncrona.
 5. **[Stacks (L5)](/roadmap/para-no-programadores/5):** Arquitectura web e inicio del proyecto hilo conductor: **ShortURL**.
 6. **[Frontend (L6)](/roadmap/para-no-programadores/6):** Maquetación e interactividad visual con HTML, CSS y JS.
 7. **[Backend (L7)](/roadmap/para-no-programadores/7):** Creación de APIs y servidores web con Node.js.
-8. **[Base de datos (L8)](/roadmap/para-no-programadores/8):** Persistencia y almacenamiento con SQLite.
+8. **[Base de datos (L8)](/roadmap/para-no-programadores/8):** Persistencia y almacenamiento relacional con SQLite.
 9. **[Uso de terminal (L9)](/roadmap/para-no-programadores/9):** Comandos esenciales para dominar la línea de comandos.
-10. **[Control de versiones (L10)](/roadmap/para-no-programadores/10):** Git y GitHub para gestionar tus proyectos.
+10. **[Control de versiones (L10)](/roadmap/para-no-programadores/10):** Git y GitHub para gestionar tus proyectos colaborativamente.
 11. **[Sistemas operativos (L11)](/roadmap/para-no-programadores/11):** Variables de entorno, procesos y arquitectura del sistema.
-12. **[DevOps (L12)](/roadmap/para-no-programadores/12):** Despliegue en la nube y puesta en producción de ShortURL.
+12. **[DevOps (L12)](/roadmap/para-no-programadores/12):** Despliegue en la nube y publicación oficial de tu aplicación en internet.
 
 ---
 
-## 🎯 Fase 2: Introducción al Tema y Objetivos (45 min)
+## 🎯 Fase 2: Introducción al Tema y Fundamentos (45 min)
 
-En esta fase exploraremos qué es realmente el software y cómo las computadoras interpretan las instrucciones humanas.
+En esta fase entenderemos qué ocurre detrás de la pantalla cada vez que usas una aplicación y cómo las computadoras procesan nuestras órdenes.
 
-### Objetivos de Aprendizaje de Hoy
+---
 
-Al finalizar esta sesión serás capaz de:
-1. Entender qué hace un navegador web internamente cuando visita una página.
-2. Abrir y navegar con soltura por las **Herramientas de Desarrollador (DevTools)**.
-3. Utilizar la **Consola de JavaScript** para ejecutar comandos, operaciones y cuadros de diálogo interactivos.
-4. Modificar elementos en vivo de una página web directamente con código.
+### 1. ¿Qué es realmente el Software? (10 min)
 
-### ¿Cómo funciona la Web a alto nivel?
+Una computadora es, en esencia, una máquina increíblemente veloz pero **completamente ciega e incapaz de pensar por sí misma**. Solo sabe hacer dos cosas básicas:
+1. Almacenar electricidad en forma de ceros y unos (`0` = apagado, `1` = encendido) en sus circuitos de memoria.
+2. Ejecutar operaciones matemáticas a la velocidad de la luz en el procesador central (CPU).
 
-Cuando navegas por internet, interactúas con dos mundos:
-1. **El Cliente (Frontend):** Es tu navegador (Chrome, Safari). Su trabajo es recibir código (HTML, CSS, JavaScript) y pintarlo visualmente en tu pantalla.
-2. **El Servidor (Backend):** Es una computadora remota donde viven las bases de datos y la lógica pesada.
+Para comunicarnos con esta máquina sin tener que escribir manualmente millones de ceros y unos en código binario, la humanidad inventó los **lenguajes de programación**.
 
-<Aside type="note" title="Tu navegador ya es un entorno de desarrollo profesional">
-No necesitas instalar programas pesados para empezar. Tu navegador ya incluye un **motor de JavaScript** completo (como el motor *V8* de Google Chrome) listo para interpretar y ejecutar código al instante.
+* **Lenguajes de alto nivel (como JavaScript o Python):** Utilizan palabras en inglés y símbolos familiares (`if`, `console.log`, `+`, `{ }`) para que los humanos podamos expresar ideas lógicas complejas de manera legible.
+* **El Intérprete / Motor de ejecución:** Es el traductor simultáneo que toma nuestras palabras en JavaScript y las convierte al instante en las señales eléctricas binarias que el chip de la computadora comprende.
+
+<Aside type="note" title="Programar es dar instrucciones inequívocas">
+Programar no es magia: es **describir una solución en una secuencia de pasos tan claros, simples y ordenados** que cualquier máquina pueda ejecutarlos sin ambigüedad.
 </Aside>
+
+---
+
+### 2. El Viaje de un Clic: ¿Qué pasa cuando abres una página web? (10 min)
+
+Cuando abres tu navegador, escribes `https://desde0.com` y presionas **Enter**, ocurre una fascinante coreografía en menos de medio segundo:
+
+```
+[Tu Computadora: Cliente] 
+       │  (1. Petición: "Quiero ver la página")
+       ▼
+[La Red Internet / Servidores DNS]
+       │  (2. Busca la dirección IP en el mundo)
+       ▼
+[Servidor Remoto: Backend]
+       │  (3. Empaqueta archivos HTML, CSS y JS)
+       ▼
+[Tu Navegador Web: Renderizado en Pantalla]
+```
+
+1. **Tu navegador (El Cliente):** Envía una solicitud por internet diciendo: *"Hola, quiero ver la página de Desde0"*.
+2. **Los Servidores de Nombres (DNS):** Actúan como la libreta de contactos de internet, traduciendo el nombre del dominio a la dirección IP numérica del servidor.
+3. **El Servidor (Backend):** Es una computadora encendida 24/7 en un centro de datos. Recibe tu solicitud, empaqueta los archivos de la página y te los envía de vuelta en paquetes de datos.
+4. **Tu Navegador procesa los archivos:** Descarga tres lenguajes esenciales y los dibuja en tu monitor: **HTML, CSS y JavaScript**.
+
+---
+
+### 3. La Trinidad de la Web: HTML, CSS y JavaScript (15 min)
+
+Toda página o aplicación web moderna —desde un blog hasta Netflix, Spotify o Instagram— está construida combinando exactamente estos tres lenguajes:
+
+| Lenguaje | Rol en la Web | Analogía de la Casa | Analogía del Auto | Analogía del Cuerpo |
+| :--- | :--- | :--- | :--- | :--- |
+| **HTML** *(HyperText Markup)* | **Estructura y Contenido** | Los cimientos, ladrillos, vigas y puertas. | El chasis, la carrocería, asientos y ruedas. | El esqueleto óseo y los órganos. |
+| **CSS** *(Cascading Style Sheets)* | **Diseño y Estética** | La pintura, los azulejos, colores y decoración. | El color de la pintura, rines y tapizado. | La piel, los ojos, el peinado y la ropa. |
+| **JavaScript** | **Comportamiento e Inteligencia** | El sistema eléctrico, timbres y sensores. | El motor, la transmisión, frenos y GPS. | El sistema nervioso, músculos y cerebro. |
+
+#### 🔍 Demostración Guiada del Instructor:
+*(El instructor proyecta su pantalla, abre un sitio web popular como Wikipedia o una tienda en línea, abre las herramientas de desarrollo y desactiva temporalmente el archivo CSS para mostrar cómo la página se reduce a texto plano sin formato. Luego desactiva JavaScript para demostrar cómo los botones interactivos, carruseles y menús desplegables dejan de reaccionar).*
+
+---
+
+### 4. La Consola: La Ventana Secreta al Motor de tu Navegador (10 min)
+
+Muchas personas asumen que para programar se necesita instalar programas pesados, terminales oscuras o software de pago. **Esto es falso.**
+
+Tu navegador web ya incluye un **motor de JavaScript profesional de nivel industrial** (por ejemplo, Google Chrome y Microsoft Edge usan el motor *V8*, desarrollado en C++ por Google):
+
+* Al abrir las **Herramientas de Desarrollador (DevTools)** y pasar a la pestaña **Consola**, nos conectamos directamente a ese motor en tiempo real.
+* La consola funciona bajo el ciclo **REPL** (*Read-Eval-Print Loop*):
+  1. **Read (Lee):** Lee el código que escribes en la línea de comandos.
+  2. **Eval (Evalúa):** Procesa el cálculo o la instrucción en la memoria.
+  3. **Print (Imprime):** Muestra el resultado de inmediato en pantalla.
+  4. **Loop (Repite):** Vuelve a quedar esperando tu siguiente instrucción.
 
 ---
 
 ## 💻 Fase 3: Práctica Semanal Asistida en Vivo (90 min)
 
-¡Llegó el momento de poner las manos en el teclado! Realizaremos juntos 3 retos prácticos progresivos en la consola de tu navegador.
+Ha llegado el momento de poner las manos en el teclado. Realizaremos juntos 3 retos prácticos progresivos directamente en la consola de tu navegador.
 
-### Paso Previo: Abrir la Consola de Desarrollador
+### Paso 0: Abrir las Herramientas de Desarrollador
 
-1. Haz **clic derecho** en cualquier parte vacía de esta página y selecciona **Inspeccionar** (*Inspect*).
-2. En la ventana que se abre, localiza y haz clic en la pestaña **Consola** (*Console*).
+1. En esta misma ventana de tu navegador, haz **clic derecho** sobre cualquier espacio vacío de la página.
+2. Selecciona la opción **"Inspeccionar"** (o *Inspect*).
+3. En el panel que se abre, haz clic en la pestaña superior llamada **"Consola"** (o *Console*).
 
 <Aside type="tip" title="Atajos rápidos de teclado">
 - **Windows / Linux:** Presiona `F12` o `Ctrl + Shift + J`.
@@ -106,125 +167,171 @@ No necesitas instalar programas pesados para empezar. Tu navegador ya incluye un
 
 ---
 
-### 🧩 Reto 1: La Consola como Panel de Control y Calculadora (25 min)
+### 🧩 Reto 1: La Consola como Panel de Control y Calculadora Inteligente (20 min)
 
-Vamos a familiarizarnos con el comando básico de salida: `console.log()`.
+**Objetivo:** Dominar el comando de salida `console.log()` y entender cómo la computadora procesa operaciones matemáticas y textos.
 
-Escribe en la consola y presiona **Enter**:
+#### Paso 1.1: Tu primer mensaje formal
+Escribe en la consola junto al cursor parpadeante (`>`) y presiona la tecla **Enter**:
 
 ```javascript
-console.log("¡Hola Mundo! Estoy iniciando mi camino en Desde0.");
+console.log("¡Hola Mundo! Estoy iniciando mi carrera en Desde0.");
 ```
 
-La función `console.log` le pide a la computadora que imprima un mensaje en el panel.
+* **`console`**: Es el objeto del sistema que representa el panel de control.
+* **`.log()`**: Es la función que le ordena *"muestra lo que está dentro de los paréntesis"*.
+* **Las comillas (`""`)**: Indican que el contenido es un texto literal (*String*).
 
-Ahora prueba realizar cálculos matemáticos directos:
+#### Paso 1.2: Cálculos matemáticos y precedencia de operadores
+Escribe estas operaciones una por una y presiona **Enter** tras cada una:
 
 ```javascript
-// Suma y resta
-250 + 130 - 45
+// Suma y resta directa
+1500 + 350 - 120
 
-// Multiplicación y división (fíjate en los paréntesis para el orden)
+// Multiplicación y división
+25 * 4 / 2
+
+// Uso de paréntesis para controlar qué se calcula primero
 (100 - 15) * 1.16
 
-// ¿Cuántas horas tiene un año bisiesto?
-366 * 24
+// ¿Cuántas horas hay en un año normal de 365 días?
+365 * 24
 ```
+
+<Aside type="note" title="Observación clave">
+Fíjate que cuando escribes números para calcular **no llevan comillas**. Si pones `"20" + "20"`, la computadora los unirá como texto (`"2020"`). Si pones `20 + 20`, los sumará matemáticamente (`40`).
+</Aside>
 
 ---
 
 ### 🧩 Reto 2: Diálogos Interactivos con el Usuario (`alert` y `prompt`) (35 min)
 
-Un programa se vuelve emocionante cuando interactúa con las personas. Vamos a crear un script que le pregunte su nombre al usuario y lo salude en una ventana emergente.
+**Objetivo:** Crear un programa que capture información ingresada por una persona, la procese en memoria y muestre una respuesta personalizada.
 
+#### Paso 2.1: El saludo emergente interactivo
 Escribe las siguientes líneas una por una en la consola:
 
 ```javascript
-// 1. Mostramos una alerta de bienvenida
-alert("¡Bienvenido al sistema interactivo!");
+// 1. Enviamos un aviso en ventana emergente
+alert("¡Bienvenido al sistema interactivo de Desde0!");
 
-// 2. Pedimos un dato al usuario con prompt y lo guardamos
+// 2. Pedimos el nombre del usuario y lo guardamos en una variable con let
 let nombreUsuario = prompt("¿Cuál es tu nombre?");
 
-// 3. Respondemos utilizando el dato ingresado
+// 3. Respondemos usando el nombre capturado mediante concatenación (+)
 alert("¡Mucho gusto, " + nombreUsuario + "! Tu primer programa interactivo está funcionando.");
 ```
 
-#### Mini-Desafío en Vivo:
-Crea una calculadora interactiva que pida dos números al usuario y muestre su suma total:
+#### Paso 2.2: Mini-Desafío en Vivo (La Calculadora de Suma)
+¿Qué pasa si queremos pedirle dos números al usuario y sumarlos?
 
 ```javascript
-let primerNumero = Number(prompt("Ingresa el primer número:"));
-let segundoNumero = Number(prompt("Ingresa el segundo número:"));
+// Pedimos el primer número y lo convertimos a valor numérico con Number()
+let numero1 = Number(prompt("Ingresa el primer número:"));
 
-let resultadoSuma = primerNumero + segundoNumero;
-alert("El resultado de la suma es: " + resultadoSuma);
+// Pedimos el segundo número
+let numero2 = Number(prompt("Ingresa el segundo número:"));
+
+// Realizamos el cálculo
+let totalSuma = numero1 + numero2;
+
+// Mostramos el resultado
+alert("La suma de " + numero1 + " + " + numero2 + " es igual a: " + totalSuma);
 ```
 
 ---
 
-### 🧩 Reto 3: Hackeando en Vivo la Página Web (30 min)
+### 🧩 Reto 3: Modificando una Página Web en Tiempo Real (DOM) (35 min)
 
-JavaScript tiene el superpoder de modificar la página web en tiempo real a través del objeto `document`.
+**Objetivo:** Comprender que las páginas web son dinámicas y que JavaScript puede alterar en vivo el texto, los colores y la estructura de lo que ves.
 
-Prueba ejecutar estas instrucciones en la consola mientras observas esta misma pestaña:
+El navegador nos da acceso a un objeto global llamado `document`, que representa la página web actual.
+
+Ejecuta estas instrucciones en la consola mientras observas esta misma pestaña:
 
 ```javascript
-// 1. Cambia el título de la pestaña del navegador
-document.title = "🚀 ¡Página personalizada por mí!";
+// 1. Cambia el título de la pestaña de tu navegador
+document.title = "🚀 ¡Página hackeada por mí con JavaScript!";
 
 // 2. Cambia el color de fondo de toda la pantalla
-document.body.style.backgroundColor = "#F1F5F9";
+document.body.style.backgroundColor = "#0F172A";
 
-// 3. Lanza un mensaje final de felicitación
-console.log("¡Felicidades! Has interactuado directamente con el DOM de la página.");
+// 3. Cambia el color de todos los textos para que contrasten en blanco
+document.body.style.color = "#F8FAFC";
+
+// 4. Cambia el texto del título principal (h1) de esta página
+document.querySelector('h1').innerText = "¡He tomado el control con JavaScript!";
 ```
 
-*(Si recargas la página con F5, volverá a su estado original. ¡No puedes romper nada, así que experimenta con total libertad!)*
+<Aside type="tip" title="¡Tu entorno es seguro!">
+Si recargas la página presionando `F5` o el botón de recarga, la página volverá a su estado original. Lo que acabas de hacer demuestra que el código de una página web se ejecuta en **tu propia computadora**, no en el servidor remoto.
+</Aside>
 
 ---
 
-## 🗣️ Fase 4: Exposición de Resultados, Preguntas y Debugging (45 min)
+## 🗣️ Fase 4: Exposición de Resultados, Debate y Debugging (45 min)
 
-En esta fase abrimos los micrófonos y la pantalla para revisar los resultados de la práctica, resolver dudas y aprender de los errores comunes.
+En esta fase abrimos micrófonos, compartimos pantalla y analizamos los errores comunes ocurridos durante la práctica.
 
-### 🐞 Los Primeros Errores de Novato (y cómo solucionarlos)
+### 🐞 Anatomía de un Error: Cómo leer la Consola sin Miedo
 
-Cuando programas, cometer errores es lo más normal del mundo. Los mensajes en rojo de la consola no son un regaño: **son pistas de la computadora para ayudarte**.
+Cuando estás programando, cometer errores es parte natural del trabajo diario. Los mensajes en rojo de la consola son diagnósticos precisos que te indican **qué falló y en qué línea**.
 
 #### 1. `Uncaught SyntaxError: Invalid or unexpected token`
-* **¿Por qué ocurre?** Olvidaste cerrar unas comillas (`"`) o un paréntesis `)`.
-* **Ejemplo que falla:** `console.log("Hola Mundo);`
-* **Solución:** Revisa que cada comilla y paréntesis que abras tenga su respectivo cierre.
+* **¿Qué significa?** Violaste una regla gramatical del lenguaje. Casi siempre ocurre por olvidar cerrar unas comillas (`"`) o un paréntesis `)`.
+* **Ejemplo erróneo:** `console.log("Hola Mundo);`
+* **Cómo solucionarlo:** Revisa que cada símbolo abierto tenga su respectivo cierre en el lugar correcto.
 
 #### 2. `Uncaught ReferenceError: [nombre] is not defined`
-* **¿Por qué ocurre?** Escribiste mal el nombre de una función o variable. JavaScript distingue estrictamente entre mayúsculas y minúsculas (*case-sensitive*).
-* **Ejemplo que falla:** `Console.log("Hola");` o `console.Log("Hola");`
-* **Solución:** Escríbelo exactamente en minúsculas: `console.log(...)`.
+* **¿Qué significa?** Intentaste usar una variable o función que JavaScript no conoce. Recuerda que JavaScript es estrictamente sensible a mayúsculas y minúsculas (*case-sensitive*).
+* **Ejemplo erróneo:** `Console.log("Hola");` o `console.Log("Hola");`
+* **Cómo solucionarlo:** Escríbelo exactamente en minúsculas: `console.log(...)`.
 
-#### 3. Sumas que se convierten en texto pegado (`"10" + "5" = "105"`)
-* **¿Por qué ocurre?** Si no conviertes el texto de un `prompt()` con `Number()`, JavaScript asume que quieres pegar las letras en vez de sumar cantidades.
+#### 3. El error de concatenación accidental (`"10" + 5 = "105"`)
+* **¿Qué significa?** `prompt()` siempre entrega datos en formato de texto (*String*). Si sumas texto con números sin usar `Number()`, JavaScript los junta como palabras en lugar de sumarlos como cantidades.
+* **Solución:** Envuelve siempre la entrada con `Number(prompt(...))`.
 
 ---
 
 ## 🏠 Fase 5: Definición de Práctica en Casa / Reto Semanal (30 min)
 
-Para consolidar lo aprendido hoy antes de la siguiente sesión, realizarás tu primer proyecto en casa.
+Para afianzar los conceptos aprendidos hoy y prepararte para la Lección 2, realizarás un proyecto completo en casa.
 
-### 🏆 Reto Semanal: "El Calculador de Tiempo de Vida"
+### 🏆 Proyecto Semanal: "El Generador de Biografía y Tiempo de Vida"
 
-**Instrucciones:**
-Abre la consola de tu navegador en cualquier página y crea un script interactivo que realice lo siguiente:
-1. Muestre una alerta inicial: `"Bienvenido al calculador de edad"`.
-2. Le pida al usuario su nombre con `prompt()`.
-3. Le pida al usuario su año de nacimiento.
-4. Calcule la edad aproximada del usuario (`2026 - añoNacimiento`).
-5. Calcule aproximadamente cuántos meses y días ha vivido (`edad * 12` meses, `edad * 365` días).
-6. Muestre el resultado en un mensaje de alerta final:  
-   *`"Hola [Nombre], tienes aproximadamente [X] años, lo que equivale a [Y] meses o [Z] días de vida. ¡Increíble!"`*
+**Objetivo:** Desarrollar un script interactivo en la consola del navegador que recopile datos de una persona y genere un reporte biográfico completo con cálculos de tiempo de vida.
 
-<Aside type="tip" title="Criterio de éxito para casa">
-Pruébalo con familiares o amigos ingresando diferentes años de nacimiento y verifica que los cálculos matemáticos se muestren correctamente en la ventana de alerta.
+#### Especificaciones del Script:
+1. **Mensaje de bienvenida:** Mostrar un `alert("Bienvenido al Generador de Biografía Desde0");`.
+2. **Captura de datos con `prompt()`:**
+   - Nombre completo.
+   - Ciudad de residencia.
+   - Año de nacimiento (ej. `1998`).
+   - Profesión u ocupación actual.
+3. **Cálculos matemáticos:**
+   - Calcular la edad aproximada: `2026 - añoNacimiento`.
+   - Calcular los meses aproximados vividos: `edad * 12`.
+   - Calcular los días aproximados vividos: `edad * 365`.
+   - Calcular las horas aproximadas vividas: `días * 24`.
+4. **Salida final formateada:** Mostrar una ventana de alerta o imprimir en la consola un texto estructurado como este:
+   ```
+   ========================================
+   👤 REPORTE BIOGRÁFICO DE [NOMBRE]
+   ========================================
+   • Residencia: [Ciudad]
+   • Profesión: [Profesión]
+   • Edad aproximada: [Edad] años
+   • Tiempo en el planeta:
+     - [Meses] meses
+     - [Días] días
+     - [Horas] horas de vida
+   ========================================
+   ¡Gracias por usar nuestro programa!
+   ```
+
+<Aside type="tip" title="Criterio de Entrega">
+Prueba tu script en la consola de tu navegador con al menos 3 personas distintas (amigos o familiares) y asegúrate de que todos los cálculos matemáticos se muestren sin errores de tipo `NaN`.
 </Aside>
 
 ---
@@ -260,8 +367,8 @@ Para acompañar tu estudio en casa con explicaciones visuales y amenas, te recom
 
 ## 🚀 Conclusión y Próximos Pasos
 
-¡Felicidades por completar tu primera sesión intensiva de 4 horas! Has roto la barrera del miedo, dominas la consola de desarrollador y has creado tus primeros programas interactivos en JavaScript.
+¡Felicidades por completar tu primera sesión intensiva de 4 horas! Has roto el miedo a programar, dominas las herramientas de desarrollo del navegador y has creado tus primeros programas interactivos en JavaScript.
 
-En la próxima sesión nos sumergiremos en el corazón de la programación estructurada: **[Lección 2: Conceptos básicos (L2)](/roadmap/para-no-programadores/2)**, donde aprenderemos a guardar datos con variables, evaluar condiciones y automatizar tareas repetitivas con bucles y funciones.
+En la próxima sesión construiremos las estructuras lógicas de cualquier aplicación: **[Lección 2: Conceptos básicos (L2)](/roadmap/para-no-programadores/2)**, donde aprenderemos a guardar datos con variables, evaluar condiciones lógicas con `if/else`, automatizar repeticiones con bucles y encapsular lógica en funciones reutilizables.
 
 <Cta></Cta>
