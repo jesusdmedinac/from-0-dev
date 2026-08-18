@@ -1,506 +1,348 @@
 ---
 title: Conceptos básicos
-description: ¡Prepárate para dar el primer paso hacia el mundo de la programación! En esta sección, exploraremos los conceptos fundamentales que te permitirán desarrollar una carrera como programador de software.
+description: Una sesión de aprendizaje de 4 horas para dominar los 5 bloques fundamentales de cualquier software - variables, tipos de datos, operadores, estructuras de control y funciones.
 ---
 
-import Link from "@components/ui/link.astro";
-import { Icon, Aside } from '@astrojs/starlight/components';
-import { Image } from 'astro:assets';
-import algoritmo1 from '../../../../assets/algoritmo-1.png';
-import algoritmo2 from '../../../../assets/algoritmo-2.png';
-import algoritmo3 from '../../../../assets/algoritmo-3.png';
+import { Aside, CardGrid, LinkCard } from '@astrojs/starlight/components';
 import Cta from '@components/cta/para-no-programadores/cta.astro';
 
 <Cta></Cta>
 
-¡Prepárate para dar el primer paso hacia el mundo de la programación! En esta sección, 
-exploraremos los conceptos fundamentales que te permitirán desarrollar una carrera como
-programador de software.
+En la **[Lección 1: Antes de empezar (L1)](/roadmap/para-no-programadores/1)** dimos nuestros primeros pasos abriendo la consola del navegador y ejecutando instrucciones interactivas. Hoy nos adentraremos en el núcleo de la programación: los **5 bloques constructivos** con los que se crea cualquier aplicación en el mundo.
 
-En esta clase entenderás qué es una variables, qué tipos existen y para qué se utilizan.
-También dominarás los diferentes tipos de operadores para realizar operaciones con los datos.
-Continuaremos con estrucutras de control para controlar el flujo de la ejecución de tu programa y 
-definiremos funciones como bloques de código reutilizables. Realizarás algoritmos para resolver problemas
-específicos en forma de secuencia y aprenderás lo que son los arreglos y las estructuras de datos para
-organizar y almacenar datos de manera eficiente.
+Esta sesión de **4 horas** está diseñada para que entiendas la teoría a través de analogías claras y la apliques inmediatamente con retos de programación en vivo.
 
-Para esta clase utilizaremos JavaScript para cada uno de los ejemplos.
+---
 
-### Variables
+## ⏱️ Estructura de la Sesión de 4 Horas
 
-En programación, una variable es un dato o información almacenado en la memoria de nuestra computadora.
-Nosotros asignamos un nombre y le indicamos qué dato almacenar.
-
-Es decir, definimos el nombre del valor que queremos guardar. Por ejemplo:
-```js
-var nombre = "Joul"
-var edad = 29
-var dirección = "La dirección de Joul"
+```
+Sesión de 4 Horas: Conceptos Básicos
+├── 1. Revisión del Tema Anterior y Dudas (30 min)
+├── 2. Introducción Teórica y Objetivos (45 min)
+├── 3. Práctica Asistida en Vivo (90 min)
+├── 4. Exposición, Debate y Debugging (45 min)
+└── 5. Reto Semanal y Práctica en Casa (30 min)
 ```
 
-Veamos la estructura para escribir variables:
+---
 
-```js
-/*1*/var /*2*/nombreDeLaVariable /*3*/= /*4*/"Valor de la variable"
-```
+## ☕ Fase 1: Revisión del Tema Anterior y Dudas (30 min)
 
-1. Palabra reservada para indicar que crearemos una variable: `var`, `let`, `const`.
+Comenzamos la sesión revisando el reto dejado en la Lección 1 y resolviendo inquietudes comunes.
 
-Aunque en JavaScript no es obligatorio utilizar esta palabra reservada, se recomienda utilizarla
-para que nuestro código sea más fácil de leer por otros programadores.
+### Puesta en Común del Reto de la Lección 1
+En la sesión anterior construimos un calculador interactivo de edad con `prompt()`, `alert()` y `Number()`.
+- ¿Pudiste probar tu script con diferentes años de nacimiento?
+- ¿Qué ocurrió si el usuario escribió letras en vez de números? (Apareció `NaN` o *Not a Number*, un concepto que profundizaremos hoy).
+- ¿Cómo te sentiste al interactuar directamente con la consola?
 
-2. Nombre de la variable.
-
-El nombre es muy importante por el mismo tema de la legibilidad de nuestro código. Se recomienda que
-el nombre sea descriptivo y fácil de entender.
-
-Podemos utilizar casi cualquier caracter para escribir el nombre de nuestras variables, pero lo más
-común es escribir nombre en inglés.
-
-3. Operador de asignación: `=`, `+=`, `-=`, `*=`.
-
-Estos operadores los explicaremos en la sección de operadores. Pero su uso es básicamente decirle a
-la variable qué valor va a tener asignado.
-
-4. Valor de la variable.
-
-Prácticamente cualquier información que queramos utilizar más adelante. Es decir, si tú necesitas
-que tu programa recuerde algo, puedes definir variables con valores para utilizarlos en otra parte
-de tu código.
-
-Si sientes que esto de las variables es muy ambigüo, repasemos los ejercicios de la clase pasada:
-
-```js
-var suma = 2 + 2
-var suma = 2 + 2
-var resta = 2 - 2
-var multiplicacion = 2 * 2
-var divicion = 2 / 2
-var modulo = 2 % 2
-alert(suma)
-alert(resta)
-alert(multiplicacion)
-alert(divicion)
-alert(modulo)
-```
-
-### Tipos de datos
-
-Después de entender las variables, debiste haber notado que los valores de las variables se escriben de
-forma distinta dependiendo del tipo de información que quieres almacenar. Es decir, el tipo de dato.
-
-Los tipos de datos representan categorías de información, es decir, tipos de información.
-
-En todos los lenguajes de programación encontraremos representaciones de los tipos de datos para las
-siguientes categorías: texto, números, buleanos, arreglos y objetos.
-
-En JavaScript tenemos diferentes tipos de datos para representar estas categorías:
-```js
-// string -> Cadena de texto
-var nombre = "Joul"
-// number -> Cualquier número, enteros, decimales, negativos, etc.
-var edad = 29
-// boolean -> Buleanos, es decir, true (verdadero) o false (falso).
-var esMayorDeEdad = true
-// array -> Arreglos, esto lo explicaremos más adelante.
-var gustos = ["Cocina", "Fotografía", "Tomar café"]
-// object -> Objetos, esto lo explicaremos en la clase de paradigmas.
-var persona = Person(nombre, edad, gustos)
-```
-
-### Operadores
-
-Los operadores son símbolos utilizados para realizar operaciones. Existen varios tipos de operaciones 
-comunes: Aritméticos, asignación, comparación, lógicos, bit a bit, cadena, ternario, tipos, desestructuración
-y nulidad.
-
-Veamos uno por uno:
-```js
-// Operadores aritméticos
-let a = 10;
-let b = 5;
-
-let suma = a + b;          // Suma
-let resta = a - b;         // Resta
-let multiplicacion = a * b; // Multiplicación
-let division = a / b;      // División
-let modulo = a % b;        // Módulo
-let exponente = a ** b;    // Exponenciación
-a++;                       // Incremento
-b--;                       // Decremento
-
-// Operadores de asignación
-let c = 10;
-
-c = 5;         // Asignación
-c += 5;        // Suma y asignación
-c -= 2;        // Resta y asignación
-c *= 3;        // Multiplicación y asignación
-c /= 2;        // División y asignación
-c %= 3;        // Módulo y asignación
-c **= 2;       // Exponenciación y asignación
-
-// Operadores de comparación
-let d = 10;
-let e = 20;
-
-d == e;        // Igualdad
-d != e;        // Desigualdad
-d === e;       // Igualdad estricta
-d !== e;       // Desigualdad estricta
-d > e;         // Mayor que
-d < e;         // Menor que
-d >= e;        // Mayor o igual que
-d <= e;        // Menor o igual que
-
-// Operadores lógicos
-let f = true;
-let g = false;
-
-f && g;        // AND lógico
-f || g;        // OR lógico
-!f;            // NOT lógico
-
-// Operadores bit a bit
-let h = 5;    // 0101 en binario
-let i = 3;    // 0011 en binario
-
-h & i;        // AND bit a bit (0001)
-h | i;        // OR bit a bit (0111)
-h ^ i;        // XOR bit a bit (0110)
-~h;           // NOT bit a bit (1010)
-h << 1;       // Desplazamiento a la izquierda (1010)
-h >> 1;       // Desplazamiento a la derecha (0010)
-h >>> 1;      // Desplazamiento a la derecha sin signo (0010)
-
-// Operadores de cadena
-let j = "Hola";
-let k = "Mundo";
-
-let concatenacion = j + " " + k; // Concatenación de cadenas
-j += " a todos";                // Concatenación y asignación
-
-// Operador ternario
-let l = 10;
-let resultado = (l > 5) ? "Mayor que 5" : "Menor o igual a 5";
-
-// Operadores de tipo
-let m = "Hola Mundo";
-
-typeof m;                 // Devuelve "string"
-m instanceof String;      // Devuelve false (String primitivo no es instancia de String objeto)
-
-// Operadores de desestructuración
-let [n, o] = [1, 2];      // Desestructuración de array
-let { p, q } = { p: 3, q: 4 }; // Desestructuración de objeto
-
-// Operador de nulidad
-let r = null;
-let valor = r ?? "Valor por defecto"; // Devuelve "Valor por defecto" ya que r es null
-```
-
-### Estructuras de control
-
-Al escribir código, podemos controlar el flujo en el que se ejecutan nuestras líneas.
-Es decir, podemos hacer que nuestro código tome decisiones para tomar diferentes caminos.
-
-Tomemos un ejemplo muy sencillo:
-Imagina que queremos mostrar un mensaje diferente dependiendo de si una persona es mayor
-de edad.
-
-```js
-var esMayorDeEdad = true
-if (esMayorDeEdad) {
-  alert("Es mayor de edad")
-} else {
-  alert("Es menor de edad")
-}
-```
-
-Las estructuras de control nos ayudan a simplificar el código.
-```js
-// if, else if, else
-let a = 10;
-
-if (a > 5) {
-    console.log("a es mayor que 5");
-} else if (a === 5) {
-    console.log("a es igual a 5");
-} else {
-    console.log("a es menor que 5");
-}
-
-// switch
-let dia = 3;
-let nombreDia;
-
-switch (dia) {
-    case 1:
-        nombreDia = "Lunes";
-        break;
-    case 2:
-        nombreDia = "Martes";
-        break;
-    case 3:
-        nombreDia = "Miércoles";
-        break;
-    case 4:
-        nombreDia = "Jueves";
-        break;
-    case 5:
-        nombreDia = "Viernes";
-        break;
-    case 6:
-        nombreDia = "Sábado";
-        break;
-    case 7:
-        nombreDia = "Domingo";
-        break;
-    default:
-        nombreDia = "Día no válido";
-}
-
-console.log(nombreDia);
-
-// Bucles o Ciclos
-// for
-for (let i = 0; i < 5; i++) {
-    console.log("Iteración número " + i);
-}
-// while
-let b = 0;
-
-while (b < 5) {
-    console.log("b es " + b);
-    b++;
-}
-// do..while
-let c = 0;
-
-do {
-    console.log("c es " + c);
-    c++;
-} while (c < 5);
-
-// for...in (para iterar sobre las propiedades de un objeto)
-let objeto = { nombre: "Juan", edad: 30, ciudad: "Madrid" };
-
-for (let propiedad in objeto) {
-    console.log(propiedad + ": " + objeto[propiedad]);
-}
-
-// for...of (para iterar sobre elementos de un iterable como arrays)
-let array = [10, 20, 30, 40, 50];
-
-for (let valor of array) {
-    console.log(valor);
-}
-
-// Manejo de Errores
-// try...catch
-try {
-    let resultado = 10 / 0; // No lanza error pero resultado será Infinity
-    console.log(resultado);
-
-    let noDefinido;
-    console.log(noDefinido.propiedad); // Esto lanzará un error
-} catch (error) {
-    console.log("Se ha producido un error: " + error.message);
-}
-
-// try...catch...finally
-try {
-    let resultado = 10 / 2;
-    console.log(resultado);
-} catch (error) {
-    console.log("Se ha producido un error: " + error.message);
-} finally {
-    console.log("Esto se ejecuta siempre, haya o no error");
-}
-
-// throw (para lanzar errores)
-function dividir(a, b) {
-    if (b === 0) {
-        throw new Error("No se puede dividir por cero");
-    }
-    return a / b;
-}
-
-try {
-    let resultado = dividir(10, 0);
-    console.log(resultado);
-} catch (error) {
-    console.log("Error: " + error.message);
-}
-```
-
-Estas estructuras de control permiten tomar decisiones y repetir acciones en tu código de 
-manera eficiente y controlada.
-
-### Funciones
-
-Cuando escribimos código, es muy común querer reutilizar nuestro código en diferentes partes de nuestro código.
-Sin embargo, no es muy práctico copiar el código y pegarlo cada vez que lo necesitemos.
-
-```js
-// Calcular si un número es par
-var primerNumero = 1
-var segundoNumero = 2
-var tercerNumero = 3
-
-var elPrimerNumeroEsPar = primerNumero % 2 == 0
-var elSegundoNumeroEsPar = segundoNumero % 2 == 0
-var elTercerNumeroEsPar = tercerNumero % 2 == 0
-```
-
-En lugar de eso, podemos crear una función para que nos haga el trabajo.
-```js
-// Calcular si un número es par
-function esPar(numero) {
-  return numero % 2 == 0
-}
-
-var primerNumero = 1
-var segundoNumero = 2
-var tercerNumero = 3
-
-var elPrimerNumeroEsPar = esPar(primerNumero)
-var elSegundoNumeroEsPar = esPar(segundoNumero)
-var elTercerNumeroEsPar = esPar(tercerNumero)
-```
-
-O incluso podemos simplificar aún más
-
-```js
-var elPrimerNumeroEsPar = esPar(1)
-var elSegundoNumeroEsPar = esPar(2)
-var elTercerNumeroEsPar = esPar(3)
-```
-
-Entendamos la estructura de una función en JavaScript.
-
-1. Palabra reservada `function`.
-
-La palabra clave function es el punto de partida para definir una función.
-
-2. Nombre de la función
-
-El nombre de la función identifica la función. Es importante seguir las convenciones 
-de nomenclatura, como usar `camelCase`.
-
-3. Parámetros
-
-Los parámetros se definen dentro de paréntesis (). Puedes tener cero o más parámetros 
-separados por comas.
-
-4. Cuerpo de la función
-
-El cuerpo de la función está encerrado entre llaves {} y contiene las declaraciones que 
-definen lo que hace la función.
-
-5. Palabra reservada para regresar valores `return`.
-
-```js
-function esPar(numero) { // Palabra clave 'function', nombre de la función 'esPar', y parámetro 'numero'
-  return numero % 2 == 0 // Cuerpo de la función y palabra reservada `return`
-}
-```
-
-### Algoritmos
-
-Imagina una receta. Sigues cada uno de los pasos para preparar el platillo perfecto. Pero no te sale como en el video. ¿Por qué? Quizás olvidaste un paso importante, o hay algún paso que no aparece en el recetario o video de cocina.
-
-Cada paso en la receta es importante. Es lo que determina que obtengas el mismo resultado siempre; seguir el mismo algoritmo.
-
-#### Definición de algoritmo
-
-<Aside type="note">
-En informática, se llaman algoritmos el conjunto de instrucciones sistemáticas y previamente definidas que se utilizan para realizar una determinada tarea. Estas instrucciones están ordenadas y acotadas a manera de pasos a seguir para alcanzar un objetivo.
+<Aside type="tip" title="Conclusión de la revisión">
+La consola del navegador es nuestro laboratorio de pruebas rápido. Hoy dejaremos de escribir líneas sueltas y comenzaremos a estructurar lógica completa.
 </Aside>
 
-Esta es una de las definiciones más complejas que he encontrado. Pero es la ideal para nosotros.
+---
 
-#### Conjunto de instrucciones sistemáticas
+## 🎯 Fase 2: Introducción Teórica y Objetivos (45 min)
 
-Una instrucción es una sub-tarea precisa. Por ejemplo, en una receta, cada paso de la receta es una instrucción. Pero el conjunto de instrucciones forman un sistema llamado receta.
+En esta fase exploraremos los 5 pilares fundamentales de la programación mediante ejemplos prácticos en JavaScript.
 
-#### Que se utilizan para realizar una determinada tarea
+### Objetivos de Aprendizaje de Hoy
 
-La tarea en una receta es el platillo a cocinar. Si sigues cada paso lograrás realizar la tarea determinada.
+1. **Variables (`let` y `const`):** Guardar y recuperar datos en la memoria de la computadora.
+2. **Tipos de Datos:** Identificar texto (`string`), números (`number`), decisiones (`boolean`), listas (`array`) y objetos (`object`).
+3. **Operadores:** Realizar cálculos matemáticos y comparaciones lógicas.
+4. **Estructuras de Control:** Enseñar al programa a tomar decisiones (`if / else`) y a repetir tareas (`for / while`).
+5. **Funciones:** Encapsular código en bloques reutilizables para no repetirnos.
 
-#### Estas instrucciones están ordenadas y acotadas a manera de pasos a seguir
+---
 
-Ordenar y acotar las instrucciones es esencial para obtener el mismo resultado. Si decides cambiar el orden de las tareas corres el riesgo de obtener un resultado diferente. 
+### 1. Variables: Las cajas de la memoria
 
-Y en ocasiones es imposible cambiar el orden. Por ejemplo, no puedes batir los huevos sin antes romper el cascarón. O no puedes cocinar sin antes prender la estufa. Sé que parece lógico, pero es importante precisar el orden y acotar las instrucciones para que garanticemos el mismo resultado.
+Imagina que la memoria de tu computadora es una habitación llena de estanterías vacías. Para guardar algo y encontrarlo después con facilidad, tomas una **caja**, le pegas una **etiqueta con un nombre** y colocas un **valor dentro**.
 
-Es por eso que obtener un resultado diferente nos hace pensar si hay algún paso que no seguimos al pie de la letra.
+```javascript
+/* 1 */ let /* 2 */ nombreUsuario /* 3 */ = /* 4 */ "Ada Lovelace";
+```
 
-#### ¿Cuáles son las características de un algoritmo?
+* **`let` / `const`:** Avisa a JavaScript que reservamos memoria. Usamos `let` cuando el dato puede cambiar (ej. el nivel de un juego) y `const` cuando es un valor fijo e inmutable (ej. tu fecha de nacimiento).
+* **Nombre de la variable:** Usamos la convención `camelCase` (ej. `precioProducto`, `estaAutenticado`).
+* **`=` (Asignación):** Guarda el dato de la derecha en la variable de la izquierda.
 
-Es importante precisar que cada algoritmo es diferente. Sin embargo, todos deben cumplir con las siguientes características para ser considerado algoritmos:
+---
 
-1. **Inicio y fin:** Es importante precisar que un algoritmo puede o no tener pre-requisitos. Es decir, qué se necesita antes de empezar. Pero una vez empieza el algoritmo, debe terminar en algún punto.
-2. **Exactitud:** Cada algoritmo debe de garantizar que, siempre que se siga al pie de la letra, el resultado debe ser el mismo.
-3. **Secuencia:** Cambiar el orden de las instrucciones siempre provocará un resultado diferente.
-4. **Finitos:** El número de pasos para ejecutar la tarea debe ser finito para darla por concluida.
+### 2. Tipos de Datos Fundamentales
 
-#### Ejemplo de un algoritmo
+```javascript
+// Texto (String): Siempre entre comillas
+let ciudad = "Ciudad de México";
 
-Hagamos un pequeño ejemplo de un algoritmo para ayudar a nuestro pequeño robot a llegar al final del laberinto.
+// Número (Number): Enteros o decimales, sin comillas
+let temperatura = 23.5;
 
-<Image src={algoritmo1} alt="Laberinto 1" width="512"/>
+// Booleano (Boolean): Solo true (verdadero) o false (falso)
+let esDiaSoleado = true;
 
-En la imagen tenemos marcado el punto de inicio con una S de start de color verde, y de rojo tenemos la E de exit.
+// Lista (Array): Colección ordenada entre corchetes
+let amigos = ["Carlos", "Diana", "Sebastián"];
 
-Todo algoritmo tiene un inicio y un fin, así que nuestro algoritmo se definiría de la siguiente manera:
+// Objeto (Object): Ficha de datos estructurada entre llaves
+let producto = {
+  nombre: "Café de Especialidad",
+  precio: 75,
+  disponible: true
+};
+```
 
-1. Iniciamos desde la puerta de entrada S
-2. …
-3. Salimos por la puerta de salida E
+---
 
-¿Y cómo definimos los pasos intermedios? primero intenta resolver el laberinto. ¿Listo? ¿No? aquí tienes una pequeña ayuda:
+### 3. Operadores Esenciales
 
-<Image src={algoritmo2} alt="Laberinto 2" width="512"/>
+* **Aritméticos:** `+` (suma), `-` (resta), `*` (multiplicación), `/` (división), `%` (módulo o residuo).
+* **Comparación:** `===` (¿es idéntico?), `!==` (¿es diferente?), `>` (mayor), `<` (menor), `>=` (mayor o igual).
+* **Lógicos:** `&&` (AND: ambas condiciones deben ser verdaderas), `||` (OR: al menos una condición debe cumplirse), `!` (NOT: invierte el valor).
 
-Ahora intenta describir paso a paso cómo avanzarías por el laberinto.
+---
 
-¿Cómo te fue? ¿Pudiste hacerlo? ¿No? no te preocupes, deja te muestro cómo lo describiría yo:
+### 4. Estructuras de Control: Decisiones y Bucles
 
-1. Iniciamos desde la puerta de entrada S.
-2. Avanzamos recto hasta la intersección.
-3. Giramos hacia la derecha.
-4. Avanzamos recto hasta la intersección.
-5. Giramos hacia la izquierda.
-6. Avanzamos recto hasta la pared.
-7. Giramos hacia la derecha.
-8. Avanzamos recto hasta la pared.
-9. Giramos hacia la izquierda.
-10. Avanzamos recto hasta la pared.
-11. Giramos hacia la izquierda.
-12. Avanzamos recto hasta la pared.
-13. Giramos hacia la izquierda.
-14. Avanzamos recto hasta la pared.
-15. Giramos hacia la derecha.
-16. Avanzamos recto hasta la pared.
-17. Giramos hacia la derecha.
-18. Avanzamos recto hasta la salida.
-19. Salimos por la puerta de salida E.
+#### Decisiones (`if / else if / else`)
+Permiten que el programa elija qué bloque de código ejecutar según una condición:
 
-Intenta seguir mi algoritmo en el laberinto y verifica si llegas hasta la salida.
+```javascript
+let saldo = 120;
+let costoProducto = 100;
 
-Lo sé, es muchísimo más fácil simplemente ir dibujando en el laberinto el camino por el que vamos avanzando y olvidarnos de los pasos anteriores. Nuestro cerebro es bueno para resolver este tipo de problemas sin que nosotros tengamos que pensar en el paso a paso.
+if (saldo >= costoProducto) {
+  console.log("¡Compra exitosa! Disfruta tu producto.");
+} else {
+  console.log("Saldo insuficiente. Por favor recarga fondos.");
+}
+```
 
-Pero te aseguro que si practicas haciendo más algoritmo, eventualmente podrás resolver problemas muchísimo más complejos que antes tu mente no te permitía. Por ejemplo, imagina cómo sería el algoritmo para resolver este laberinto?
+#### Bucles (`for` y `while`)
+Permiten repetir una acción automáticamente sin copiar y pegar código:
 
-<Image src={algoritmo3} alt="Laberinto 3" width="512" style="background-color: #FFF"/>
+```javascript
+// Repite exactamente 5 veces
+for (let i = 1; i <= 5; i++) {
+  console.log("Empaquetando caja número:", i);
+}
+```
 
-#### Conclusión
+---
 
-Describir el paso a paso de la solución de un problema puede ser una tarea tediosa, pero una vez que somos consientes de cada paso para la solución de un problema podemos resolver problemas muchísimo más complejos un paso a la vez.
+### 5. Funciones: Máquinas de código reutilizable
 
-Definir un algoritmo es fundamental para que resolver problemas utilizando el pensamiento lógico. Esto nos ayudará a describir soluciones utilizando lenguajes de programación y desarrollar aplicaciones super simples.
+Una función es como una cafetera: le introduces ingredientes (parámetros), ejecuta un proceso interno y te devuelve un resultado (`return`).
 
-Espero que puedas escribir tus propios algoritmos a partir de ahora.
+```javascript
+function calcularTotal(precio, cantidad) {
+  return precio * cantidad;
+}
+
+let totalCompra1 = calcularTotal(50, 3); // 150
+let totalCompra2 = calcularTotal(12, 10); // 120
+```
+
+---
+
+## 💻 Fase 3: Práctica Semanal Asistida en Vivo (90 min)
+
+Realizaremos 4 retos progresivos en la consola de tu navegador acompañados por el instructor.
+
+---
+
+### 🧩 Reto 1: Calculadora de Cuentas y Propinas (20 min)
+
+**Objetivo:** Dominar variables `let`/`const`, tipos numéricos y operaciones aritméticas.
+
+Escribe y ejecuta en tu consola:
+
+```javascript
+// 1. Datos iniciales
+const totalCuenta = 480; // Costo de la cena en el restaurante
+const porcentajePropina = 0.15; // 15% de propina
+const numeroPersonas = 4; // Amigos en la mesa
+
+// 2. Cálculos
+const montoPropina = totalCuenta * porcentajePropina;
+const totalConPropina = totalCuenta + montoPropina;
+const pagoPorPersona = totalConPropina / numeroPersonas;
+
+// 3. Resultados en consola
+console.log("Total de la comida: $" + totalCuenta);
+console.log("Propina sugerida (15%): $" + montoPropina);
+console.log("Total a pagar: $" + totalConPropina);
+console.log("Cada persona paga: $" + pagoPorPersona);
+```
+
+---
+
+### 🧩 Reto 2: El Portero Virtual / Control de Acceso (`if / else`) (25 min)
+
+**Objetivo:** Practicar condicionales y operadores lógicos combinados (`&&`, `||`).
+
+Vamos a simular el acceso a un evento exclusivo:
+
+```javascript
+let edad = 20;
+let tieneBoletoVip = false;
+let estaEnListaDeInvitados = true;
+
+if (edad >= 18 && (tieneBoletoVip || estaEnListaDeInvitados)) {
+  console.log("🟢 ¡Bienvenido al evento! Pasa a la zona preferencial.");
+} else if (edad >= 18 && !tieneBoletoVip) {
+  console.log("🟡 Eres mayor de edad pero necesitas adquirir tu boleto VIP en taquilla.");
+} else {
+  console.log("🔴 Acceso denegado: Evento exclusivo para mayores de 18 años.");
+}
+```
+
+*Prueba cambiar los valores de `edad`, `tieneBoletoVip` y `estaEnListaDeInvitados` para observar cómo cambia el veredicto del programa.*
+
+---
+
+### 🧩 Reto 3: El Generador Automático de Tablas con Bucles (25 min)
+
+**Objetivo:** Automatizar repeticiones con bucles `for` y `while`.
+
+Generemos la tabla de multiplicar del número 7 en 3 líneas de código:
+
+```javascript
+let numeroTabla = 7;
+
+console.log("--- Tabla del " + numeroTabla + " ---");
+for (let multiplicador = 1; multiplicador <= 10; multiplicador++) {
+  let resultado = numeroTabla * multiplicador;
+  console.log(numeroTabla + " x " + multiplicador + " = " + resultado);
+}
+```
+
+Ahora un contador regresivo de lanzamiento espacial con `while`:
+
+```javascript
+let cuentaAtras = 5;
+
+while (cuentaAtras > 0) {
+  console.log("T-menos " + cuentaAtras + " segundos...");
+  cuentaAtras--; // Restamos 1 en cada vuelta
+}
+
+console.log("🚀 ¡Despegue exitoso!");
+```
+
+---
+
+### 🧩 Reto 4: La Fábrica de Funciones Reutilizables (20 min)
+
+**Objetivo:** Convertir nuestros retos anteriores en funciones modulares.
+
+```javascript
+// Función para verificar si un número es par o impar
+function esPar(numero) {
+  return numero % 2 === 0;
+}
+
+// Función para calcular el descuento de una tienda
+function aplicarDescuento(precioOriginal, porcentajeDescuento) {
+  let descuento = precioOriginal * (porcentajeDescuento / 100);
+  return precioOriginal - descuento;
+}
+
+console.log("¿El número 24 es par?", esPar(24)); // true
+console.log("¿El número 15 es par?", esPar(15)); // false
+console.log("Precio final con 20% de descuento:", "$" + aplicarDescuento(500, 20)); // $400
+```
+
+---
+
+## 🗣️ Fase 4: Exposición de Resultados, Debate y Debugging (45 min)
+
+Compartimos pantallas, comparamos soluciones y analizamos las trampas clásicas del código en vivo.
+
+### 🐞 Los Errores Típicos en Conceptos Básicos
+
+#### 1. Confundir `=` (asignar) con `===` (comparar)
+* **El error:** Escribir `if (edad = 18)` en lugar de `if (edad === 18)`.
+* **Consecuencia:** `=` sobrescribe el valor de la variable en lugar de compararlo, provocando comportamientos inesperados.
+
+#### 2. El Bucle Infinito en `while`
+* **El error:** Olvidar la línea `contador++` o `cuentaAtras--` dentro del cuerpo de un `while`.
+* **Consecuencia:** La condición nunca deja de ser verdadera y el navegador se congela.  
+* *Tip de rescate:* Cierra la pestaña congelada con el administrador de tareas del navegador (`Shift + Esc` en Chrome).
+
+#### 3. El Alcance de las Variables (*Scope*)
+* **El error:** Declarar una variable dentro de un bloque `if { let secreto = 123; }` e intentar leerla fuera de las llaves.
+* **Solución:** Las variables creadas con `let` dentro de `{ }` solo viven dentro de esas llaves.
+
+---
+
+## 🏠 Fase 5: Definición de Práctica en Casa / Reto Semanal (30 min)
+
+Para consolidar tu aprendizaje antes de la siguiente clase, desarrollarás tu primer mini-sistema comercial.
+
+### 🏆 Reto Semanal: "El Asistente de Caja del Supermercado"
+
+**Descripción del Problema:**
+Crea un programa en la consola que simule el cobro de una compra en un supermercado con las siguientes reglas:
+
+1. Define un arreglo con los precios de 3 productos comprados: `let precios = [120, 45, 80];`
+2. Utiliza un bucle `for` para sumar el precio de todos los productos y obtener el `subtotal`.
+3. Crea una función llamada `calcularDescuento(monto)` que aplique las siguientes reglas con un `if/else`:
+   - Si el subtotal es mayor a `$200`, aplica un **10% de descuento**.
+   - Si el subtotal es menor o igual a `$200`, no aplica descuento (0%).
+4. Calcula el total final a pagar.
+5. Imprime en consola un ticket estructurado:
+   ```
+   ===============================
+   🧾 TICKET DE COMPRA
+   ===============================
+   Subtotal: $245
+   Descuento aplicado (10%): $24.50
+   TOTAL A PAGAR: $220.50
+   ===============================
+   ```
+
+<Aside type="tip" title="Criterio de evaluación para casa">
+Prueba tu script cambiando los precios del arreglo: verifica que cuando la suma sea menor a $200 no se aplique descuento y que cuando supere $200 el descuento se calcule exactamente.
+</Aside>
+
+---
+
+## 📚 Recursos y Videos Recomendados
+
+Para reforzar estos conceptos con explicaciones visuales y directas:
+
+<CardGrid>
+  <LinkCard
+    title="¿Qué son las Variables en Programación?"
+    href="https://www.youtube.com/watch?v=F07pE99N7pE"
+    description="Una explicación visual de cómo se guardan los datos en la memoria de la computadora."
+  />
+  <LinkCard
+    title="Condicionales y Bucles explicados para principiantes"
+    href="https://www.youtube.com/watch?v=cFiB4v3Bdjo"
+    description="Aprende cómo los programas toman decisiones y automatizan tareas repetitivas."
+  />
+  <LinkCard
+    title="¿Qué es una Función y para qué sirve?"
+    href="https://www.youtube.com/watch?v=Oqqxfr8WNlQ"
+    description="Comprende la importancia de encapsular y reutilizar código para crear programas ordenados."
+  />
+  <LinkCard
+    title="El Secreto de los Algoritmos en la Vida Real"
+    href="https://www.youtube.com/watch?v=kKRW_cUl2Ro"
+    description="Descubre cómo el pensamiento algorítmico te ayuda a resolver problemas cotidianos y de software."
+  />
+</CardGrid>
+
+---
+
+## 🚀 Conclusión y Próximos Pasos
+
+¡Gran trabajo! En esta sesión de 4 horas has dominado los cinco bloques esenciales del desarrollo de software: **variables, tipos de datos, operadores, estructuras de control y funciones**.
+
+En la próxima sesión exploraremos la sintaxis completa y las herramientas avanzadas de JavaScript en nuestra **[Lección 3: Language Tour (L3)](/roadmap/para-no-programadores/3)**.
 
 <Cta></Cta>
