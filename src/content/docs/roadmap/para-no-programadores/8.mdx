@@ -1,12 +1,452 @@
 ---
-title: Base de datos
-description: WIP
+title: Base de Datos - Persistencia Relacional con SQLite y SQL
+description: Guía y cuaderno de trabajo para una sesión de 4 horas. Conecta una base de datos relacional SQLite a ShortURL, domina las consultas SQL esenciales (CREATE, INSERT, SELECT, UPDATE) y asegura la persistencia permanente de datos.
 ---
 
+import { Aside, CardGrid, LinkCard } from '@astrojs/starlight/components';
 import Cta from '@components/cta/para-no-programadores/cta.astro';
 
 <Cta></Cta>
 
-WIP
+En la **[Lección 7: Backend - Servidor Web y API REST con Node.js (L7)](/roadmap/para-no-programadores/7)** construimos el servidor web de **ShortURL**, implementamos endpoints `POST` y `GET`, y conectamos la interfaz gráfica mediante `fetch()`.
+
+Nuestra aplicación ya es capaz de recibir URLs, generar códigos cortos y redirigir usuarios en milisegundos. Sin embargo, tenemos un problema crítico: cada vez que apagamos la computadora o reiniciamos el servidor con `Ctrl + C`, **¡todos los enlaces guardados en memoria desaparecen por completo!**
+
+En esta sesión intensiva de **4 horas**, resolveremos este problema de raíz implementando la tercera y última gran capa de nuestro stack: la **Base de Datos**. Aprenderemos los fundamentos de las bases de datos relacionales, dominaremos el lenguaje universal **SQL** (*Structured Query Language*) e integraremos **SQLite** en Node.js para que nuestros enlaces y estadísticas queden guardados para siempre.
+
+---
+
+## 🗺️ Estructura de la Sesión
+
+{/* 
+Guía metodológica para el instructor:
+- Fase 1: Revisión del Tema Anterior y Conclusiones (~30 min)
+- Fase 2: Introducción al Tema y Fundamentos Teóricos (~45 min)
+- Fase 3: Práctica Asistida en Vivo (~90 min)
+- Fase 4: Exposición, Debate y Debugging (~45 min)
+- Fase 5: Reto Semanal y Práctica en Casa (~30 min)
+*/}
+
+Cada una de nuestras sesiones semanales sigue una metodología pedagógica dividida en **5 fases**:
+
+```
+Estructura de la Sesión
+├── ☕ Fase 1: Revisión del Tema Anterior y Conclusiones
+├── 🎯 Fase 2: Introducción al Tema y Fundamentos
+├── 💻 Fase 3: Práctica Asistida en Vivo
+├── 🗣️ Fase 4: Exposición, Debate y Debugging
+└── 🏠 Fase 5: Reto Semanal y Práctica en Casa
+```
+
+---
+
+{/* Duración estimada para el instructor: 30 min */}
+## ☕ Fase 1: Revisión del Tema Anterior y Conclusiones
+
+Iniciamos la sesión analizando las limitaciones del almacenamiento en memoria RAM y conectando con la necesidad de persistencia.
+
+{/* Tiempo sugerido: 15 min */}
+### 1. Puesta en Común del Reto de la Lección 7
+
+En la lección previa construimos los endpoints `POST /api/acortar`, `GET /:codigo` y el endpoint de métricas:
+* **Discusión en grupo:** ¿Pudiste acortar un enlace real y comprobar la redirección hacia el sitio de destino?
+* ¿Qué ocurrió cuando detuviste el servidor Node.js en la terminal y lo volviste a encender?
+* ¿Por qué una empresa como Bitly, YouTube o Twitter no podría operar guardando sus datos en un arreglo `const baseDeDatos = []` en memoria?
+
+{/* Tiempo sugerido: 15 min */}
+### 2. El Puente Conceptual: La Bóveda Permanente de Datos
+
+La memoria RAM es ultra rápida, pero es **volátil**: requiere electricidad constante para recordar los datos. Un disco duro o unidad SSD, por el contrario, es **persistente**: guarda la información magnética o electrónicamente para que sobreviva a reinicios y apagones.
+
+Una **Base de Datos** es un sistema especializado diseñado para:
+1. Guardar millones de datos en el disco de forma estructurada.
+2. Buscar registros específicos en fracciones de milisegundo mediante índices.
+3. Garantizar que ninguna información se corrompa si ocurren errores o caídas del sistema.
+
+---
+
+{/* Duración estimada para el instructor: 45 min */}
+## 🎯 Fase 2: Introducción al Tema y Fundamentos Teóricos
+
+Analicemos la estructura de las bases de datos relacionales, el lenguaje SQL y por qué SQLite es la herramienta ideal.
+
+---
+
+{/* Tiempo sugerido: 15 min */}
+### 1. Bases de Datos Relacionales y Tablas
+
+Una **Base de Datos Relacional** organiza la información en **Tablas** (muy similares a hojas de cálculo de Excel bien estructuradas):
+* **Columnas (Campos):** Definen qué tipo de dato guardamos en cada celda (`TEXT`, `INTEGER`, `BOOLEAN`).
+* **Filas (Registros / Tuplas):** Cada una representa un elemento individual (un enlace acortado, un usuario, un producto).
+* **Llave Primaria (`PRIMARY KEY`):** Una columna especial que garantiza que cada fila tenga un identificador único e irrepetible (`id`).
+
+```
+Tabla: "enlaces"
+┌─────┬─────────────────────────────────┬──────────────┬───────┬──────────────────────────┐
+│ id  │ url_original                    │ codigo_corto │ clics │ fecha_creacion           │
+├─────┼─────────────────────────────────┼──────────────┼───────┼──────────────────────────┤
+│ 1   │ https://developer.mozilla.org   │ mdn-docs     │ 15    │ 2026-08-18T10:00:00.000Z │
+│ 2   │ https://astro.build             │ astro-web    │ 42    │ 2026-08-18T11:30:00.000Z │
+│ 3   │ https://wikipedia.org           │ wiki-main    │ 8     │ 2026-08-18T12:15:00.000Z │
+└─────┴─────────────────────────────────┴──────────────┴───────┴──────────────────────────┘
+```
+
+---
+
+{/* Tiempo sugerido: 15 min */}
+### 2. El Lenguaje SQL: Las 4 Operaciones Maestras (CRUD)
+
+**SQL (*Structured Query Language*)** es el lenguaje estándar universal utilizado para dialogar con bases de datos. No importa si usas SQLite, PostgreSQL, MySQL o Oracle; los comandos esenciales son los mismos:
+
+#### 1. CREATE TABLE (Crear estructura)
+```sql
+CREATE TABLE IF NOT EXISTS enlaces (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  url_original TEXT NOT NULL,
+  codigo_corto TEXT UNIQUE NOT NULL,
+  clics INTEGER DEFAULT 0,
+  fecha_creacion TEXT
+);
+```
+
+#### 2. INSERT (Crear / Guardar un nuevo registro)
+```sql
+INSERT INTO enlaces (url_original, codigo_corto, fecha_creacion)
+VALUES ('https://github.com', 'gh-main', '2026-08-18');
+```
+
+#### 3. SELECT (Consultar / Buscar registros)
+```sql
+-- Buscar un enlace específico por su código corto
+SELECT * FROM enlaces WHERE codigo_corto = 'gh-main';
+```
+
+#### 4. UPDATE (Modificar un registro existente)
+```sql
+-- Sumar un clic al enlace
+UPDATE enlaces SET clics = clics + 1 WHERE codigo_corto = 'gh-main';
+```
+
+---
+
+{/* Tiempo sugerido: 15 min */}
+### 3. ¿Por qué SQLite?
+
+A diferencia de otros motores de bases de datos que requieren instalar servidores pesados y configurar contraseñas complejas, **SQLite es una base de datos embebida en un solo archivo**:
+* Toda tu base de datos vive dentro de un archivo local en tu proyecto (`shorturl.db`).
+* Es la base de datos más utilizada en el planeta: está dentro de todos los teléfonos iPhone y Android, dentro de navegadores web como Google Chrome y en aplicaciones como Spotify y WhatsApp.
+* Cero configuración, ultra veloz y perfecta para nuestro proyecto.
+
+---
+
+### 🔍 Experimento en Vivo: Inspeccionando una Base de Datos SQLite
+
+Vamos a ver cómo se ve una base de datos relacional:
+
+1. Crearemos una carpeta llamada `data/` en nuestro proyecto.
+2. Usaremos la librería `better-sqlite3` en Node.js para crear el archivo `data/shorturl.db`.
+3. Verás cómo SQLite genera un archivo binario real en tu disco duro que preservará todos los datos incluso si reinicias tu equipo.
+
+---
+
+## 💻 Fase 3: Práctica Asistida en Vivo
+
+Integraremos SQLite en nuestro servidor **ShortURL** paso a paso.
+
+---
+
+{/* Tiempo sugerido: 20 min */}
+### 🧩 Reto 1: Inicializar la Base de Datos SQLite (`database.js`)
+
+**Objetivo:** Crear el módulo de conexión y asegurar que la tabla `enlaces` se cree automáticamente si no existe.
+
+Crea un archivo llamado `database.js` en la raíz de tu proyecto:
+
+```javascript title="database.js"
+// 1. Importamos better-sqlite3 y el módulo de rutas del sistema
+const Database = require("better-sqlite3");
+const path = require("path");
+const fs = require("fs");
+
+// 2. Nos aseguramos de que exista la carpeta data/
+const carpetaData = path.join(__dirname, "data");
+if (!fs.existsSync(carpetaData)) {
+  fs.mkdirSync(carpetaData);
+}
+
+// 3. Abrimos o creamos el archivo de base de datos
+const rutaDB = path.join(carpetaData, "shorturl.db");
+const db = new Database(rutaDB);
+
+// 4. Creamos la tabla 'enlaces' con SQL puro si aún no existe
+db.exec(`
+  CREATE TABLE IF NOT EXISTS enlaces (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    url_original TEXT NOT NULL,
+    codigo_corto TEXT UNIQUE NOT NULL,
+    clics INTEGER DEFAULT 0,
+    fecha_creacion TEXT NOT NULL
+  );
+`);
+
+console.log("📦 Base de datos SQLite conectada e inicializada con éxito.");
+
+// Exportamos la instancia para usarla en server.js
+module.exports = db;
+```
+
+---
+
+{/* Tiempo sugerido: 25 min */}
+### 🧩 Reto 2: Guardar Enlaces con Consultas Preparadas (`INSERT`)
+
+**Objetivo:** Reemplazar el arreglo en memoria en `server.js` por una sentencia SQL segura contra inyecciones.
+
+Abre `server.js` e importa la base de datos:
+
+```javascript title="server.js"
+const express = require("express");
+const db = require("./database"); // Importamos nuestra base de datos SQLite
+const app = express();
+const PUERTO = 3000;
+
+app.use(express.json());
+app.use(express.static("public"));
+
+function generarCodigo(longitud = 6) {
+  const caracteres = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+  let codigo = "";
+  for (let i = 0; i < longitud; i++) {
+    codigo += caracteres[Math.floor(Math.random() * caracteres.length)];
+  }
+  return codigo;
+}
+
+// Endpoint POST: Guardar permanentemente en SQLite
+app.post("/api/acortar", (req, res) => {
+  const { urlOriginal } = req.body;
+
+  if (!urlOriginal || !urlOriginal.startsWith("http")) {
+    return res.status(400).json({ error: "La URL debe comenzar con http:// o https://" });
+  }
+
+  const codigo = generarCodigo();
+  const fecha = new Date().toISOString();
+
+  try {
+    // 1. Preparamos la consulta SQL con parámetros seguros (?)
+    const consulta = db.prepare(`
+      INSERT INTO enlaces (url_original, codigo_corto, fecha_creacion)
+      VALUES (?, ?, ?)
+    `);
+
+    // 2. Ejecutamos la inserción con los valores reales
+    consulta.run(urlOriginal, codigo, fecha);
+
+    console.log(`[SQL INSERT] Enlace guardado en disco: ${codigo} -> ${urlOriginal}`);
+
+    res.status(201).json({
+      exito: true,
+      codigo: codigo,
+      urlCorta: `http://localhost:${PUERTO}/${codigo}`,
+      urlOriginal: urlOriginal
+    });
+
+  } catch (error) {
+    console.error("Error al guardar en base de datos:", error);
+    res.status(500).json({ error: "Error interno al procesar el enlace." });
+  }
+});
+```
+
+---
+
+{/* Tiempo sugerido: 25 min */}
+### 🧩 Reto 3: Buscar y Actualizar Clics con SQL (`SELECT` y `UPDATE`)
+
+**Objetivo:** Modificar el endpoint `GET /:codigo` para consultar SQLite y aumentar el contador de visitas en el disco.
+
+Agrega la lógica de búsqueda y actualización a `server.js`:
+
+```javascript title="server.js (Continuación)"
+// Endpoint GET: Buscar código, actualizar clics y redirigir
+app.get("/:codigo", (req, res) => {
+  const codigoBuscado = req.params.codigo;
+
+  try {
+    // 1. Buscamos el registro en SQLite usando SELECT y get()
+    const consultaBusqueda = db.prepare("SELECT * FROM enlaces WHERE codigo_corto = ?");
+    const enlace = consultaBusqueda.get(codigoBuscado);
+
+    // Si no existe en la base de datos, enviamos 404
+    if (!enlace) {
+      return res.status(404).send(`
+        <h1 style="font-family: sans-serif; text-align: center; margin-top: 50px;">
+          ❌ Error 404: Enlace no encontrado en la base de datos
+        </h1>
+        <p style="text-align: center;"><a href="/">Volver a ShortURL</a></p>
+      `);
+    }
+
+    // 2. Incrementamos el contador en la base de datos con UPDATE
+    const consultaActualizar = db.prepare(`
+      UPDATE enlaces SET clics = clics + 1 WHERE codigo_corto = ?
+    `);
+    consultaActualizar.run(codigoBuscado);
+
+    console.log(`[SQL UPDATE] Redirigiendo ${codigoBuscado} a ${enlace.url_original} (Clics: ${enlace.clics + 1})`);
+
+    // 3. Redirigimos al usuario a su destino
+    res.redirect(enlace.url_original);
+
+  } catch (error) {
+    console.error("Error al consultar la base de datos:", error);
+    res.status(500).send("Error del servidor");
+  }
+});
+```
+
+---
+
+{/* Tiempo sugerido: 20 min */}
+### 🧩 Reto 4: Endpoint de Métricas Persistente (`GET /api/metricas/:codigo`)
+
+**Objetivo:** Consultar la base de datos y devolver la información histórica de cualquier enlace.
+
+```javascript title="server.js (Continuación)"
+app.get("/api/metricas/:codigo", (req, res) => {
+  const codigoBuscado = req.params.codigo;
+
+  try {
+    const consulta = db.prepare("SELECT * FROM enlaces WHERE codigo_corto = ?");
+    const enlace = consulta.get(codigoBuscado);
+
+    if (!enlace) {
+      return res.status(404).json({ error: "El enlace no existe en la base de datos." });
+    }
+
+    res.json({
+      codigo: enlace.codigo_corto,
+      urlOriginal: enlace.url_original,
+      clicsTotales: enlace.clics,
+      fechaCreacion: enlace.fecha_creacion
+    });
+
+  } catch (error) {
+    res.status(500).json({ error: "Error al consultar métricas." });
+  }
+});
+```
+
+---
+
+{/* Duración estimada para el instructor: 45 min */}
+## 🗣️ Fase 4: Exposición de Resultados, Debate y Debugging
+
+Probamos la persistencia en vivo: creamos enlaces, apagamos el servidor con `Ctrl + C`, lo encendemos de nuevo y comprobamos que los enlaces siguen funcionando.
+
+### 🐞 Las 4 Trampas Clásicas de SQL y Bases de Datos
+
+#### 1. Inyección SQL (*SQL Injection*): El Error Más Peligroso
+* **El error fatal:** Escribir consultas concatenando texto:
+  ```javascript
+  // ❌ ¡PELIGROSO! Vulnerable a ataques de inyección SQL
+  db.prepare("SELECT * FROM enlaces WHERE codigo = '" + inputUsuario + "'");
+  ```
+* **La solución profesional:** Usar **Consultas Preparadas (*Prepared Statements*)** con el signo `?`:
+  ```javascript
+  // ✅ 100% Seguro: SQLite trata la entrada como texto plano, nunca como código ejecutable
+  db.prepare("SELECT * FROM enlaces WHERE codigo = ?").get(inputUsuario);
+  ```
+
+#### 2. Olvidar la cláusula `WHERE` en `UPDATE` o `DELETE`
+* **La pesadilla:** Ejecutar `UPDATE enlaces SET clics = 0;` sin `WHERE`.
+* **Consecuencia:** Modificará o borrará **todas las filas de la tabla** sin confirmación. Siempre verifica dos veces el `WHERE`.
+
+#### 3. Confundir `.run()`, `.get()` y `.all()` en `better-sqlite3`
+* `.run(params)`: Para operaciones que modifican datos (`INSERT`, `UPDATE`, `DELETE`).
+* `.get(params)`: Para consultas `SELECT` que devuelven una sola fila (o `undefined`).
+* `.all(params)`: Para consultas `SELECT` que devuelven un arreglo con múltiples filas.
+
+#### 4. Bloqueo de archivo de base de datos
+* **El síntoma:** `SqliteError: database is locked`.
+* **La causa:** Dos procesos de Node.js intentando escribir simultáneamente en el mismo archivo sin cerrar conexiones.
+
+---
+
+{/* Duración estimada para el instructor: 30 min */}
+## 🏠 Fase 5: Definición de Práctica en Casa / Reto Semanal
+
+Crearás un panel de enlaces populares para mostrar en la página principal.
+
+### 🏆 Proyecto Semanal: "El Top 5 de Enlaces Más Populares"
+
+**Descripción del Problema:**
+Queremos mostrar en nuestra interfaz cuáles son los 5 enlaces más visitados de toda la plataforma.
+
+#### Especificaciones Técnicas a Implementar:
+
+1. **Nuevo Endpoint `GET /api/populares` en `server.js`:**
+   * Escribe una consulta SQL que ordene los registros de forma descendente por clics y limite el resultado a 5 filas:
+     ```sql
+     SELECT codigo_corto, url_original, clics FROM enlaces
+     ORDER BY clics DESC
+     LIMIT 5;
+     ```
+   * Ejecuta la consulta usando `db.prepare(...).all()` y devuelve el arreglo en formato JSON.
+
+2. **Mostrar la lista en el Frontend (`index.html` y `app.js`):**
+   * Agrega una sección `<section id="seccion-populares">` debajo del formulario.
+   * Crea una función `cargarEnlacesPopulares()` en `app.js` que haga un `fetch('/api/populares')` y pinte una pequeña lista con los enlaces top y su número de visitas.
+   * Llama a esta función al cargar la página y cada vez que el usuario cree un enlace nuevo.
+
+3. **Prueba de Fuego de Persistencia:**
+   * Crea 3 enlaces distintos y haz clics en ellos.
+   * Cierra por completo tu terminal y apaga tu computadora si lo deseas.
+   * Vuelve a abrir la terminal, ejecuta `node server.js`, abre `http://localhost:3000` y verifica con orgullo que tus enlaces y su ranking popular siguen ahí intactos.
+
+<Aside type="tip" title="Criterio de Autoevaluación">
+Comprueba que al visitar varias veces un enlace el ranking de populares se actualice dinámicamente y que el archivo `data/shorturl.db` conserve los datos entre sesiones.
+</Aside>
+
+---
+
+## 📚 Recursos y Videos Recomendados
+
+Para profundizar en bases de datos relacionales, SQL y SQLite:
+
+<CardGrid>
+  <LinkCard
+    title="Curso de SQL desde Cero para Principiantes"
+    href="https://www.youtube.com/watch?v=DFg1V-rO6Pg"
+    description="Aprende a crear tablas, filtrar con WHERE y ordenar resultados con consultas SQL."
+  />
+  <LinkCard
+    title="¿Qué es SQLite y por qué es tan especial?"
+    href="https://www.sqlite.org/about.html"
+    description="Sitio oficial de SQLite con la historia y diseño del motor SQL más usado del mundo."
+  />
+  <LinkCard
+    title="Inyección SQL Explicada Fácil (OWASP)"
+    href="https://owasp.org/www-community/attacks/SQL_Injection"
+    description="Guía de seguridad de OWASP sobre cómo funcionan los ataques de inyección y cómo evitarlos con Prepared Statements."
+  />
+  <LinkCard
+    title="Documentación de better-sqlite3 para Node.js"
+    href="https://github.com/WiseLibs/better-sqlite3"
+    description="Guía oficial con ejemplos de consultas síncronas de alto rendimiento en Node.js."
+  />
+</CardGrid>
+
+---
+
+## 🚀 Conclusión y Próximos Pasos
+
+¡Felicidades por completar el **Sprint 2: Construcción Full-Stack de ShortURL**!
+
+En este momento has construido una aplicación web profesional de tres capas (**Frontend + Backend + Base de Datos**) que funciona de punta a punta.
+
+Ahora que dominas el código de la aplicación, entraremos en la recta final del curso: el **Bloque 4**, donde aprenderemos las herramientas que utilizan los desarrolladores profesionales para trabajar a diario:
+En la próxima sesión iniciaremos con: **[Lección 9: Uso de la Terminal - Dominio de la Línea de Comandos CLI (L9)](/roadmap/para-no-programadores/9)**.
 
 <Cta></Cta>

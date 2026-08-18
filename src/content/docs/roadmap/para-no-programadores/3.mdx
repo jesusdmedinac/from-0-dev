@@ -1,6 +1,6 @@
 ---
 title: Language Tour
-description: Guía y cuaderno de trabajo para una sesión de 4 horas. Recorrido a fondo por la sintaxis moderna de JavaScript: manipulación de textos, arreglos avanzados, objetos y blindaje contra errores con try/catch.
+description: "Guía y cuaderno de trabajo para una sesión de 4 horas. Recorrido a fondo por la sintaxis moderna de JavaScript: manipulación de textos, arreglos avanzados, objetos y blindaje contra errores con try/catch."
 ---
 
 import { Aside, CardGrid, LinkCard } from '@astrojs/starlight/components';
@@ -16,14 +16,14 @@ En esta sesión intensiva de **4 horas**, aprenderemos a manipular textos, domin
 
 ## 🗺️ Estructura de la Sesión
 
-<!-- 
+{/* 
 Guía metodológica para el instructor:
 - Fase 1: Revisión del Tema Anterior y Conclusiones (~30 min)
 - Fase 2: Introducción al Tema y Fundamentos Teóricos (~45 min)
 - Fase 3: Práctica Asistida en Vivo (~90 min)
 - Fase 4: Exposición, Debate y Debugging (~45 min)
 - Fase 5: Reto Semanal y Práctica en Casa (~30 min)
--->
+*/}
 
 Cada una de nuestras sesiones semanales sigue una metodología pedagógica dividida en **5 fases**:
 
@@ -38,12 +38,12 @@ Estructura de la Sesión
 
 ---
 
-<!-- Duración estimada para el instructor: 30 min -->
+{/* Duración estimada para el instructor: 30 min */}
 ## ☕ Fase 1: Revisión del Tema Anterior y Conclusiones
 
 Comenzamos la sesión revisando el proyecto de facturación de la semana anterior y conectando con los desafíos del mundo real.
 
-<!-- Tiempo sugerido: 15 min -->
+{/* Tiempo sugerido: 15 min */}
 ### 1. Puesta en Común del Reto de la Lección 2
 
 En la sesión previa desarrollamos el *"Asistente de Facturación del Minimarket"*, sumando un arreglo de precios con un bucle `for` y aplicando descuentos condicionales:
@@ -51,7 +51,7 @@ En la sesión previa desarrollamos el *"Asistente de Facturación del Minimarket
 * ¿Qué ocurrió si intentaste agregar un producto con precio negativo o texto por accidente?
 * ¿Notaste lo repetitivo que puede ser escribir bucles `for` tradicionales para tareas sencillas?
 
-<!-- Tiempo sugerido: 15 min -->
+{/* Tiempo sugerido: 15 min */}
 ### 2. El Puente Conceptual: La Caja de Herramientas Moderna
 
 En el desarrollo real, los datos rara vez vienen limpios y perfectos:
@@ -64,14 +64,14 @@ Hoy exploraremos las herramientas integradas de JavaScript diseñadas para resol
 
 ---
 
-<!-- Duración estimada para el instructor: 45 min -->
+{/* Duración estimada para el instructor: 45 min */}
 ## 🎯 Fase 2: Introducción al Tema y Fundamentos Teóricos
 
 En esta fase recorreremos las cuatro grandes áreas de la sintaxis moderna de JavaScript.
 
 ---
 
-<!-- Tiempo sugerido: 10 min -->
+{/* Tiempo sugerido: 10 min */}
 ### 1. Métodos de Texto (Strings): Limpieza y Búsqueda
 
 Las cadenas de texto en JavaScript no son simples letras estáticas; vienen equipadas con "superpoderes" (*métodos*) para transformar y analizar su contenido:
@@ -96,7 +96,7 @@ const mensajeAdaptado = mensajeLimpio.replace("Genial", "Transformador");
 
 ---
 
-<!-- Tiempo sugerido: 15 min -->
+{/* Tiempo sugerido: 15 min */}
 ### 2. Métodos Avanzados de Arreglos (Arrays): La Tríada Funcional
 
 En la Lección 2 usamos bucles `for` tradicionales para recorrer listas. En el desarrollo moderno utilizamos métodos declarativos que expresan **qué queremos lograr** con la lista:
@@ -133,7 +133,7 @@ A diferencia de métodos antiguos, `filter` y `map` **no modifican el arreglo or
 
 ---
 
-<!-- Tiempo sugerido: 10 min -->
+{/* Tiempo sugerido: 10 min */}
 ### 3. Objetos Complejos y Acceso a Propiedades
 
 En aplicaciones reales trabajamos con colecciones de objetos (*fichas de datos*) que combinan múltiples tipos de información:
@@ -154,7 +154,7 @@ const disponibles = catalogo.filter(curso => curso.disponible);
 
 ---
 
-<!-- Tiempo sugerido: 10 min -->
+{/* Tiempo sugerido: 10 min */}
 ### 4. El Cinturón de Seguridad contra Errores (`try / catch / finally`)
 
 Cuando ocurre un error imprevisto (por ejemplo, intentar procesar un texto que no existe o una falla de conexión), JavaScript detiene por completo la ejecución de la aplicación (*crash*).
@@ -205,7 +205,7 @@ Abriremos la consola y construiremos 4 retos guiados progresivos para dominar es
 
 ---
 
-<!-- Tiempo sugerido: 20 min -->
+{/* Tiempo sugerido: 20 min */}
 ### 🧩 Reto 1: El Sanitizador y Normalizador de Datos de Usuario
 
 **Objetivo:** Limpiar textos desordenados ingresados por usuarios utilizando métodos de `String`.
@@ -233,7 +233,7 @@ console.log("Nombre formateado:", formatearNombre("   María     Fernanda    Ló
 
 ---
 
-<!-- Tiempo sugerido: 25 min -->
+{/* Tiempo sugerido: 25 min */}
 ### 🧩 Reto 2: El Buscador y Transformador de Catálogo (`filter` y `map`)
 
 **Objetivo:** Filtrar productos por presupuesto y calcular sus precios con impuestos de forma declarativa.
@@ -270,7 +270,7 @@ console.log("Catálogo con IVA incluido:", listaConIva);
 
 ---
 
-<!-- Tiempo sugerido: 25 min -->
+{/* Tiempo sugerido: 25 min */}
 ### 🧩 Reto 3: El Escudo Protector de Cálculos con `try / catch`
 
 **Objetivo:** Crear funciones matemáticas seguras que validen los tipos de datos y lancen errores personalizados con `throw`.
@@ -304,7 +304,7 @@ console.log(divisionSegura("100", 2));  // "❌ Error detectado: Ambos argumento
 
 ---
 
-<!-- Tiempo sugerido: 20 min -->
+{/* Tiempo sugerido: 20 min */}
 ### 🧩 Reto 4: Mini-Buscador de Contactos en Tiempo Real
 
 **Objetivo:** Construir un motor de búsqueda flexible insensible a mayúsculas/minúsculas.
@@ -336,7 +336,7 @@ console.log("Búsqueda inexistente 'roberto':", buscarContacto("roberto")); // [
 
 ---
 
-<!-- Duración estimada para el instructor: 45 min -->
+{/* Duración estimada para el instructor: 45 min */}
 ## 🗣️ Fase 4: Exposición de Resultados, Debate y Debugging
 
 En esta fase compartimos pantallas, analizamos el código de los estudiantes y desarmamos las trampas clásicas de JavaScript en vivo.
@@ -363,7 +363,7 @@ En esta fase compartimos pantallas, analizamos el código de los estudiantes y d
 
 ---
 
-<!-- Duración estimada para el instructor: 30 min -->
+{/* Duración estimada para el instructor: 30 min */}
 ## 🏠 Fase 5: Definición de Práctica en Casa / Reto Semanal
 
 Para afianzar el dominio de arreglos, objetos y manejo de errores, desarrollarás un analizador de datos comerciales.

@@ -1,139 +1,411 @@
 ---
-title: Backend
-description: En esta clase aprenderemos los fundamentos del desarrollo backend,  qué es un API, qué es un endpoint y cómo implementarlo en nuestro ejemplo de ShortenURL.
+title: Backend - Servidor Web y API REST con Node.js
+description: "Guía y cuaderno de trabajo para una sesión de 4 horas. Construye el servidor web y la API REST de ShortURL con Node.js y Express: creación de endpoints POST y GET, redirecciones HTTP y conexión con el Frontend vía fetch()."
 ---
 
-import { Aside } from '@astrojs/starlight/components';
+import { Aside, CardGrid, LinkCard } from '@astrojs/starlight/components';
 import Cta from '@components/cta/para-no-programadores/cta.astro';
 
 <Cta></Cta>
 
-<Aside title="Referencia">Tanto el front end como el back end son aspectos críticos de cualquier aplicación. El front end es aquello que ven los usuarios e incluye elementos visuales, como botones, casillas de verificación, gráficos y mensajes de texto. Permite a los usuarios interactuar con la aplicación. El back-end son los datos y la infraestructura que permiten que la aplicación funcione. Almacena y procesa los datos de las aplicaciones para los usuarios. - [AWS](https://aws.amazon.com/es/compare/the-difference-between-frontend-and-backend/)</Aside>
+En la **[Lección 6: Frontend - HTML, CSS y DOM (L6)](/roadmap/para-no-programadores/6)** construimos una interfaz gráfica atractiva y responsiva para nuestro proyecto **ShortURL**.
 
-En esta clase aprenderemos los fundamentos del desarrollo backend,  qué es un API, qué es un endpoint y cómo implementarlo en nuestro ejemplo de ShortenURL.
+Sin embargo, hasta el momento los enlaces se generaban de forma simulada en la memoria del navegador. Si otra persona intentaba abrir el enlace corto desde su teléfono, ¡la página no existía! Para que una aplicación web funcione globalmente, necesitamos un **servidor central** que atienda peticiones día y noche, procese los datos y redirija a los visitantes: el **Backend**.
 
-# ¿Qué es el Backend?
+En esta sesión intensiva de **4 horas**, utilizaremos **Node.js** y **Express** para crear nuestro primer servidor web profesional, implementaremos una **API REST** con endpoints `POST` y `GET`, programaremos redirecciones HTTP automáticas y conectaremos la interfaz gráfica con el servidor utilizando `fetch()`.
 
-El Backend es la parte de la aplicación con la que interactúa el Frontend. Esto puede incluir autenticación de usuarios, gestión de base de datos, almacenamiento de recursos, etc.
+---
 
-Al igual que en el Frontend, podemos utilizar JavaScript en el Backend, sólo que necesitamos una herramienta más para lograr ejecutarlo en nuestro servidor. Para ello utilizaremos Node.js.
+## 🗺️ Estructura de la Sesión
 
-# API y Endpoints
+{/* 
+Guía metodológica para el instructor:
+- Fase 1: Revisión del Tema Anterior y Conclusiones (~30 min)
+- Fase 2: Introducción al Tema y Fundamentos Teóricos (~45 min)
+- Fase 3: Práctica Asistida en Vivo (~90 min)
+- Fase 4: Exposición, Debate y Debugging (~45 min)
+- Fase 5: Reto Semanal y Práctica en Casa (~30 min)
+*/}
 
-<Aside>
-La API RESTful es una interfaz que dos sistemas de computación utilizan para intercambiar información de manera segura a través de Internet. La mayoría de las aplicaciones para empresas deben comunicarse con otras aplicaciones internas o de terceros para llevar a cabo varias tareas. Por ejemplo, para generar nóminas mensuales, su sistema interno de cuentas debe compartir datos con el sistema bancario de su cliente para automatizar la facturación y comunicarse con una aplicación interna de planillas de horarios. Las API RESTful admiten este intercambio de información porque siguen estándares de comunicación de software seguros, confiables y eficientes. - [¿Qué es una API RESTful?](https://aws.amazon.com/es/what-is/restful-api/)
+Cada una de nuestras sesiones semanales sigue una metodología pedagógica dividida en **5 fases**:
+
+```
+Estructura de la Sesión
+├── ☕ Fase 1: Revisión del Tema Anterior y Conclusiones
+├── 🎯 Fase 2: Introducción al Tema y Fundamentos
+├── 💻 Fase 3: Práctica Asistida en Vivo
+├── 🗣️ Fase 4: Exposición, Debate y Debugging
+└── 🏠 Fase 5: Reto Semanal y Práctica en Casa
+```
+
+---
+
+{/* Duración estimada para el instructor: 30 min */}
+## ☕ Fase 1: Revisión del Tema Anterior y Conclusiones
+
+Iniciamos la sesión analizando la interfaz creada la semana anterior y entendiendo por qué el navegador necesita un servidor.
+
+{/* Tiempo sugerido: 15 min */}
+### 1. Puesta en Común del Reto de la Lección 6
+
+En la lección previa construimos el Frontend con HTML, CSS Flexbox y JavaScript para el DOM:
+* **Discusión en grupo:** ¿Cómo implementaste el cambio de color rojo/verde en el input de texto?
+* ¿Pudiste probar el botón de copiar al portapapeles y pegar el enlace en otra pestaña?
+* ¿Qué ocurrió cuando intentaste compartir ese enlace corto con un compañero de clase? (Descubrieron que no cargaba porque nadie estaba sirviendo esa URL en la red).
+
+{/* Tiempo sugerido: 15 min */}
+### 2. El Puente Conceptual: El Servidor Web como Restaurante
+
+En el mundo web, la comunicación sigue el modelo del **Restaurante**:
+* **El Cliente (Frontend):** Eres tú sentado en la mesa revisando el menú.
+* **El Servidor (Backend):** Es la cocina donde se preparan los pedidos y se resguardan las recetas.
+* **La API (El Camarero / Mesero):** Es el mensajero formal que lleva tu pedido a la cocina y regresa con tu platillo listo.
+
+Hoy construiremos esa cocina con **Node.js** y programaremos al camarero con **Express** para que atienda a los clientes de ShortURL.
+
+---
+
+{/* Duración estimada para el instructor: 45 min */}
+## 🎯 Fase 2: Introducción al Tema y Fundamentos Teóricos
+
+Analicemos qué es Node.js, cómo funciona el protocolo HTTP y la anatomía de los endpoints.
+
+---
+
+{/* Tiempo sugerido: 15 min */}
+### 1. ¿Qué es Node.js y por qué revolucionó el desarrollo?
+
+Originalmente, JavaScript solo podía ejecutarse dentro de navegadores web (Chrome, Firefox, Safari). En 2009, Ryan Dahl tomó el motor **V8** de Google Chrome y lo adaptó para que pudiera ejecutarse directamente en el sistema operativo de cualquier computadora.
+
+Con **Node.js**, JavaScript se convirtió en un lenguaje universal: ahora podemos usar el mismo lenguaje para diseñar botones en el navegador y para crear servidores de alto rendimiento en la nube.
+
+---
+
+{/* Tiempo sugerido: 15 min */}
+### 2. El Protocolo HTTP: Métodos y Códigos de Estado
+
+Cada vez que un navegador interactúa con un servidor, intercambian mensajes mediante el protocolo **HTTP** (*HyperText Transfer Protocol*):
+
+#### Los 2 Métodos Principales:
+* **`GET` (Obtener / Visitar):** Se usa para solicitar información o visitar una página (ej. cuando escribes `short.ly/a8B9x` en la barra de direcciones).
+* **`POST` (Enviar / Crear):** Se usa para enviar información al servidor en un paquete oculto llamado *Body* (ej. cuando envías el formulario con la URL larga).
+
+#### Códigos de Estado HTTP Fundamentales:
+* **`200 OK`:** La petición fue exitosa y se envían los datos solicitados.
+* **`201 Created`:** El recurso fue creado exitosamente en el servidor.
+* **`302 Found (Redirección)`:** Le ordena al navegador: *"El recurso que buscas está en esta otra dirección web, viaja hacia allá de inmediato"*.
+* **`400 Bad Request`:** El cliente envió datos inválidos o incompletos.
+* **`404 Not Found`:** El recurso solicitado no existe en el servidor.
+
+---
+
+{/* Tiempo sugerido: 15 min */}
+### 3. ¿Qué es una API REST y qué es un Endpoint?
+
+Una **API REST** es una colección de "ventanillas de atención" (*Endpoints*) que el servidor expone para que el Frontend solicite operaciones:
+
+```
+Rutas de la API de ShortURL
+├── POST /api/acortar ──► Recibe { urlOriginal } ──► Devuelve { urlCorta, codigo } (Código 201)
+├── GET  /:codigo     ──► Busca código en memoria ──► Redirige a la URL original (Código 302)
+└── GET  /            ──► Entrega el index.html del Frontend (Código 200)
+```
+
+---
+
+### 🔍 Experimento en Vivo: Haciendo peticiones HTTP con `fetch()`
+
+Vamos a consumir una API real pública desde la consola de nuestro navegador:
+
+1. **Abre la consola de tu navegador (`F12`).**
+2. **Ejecuta este código para consultar datos en vivo de una API pública:**
+   ```javascript
+   fetch("https://jsonplaceholder.typicode.com/todos/1")
+     .then(respuesta => respuesta.json())
+     .then(datos => {
+       console.log("📦 Datos recibidos del servidor remoto:", datos);
+       console.log("Título de la tarea:", datos.title);
+     });
+   ```
+3. **Observa el resultado:** Tu navegador viajó a un servidor en internet, descargó un objeto JSON y te lo entregó listo en JavaScript. ¡Esa misma comunicación haremos entre nuestro frontend y nuestro backend!
+
+---
+
+## 💻 Fase 3: Práctica Asistida en Vivo
+
+Crearemos el servidor backend completo de **ShortURL** en Node.js.
+
+---
+
+{/* Tiempo sugerido: 20 min */}
+### 🧩 Reto 1: Inicialización y Servidor Base (`server.js`)
+
+**Objetivo:** Configurar el servidor Express en el puerto 3000 y servir la carpeta estática `/public`.
+
+Crea un archivo llamado `server.js` en la raíz de tu proyecto:
+
+```javascript title="server.js"
+// 1. Importamos la librería Express
+const express = require("express");
+const app = express();
+const PUERTO = 3000;
+
+// 2. Middleware para que Express entienda peticiones con formato JSON
+app.use(express.json());
+
+// 3. Servir automáticamente los archivos de la interfaz (HTML, CSS, JS)
+app.use(express.static("public"));
+
+// 4. Base de datos temporal en memoria
+const baseDeDatos = [];
+
+// 5. Encendemos el servidor para escuchar peticiones
+app.listen(PUERTO, () => {
+  console.log(`🚀 Servidor ShortURL ejecutándose en: http://localhost:${PUERTO}`);
+});
+```
+
+---
+
+{/* Tiempo sugerido: 25 min */}
+### 🧩 Reto 2: Endpoint para Acortar Enlaces (`POST /api/acortar`)
+
+**Objetivo:** Recibir una URL larga en el cuerpo de la petición, validarla, generar un código único y responder con JSON.
+
+Agrega este bloque a tu `server.js`:
+
+```javascript title="server.js (Continuación)"
+// Función generadora de códigos cortos de 6 caracteres
+function generarCodigo(longitud = 6) {
+  const caracteres = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+  let codigo = "";
+  for (let i = 0; i < longitud; i++) {
+    codigo += caracteres[Math.floor(Math.random() * caracteres.length)];
+  }
+  return codigo;
+}
+
+// Endpoint POST: Crear enlace corto
+app.post("/api/acortar", (req, res) => {
+  const { urlOriginal } = req.body;
+
+  // Validación de seguridad básica
+  if (!urlOriginal || !urlOriginal.startsWith("http")) {
+    return res.status(400).json({ 
+      error: "La URL es inválida. Debe comenzar con http:// o https://" 
+    });
+  }
+
+  // Generamos el código y guardamos la ficha
+  const codigo = generarCodigo();
+  const nuevoRegistro = {
+    id: Date.now(),
+    urlOriginal: urlOriginal,
+    codigoCorto: codigo,
+    clics: 0,
+    fechaCreacion: new Date().toISOString()
+  };
+
+  baseDeDatos.push(nuevoRegistro);
+  console.log(`[POST] Enlace creado: ${codigo} -> ${urlOriginal}`);
+
+  // Respondemos al cliente con código HTTP 201 (Created)
+  res.status(201).json({
+    exito: true,
+    codigo: codigo,
+    urlCorta: `http://localhost:${PUERTO}/${codigo}`,
+    urlOriginal: urlOriginal
+  });
+});
+```
+
+---
+
+{/* Tiempo sugerido: 25 min */}
+### 🧩 Reto 3: Endpoint de Redirección Automática (`GET /:codigo`)
+
+**Objetivo:** Atender la visita del usuario, buscar el enlace en la base de datos, sumar el clic y redirigir al sitio original.
+
+Agrega la ruta de redirección en `server.js`:
+
+```javascript title="server.js (Continuación)"
+// Endpoint GET dinámico: Redirigir según el código
+app.get("/:codigo", (req, res) => {
+  const codigoBuscado = req.params.codigo;
+
+  // Buscamos si el código existe en nuestra memoria
+  const enlace = baseDeDatos.find(item => item.codigoCorto === codigoBuscado);
+
+  if (!enlace) {
+    // Si no existe, enviamos código HTTP 404 (Not Found)
+    return res.status(404).send(`
+      <h1 style="font-family: sans-serif; text-align: center; margin-top: 50px;">
+        ❌ Error 404: Enlace corto no encontrado
+      </h1>
+      <p style="text-align: center;"><a href="/">Volver a ShortURL</a></p>
+    `);
+  }
+
+  // Incrementamos el contador de visitas
+  enlace.clics++;
+  console.log(`[GET] Redirigiendo ${codigoBuscado} a ${enlace.urlOriginal} (Clics: ${enlace.clics})`);
+
+  // ¡Redirección mágica de Express!
+  res.redirect(enlace.urlOriginal);
+});
+```
+
+---
+
+{/* Tiempo sugerido: 20 min */}
+### 🧩 Reto 4: Conectando el Frontend con el Servidor (`app.js`)
+
+**Objetivo:** Modificar el `app.js` de la Lección 6 para que envíe los datos reales al Backend usando `fetch()`.
+
+Abre `public/app.js` y actualiza la lógica del formulario:
+
+```javascript title="public/app.js"
+const formulario = document.getElementById("form-acortar");
+const inputUrl = document.getElementById("input-url");
+const seccionResultado = document.getElementById("seccion-resultado");
+const btnAcortar = document.getElementById("btn-acortar");
+
+formulario.addEventListener("submit", async function(evento) {
+  evento.preventDefault();
+
+  const urlAEnviar = inputUrl.value.trim();
+  btnAcortar.disabled = true;
+  btnAcortar.innerText = "⏳ Acortando...";
+
+  try {
+    // Enviamos la petición POST al backend
+    const respuesta = await fetch("/api/acortar", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ urlOriginal: urlAEnviar })
+    });
+
+    const datos = await respuesta.json();
+
+    if (!respuesta.ok) {
+      throw new Error(datos.error || "Ocurrió un error en el servidor");
+    }
+
+    // Renderizamos la URL corta real entregada por Node.js
+    renderizarResultado(datos.urlCorta, datos.urlOriginal);
+    inputUrl.value = "";
+
+  } catch (error) {
+    alert("❌ Error: " + error.message);
+  } finally {
+    btnAcortar.disabled = false;
+    btnAcortar.innerText = "Acortar Enlace";
+  }
+});
+```
+
+---
+
+{/* Duración estimada para el instructor: 45 min */}
+## 🗣️ Fase 4: Exposición de Resultados, Debate y Debugging
+
+Arrancamos el servidor en la terminal (`node server.js`), abrimos `http://localhost:3000` en el navegador y probamos acortar enlaces reales.
+
+### 🐞 Las 4 Trampas Clásicas de Backend
+
+#### 1. Olvidar `app.use(express.json())`
+* **El síntoma:** `req.body` llega como `undefined` y el servidor lanza `TypeError: Cannot destructure property 'urlOriginal' of 'req.body'`.
+* **La causa:** Por defecto, Express no interpreta el formato JSON a menos que actives su middleware analizador.
+* **La solución:** Asegúrate de incluir `app.use(express.json());` antes de definir cualquier ruta.
+
+#### 2. Error `listen EADDRINUSE: address already in use :::3000`
+* **La causa:** Ya tienes otra ventana o proceso ejecutando un servidor en el puerto 3000.
+* **La solución:** Cierra el proceso anterior en la terminal (`Ctrl + C`) o cambia el número de puerto a `3001` o `4000`.
+
+#### 3. Olvidar enviar una respuesta (`res.json()` o `res.send()`)
+* **El síntoma:** El navegador se queda con el círculo de carga dando vueltas eternamente hasta que se agota el tiempo (*Timeout*).
+* **La causa:** Toda petición HTTP necesita una respuesta explícita del servidor para cerrar el ciclo de comunicación.
+
+#### 4. Confundir `req.params` con `req.body`
+* **Regla de oro:** `req.params` lee variables que vienen escritas en la propia URL (como `/:codigo`), mientras que `req.body` lee los datos enviados dentro de una petición `POST`.
+
+---
+
+{/* Duración estimada para el instructor: 30 min */}
+## 🏠 Fase 5: Definición de Práctica en Casa / Reto Semanal
+
+Crearás un endpoint de analíticas para consultar el rendimiento de los enlaces.
+
+### 🏆 Proyecto Semanal: "El Endpoint de Métricas de ShortURL"
+
+**Descripción del Problema:**
+Los usuarios y creadores de contenido quieren saber cuántas veces se ha hecho clic en sus enlaces acortados.
+
+#### Especificaciones Técnicas a Implementar:
+
+1. **Nuevo Endpoint `GET /api/metricas/:codigo`:**
+   * Crea una nueva ruta en `server.js` que reciba el código en los parámetros de la URL (`req.params.codigo`).
+   * Busca el enlace en `baseDeDatos`.
+   * Si no existe, responde con código HTTP 404 y un objeto JSON:
+     ```json
+     { "error": "El enlace no existe en los registros" }
+     ```
+   * Si existe, responde con código HTTP 200 y el reporte completo:
+     ```json
+     {
+       "codigo": "x9K2p1",
+       "urlOriginal": "https://developer.mozilla.org",
+       "clicsTotales": 8,
+       "fechaCreacion": "2026-08-18T12:00:00.000Z"
+     }
+     ```
+
+2. **Prueba de Funcionamiento:**
+   * Acorta un enlace desde la página web.
+   * Haz clic en el enlace corto 3 o 4 veces en distintas pestañas.
+   * Abre `http://localhost:3000/api/metricas/TU_CODIGO` en tu navegador y comprueba que el contador `clicsTotales` refleje exactamente las visitas realizadas.
+
+<Aside type="tip" title="Criterio de Autoevaluación">
+Verifica que las métricas se actualicen con cada visita y que al consultar un código inventado (ej. `/api/metricas/no-existe`) el servidor entregue un código HTTP 404 sin detenerse.
 </Aside>
 
-## ¿Qué es una API?
+---
 
-API significa **Application Programming Interface**. Es un conjunto de reglas que permiten a diferentes sistemas comunicarse entre sí. Las APIs son esenciales en el Backend, ya que proporcionan una forma estándar de interacción entre el cliente (Frontend) y el servidor (Backend).
+## 📚 Recursos y Videos Recomendados
 
-## ¿Qué es un endpoint?
+Para profundizar en Node.js, Express y desarrollo Backend:
 
-Un **endpoint** es una de las rutas que proporciona la API para que un cliente interactúe con ella. Cada endpoint está asociado con una URL específica que recibe solicitudes y devuelve una respuesta. Los endpoints son responsables de manejar las acciones o datos solicitados por el usuario.
+<CardGrid>
+  <LinkCard
+    title="Node.js y Express desde Cero para Principiantes"
+    href="https://www.youtube.com/watch?v=1hpc70_OoAg"
+    description="Aprende a crear tu primer servidor web, configurar rutas y manejar peticiones HTTP."
+  />
+  <LinkCard
+    title="¿Qué es una API REST? Explicación con Animaciones"
+    href="https://www.youtube.com/watch?v=lsMQRaeKNDk"
+    description="Descubre cómo se comunican las aplicaciones modernas a través de endpoints y verbos HTTP."
+  />
+  <LinkCard
+    title="Guía Completa de Códigos de Estado HTTP en MDN"
+    href="https://developer.mozilla.org/es/docs/Web/HTTP/Status"
+    description="Referencia oficial de Mozilla con el significado de cada código HTTP (200, 201, 302, 404, 500)."
+  />
+  <LinkCard
+    title="La API Fetch de JavaScript Explicada"
+    href="https://developer.mozilla.org/es/docs/Web/API/Fetch_API/Using_Fetch"
+    description="Documentación práctica sobre cómo enviar y recibir datos JSON de forma asíncrona."
+  />
+</CardGrid>
 
-## El protocolo HTTP
+---
 
-Los desarrolladores suelen implementar API RESTful mediante el uso del protocolo de transferencia de hipertexto (HTTP). Un método de HTTP informa al servidor lo que debe hacer con el recurso. Los métodos más comunos son:
+## 🚀 Conclusión y Próximos Pasos
 
-- ***GET***: Los clientes utilizan GET para acceder a los recursos que están ubicados en el URL especificado en el servidor.
-Pueden almacenar en caché las solicitudes GET y enviar parámetros en la solicitud dela API RESTful para indicar al servidor que filtre los datos antes de enviarlos.
+¡Felicidades! Acabas de dar el paso más importante en tu camino como desarrollador Full-Stack: has conectado exitosamente una interfaz visual en el navegador con un servidor web real en Node.js.
 
-- ***POST***: Los clientes usan POST para enviar datos al servidor. Incluyen la representación de los datos con la solicitud. Enviar la misma solicitud POST varias veces produce el efecto secundario de crear el mismo recurso varias veces.
+Ahora nuestro sistema genera enlaces, atiende peticiones y redirige usuarios en milisegundos. Sin embargo, hay un último eslabón pendiente en nuestro stack: si apagamos la computadora o reiniciamos el servidor Node.js... **¡todos los enlaces guardados en memoria se pierden!**
 
-- ***PUT***: Los clientes utilizan PUT para actualizar los recursos existentes en el servidor. A diferencia de POST, el envío de lamisma solicitud PUT varias veces en un servicio web RESTful da el mismo resultado.
-
-- ***DELETE***: Los clientes utilizan la solicitud DELETE para eliminar el recurso. Una solicitud DELETE puede cambiar el estado del servidor. Sin embargo, si el usuario no cuenta con la autenticación  adecuada, la solicitud fallará.
-
-## Encabezados de HTTP
-
-Los encabezados de solicitudes son los metadatos que se intercambian entre el cliente y el servidor. Por ejemplo, el encabezado de la solicitud indica el formato de la solicitud y la respuesta, proporciona información sobre el estado de la solicitud, etc.
-
-- ***Datos***: Las solicitudes de la API REST pueden incluir datos para que los métodos POST, PUT y otros métodos HTTP funcionen de manera correcta.
-
-- ***Parámetros***: Las solicitudes de la API RESTful pueden incluir parámetro que brindan al servidor más detalles sobre lo que se debe hacer. A continuación, se indican algunos tipos de parámetros:
-  - Los parámetros de ruta especifican los detalles del URL.
-  - Los parámetros de consulta solicitan más información acerca del recurso.
-  - Los parámetros de cookie autentican a los clientes con rapidez.
-
-# NodeJS
-
-<Aside title="Referencia">Node.js usa un modelo basado en eventos y no bloqueante, lo que lo convierte en una opción ideal para aplicaciones que requieren un rendimiento eficiente, como aplicaciones en tiempo real o APIs RESTful. Más información: [Node.js](https://nodejs.org/es/).</Aside>
-
-Node.js es un entorno de JavaScript de código abierto y multiplataforma.
-
-Una aplicación Node.js se ejecuta en un proceso único, lo que permite que no se creen nuevos hilos por cada solicitud.
-
-## Una aplicación de ejemplo con Node.js
-
-El ejemplo más común de Node.js es crear un Hola Mundo desde un servidor web:
-
-<iframe src="https://codesandbox.io/p/devbox/qwxhs3?embed=1&file=%2Findex.js"
-  style="width:100%; height: 500px; border:0; border-radius: 4px; overflow:hidden;"
-  title="hello-world-nodejs"
-  allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
-  sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
-></iframe>
-
-Para ejecutar el código, puedes copiarlo y guardarlo en un archivo llamado `server.js` y ejecutar el comando `node server.js` en tu terminal.
-
-También puedes ejecutar `node server.js` desde la terminal del Sandbox.
-
-Expliquemos el código línea por línea:
-```js
-// Importamos la función createServer de la librería nativa de Node.js
-const { createServer } = require('node:http');
-
-// Definimos el nombre de nuestro anfitrión
-// Es decir, en donde se ejecutará nuestro servidor
-const hostname = '127.0.0.1';
-// Definimos el puerto de nuestro servicio
-const port = 3000;
-
-// Ejecutamos la función create server y la almacenamos en la constante server
-const server = createServer(
-  // Agregamos como argumento a la función server
-  // Una función que se ejecutará cada vez que envíen una
-  // solicitud al servidor
-  // La función recibe dos objetos, un req y un res
-  (req, res) => {
-    // Utilizamos el objeto res para generar la respuesta
-    // Asignamos el status de la respuesta
-    res.statusCode = 200;
-    // Asignamos el header de la respuesta
-    res.setHeader('Content-Type', 'text/plain');
-    // Y terminamos de procesar la respuesta
-    res.end('Hello World');
-  }
-);
-
-// Finalmente, ejecutamos la función listen para agregar
-// una función que nos permita monitorear nuestro servidor
-server.listen(port, hostname, () => {
-  console.log(`Server running at http://${hostname}:${port}/`);
-});
-```
-
-# ShortenURL API
-
-En la clase [Stacks](/roadmap/para-no-programadores/5) creamos un servidor web con Node.js que nos permitía guardar los URLs que queríamos acortar y nos permitía redirigir a los usuarios que utilizaran los URLs generados.
-
-En esta clase quiero que mejoremos el código de nuestro Backend de la siguiente manera:
-
-```js title="server.js"
-const http = require('http');
-const { onRequest } = require('./actions');
-
-const server = http.createServer(onRequest);
-
-const PORT = 3000;
-server.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
-});
-```
-
-Para hacer que nuestro servidor web funcione, simplificamos el código de nuestro archivo `server.js` para que sea más fácil de leer. Sin embargo, ahora dependemos de una función llamada `onRequest`. Tu desafío será implementar dicha función para que acorte los URLs y redirija al usuario.
-
-Intenta resolverlo a tu manera, y revisa el [repositorio del proyecto terminado](https://github.com/desde0/shorturl-example).
+En la próxima sesión construiremos el almacenamiento definitivo: **[Lección 8: Base de Datos - Persistencia Relacional con SQLite y SQL (L8)](/roadmap/para-no-programadores/8)**, donde blindaremos nuestros datos para que permanezcan guardados para siempre.
 
 <Cta></Cta>

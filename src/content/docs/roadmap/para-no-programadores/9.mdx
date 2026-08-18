@@ -1,12 +1,361 @@
 ---
-title: Uso de Terminal
-description: WIP
+title: Uso de la Terminal - Dominio de la Línea de Comandos (CLI)
+description: "Guía y cuaderno de trabajo para una sesión de 4 horas. Domina la terminal de comandos: navegación en el árbol de directorios, manipulación de archivos y carpetas, lectura y búsqueda con grep, y ejecución de scripts de Node.js."
 ---
 
+import { Aside, CardGrid, LinkCard } from '@astrojs/starlight/components';
 import Cta from '@components/cta/para-no-programadores/cta.astro';
 
 <Cta></Cta>
 
-WIP
+En la **[Lección 8: Base de Datos - Persistencia Relacional con SQLite (L8)](/roadmap/para-no-programadores/8)** completamos la arquitectura de tres capas de **ShortURL**, asegurando que todos nuestros datos sobrevivan a cualquier reinicio.
+
+Hasta este punto del curso, hemos utilizado la interfaz gráfica de nuestra computadora: hacemos clic en carpetas, arrastramos archivos y usamos el explorador visual. Sin embargo, en el mundo del software profesional y en los servidores de la nube, las computadoras **no tienen pantalla, ventanas ni ratón**. Todo se administra exclusivamente a través de texto: la **Terminal** o **Línea de Comandos (CLI - *Command Line Interface*)**.
+
+En esta sesión intensiva de **4 horas**, perderemos el miedo a la pantalla negra, aprenderemos a navegar velozmente por el sistema de archivos, manipularemos carpetas y documentos como profesionales y dominaremos los comandos esenciales que todo desarrollador utiliza a diario.
+
+---
+
+## 🗺️ Estructura de la Sesión
+
+{/* 
+Guía metodológica para el instructor:
+- Fase 1: Revisión del Tema Anterior y Conclusiones (~30 min)
+- Fase 2: Introducción al Tema y Fundamentos Teóricos (~45 min)
+- Fase 3: Práctica Asistida en Vivo (~90 min)
+- Fase 4: Exposición, Debate y Debugging (~45 min)
+- Fase 5: Reto Semanal y Práctica en Casa (~30 min)
+*/}
+
+Cada una de nuestras sesiones semanales sigue una metodología pedagógica dividida en **5 fases**:
+
+```
+Estructura de la Sesión
+├── ☕ Fase 1: Revisión del Tema Anterior y Conclusiones
+├── 🎯 Fase 2: Introducción al Tema y Fundamentos
+├── 💻 Fase 3: Práctica Asistida en Vivo
+├── 🗣️ Fase 4: Exposición, Debate y Debugging
+└── 🏠 Fase 5: Reto Semanal y Práctica en Casa
+```
+
+---
+
+{/* Duración estimada para el instructor: 30 min */}
+## ☕ Fase 1: Revisión del Tema Anterior y Conclusiones
+
+Iniciamos la sesión conectando el desarrollo de software con la administración del sistema operativo.
+
+{/* Tiempo sugerido: 15 min */}
+### 1. Puesta en Común del Reto de la Lección 8
+
+En la lección previa conectamos SQLite y construimos el endpoint de enlaces populares:
+* **Discusión en grupo:** ¿Pudiste comprobar que los datos sobrevivieron al apagar y encender el servidor?
+* ¿Cómo encendiste tu servidor en las últimas clases? (Escribiendo `node server.js` en la terminal).
+* ¿Te has preguntado qué más puedes hacer en esa ventana de comandos además de encender Node.js?
+
+{/* Tiempo sugerido: 15 min */}
+### 2. El Puente Conceptual: Hablando Directamente con la Máquina
+
+Una interfaz gráfica (como Windows Explorer o macOS Finder) es como pedir comida a través de un intérprete que traduce tus gestos: es visual y amigable, pero lenta para tareas complejas y repetitivas.
+
+La **Terminal** es hablar directamente con el núcleo (*Kernel*) del sistema operativo. Mediante comandos de una sola línea puedes:
+* Crear 100 carpetas estructuradas en 0.1 segundos.
+* Buscar una palabra clave dentro de 10,000 archivos de código.
+* Administrar un servidor que se encuentra físicamente al otro lado del planeta.
+* Automatizar tareas de despliegue y control de versiones con Git.
+
+---
+
+{/* Duración estimada para el instructor: 45 min */}
+## 🎯 Fase 2: Introducción al Tema y Fundamentos Teóricos
+
+Analicemos la estructura del sistema de archivos y el catálogo universal de comandos.
+
+---
+
+{/* Tiempo sugerido: 15 min */}
+### 1. El Árbol de Directorios y Tipos de Rutas
+
+Todas las carpetas y archivos de una computadora forman un gran árbol invertido:
+
+```
+/ (Directorio Raíz del Disco)
+├── Users / home (Carpetas de usuarios)
+│   └── tu_usuario (Tu carpeta personal: se representa con el símbolo "~")
+│       ├── Documentos
+│       ├── Descargas
+│       └── proyectos
+│           └── shorturl
+│               ├── server.js
+│               └── public
+│                   └── index.html
+```
+
+#### Rutas Absolutas vs Rutas Relativas:
+* **Ruta Absoluta:** Describe el camino completo desde la raíz `/` del disco (ej. `/Users/joul/proyectos/shorturl`). No importa dónde estés parado, siempre llega al mismo lugar.
+* **Ruta Relativa:** Describe el camino a partir de **donde estás parado ahora mismo**:
+  * `.` (Un punto): Representa el directorio actual.
+  * `..` (Dos puntos): Representa la carpeta superior (subir un nivel).
+
+---
+
+{/* Tiempo sugerido: 15 min */}
+### 2. El Catálogo Universal de Comandos (POSIX / Unix)
+
+Estos comandos funcionan exactamente igual en macOS, Linux y en la terminal Git Bash / WSL de Windows:
+
+| Comando | Significado | ¿Para qué sirve? |
+| :--- | :--- | :--- |
+| **`pwd`** | *Print Working Directory* | Muestra la ruta completa de la carpeta en la que estás parado. |
+| **`ls`** | *List* | Lista los archivos y carpetas del directorio actual (`ls -la` muestra detalles y ocultos). |
+| **`cd`** | *Change Directory* | Cambia de carpeta (ej. `cd proyectos`, `cd ..`, `cd ~`). |
+| **`mkdir`** | *Make Directory* | Crea una carpeta nueva (ej. `mkdir mi-carpeta`). |
+| **`touch`** | *Touch* | Crea un archivo vacío (ej. `touch index.html`). |
+| **`cp`** | *Copy* | Copia archivos o carpetas (`cp archivo.txt copia.txt`). |
+| **`mv`** | *Move* | Mueve o renombra un archivo (`mv viejo.txt nuevo.txt`). |
+| **`rm`** | *Remove* | Elimina archivos (`rm archivo.txt`). |
+| **`cat`** | *Concatenate* | Muestra el contenido completo de un archivo en pantalla. |
+| **`grep`** | *Global Regular Expression Print* | Busca una palabra específica dentro de archivos. |
+| **`clear`** | *Clear Screen* | Limpia la pantalla de la terminal (`Ctrl + L`). |
+
+---
+
+{/* Tiempo sugerido: 15 min */}
+### 3. El Superpoder de la Tecla `Tab` (Autocompletado)
+
+Los programadores profesionales no escriben nombres de carpetas largos letra por letra. Escriben las primeras dos letras y presionan la tecla **`Tab`**:
+* Si escribes `cd pro` y presionas `Tab`, la terminal autocompleta instantáneamente `cd proyectos/`.
+* Si presionas la **flecha hacia arriba (`↑`)**, la terminal te muestra el historial de comandos anteriores para no tener que escribirlos de nuevo.
+
+---
+
+### 🔍 Experimento en Vivo: Tu Primer Vuelo en la Terminal
+
+Vamos a abrir la terminal y realizar un recorrido guiado:
+
+1. **Abre tu Terminal (Terminal en macOS/Linux, Git Bash o PowerShell en Windows).**
+2. **Pregúntale a la máquina dónde estás:**
+   ```bash
+   pwd
+   ```
+3. **Mira qué hay a tu alrededor:**
+   ```bash
+   ls -la
+   ```
+4. **Viaja a tu carpeta personal:**
+   ```bash
+   cd ~
+   pwd
+   ```
+
+---
+
+## 💻 Fase 3: Práctica Asistida en Vivo
+
+Realizaremos 4 retos guiados para dominar la manipulación de archivos y ejecución de scripts.
+
+---
+
+{/* Tiempo sugerido: 20 min */}
+### 🧩 Reto 1: Navegación Ágil por el Sistema de Archivos
+
+**Objetivo:** Moverse entre niveles de carpetas sin usar el ratón.
+
+Ejecuta en tu terminal:
+
+```bash
+# 1. Viajamos a nuestra carpeta personal
+cd ~
+
+# 2. Creamos una carpeta temporal de experimentos y entramos en ella
+mkdir laboratorio-terminal
+cd laboratorio-terminal
+
+# 3. Verificamos dónde estamos parados
+pwd
+
+# 4. Creamos una subcarpeta y entramos
+mkdir nivel-1
+cd nivel-1
+
+# 5. Subimos un nivel hacia atrás
+cd ..
+
+# 6. Verificamos que volvimos a laboratorio-terminal
+pwd
+```
+
+---
+
+{/* Tiempo sugerido: 25 min */}
+### 🧩 Reto 2: Creación de Estructuras en un Solo Comando (`mkdir -p` y `touch`)
+
+**Objetivo:** Crear una arquitectura de proyecto web completa en segundos.
+
+```bash
+# Estando dentro de laboratorio-terminal:
+# Creamos múltiples carpetas anidadas con el parámetro -p (parents)
+mkdir -p mi-app-web/public/css mi-app-web/public/js mi-app-web/src/data
+
+# Entramos al proyecto
+cd mi-app-web
+
+# Creamos los archivos base con touch
+touch public/index.html public/css/styles.css public/js/app.js src/server.js README.md
+
+# Listamos recursivamente para ver la estructura completa
+ls -R
+```
+
+---
+
+{/* Tiempo sugerido: 25 min */}
+### 🧩 Reto 3: Escribir, Leer y Filtrar Archivos (`echo`, `cat` y `grep`)
+
+**Objetivo:** Manipular contenido de texto y buscar errores directamente desde la línea de comandos.
+
+```bash
+# 1. Escribimos texto dentro de un archivo de logs usando redirección con >
+echo "2026-08-18 10:00:00 [INFO] Servidor ShortURL iniciado correctamente" > logs.txt
+echo "2026-08-18 10:05:12 [INFO] Petición GET /mdn recibida con éxito" >> logs.txt
+echo "2026-08-18 10:12:44 [ERROR] Base de datos no respondió a tiempo" >> logs.txt
+echo "2026-08-18 10:15:00 [INFO] Enlace corto generado con éxito: a8B9x" >> logs.txt
+echo "2026-08-18 10:20:10 [ERROR] Formato de URL inválido en POST /api/acortar" >> logs.txt
+
+# 2. Leemos todo el archivo en la pantalla con cat
+cat logs.txt
+
+# 3. Filtramos ÚNICAMENTE las líneas que contienen la palabra ERROR con grep
+grep "ERROR" logs.txt
+```
+
+---
+
+{/* Tiempo sugerido: 20 min */}
+### 🧩 Reto 4: Ejecución de Scripts de Node.js con Parámetros CLI
+
+**Objetivo:** Crear un script en JavaScript que lea argumentos pasados desde la terminal mediante `process.argv`.
+
+Crea un archivo llamado `saludo-cli.js`:
+
+```javascript title="saludo-cli.js"
+// process.argv contiene los argumentos pasados en la terminal
+const argumentos = process.argv.slice(2);
+
+const nombre = argumentos[0] || "Desarrollador";
+const rol = argumentos[1] || "Estudiante";
+
+console.log("=========================================");
+console.log(`👋 ¡Hola, ${nombre}!`);
+console.log(`💼 Tu rol en el proyecto es: ${rol}`);
+console.log(`📅 Fecha de ejecución: ${new Date().toLocaleDateString()}`);
+console.log("=========================================");
+```
+
+Pruébalo ejecutando en tu terminal:
+
+```bash
+node saludo-cli.js Joul Ingeniero
+node saludo-cli.js Maria Diseñadora
+```
+
+---
+
+{/* Duración estimada para el instructor: 45 min */}
+## 🗣️ Fase 4: Exposición de Resultados, Debate y Debugging
+
+Compartimos terminales, revisamos los comandos ejecutados y aprendemos a evitar errores críticos.
+
+### 🐞 Trampas Clásicas y Precauciones de Seguridad en la Terminal
+
+#### 1. ¡Cuidado extremo con `rm -rf`!
+* **El peligro:** En la interfaz gráfica, cuando borras un archivo se va a la *Papelera de Reciclaje* y puedes recuperarlo. En la terminal, **`rm` elimina los archivos de forma permanente e irreversible sin confirmación**.
+* **Regla de oro:** Nunca ejecutes `rm -rf` sobre carpetas si no estás 100% seguro de la ruta en la que estás parado (`pwd`).
+
+#### 2. Espacios en nombres de carpetas
+* **El error:** Escribir `cd Mis Documentos`. La terminal creerá que intentas entrar a dos carpetas distintas: `Mis` y `Documentos`.
+* **La solución:** Usa comillas `cd "Mis Documentos"` o escapa el espacio con barra invertida `cd Mis\ Documentos/`.
+
+#### 3. Error `command not found`
+* **La causa:** Escribiste mal el comando (ej. `nod` en lugar de `node`) o el programa no está instalado en las variables de entorno del sistema (`PATH`).
+
+#### 4. Permiso Denegado (*Permission Denied*)
+* **La solución:** Nunca uses `sudo` por costumbre. Si una carpeta de tu proyecto da error de permisos, revisa que seas el dueño de la carpeta con `ls -l`.
+
+---
+
+{/* Duración estimada para el instructor: 30 min */}
+## 🏠 Fase 5: Definición de Práctica en Casa / Reto Semanal
+
+Demostrarás tu autonomía construyendo un proyecto completo sin tocar el ratón.
+
+### 🏆 Proyecto Semanal: "El Reto del Explorador de Terminal"
+
+**Descripción del Reto:**
+Debes crear la estructura completa de un nuevo proyecto web utilizando **exclusivamente comandos de terminal**.
+
+#### Pasos Obligatorios a Ejecutar:
+
+1. **Crear el directorio raíz:**
+   * Crea una carpeta llamada `proyecto-terminal-desde0/` dentro de tu directorio de proyectos y entra en ella.
+
+2. **Crear la estructura de carpetas en un solo comando:**
+   * Genera las carpetas `public/assets/images`, `public/assets/styles`, `src/controllers`, `src/routes` y `config`.
+
+3. **Crear los archivos base:**
+   * Crea `public/index.html`, `public/assets/styles/main.css`, `src/server.js` y `config/app.json`.
+
+4. **Escribir contenido con comandos de terminal:**
+   * Escribe el encabezado HTML básico dentro de `public/index.html` usando `echo` y redirección `>`.
+   * Crea un archivo `README.md` en la raíz que contenga: *"# Proyecto Creado 100% desde la Terminal CLI"*.
+
+5. **Verificación final:**
+   * Ejecuta `ls -la` y `ls -R` (o `tree` si lo tienes instalado) y captura la salida visual de tu terminal.
+
+6. **Limpieza del laboratorio previo:**
+   * Sal de la carpeta con `cd ..` y elimina la carpeta `laboratorio-terminal` creada en clase usando `rm -r laboratorio-terminal`.
+
+<Aside type="tip" title="Criterio de Autoevaluación">
+Verifica que cada uno de los archivos se haya creado en su ruta correcta y contenga el texto correspondiente sin haber abierto el explorador de archivos visual.
+</Aside>
+
+---
+
+## 📚 Recursos y Videos Recomendados
+
+Para profundizar en el uso de la terminal y comandos de consola:
+
+<CardGrid>
+  <LinkCard
+    title="Comandos Básicos de la Terminal que Todo Programador Debe Saber"
+    href="https://www.youtube.com/watch?v=oxuRxtrO2Ag"
+    description="Aprende los comandos más utilizados en el día a día del desarrollo de software."
+  />
+  <LinkCard
+    title="Guía Interactiva de la Terminal de Linux / macOS"
+    href="https://developer.mozilla.org/es/docs/Learn/Tools_and_testing/Understanding_client-side_tools/Command_line"
+    description="Tutorial completo de Mozilla Developer Network para dominar la línea de comandos."
+  />
+  <LinkCard
+    title="Chuleta (Cheat Sheet) de Comandos Bash / Unix"
+    href="https://devhints.io/bash"
+    description="Referencia rápida con ejemplos de comandos de búsqueda, permisos y manipulación de texto."
+  />
+  <LinkCard
+    title="Aprende a Navegar y Manipular Archivos con CLI"
+    href="https://www.youtube.com/watch?v=F_f4yRk8Iik"
+    description="Tutorial práctico sobre rutas absolutas, relativas y atajos de teclado esenciales."
+  />
+</CardGrid>
+
+---
+
+## 🚀 Conclusión y Próximos Pasos
+
+¡Excelente! Has roto la barrera del miedo a la terminal. Ahora sabes moverte con soltura por el sistema de archivos, crear estructuras complejas en segundos y ejecutar scripts de Node.js como un verdadero profesional.
+
+El dominio de la terminal es el requisito previo indispensable para la herramienta más importante de colaboración y seguridad en el software: el **Control de Versiones**.
+
+En la próxima sesión aprenderemos a guardar el historial de cambios de nuestro código y a publicarlo en la red: **[Lección 10: Control de Versiones con Git y GitHub (L10)](/roadmap/para-no-programadores/10)**.
 
 <Cta></Cta>

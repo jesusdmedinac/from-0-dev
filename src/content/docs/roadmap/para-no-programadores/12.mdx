@@ -1,12 +1,315 @@
 ---
-title: DevOps
-description: WIP
+title: DevOps - Despliegue en la Nube y Graduación del Curso
+description: Guía y cuaderno de trabajo para la sesión final de 4 horas. Publica ShortURL en la nube con un dominio público HTTPS gratuito, domina los fundamentos de DevOps y celebra tu graduación oficial del curso.
 ---
 
+import { Aside, CardGrid, LinkCard } from '@astrojs/starlight/components';
 import Cta from '@components/cta/para-no-programadores/cta.astro';
 
 <Cta></Cta>
 
-WIP
+En la **[Lección 11: Sistemas Operativos y Variables de Entorno (L11)](/roadmap/para-no-programadores/11)** preparamos nuestro servidor **ShortURL** para operar de forma dinámica, segura y desacoplada mediante `process.env`.
+
+Hemos llegado a la última y más emocionante sesión de nuestro viaje formativo. Comenzamos desde cero absoluto: sin saber qué era una variable, cómo funcionaba un navegador o cómo escribir una función. Hoy no solo dominas la lógica de programación, el Frontend, el Backend, las Bases de Datos y el Control de Versiones; hoy **publicarás tu aplicación web en internet para que cualquier persona en el mundo pueda utilizarla**.
+
+En esta sesión intensiva de **4 horas**, aprenderemos los fundamentos de la cultura **DevOps** (*Development & Operations*), conectaremos nuestro repositorio de GitHub con una plataforma en la nube (PaaS) y realizaremos el **Despliegue Global en Vivo** de nuestro proyecto **ShortURL**.
+
+---
+
+## 🗺️ Estructura de la Sesión
+
+{/* 
+Guía metodológica para el instructor:
+- Fase 1: Revisión del Tema Anterior y Conclusiones (~30 min)
+- Fase 2: Introducción al Tema y Fundamentos Teóricos (~45 min)
+- Fase 3: Práctica Asistida en Vivo (~90 min)
+- Fase 4: Exposición, Debate y Debugging (~45 min)
+- Fase 5: Graduación, Retrospectiva y Próximos Pasos (~30 min)
+*/}
+
+Cada una de nuestras sesiones semanales sigue una metodología pedagógica dividida en **5 fases**:
+
+```
+Estructura de la Sesión
+├── ☕ Fase 1: Revisión del Tema Anterior y Conclusiones
+├── 🎯 Fase 2: Introducción al Tema y Fundamentos
+├── 💻 Fase 3: Práctica Asistida en Vivo
+├── 🗣️ Fase 4: Exposición, Debate y Debugging
+└── 🏠 Fase 5: Graduación, Retrospectiva y Próximos Pasos
+```
+
+---
+
+{/* Duración estimada para el instructor: 30 min */}
+## ☕ Fase 1: Revisión del Tema Anterior y Conclusiones
+
+Iniciamos la sesión final celebrando el progreso acumulado y preparando el salto a la nube.
+
+{/* Tiempo sugerido: 15 min */}
+### 1. Puesta en Común del Reto de la Lección 11
+
+En la sesión previa configuramos `dotenv`, preparamos `.env.example` y blindamos el servidor con apagado limpio:
+* **Discusión en grupo:** ¿Pudiste cambiar el puerto de tu aplicación sin tocar el código JavaScript?
+* ¿Probaste reiniciar el servidor automáticamente con el comando `npm run dev`?
+* ¿Estás listo para ver tu aplicación con un enlace público `https://...` que puedas enviar por WhatsApp a cualquier persona?
+
+{/* Tiempo sugerido: 15 min */}
+### 2. El Puente Conceptual: ¿Qué significa "Poner en Producción"?
+
+Durante 11 semanas, tu aplicación ha vivido exclusivamente en `localhost:3000` (tu propia máquina). 
+
+"Poner en Producción" significa trasladar tu software a computadoras industriales de alta disponibilidad ubicadas en centros de datos (*Data Centers*) de todo el mundo. Estas computadoras están encendidas las 24 horas del día, conectadas a cables de fibra óptica de altísima velocidad y protegidas con certificados de seguridad SSL (el candado verde HTTPS).
+
+Hoy aprenderemos cómo las plataformas modernas automatizan este proceso a través de **DevOps**.
+
+---
+
+{/* Duración estimada para el instructor: 45 min */}
+## 🎯 Fase 2: Introducción al Tema y Fundamentos Teóricos
+
+Analicemos qué es DevOps, cómo funcionan las plataformas PaaS y el ciclo de Integración y Despliegue Continuo (CI/CD).
+
+---
+
+{/* Tiempo sugerido: 15 min */}
+### 1. ¿Qué es DevOps? (Desarrollo + Operaciones)
+
+Históricamente, en las empresas de software existían dos bandos separados:
+* **Desarrolladores (Dev):** Escribían el código en sus computadoras y decían: *"En mi máquina sí funciona"*.
+* **Operaciones (Ops):** Eran los administradores de sistemas que tenían que hacer que ese código funcionara en los servidores físicos.
+
+**DevOps** es la filosofía moderna que une a ambos mundos mediante la **automatización**: herramientas que toman el código directamente de GitHub, prueban que no tenga errores y lo publican en la nube en cuestión de segundos.
+
+```
+Ciclo DevOps
+[Escribir Código] ──► [git push a GitHub] ──► [Construcción Automática] ──► [Despliegue Global en la Nube 🚀]
+```
+
+---
+
+{/* Tiempo sugerido: 15 min */}
+### 2. Plataformas como Servicio (PaaS Cloud)
+
+Hoy en día, para proyectos modernos no compramos servidores físicos ni configuramos sistemas operativos complejos. Utilizamos plataformas como servicio (**PaaS - *Platform as a Service***) como **Render**, **Railway**, **Fly.io** o **Vercel**:
+* Se conectan directamente a tu cuenta de GitHub con un clic.
+* Detectan automáticamente que tu proyecto utiliza Node.js.
+* Asignan memoria, configuran el puerto dinámico con `process.env.PORT` y levantan tu servidor en segundos.
+* Te entregan una dirección web pública gratuita con certificado de seguridad **HTTPS** incluido.
+
+---
+
+{/* Tiempo sugerido: 15 min */}
+### 3. El Superpoder del Despliegue Continuo (CD)
+
+Una vez que vinculas tu repositorio de GitHub a la nube, ocurre algo mágico:
+* Cada vez que realices una mejora en tu código y hagas `git push origin main`, la plataforma cloud descargará la nueva versión y actualizará tu sitio web en vivo **sin que tengas que configurar nada manualmente**.
+
+---
+
+### 🔍 Experimento en Vivo: Inspeccionando un Despliegue en Tiempo Real
+
+Vamos a observar cómo la nube compila aplicaciones:
+
+1. El proveedor cloud descarga nuestro repositorio desde GitHub.
+2. Ejecuta `npm install` para instalar las dependencias declaradas en `package.json`.
+3. Ejecuta `npm start` para encender nuestro servidor `server.js`.
+4. El balanceador de carga redirige el tráfico mundial de internet hacia nuestro proceso. ¡Todo en menos de 60 segundos!
+
+---
+
+## 💻 Fase 3: Práctica Asistida en Vivo
+
+Desplegaremos **ShortURL** en la nube utilizando la plataforma gratuita **Render** (o tu PaaS de preferencia).
+
+---
+
+{/* Tiempo sugerido: 20 min */}
+### 🧩 Reto 1: Verificación de Producción en `package.json`
+
+**Objetivo:** Asegurar que nuestro proyecto tenga declaradas todas las dependencias y el script oficial de inicio.
+
+Abre tu `package.json` y asegúrate de que contenga:
+
+```json title="package.json"
+{
+  "name": "shorturl-desde0",
+  "version": "1.0.0",
+  "description": "Acortador de URLs Full-Stack",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js"
+  },
+  "dependencies": {
+    "better-sqlite3": "^11.0.0",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2"
+  }
+}
+```
+
+Haz un commit final y súbelo a GitHub:
+```bash
+git add .
+git commit -m "chore: ensure production readiness in package.json"
+git push origin main
+```
+
+---
+
+{/* Tiempo sugerido: 25 min */}
+### 🧩 Reto 2: Conectar GitHub con la Plataforma Cloud (Render)
+
+**Objetivo:** Crear un servicio web vinculado a nuestro repositorio.
+
+1. Entra en tu navegador a **[Render.com](https://render.com/)** y regístrate gratis usando tu cuenta de **GitHub**.
+2. En el panel principal, haz clic en el botón azul **"New +"** y selecciona **"Web Service"**.
+3. Selecciona la opción **"Build and deploy from a Git repository"**.
+4. Busca y conecta tu repositorio `shorturl-desde0`.
+5. Configura los parámetros básicos del servicio:
+   * **Name:** `mi-shorturl-desde0` (o el nombre que elijas).
+   * **Region:** La más cercana (ej. *Oregon / Ohio*).
+   * **Branch:** `main`.
+   * **Runtime:** `Node`.
+   * **Build Command:** `npm install`.
+   * **Start Command:** `npm start`.
+   * **Instance Type:** `Free` (Gratis).
+
+---
+
+{/* Tiempo sugerido: 25 min */}
+### 🧩 Reto 3: Configuración de Variables de Entorno en la Nube
+
+**Objetivo:** Declarar las variables de producción en el panel de control.
+
+1. En la misma página de configuración de Render, desplázate hacia abajo hasta la sección **"Environment Variables"**.
+2. Agrega la variable:
+   * **Key:** `NODE_ENV`
+   * **Value:** `production`
+3. *(Nota: No necesitas configurar `PORT`, Render le asignará automáticamente el puerto dinámico correcto a través de `process.env.PORT`).*
+4. Haz clic en el botón inferior **"Create Web Service"**.
+
+---
+
+{/* Tiempo sugerido: 20 min */}
+### 🧩 Reto 4: ¡Despliegue en Vivo y Prueba Global!
+
+**Objetivo:** Observar la compilación en los logs y probar la aplicación pública desde teléfonos celulares.
+
+1. Observa la pantalla de **Logs** de Render en tiempo real:
+   ```
+   ==> Cloning from https://github.com/TU_USUARIO/shorturl-desde0...
+   ==> Running build command 'npm install'...
+   ==> Uploading build...
+   ==> Build successful 🎉
+   ==> Starting service with 'npm start'...
+   🚀 Servidor ShortURL iniciado en modo: [PRODUCTION]
+   ==> Your service is live 🚀
+   ```
+2. En la parte superior izquierda verás tu URL pública asignada (ej. `https://mi-shorturl-desde0.onrender.com`).
+3. **¡Abre esa URL en tu navegador y en tu teléfono celular!**
+4. Pega un enlace largo, genera un enlace corto, cópialo y envíaselo a tus compañeros.
+
+---
+
+{/* Duración estimada para el instructor: 45 min */}
+## 🗣️ Fase 4: Exposición de Resultados, Retrospectiva y Debugging
+
+Todos los estudiantes comparten sus enlaces en vivo en la sesión, prueban las aplicaciones de sus compañeros y revisamos los logs de la nube.
+
+### 🐞 Las 3 Trampas Clásicas de Despliegue en la Nube
+
+#### 1. *Build Failed: Cannot find module '...'*
+* **La causa:** Instalaste una librería en tu computadora con `npm install` pero olvidaste hacer `git push` del archivo `package.json` actualizado. La nube no sabe qué librerías necesita tu proyecto.
+* **La solución:** Revisa que todas las dependencias aparezcan en `package.json` y sube el commit a GitHub.
+
+#### 2. *Port Binding Timeout / Service Unreachable*
+* **La causa:** Dejaste el puerto fijo en `3000` (`app.listen(3000)`).
+* **La solución:** La nube exige `const PUERTO = process.env.PORT || 3000;`.
+
+#### 3. Olvidar el Script `"start"`
+* **La causa:** Render no sabe cómo encender tu servidor si no especificas `"start": "node server.js"` en `package.json`.
+
+---
+
+{/* Duración estimada para el instructor: 30 min */}
+## 🏠 Fase 5: Graduación, Retrospectiva y Próximos Pasos
+
+¡Lo lograste! Has completado las **12 semanas** de la ruta **Para No Programadores**.
+
+---
+
+### 🎓 Retrospectiva de tu Viaje de Aprendizaje
+
+Echemos la vista atrás para ver todo lo que has construido:
+
+```
+El Mapa Completo de tu Transformación (12 Semanas)
+├── 🟢 Semana 1: Derribar el miedo, anatomía web y consola DevTools.
+├── 🟢 Semana 2: Las 5 piezas de la lógica: variables, tipos, operadores, condicionales y funciones.
+├── 🟢 Semana 3: Language Tour: manipulación de textos, arreglos funcionales y try/catch.
+├── 🟢 Semana 4: Paradigmas: Programación Orientada a Objetos y Asincronía con async/await.
+├── 🟢 Semana 5: Stacks tecnológicos y diseño arquitectónico de ShortURL.
+├── 🟢 Semana 6: Frontend: HTML5 Semántico, CSS Flexbox y eventos del DOM.
+├── 🟢 Semana 7: Backend: Servidores web, protocolo HTTP y API REST con Express.
+├── 🟢 Semana 8: Base de Datos: Persistencia permanente con SQLite y consultas SQL.
+├── 🟢 Semana 9: Terminal: Dominio de la línea de comandos CLI y scripts.
+├── 🟢 Semana 10: Control de Versiones: Commits atómicos, ramas y GitHub.
+├── 🟢 Semana 11: Sistemas Operativos: Gestión de procesos y variables de entorno (.env).
+└── 🟢 Semana 12: DevOps: Despliegue continuo en la nube y publicación global.
+```
+
+---
+
+### 🏆 Tu Proyecto de Graduación para el Mundo
+
+Ahora posees una aplicación web Full-Stack real funcionando en internet, con código fuente documentado en GitHub y desplegada en la nube.
+
+<Aside type="tip" title="🚀 Cómo Compartir tu Logro">
+1. **Agrégalo a tu CV y Perfil de LinkedIn:**
+   * Título del Proyecto: *ShortURL - Full-Stack URL Shortener Application*.
+   * Tecnologías: *JavaScript (ES6+), Node.js, Express, SQLite, HTML5/CSS3, Git, GitHub, Render PaaS*.
+   * Enlaces: Tu repositorio de GitHub y tu URL pública en vivo.
+2. **Comparte tu experiencia:** Escribe un post contando cómo pasaste de no saber programar a publicar tu primera aplicación web en producción.
+</Aside>
+
+---
+
+## 📚 Recursos y Videos Recomendados
+
+Para continuar tu crecimiento profesional hacia la siguiente etapa:
+
+<CardGrid>
+  <LinkCard
+    title="¿Qué es DevOps? Guía para Desarrolladores"
+    href="https://www.youtube.com/watch?v=kmbzFjO_a_I"
+    description="Aprende sobre la cultura de integración continua, pruebas automáticas y entrega de valor."
+  />
+  <LinkCard
+    title="Cómo Crear un Portafolio de Programación Atractivo"
+    href="https://www.youtube.com/watch?v=2I9Z1HkE7_k"
+    description="Consejos prácticos para presentar tus proyectos en GitHub y LinkedIn ante reclutadores."
+  />
+  <LinkCard
+    title="Despliegue Continuo (CI/CD) con GitHub Actions"
+    href="https://docs.github.com/es/actions/learn-github-actions/understanding-github-actions"
+    description="Documentación oficial de GitHub para automatizar pruebas y despliegues en la nube."
+  />
+  <LinkCard
+    title="Ruta de Especialización: Para Principiantes (Juniors)"
+    href="/roadmap/para-principiantes/1"
+    description="Da el siguiente paso: aprende React, TypeScript, APIs avanzadas y trabajo ágil en equipo."
+  />
+</CardGrid>
+
+---
+
+## 🚀 Próxima Parada: La Ruta Para Principiantes (Juniors)
+
+¡Felicidades, graduado de **Desde0**! Ya no eres una persona ajena al mundo de la tecnología; **ahora eres un creador de software**.
+
+Cuando estés listo para dar el siguiente salto profesional hacia la empleabilidad y profundizar en frameworks modernos como React y arquitecturas avanzadas, te esperamos en:
+
+👉 **[Ruta: Para Principiantes (Juniors) - Lección 1: Configuración del Entorno Profesional](/roadmap/para-principiantes/1)**
 
 <Cta></Cta>

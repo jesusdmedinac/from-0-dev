@@ -1,12 +1,368 @@
 ---
-title: Sistemas Operativos
-description: WIP
+title: Sistemas Operativos y Variables de Entorno (.env)
+description: "Guía y cuaderno de trabajo para una sesión de 4 horas. Comprende cómo interactúa el software con el sistema operativo: procesos, memoria, señales del sistema y gestión segura de variables de entorno con dotenv en ShortURL."
 ---
 
+import { Aside, CardGrid, LinkCard } from '@astrojs/starlight/components';
 import Cta from '@components/cta/para-no-programadores/cta.astro';
 
 <Cta></Cta>
 
-WIP
+En la **[Lección 10: Control de Versiones con Git y GitHub (L10)](/roadmap/para-no-programadores/10)** publicamos el código fuente de nuestro proyecto **ShortURL** en la nube con un repositorio profesional y documentado.
+
+Ahora nos encontramos a un solo paso de la meta final: poner nuestra aplicación en producción en un servidor cloud público para que cualquier persona en el mundo pueda usarla.
+
+Sin embargo, antes de enviar nuestro código a la nube, debemos resolver una pregunta crucial: **¿Cómo interactúa nuestro programa con el Sistema Operativo que lo hospeda?** En tu computadora local tu servidor siempre escucha en el puerto `3000` y busca la base de datos en tu carpeta de usuario; pero en la nube, los servidores asignan puertos dinámicos y exigen proteger las contraseñas sin escribirlas dentro del código fuente.
+
+En esta sesión intensiva de **4 horas**, comprenderemos cómo el **Sistema Operativo** administra la memoria y los procesos de Node.js, dominaremos las **Variables de Entorno (`.env`)** y aprenderemos a apagar servidores limpiamente mediante **Señales del Sistema (*Graceful Shutdown*)**.
+
+---
+
+## 🗺️ Estructura de la Sesión
+
+{/* 
+Guía metodológica para el instructor:
+- Fase 1: Revisión del Tema Anterior y Conclusiones (~30 min)
+- Fase 2: Introducción al Tema y Fundamentos Teóricos (~45 min)
+- Fase 3: Práctica Asistida en Vivo (~90 min)
+- Fase 4: Exposición, Debate y Debugging (~45 min)
+- Fase 5: Reto Semanal y Práctica en Casa (~30 min)
+*/}
+
+Cada una de nuestras sesiones semanales sigue una metodología pedagógica dividida en **5 fases**:
+
+```
+Estructura de la Sesión
+├── ☕ Fase 1: Revisión del Tema Anterior y Conclusiones
+├── 🎯 Fase 2: Introducción al Tema y Fundamentos
+├── 💻 Fase 3: Práctica Asistida en Vivo
+├── 🗣️ Fase 4: Exposición, Debate y Debugging
+└── 🏠 Fase 5: Reto Semanal y Práctica en Casa
+```
+
+---
+
+{/* Duración estimada para el instructor: 30 min */}
+## ☕ Fase 1: Revisión del Tema Anterior y Conclusiones
+
+Iniciamos la sesión analizando el repositorio publicado en GitHub y conectando con los entornos de producción.
+
+{/* Tiempo sugerido: 15 min */}
+### 1. Puesta en Común del Reto de la Lección 10
+
+En la lección previa creamos commits atómicos, configuramos el `.gitignore` y publicamos el repositorio en GitHub:
+* **Discusión en grupo:** ¿Pudiste ver tu `README.md` formateado en GitHub?
+* ¿Por qué nos aseguramos de que la carpeta `node_modules/` no subiera a GitHub?
+* Si en el futuro agregamos una contraseña secreta o una llave de API a nuestro servidor... ¿deberíamos subirla a un repositorio público de GitHub?
+
+{/* Tiempo sugerido: 15 min */}
+### 2. El Puente Conceptual: El Código es el Mismo, el Entorno Cambia
+
+Uno de los principios más importantes de la ingeniería de software moderna es:
+> *"El código de tu aplicación debe ser idéntico en desarrollo y en producción; lo único que debe cambiar es su configuración."*
+
+Tu código no debe tener escrito de forma fija (*hardcoded*) valores como `const PUERTO = 3000;`. En su lugar, debe preguntarle al Sistema Operativo: *"¿En qué puerto quieres que me ejecute hoy?"*. A este mecanismo de comunicación lo llamamos **Variables de Entorno**.
+
+---
+
+{/* Duración estimada para el instructor: 45 min */}
+## 🎯 Fase 2: Introducción al Tema y Fundamentos Teóricos
+
+Analicemos qué es un Proceso, cómo se gestiona la memoria y cómo opera `process.env`.
+
+---
+
+{/* Tiempo sugerido: 15 min */}
+### 1. ¿Qué es un Proceso en el Sistema Operativo?
+
+Cuando ejecutas `node server.js` en tu terminal, el Sistema Operativo (macOS, Linux o Windows) realiza tres tareas:
+1. **Asigna un Identificador Único (PID - *Process ID*):** Un número como `PID: 4892` que identifica a tu servidor.
+2. **Reserva un bloque de Memoria RAM:** Para guardar tus variables y código en ejecución.
+3. **Le otorga acceso a los recursos:** Como puertos de red y lectura del disco duro.
+
+```
+┌────────────────────────────────────────────────────────────┐
+│ 🖥️ SISTEMA OPERATIVO (Kernel)                              │
+│                                                            │
+│   ┌────────────────────────────────────────────────────┐   │
+│   │ ⚙️ PROCESO: Node.js (PID: 5821)                    │   │
+│   │ • Memoria asignada: 45 MB                          │   │
+│   │ • Puerto de red: 3000                              │   │
+│   │ • Variables de Entorno: { PORT: "3000", ... }      │   │
+│   └────────────────────────────────────────────────────┘   │
+└────────────────────────────────────────────────────────────┘
+```
+
+---
+
+{/* Tiempo sugerido: 15 min */}
+### 2. Variables de Entorno y el Objeto `process.env`
+
+En Node.js, todas las variables de configuración del sistema operativo se leen a través del objeto global **`process.env`**:
+
+```javascript
+// Si el sistema operativo define un puerto, úsalo; de lo contrario usa 3000 por defecto
+const PUERTO = process.env.PORT || 3000;
+const AMBIENTE = process.env.NODE_ENV || "development";
+```
+
+#### El Estándar del archivo `.env`:
+Para no tener que escribir variables largas en la terminal cada vez que iniciamos el servidor, creamos un archivo local llamado **`.env`** y usamos la librería estándar **`dotenv`**:
+
+```ini title=".env (Archivo secreto local)"
+PORT=4000
+NODE_ENV=development
+NOMBRE_APP=ShortURL Desde0
+```
+
+---
+
+{/* Tiempo sugerido: 15 min */}
+### 3. Señales del Sistema Operativo (*Graceful Shutdown*)
+
+Cuando estás en la terminal y presionas **`Ctrl + C`** para apagar tu servidor, el Sistema Operativo le envía a Node.js un mensaje formal llamado **`SIGINT`** (*Signal Interrupt*).
+
+Un servidor profesional no debe morir de golpe; debe:
+1. Dejar de aceptar peticiones nuevas.
+2. Guardar y cerrar limpiamente las conexiones a la base de datos SQLite.
+3. Despedirse y apagarse con orden. A esto se le conoce como **Apagado Limpio (*Graceful Shutdown*)**.
+
+---
+
+### 🔍 Experimento en Vivo: Descubriendo tu Sistema Operativo con Node.js
+
+Vamos a inspeccionar las entrañas de nuestra computadora con JavaScript:
+
+1. **Abre tu terminal y abre el modo interactivo de Node:**
+   ```bash
+   node
+   ```
+2. **Ejecuta estas instrucciones una por una:**
+   ```javascript
+   const os = require('os');
+   console.log("Plataforma:", os.platform());
+   console.log("Memoria Libre (MB):", Math.round(os.freemem() / 1024 / 1024));
+   console.log("Núcleos de CPU:", os.cpus().length);
+   console.log("PID de este proceso:", process.pid);
+   ```
+3. **Sal del modo interactivo presionando `Ctrl + C` dos veces.**
+
+---
+
+## 💻 Fase 3: Práctica Asistida en Vivo
+
+Adaptaremos **ShortURL** para configurarse con variables de entorno dinámicas y apagarse limpiamente.
+
+---
+
+{/* Tiempo sugerido: 20 min */}
+### 🧩 Reto 1: Instalación y Configuración de `dotenv`
+
+**Objetivo:** Instalar el paquete `dotenv` y crear nuestro archivo de configuración local.
+
+Ejecuta en la terminal dentro de tu proyecto ShortURL:
+
+```bash
+# 1. Instalamos dotenv
+npm install dotenv
+
+# 2. Creamos nuestro archivo .env local
+echo "PORT=4000" > .env
+echo "NODE_ENV=development" >> .env
+echo "DB_PATH=./data/shorturl.db" >> .env
+```
+
+---
+
+{/* Tiempo sugerido: 25 min */}
+### 🧩 Reto 2: Adaptando `server.js` para Leer `process.env`
+
+**Objetivo:** Cargar `dotenv` en la primera línea de `server.js` y hacer que el puerto sea 100% dinámico.
+
+Abre `server.js` y actualiza la cabecera:
+
+```javascript title="server.js"
+// 1. Cargamos las variables de entorno del archivo .env inmediatamente
+require("dotenv").config();
+
+const express = require("express");
+const db = require("./database");
+const app = express();
+
+// 2. Leemos el puerto dinámicamente desde el entorno
+const PUERTO = process.env.PORT || 3000;
+const AMBIENTE = process.env.NODE_ENV || "development";
+
+app.use(express.json());
+app.use(express.static("public"));
+
+// ... (Aquí van los endpoints POST /api/acortar y GET /:codigo que ya creamos)
+
+// 3. Encendemos el servidor informando el entorno actual
+app.listen(PUERTO, () => {
+  console.log(`=========================================`);
+  console.log(`🚀 Servidor ShortURL iniciado en modo: [${AMBIENTE.toUpperCase()}]`);
+  console.log(`🌐 Escuchando en: http://localhost:${PUERTO}`);
+  console.log(`=========================================`);
+});
+```
+
+---
+
+{/* Tiempo sugerido: 25 min */}
+### 🧩 Reto 3: Creación de la Plantilla Segura `.env.example`
+
+**Objetivo:** Crear una plantilla pública que indique qué variables necesita el proyecto sin revelar valores secretos.
+
+Crea un archivo llamado `.env.example` en la raíz:
+
+```ini title=".env.example"
+# Puerto en el que se ejecutará el servidor web
+PORT=3000
+
+# Entorno de ejecución (development | production)
+NODE_ENV=development
+
+# Ruta de almacenamiento del archivo de base de datos
+DB_PATH=./data/shorturl.db
+```
+
+Verifica en tu terminal:
+```bash
+# Verificamos que .env esté protegido por .gitignore y .env.example sí aparezca
+git status
+```
+
+---
+
+{/* Tiempo sugerido: 20 min */}
+### 🧩 Reto 4: Implementación de Apagado Limpio (*Graceful Shutdown*)
+
+**Objetivo:** Escuchar la señal `SIGINT` (`Ctrl + C`) para cerrar SQLite y despedir el proceso con código de salida `0`.
+
+Agrega este bloque al final de `server.js`:
+
+```javascript title="server.js (Al final del archivo)"
+// Escuchamos la señal de interrupción enviada por el Sistema Operativo (Ctrl + C)
+process.on("SIGINT", () => {
+  console.log("\n🛑 Recibida señal de apagado (SIGINT). Iniciando cierre seguro...");
+
+  try {
+    // Cerramos la conexión a la base de datos para no corromper datos
+    db.close();
+    console.log("📦 Base de datos SQLite desconectada con éxito.");
+  } catch (error) {
+    console.error("Error al cerrar base de datos:", error);
+  }
+
+  console.log("👋 ¡Servidor ShortURL apagado limpiamente! Hasta pronto.\n");
+  process.exit(0); // Código 0 = Salida exitosa sin errores
+});
+```
+
+---
+
+{/* Duración estimada para el instructor: 45 min */}
+## 🗣️ Fase 4: Exposición de Resultados, Debate y Debugging
+
+Iniciamos el servidor con `node server.js`, lo probamos en el puerto `4000` definido en `.env` y presionamos `Ctrl + C` para ver el apagado limpio en la terminal.
+
+### 🐞 Las 4 Trampas Clásicas de Sistemas Operativos y `.env`
+
+#### 1. Subir accidentalmente el archivo `.env` a GitHub
+* **El peligro:** Si subes tu `.env` a GitHub, cualquier persona podrá ver tus contraseñas y llaves de acceso.
+* **La regla inquebrantable:** El archivo `.env` **NUNCA** se sube a Git. Se sube únicamente el `.env.example`.
+
+#### 2. Las variables de `process.env` SIEMPRE son Cadenas de Texto (*Strings*)
+* **La trampa:** Si en `.env` pones `ACTIVADO=false`, en JavaScript `process.env.ACTIVADO` valdrá el string `"false"`. En condicionales, `if ("false")` evalúa como verdadero (`true`).
+* **La solución:** Para booleanos compara con `process.env.ACTIVADO === "true"`. Para números usa `Number(process.env.PORT)`.
+
+#### 3. Olvidar llamar a `require('dotenv').config()`
+* **El síntoma:** `process.env.PORT` devuelve `undefined` aunque el archivo `.env` exista en la carpeta.
+* **La solución:** La primera línea ejecutable de tu `server.js` debe ser `require('dotenv').config();`.
+
+#### 4. Procesos colgados en segundo plano
+* **El síntoma:** Cerraste la ventana de terminal pero al volver a iniciar dice `EADDRINUSE: port already in use`.
+* **La solución:** El proceso de Node anterior no se apagó. Búscalo y mátalo en la terminal (`killall node` en Mac/Linux o cerrando "Node.js" en el Administrador de Tareas de Windows).
+
+---
+
+{/* Duración estimada para el instructor: 30 min */}
+## 🏠 Fase 5: Definición de Práctica en Casa / Reto Semanal
+
+Configurarás los scripts oficiales de ejecución del proyecto en `package.json`.
+
+### 🏆 Proyecto Semanal: "El Módulo de Configuración y Scripts de NPM"
+
+**Descripción del Reto:**
+Los proyectos profesionales no se inician escribiendo `node server.js` manualmente; utilizan scripts declarativos en `package.json`.
+
+#### Especificaciones a Implementar:
+
+1. **Configurar Scripts en `package.json`:**
+   * Abre tu `package.json` y define la sección `"scripts"`:
+     ```json
+     "scripts": {
+       "start": "node server.js",
+       "dev": "node --watch server.js"
+     }
+     ```
+   *(Nota: `node --watch` es una función moderna de Node.js que reinicia tu servidor automáticamente cada vez que guardas un cambio en el código).*
+
+2. **Adaptar la Base de Datos con Variable de Entorno:**
+   * En `database.js`, haz que la ruta del archivo SQLite se lea desde `process.env.DB_PATH || path.join(__dirname, "data", "shorturl.db")`.
+
+3. **Prueba de Funcionamiento:**
+   * Inicia tu servidor ejecutando: `npm run dev`.
+   * Realiza un cambio en `server.js` (ej. cambiar un mensaje de console.log) y guarda el archivo.
+   * Observa cómo Node.js se reinicia solo al instante sin que tengas que tocar la terminal.
+   * Presiona `Ctrl + C` y verifica el mensaje de apagado limpio.
+
+4. **Sube tus cambios a GitHub:**
+   * `git add .`
+   * `git commit -m "feat: implement environment variables and graceful shutdown"`
+   * `git push origin main`
+
+<Aside type="tip" title="Criterio de Autoevaluación">
+Verifica con `git status` que tu archivo `.env` NO haya sido incluido en el commit y que `.env.example` sí esté guardado en GitHub.
+</Aside>
+
+---
+
+## 📚 Recursos y Videos Recomendados
+
+Para profundizar en Sistemas Operativos, procesos y variables de entorno:
+
+<CardGrid>
+  <LinkCard
+    title="Cómo Manejar Variables de Entorno Seguras con Dotenv"
+    href="https://www.youtube.com/watch?v=17UVejOw3zA"
+    description="Aprende a proteger credenciales y configurar puertos dinámicos en Node.js."
+  />
+  <LinkCard
+    title="¿Qué es un Proceso y qué es un Hilo (Thread)?"
+    href="https://www.youtube.com/watch?v=Qh_tD2r9-F4"
+    description="Descubre cómo el Sistema Operativo organiza la memoria y ejecuta programas concurrentes."
+  />
+  <LinkCard
+    title="El Estándar de las 12 Aplicaciones Nativas de la Nube (12-Factor App)"
+    href="https://12factor.net/es/config"
+    description="Metodología estándar de la industria sobre cómo separar la configuración del código fuente."
+  />
+  <LinkCard
+    title="Guía de Señales de Proceso en Node.js (SIGINT / SIGTERM)"
+    href="https://nodejs.org/api/process.html#signal-events"
+    description="Documentación oficial de Node.js sobre cómo capturar señales del sistema operativo."
+  />
+</CardGrid>
+
+---
+
+## 🚀 Conclusión y Próximos Pasos
+
+¡Felicidades! Ahora tu aplicación es flexible, segura, desacoplada y lista para sobrevivir en cualquier entorno de ejecución.
+
+Hemos llegado a la cumbre de nuestro viaje formativo:
+En la próxima y última lección, conectaremos nuestro repositorio de GitHub con una plataforma en la nube y publicaremos ShortURL en internet con un dominio público real: **[Lección 12: DevOps - Despliegue en la Nube y Graduación (L12)](/roadmap/para-no-programadores/12)**.
 
 <Cta></Cta>

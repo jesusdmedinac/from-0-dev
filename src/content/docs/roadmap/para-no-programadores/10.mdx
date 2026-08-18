@@ -1,12 +1,394 @@
 ---
-title: Control de versiones
-description: WIP
+title: Control de Versiones con Git y GitHub
+description: "Guía y cuaderno de trabajo para una sesión de 4 horas. Domina el control de versiones profesional con Git y la colaboración en GitHub: commits atómicos, ramas, repositorios remotos y publicación del proyecto ShortURL."
 ---
 
+import { Aside, CardGrid, LinkCard } from '@astrojs/starlight/components';
 import Cta from '@components/cta/para-no-programadores/cta.astro';
 
 <Cta></Cta>
 
-WIP
+En la **[Lección 9: Uso de la Terminal - Dominio de la CLI (L9)](/roadmap/para-no-programadores/9)** aprendimos a movernos velozmente por el sistema de archivos y a ejecutar comandos directamente en el sistema operativo.
+
+Ahora daremos el paso hacia la herramienta de trabajo más importante en la historia de la ingeniería de software: el **Control de Versiones**.
+
+¿Alguna vez has guardado un documento escolar o de trabajo con nombres como `proyecto_final.zip`, `proyecto_final_v2.zip`, `proyecto_final_definitivo_AHORA_SI.zip`? En el desarrollo de software, este caos destruye proyectos completos.
+
+En esta sesión intensiva de **4 horas**, aprenderemos a utilizar **Git** (nuestra máquina del tiempo local para registrar cada cambio en el código) y **GitHub** (la plataforma global donde guardaremos nuestros respaldos y colaboraremos con otros programadores). Al finalizar, nuestro proyecto **ShortURL** estará publicado con un repositorio profesional en la nube.
+
+---
+
+## 🗺️ Estructura de la Sesión
+
+{/* 
+Guía metodológica para el instructor:
+- Fase 1: Revisión del Tema Anterior y Conclusiones (~30 min)
+- Fase 2: Introducción al Tema y Fundamentos Teóricos (~45 min)
+- Fase 3: Práctica Asistida en Vivo (~90 min)
+- Fase 4: Exposición, Debate y Debugging (~45 min)
+- Fase 5: Reto Semanal y Práctica en Casa (~30 min)
+*/}
+
+Cada una de nuestras sesiones semanales sigue una metodología pedagógica dividida en **5 fases**:
+
+```
+Estructura de la Sesión
+├── ☕ Fase 1: Revisión del Tema Anterior y Conclusiones
+├── 🎯 Fase 2: Introducción al Tema y Fundamentos
+├── 💻 Fase 3: Práctica Asistida en Vivo
+├── 🗣️ Fase 4: Exposición, Debate y Debugging
+└── 🏠 Fase 5: Reto Semanal y Práctica en Casa
+```
+
+---
+
+{/* Duración estimada para el instructor: 30 min */}
+## ☕ Fase 1: Revisión del Tema Anterior y Conclusiones
+
+Iniciamos la sesión conectando el manejo de la terminal con el flujo de trabajo en equipo.
+
+{/* Tiempo sugerido: 15 min */}
+### 1. Puesta en Común del Reto de la Lección 9
+
+En la lección previa construimos una estructura completa de proyecto desde la terminal:
+* **Discusión en grupo:** ¿Cómo te sentiste al crear carpetas y archivos sin tocar el ratón?
+* ¿Qué atajos de teclado (`Tab`, flecha `↑`) te resultaron más útiles?
+* ¿Qué harías si borras por accidente 200 líneas de código en tu proyecto y no tienes copias de seguridad?
+
+{/* Tiempo sugerido: 15 min */}
+### 2. El Puente Conceptual: La Máquina del Tiempo del Software
+
+Un **Sistema de Control de Versiones (VCS)** resuelve tres problemas monumentales:
+1. **Historial Completo:** Guarda "fotografías" (*Commits*) de tu proyecto en cada etapa. Si algo se rompe hoy, puedes retroceder al estado exacto de hace dos días con un solo comando.
+2. **Experimentación sin Riesgo:** Permite crear caminos paralelos (*Ramas / Branches*) para probar ideas nuevas sin arriesgar el código que ya funciona.
+3. **Colaboración Global:** Permite que 100 ingenieros editen el mismo proyecto simultáneamente sin sobreescribir el trabajo de los demás.
+
+---
+
+{/* Duración estimada para el instructor: 45 min */}
+## 🎯 Fase 2: Introducción al Tema y Fundamentos Teóricos
+
+Analicemos la diferencia entre Git y GitHub, los 3 estados de un archivo y el archivo `.gitignore`.
+
+---
+
+{/* Tiempo sugerido: 15 min */}
+### 1. Git vs GitHub: No son lo mismo
+
+Es común que los principiantes confundan ambas herramientas:
+* **Git:** Es el **programa de software libre** instalado en tu computadora que registra los cambios en tus archivos locales. Funciona 100% sin internet.
+* **GitHub:** Es un **servicio en la nube** (propiedad de Microsoft) que hospeda tus proyectos de Git en internet para respaldarlos, compartirlos y colaborar con otros desarrolladores.
+
+```
+[Tu Computadora Local (Git)] ──────── (git push / git pull) ────────► [La Nube (GitHub)]
+```
+
+---
+
+{/* Tiempo sugerido: 15 min */}
+### 2. Los 3 Estados de un Archivo en Git
+
+Git no toma fotos de tus archivos automáticamente cada vez que guardas; tú decides exactamente qué cambios incluir:
+
+```
+┌─────────────────────────┐       git add       ┌──────────────────────┐      git commit      ┌─────────────────────────┐
+│ 1. Working Directory    │ ──────────────────► │ 2. Staging Area      │ ───────────────────► │ 3. Git Repository (.git)│
+│ (Archivos modificados)  │                     │ (La caja de la foto) │                      │ (Foto histórica fija)   │
+└─────────────────────────┘                     └──────────────────────┘                      └─────────────────────────┘
+```
+
+1. **Working Directory:** Donde editas tu código en VS Code o tu editor.
+2. **Staging Area:** El área de preparación donde colocas los archivos listos para la foto con `git add`.
+3. **Repository (`.git`):** La base de datos interna de Git donde la foto queda sellada para siempre con `git commit -m "mensaje"`.
+
+---
+
+{/* Tiempo sugerido: 15 min */}
+### 3. La Regla de Oro del `.gitignore`
+
+Existen archivos y carpetas que **NUNCA** deben subirse a Git ni a GitHub:
+* `node_modules/`: Pesa cientos de megabytes y se puede reinstalar en cualquier máquina ejecutando `npm install`.
+* Archivos `.db` o `.sqlite`: Contienen datos locales de prueba.
+* Archivos `.env`: Contienen contraseñas, secretos y tokens de seguridad privados.
+
+Para decirle a Git que ignore estos archivos, creamos un archivo de texto llamado **`.gitignore`** en la raíz de nuestro proyecto.
+
+---
+
+### 🔍 Experimento en Vivo: Creando un Repositorio en 1 Minuto
+
+Vamos a inicializar un repositorio en una carpeta temporal:
+
+1. **Abre tu terminal y ejecuta:**
+   ```bash
+   mkdir prueba-git && cd prueba-git
+   git init
+   ```
+2. **Crea un archivo y revisa el estado:**
+   ```bash
+   echo "Hola Git" > notas.txt
+   git status
+   ```
+   *(Verás `notas.txt` en color rojo indicando que Git ha detectado un archivo nuevo).*
+3. **Agrega y crea tu primer commit:**
+   ```bash
+   git add notas.txt
+   git commit -m "docs: add first notes file"
+   git log --oneline
+   ```
+4. **Observa el resultado:** Verás un identificador único (hash) y tu mensaje. ¡Has tomado tu primera fotografía con Git!
+
+---
+
+## 💻 Fase 3: Práctica Asistida en Vivo
+
+Configuraremos Git, protegeremos **ShortURL** con un `.gitignore` y publicaremos el repositorio en GitHub.
+
+---
+
+{/* Tiempo sugerido: 20 min */}
+### 🧩 Reto 1: Configuración Global y `.gitignore` de ShortURL
+
+**Objetivo:** Configurar tu identidad en Git y crear el archivo de exclusión para ShortURL.
+
+Ejecuta en tu terminal:
+
+```bash
+# 1. Configuramos nuestro nombre y correo (aparecerá en la firma de tus commits)
+git config --global user.name "Tu Nombre Real"
+git config --global user.email "tu_correo@ejemplo.com"
+
+# 2. Entramos a la carpeta de nuestro proyecto ShortURL
+cd ~/proyectos/proyecto-shorturl
+
+# 3. Inicializamos el repositorio de Git
+git init
+
+# 4. Creamos el archivo .gitignore con las exclusiones obligatorias
+echo "node_modules/" > .gitignore
+echo "data/*.db" >> .gitignore
+echo ".env" >> .gitignore
+echo ".DS_Store" >> .gitignore
+```
+
+---
+
+{/* Tiempo sugerido: 25 min */}
+### 🧩 Reto 2: Tu Primer Commit Atómico
+
+**Objetivo:** Preparar todos los archivos limpios del proyecto y sellar el commit inicial.
+
+```bash
+# 1. Verificamos qué archivos están listos
+git status
+
+# 2. Agregamos todos los archivos del proyecto al Staging Area
+git add .
+
+# 3. Verificamos que los archivos aparezcan en color verde
+git status
+
+# 4. Sellamos nuestro primer commit con un mensaje claro
+git commit -m "feat: initial commit with full-stack ShortURL application"
+
+# 5. Verificamos el historial
+git log --oneline
+```
+
+---
+
+{/* Tiempo sugerido: 25 min */}
+### 🧩 Reto 3: Conectar y Subir a GitHub (`git push`)
+
+**Objetivo:** Vincular nuestro repositorio local con un repositorio remoto en GitHub.
+
+1. **Abre tu cuenta en [GitHub.com](https://github.com/).**
+2. Haz clic en el botón verde **"New"** (Nuevo Repositorio).
+3. Nómbralo `shorturl-desde0` y déjalo como **Público**. No selecciones "Add README" (ya tenemos archivos locales).
+4. Haz clic en **"Create repository"**.
+5. Copia los comandos que te muestra GitHub y ejecútalos en tu terminal:
+
+```bash
+# Renombramos la rama principal a "main"
+git branch -M main
+
+# Enlazamos la dirección remota de GitHub (reemplaza con tu enlace real)
+git remote add origin https://github.com/TU_USUARIO/shorturl-desde0.git
+
+# Subimos nuestro código a la nube por primera vez
+git push -u origin main
+```
+
+¡Refresca la página de GitHub en tu navegador y verás todos tus archivos publicados con tu nombre!
+
+---
+
+{/* Tiempo sugerido: 20 min */}
+### 🧩 Reto 4: Flujo de Trabajo con Ramas (*Feature Branches*)
+
+**Objetivo:** Crear una rama paralela para desarrollar una mejora sin tocar la rama estable `main`.
+
+```bash
+# 1. Creamos y nos cambiamos a una nueva rama llamada "feat/modo-oscuro"
+git checkout -b feat/modo-oscuro
+
+# 2. Realizamos una mejora en public/styles.css (ej. cambiar un color)
+echo "/* Modo oscuro activado */" >> public/styles.css
+
+# 3. Guardamos el cambio en la rama
+git add public/styles.css
+git commit -m "style: add dark theme accent to stylesheet"
+
+# 4. Volvemos a la rama principal main
+git checkout main
+
+# 5. Fusionamos (merge) la mejora en main
+git merge feat/modo-oscuro
+
+# 6. Subimos los cambios a GitHub
+git push origin main
+```
+
+---
+
+{/* Duración estimada para el instructor: 45 min */}
+## 🗣️ Fase 4: Exposición de Resultados, Debate y Debugging
+
+Revisamos los repositorios publicados en GitHub y analizamos las trampas típicas de Git.
+
+### 🐞 Las 4 Trampas Clásicas de Git
+
+#### 1. Subir accidentalmente `node_modules/` a GitHub
+* **El error:** Hacer `git add .` antes de crear el archivo `.gitignore`.
+* **Consecuencia:** GitHub tardará minutos en subir 50,000 archivos pesados y tu repositorio quedará sobrecargado.
+* **La solución:**
+  ```bash
+  echo "node_modules/" >> .gitignore
+  git rm -r --cached node_modules
+  git commit -m "fix: remove node_modules from git tracking"
+  git push origin main
+  ```
+
+#### 2. Mensajes de commit inútiles
+* **Mensajes malos:** `"cambios"`, `"arreglos"`, `"asdasd"`, `"final ahora si"`.
+* **Estándar profesional (*Conventional Commits*):**
+  * `feat:` Para una funcionalidad nueva (`feat: add clipboard copy button`).
+  * `fix:` Para corregir un error (`fix: prevent page reload on submit`).
+  * `docs:` Para actualizar documentación (`docs: add setup instructions`).
+  * `style:` Para cambios estéticos de CSS sin tocar lógica.
+
+#### 3. El temido Conflicto de Merge (*Merge Conflict*)
+* **¿Qué es?** Ocurre cuando dos ramas modificaron exactamente la misma línea de un archivo y Git no sabe cuál versión elegir.
+* **Cómo resolverlo:** Abre el archivo en VS Code, elimina las marcas `<<<<<<< HEAD`, `=======` y `>>>>>>>`, deja el código correcto y haz un nuevo commit.
+
+#### 4. Olvidar hacer `git pull` antes de trabajar
+* **La regla:** Si trabajas con otras personas o desde otra computadora, ejecuta siempre `git pull` al iniciar tu jornada para descargar los cambios más recientes.
+
+---
+
+{/* Duración estimada para el instructor: 30 min */}
+## 🏠 Fase 5: Definición de Práctica en Casa / Reto Semanal
+
+Documentarás tu proyecto ShortURL como un ingeniero profesional.
+
+### 🏆 Proyecto Semanal: "El README.md Profesional de ShortURL"
+
+**Descripción del Reto:**
+El archivo `README.md` es la carta de presentación de cualquier proyecto de software en GitHub. Debes documentar tu proyecto ShortURL para que cualquier persona en el mundo entienda qué hace y cómo instalarlo.
+
+#### Estructura Obligatoria del `README.md`:
+
+```markdown
+# 🔗 ShortURL - Acortador de Enlaces Web
+
+Un acortador de URLs profesional y ligero construido desde cero con Node.js, Express y SQLite.
+
+---
+
+## 🚀 Características
+- ✨ Interfaz gráfica responsiva y adaptable a dispositivos móviles.
+- ⚡ Redirecciones HTTP 302 ultra veloces.
+- 📋 Copiado automático al portapapeles con un solo clic.
+- 🗄️ Persistencia de datos permanente con base de datos relacional SQLite.
+- 📊 Registro histórico y contador de visitas en tiempo real.
+
+---
+
+## 🛠️ Stack Tecnológico
+- **Frontend:** HTML5 Semántico, CSS3 Flexbox, JavaScript Vanilla (DOM API).
+- **Backend:** Node.js, Express.js.
+- **Base de Datos:** SQLite (`better-sqlite3`).
+- **Control de Versiones:** Git y GitHub.
+
+---
+
+## 💻 Instalación y Uso Local
+
+1. Clona el repositorio:
+   ```bash
+   git clone https://github.com/TU_USUARIO/shorturl-desde0.git
+   cd shorturl-desde0
+   ```
+
+2. Instala las dependencias:
+   ```bash
+   npm install
+   ```
+
+3. Inicia el servidor web:
+   ```bash
+   node server.js
+   ```
+
+4. Abre tu navegador en `http://localhost:3000`.
+```
+
+#### Pasos para entregar:
+1. Crea o actualiza tu archivo `README.md` en la raíz del proyecto.
+2. Agrega el cambio: `git add README.md`.
+3. Haz commit: `git commit -m "docs: add comprehensive project README"`.
+4. Sube a GitHub: `git push origin main`.
+
+<Aside type="tip" title="Criterio de Autoevaluación">
+Abre tu repositorio en `github.com/TU_USUARIO/shorturl-desde0` y verifica que el `README.md` se renderice perfectamente con títulos formateados y bloques de código resaltados.
+</Aside>
+
+---
+
+## 📚 Recursos y Videos Recomendados
+
+Para profundizar en el uso de Git y GitHub:
+
+<CardGrid>
+  <LinkCard
+    title="Curso de Git y GitHub desde Cero para Principiantes"
+    href="https://www.youtube.com/watch?v=HiXLkL42tMU"
+    description="Aprende el flujo de trabajo completo: init, add, commit, push, pull y ramas."
+  />
+  <LinkCard
+    title="Guía Visual de Ramas y Commits en Git"
+    href="https://learngitbranching.js.org/?locale=es_ES"
+    description="Juego interactivo para dominar ramas, merges y rebase visualmente en tu navegador."
+  />
+  <LinkCard
+    title="Convención de Commits Profesionales (Conventional Commits)"
+    href="https://www.conventionalcommits.org/es/v1.0.0/"
+    description="Estándar de la industria para escribir mensajes de commit legibles y profesionales."
+  />
+  <LinkCard
+    title="Guía Oficial de GitHub sobre Archivos .gitignore"
+    href="https://docs.github.com/es/get-started/getting-started-with-git/ignoring-files"
+    description="Documentación oficial de GitHub sobre buenas prácticas para excluir archivos sensibles."
+  />
+</CardGrid>
+
+---
+
+## 🚀 Conclusión y Próximos Pasos
+
+¡Felicidades! Has alcanzado un hito trascendental: tu código ya no vive aislado en tu computadora; ahora cuenta con un historial de versiones seguro y está publicado en GitHub para todo el mundo.
+
+Antes de dar el salto final hacia la puesta en producción en la nube, necesitamos comprender cómo se ejecutan nuestros programas dentro del servidor:
+En la próxima sesión exploraremos: **[Lección 11: Sistemas Operativos y Variables de Entorno (L11)](/roadmap/para-no-programadores/11)**.
 
 <Cta></Cta>

@@ -1,252 +1,424 @@
 ---
-title: Paradigmas
-description: JavaScript es un lenguaje de programación versátil que soporta varios paradigmas de programación. Los principales paradigmas que se pueden manejar en JavaScript son Programación Imperativa, Programación Orientada a Objetos (OOP), Programación Funcional, Programación Declarativa y Programación Asíncrona.
+title: Paradigmas de Programación
+description: "Guía y cuaderno de trabajo para una sesión de 4 horas. Domina las diferentes formas de estructurar software: Programación Orientada a Objetos (POO), Programación Funcional y Asincronía con Promesas y Async/Await."
 ---
 
-import { Aside } from '@astrojs/starlight/components';
+import { Aside, CardGrid, LinkCard } from '@astrojs/starlight/components';
 import Cta from '@components/cta/para-no-programadores/cta.astro';
 
 <Cta></Cta>
 
-<Aside title="Referencia">Se denominan paradigmas de programación a las formas de clasificar los lenguajes de programación en función de sus características. Los idiomas se pueden clasificar en múltiples paradigmas. - [Wikipedia](https://es.wikipedia.org/wiki/Paradigma_de_programaci%C3%B3n)</Aside>
+En la **[Lección 3: Language Tour (L3)](/roadmap/para-no-programadores/3)** descubrimos la caja de herramientas de JavaScript para manipular textos, listas y objetos, además de blindar nuestras aplicaciones con `try / catch`.
 
-JavaScript es un lenguaje de programación versátil que soporta varios paradigmas de programación. Los principales paradigmas que se pueden manejar en JavaScript son:
+Ahora que sabemos escribir código funcional, surge una pregunta fundamental: **¿Cómo organizamos programas grandes sin que se conviertan en un laberinto incontrolable?** Aquí es donde entran los **Paradigmas de Programación**: diferentes filosofías y estilos para estructurar el pensamiento y resolver problemas en software.
 
-1. [Programación Imperativa](#programaci%C3%B3n-imperativa)
-2. [Programación Orientada a Objetos (OOP)](#programaci%C3%B3n-orientada-a-objetos-oop)
-3. [Programación Funcional](#programaci%C3%B3n-funcional)
-4. [Programación Declarativa](#programaci%C3%B3n-declarativa)
-5. [Programación Asíncrona](#programaci%C3%B3n-declarativa)
+En esta sesión intensiva de **4 horas**, exploraremos los tres paradigmas indispensables de la industria: la **Programación Orientada a Objetos (POO)**, la **Programación Funcional** y el superpoder de la **Asincronía** (`Promises` y `async / await`).
 
-### Programación Imperativa
+---
 
-<Aside title="Referencia">En ciencias de la computación, la programación imperativa es un paradigma de programación de software que utiliza declaraciones que cambian el estado del programa. Más o meno, así como cuando en lenguaje natural expresamos órdenes, un programa imperativo consiste en comandos para la que la computadora los ejecute. La programación imperativa se enfoca en describir cómo un programa debe operar paso a paso, en lugar de descripciones de alto nivel. - [Wikipedia](https://en.wikipedia.org/wiki/Imperative_programming)</Aside>
+## 🗺️ Estructura de la Sesión
 
-Debemos entender que la programación es dar instrucciones a la computadora. Pero esta idea es demasiado abstracta para una computadora. Necesitamos traducir esta idea a algo más explícita.
+{/* 
+Guía metodológica para el instructor:
+- Fase 1: Revisión del Tema Anterior y Conclusiones (~30 min)
+- Fase 2: Introducción al Tema y Fundamentos Teóricos (~45 min)
+- Fase 3: Práctica Asistida en Vivo (~90 min)
+- Fase 4: Exposición, Debate y Debugging (~45 min)
+- Fase 5: Reto Semanal y Práctica en Casa (~30 min)
+*/}
 
-De este modo, JavaScript nos permite comunicarnos con el navegador. A través de este lenguaje le damos instrucciones para que manipulo nuestra página web.
+Cada una de nuestras sesiones semanales sigue una metodología pedagógica dividida en **5 fases**:
 
-En programación imperativa, estas instrucciones son comando como:
-
-```js
-// Crea una variable llamada nombre con el valor Daniel
-let nombre = "Daniel"
-// Crea una variable llamada mensaje concatenando el valor de la variable nombre y anteponiendo la palabra Hola y un espacio
-let mensaje = "Hola " + nombre
-// Envía una alerta con el mensaje creado
-alert(mensaje)
+```
+Estructura de la Sesión
+├── ☕ Fase 1: Revisión del Tema Anterior y Conclusiones
+├── 🎯 Fase 2: Introducción al Tema y Fundamentos
+├── 💻 Fase 3: Práctica Asistida en Vivo
+├── 🗣️ Fase 4: Exposición, Debate y Debugging
+└── 🏠 Fase 5: Reto Semanal y Práctica en Casa
 ```
 
-A pesar del esfuerzo por describir el paso a paso en los comentarios en lenguaje natural, JavaScript es mucho más explícito en lo que está haciendo. De este modo, es importante entender qué queremos que nuestro sitio web o en navegador haga paso a paso para escribir nuestro código de forma correcta y evitar comportamientos inesperados.
+---
 
-### Programación Orientada a Objetos (OOP)
+{/* Duración estimada para el instructor: 30 min */}
+## ☕ Fase 1: Revisión del Tema Anterior y Conclusiones
 
-<Aside title="Referencia">La programación orientada a objetos (POO) es un paradigma de programación que parte del concepto de "objetos" como base, los cuales contienen información en forma de campos (a veces también referidos como atributos, cualidades o propiedades) y código en forma de métodos. - [Wikipedia](https://es.wikipedia.org/wiki/Programaci%C3%B3n_orientada_a_objetos)</Aside>
+Comenzamos la sesión revisando el proyecto de analíticas de e-commerce y reflexionando sobre la organización del código.
 
-La base de este paradigma son los objetos. Para entender un objeto debemos analizar tres conceptos que definen las bases de este paradigma: Clase, Instancia y Objeto.
+{/* Tiempo sugerido: 15 min */}
+### 1. Puesta en Común del Reto de la Lección 3
 
-#### Clase
+En la lección previa construimos el *"Motor de Analíticas de Ventas"*, combinando `filter()`, `map()`, `reduce()` y `try / catch`:
+* **Discusión en grupo:** ¿Cómo sentiste la diferencia entre escribir un bucle `for` manual y usar `map()` o `filter()`?
+* ¿Qué ventajas encontraste al envolver cálculos críticos dentro de `try / catch`?
+* Si tuviéramos 50 tipos diferentes de productos con reglas complejas (garantías, envíos internacionales, devoluciones), ¿dónde colocarías esa lógica sin duplicar código?
 
-Una clase es la abstracción de un objeto. En terminos simples, debemos imaginar un objeto del mundo real e intentar describirlo. Los objetos en el mundo real son demasiado completos para describirlos por completo, pero en POO no es  necesario describirlos completamente, basta con abstraerlos lo suficiente como para que cumplan su rol dentro de nuestro programa.
+{/* Tiempo sugerido: 15 min */}
+### 2. El Puente Conceptual: ¿Qué es un Paradigma?
 
-Para entender una clase imaginemos una **Persona**. Describir a una persona en general es muy difícil, porque las personas somos físicamente super complejas, ni hablar de mentalmente, pero no debemos preocuparnos. Para un programa de computadora, o un sitio web, una persona puede ser tan simple como el nombre y su edad.
+Un **paradigma** es simplemente una forma de ver y organizar el mundo a través del código:
+* **Programación Imperativa:** Le dice a la computadora exactamente *cómo* hacer las cosas paso por paso (como una receta de cocina muy estricta).
+* **Programación Orientada a Objetos (POO):** Modela el software agrupando datos y comportamientos en "cajas inteligentes" llamadas *Objetos* (como autos, cuentas bancarias o usuarios).
+* **Programación Funcional:** Trata a las funciones como tuberías matemáticas puras que transforman datos sin alterar el estado global.
+* **Programación Asíncrona:** Permite que nuestro programa realice tareas que toman tiempo (como descargar un archivo o consultar una base de datos) sin congelar la pantalla del usuario.
 
-Si queremos hacerlo más complejo, podemos imaginar entonces que una **Persona** es un **Usuario**, entonces tenemos dos clases, cada una representando un objeto del mundo real pero de forma abstracta para nuestro programa. El **Usuario** tendrá nombre de usuario y contraseña, mientras que la **Persona** sólo nombre y edad.
+JavaScript es un lenguaje **multiparadigma**, lo que significa que puedes combinar lo mejor de cada mundo en un solo proyecto.
 
-De esta forma, las clases son representaciones abstractas de objetos en el mundo real pero con información útil para nuestro programa.
+---
 
-En JavaScript podemos definir clase de la siguiente manera:
+{/* Duración estimada para el instructor: 45 min */}
+## 🎯 Fase 2: Introducción al Tema y Fundamentos Teóricos
 
-```js
-class Person {
-  name;
+Analicemos en profundidad los tres pilares estructurales del software moderno.
 
-  constructor(name) {
-    this.name = name;
+---
+
+{/* Tiempo sugerido: 15 min */}
+### 1. Programación Orientada a Objetos (POO): Clases e Instancias
+
+Imagina los planos de un arquitecto para construir casas:
+* **La Clase (`class`):** Es el **plano arquitectónico**. Define qué propiedades tendrá la casa (número de habitaciones, color) y qué acciones se pueden hacer en ella (abrir puerta, encender luces).
+* **La Instancia / Objeto:** Es la **casa real construida en el terreno**. Con un solo plano puedes construir 100 casas distintas, cada una con su propio color y dueño.
+
+```javascript
+// 1. El Plano (Clase)
+class Usuario {
+  constructor(nombre, email) {
+    this.nombre = nombre;     // Propiedad
+    this.email = email;       // Propiedad
+    this.activo = true;
   }
 
-  introduceSelf() {
-    console.log(`¡Hola!, soy ${name}`);
+  // Método (Acción que el usuario puede realizar)
+  desactivarCuenta() {
+    this.activo = false;
+    return `La cuenta de ${this.nombre} ha sido desactivada.`;
   }
 }
+
+// 2. Construimos una casa real a partir del plano (Instancia con "new")
+const usuario1 = new Usuario("Lucía Méndez", "lucia@correo.com");
+console.log(usuario1.nombre); // "Lucía Méndez"
+console.log(usuario1.desactivarCuenta());
 ```
 
-#### Instancia
+---
 
-Una instancia es la creación de un objeto a través de su clase. Es decir, definir un objeto en particular.
+{/* Tiempo sugerido: 10 min */}
+### 2. Programación Funcional: Funciones Puras e Inmutabilidad
 
-Pensemos de nuevo en la clase **Persona**. Para definir una instancia de la clase persona utilizaremos su constructor y lo almacenaremos en una variable que podremos utilizar posteriormente.
+En la Programación Funcional, pensamos en las funciones como **licuadoras de cocina**:
+* Si colocas fresas y leche, siempre obtendrás jugo de fresa.
+* La licuadora no cambia el color de las paredes de tu cocina (no tiene *efectos secundarios*).
+* Una **Función Pura** es aquella que con las mismas entradas siempre devuelve la misma salida y no altera variables fuera de sí misma.
 
-```js
-let person = new Person("Daniel")
-```
-
-Esta simple línea está creando una instancia de la clase Persona. La clase puede ser utilizada para crear infinidad de instancias, pero cada una de ellas es única.
-
-Es importante entender que la variable en la que estamos almacenando nuestra instancia puede recibir otro valor y nuestra instancia se puede perder. Si queremos tener otra instancia con el mismo nombre, debemos tomar en cuenta que no será la misma instancia. Podrá tener el mismo nombre, pero cada vez que utilizamos la palabra reservada `new`, estamos creando una nueva instancia.
-
-#### Objeto
-
-Y finalmente, el objeto es la instancia de la clase.
-
-Aunque instancia y objeto pueden parecer lo mismo, la instancia se refiera a un objeto en particular, mientras que el concepto de objeto representa la unidad que utilizamos para manipular los datos en nuestro programa.
-
-Es decir, la instancia es la creación de un objeto a partir de una clase. La razón por la que creamos instancias de la clase es para interactuar y manipular información en nuestro programa. Cada instancia es un objeto diferente.
-
-De esta forma, podemos tener múltiples objetos para realizar lo siguiente:
-
-```js
-let persona1 = new Persona("Daniel")
-let persona2 = new Persona("Tomás")
-
-persona1.introduceSelf()
-persona2.introduceSelf()
-```
-
-#### Conceptos extras
-
-Algunas características clave de la programación orientada a objetos son la herencia, cohesión, abstracción, acoplamiento y encapsulamiento.
-
-Todos estos conceptos serán abordados de forma profunda en el curso de [Programación para principiantes (Juniors)](/roadmap/para-principiantes/1). Pero es importante que los sepamos que existen para estudiarlos por encima cuando tengamos tiempo libre.
-
-### Programación Funcional
-
-<Aside>En informática, la programación funcional es un paradigma de programación declarativa basado en el uso de verdaderas funciones matemáticas. En este estilo de programación las funciones son ciudadanas de primera clase, porque sus expresiones pueden ser asignadas a variables como se haría con cualquier otro valor; además de que pueden crearse funciones de orden superior. - [Wikipedia](https://es.wikipedia.org/wiki/Programaci%C3%B3n_funcional)</Aside>
-
-Para poder entender este paradigma debemos explicar primero qué es una función.
-
-Una función representa una rutina o algoritmo de programación. Dicha rutina puede ser utilizada múltiples veces en un programa. Cada vez que se utiliza, en lugar de escribir el código contenido en la rutina, sólo declaramos una llamada a la rutina para indicar a nuestro programa que utiizaremos nuestra función:
-
-```js
-function imprimirMensajeEnConsola(mensaje) {
-  console.log(mensaje)
+```javascript
+// Función Pura: No modifica nada externo, solo transforma y retorna
+function aplicarDescuento(precioOriginal, porcentaje) {
+  return precioOriginal - (precioOriginal * (porcentaje / 100));
 }
 
-imprimirMensajeEnConsola("Mensaje");
+console.log(aplicarDescuento(100, 20)); // 80 (siempre dará 80)
 ```
 
-Cuando definimos una función, más allá de su estructura, en programación funcional debemos tomar en cuenta que las funciones siempre deben de retornar el mismo resultado si se le proporcionan los mismos valores de entrada. Es decir, para una súma de dos números, el resultado debería ser siempre igual.
+---
 
-```js
-function suma(a, b) {
-  return a + b;
-}
+{/* Tiempo sugerido: 15 min */}
+### 3. Asincronía: La Analogía del Restaurante y el Zumbador
 
-let resultadoDeLaSuma = suma(2, 2)
-console.log(resultadoDeLaSuma);
+¿Qué ocurre cuando vas a pedir comida a un restaurante rápido?
+1. Llegas al mostrador y pides tu hamburguesa.
+2. El cajero no te hace esperar parado 15 minutos en el mostrador congelando la fila de clientes.
+3. En su lugar, te entrega un **zumbador electrónico (*Buzzer*)**: una **Promesa** de que tu comida estará lista en el futuro.
+4. Mientras la cocina prepara tu comida, tú te sientas a revisar tu teléfono (*el programa sigue funcionando*).
+5. Cuando la comida está lista, el zumbador vibra (`.then()` o `await`) y recoges tu pedido.
+
+```
+Flujo Asíncrono
+[Hacer Pedido] ──► [Recibir Promesa / Zumbador] ──► [Hacer otras cosas] ──► [¡Comida Lista! (await)]
 ```
 
-La programación funcional se utiliza para dividir tareas complejas en subtareas o funciones que en partes pequeñas van resolviendo problemas sencillos pero en conjunto resuelven problemas mucho más complicados.
+En JavaScript moderno usamos `async / await` para esperar promesas de forma limpia y legible:
 
-Imaginemos la programación funcional como una calculadora. Aunque podemos definir una función llamada calcular, dependiendo que qué operación queremos realizar, podríamos requerir una serie de funciones sencillas o cada vez más complicadas juntando varias funciones para construir la función calcular.
-
-### Programación Declarativa
-
-<Aside>En ciencias de la computación se denomina programación delcarativa a un paradigma de programación de software en el que no se detallan los pasos a seguir, sino solo el resultado deseado con cierto código fuente - [Wikipedia](https://es.wikipedia.org/wiki/Programaci%C3%B3n_declarativa)</Aside>
-
-A diferencia de la programación imperativa, en donde debemos indicar las instrucciones paso a paso para que nuestro programa genere el resultado deseado, en la programación declarativa nos enfocamos más bien en el resultado en lugar de en las instrucciones.
-
-Es básicamente pensar en el **Qué** y no en el **Cómo**.
-
-En un artículo llamado [Jetpack Compose - A declarative UI](https://blog.jesusdmedinac.com/jetpack-compose-a-declarative-ui-380128e34f69) explico la diferencia entre programación imperativa y declarativa mostrando algunos ejemplos con un framework de programación para crear interfaces gráficas llamado Jetpack Compose.
-
-En ese artículo explico que si queremos cambiar el color de fondo de un botón, cada paradigma nos permite abordar el problema desde una perspectiva diferente.
-
-En JavaScript también tenemos una herramienta que nos permite crear interfaces gráficas de forma declarativa e imperativa.
-
-##### DOM - UI Imperativo
-
-Para entender la programación declarativa utilizaremos un concepto que profundizaremos más en la siguiente etapa de esta formación [Programación para principiantes (Juniors)](/roadmap/para-principiantes/1).
-
-El DOM en JavaScript es la herramienta que nos permite manipular la interfaz gráfica de nuestras páginas web.
-
-De forma imperativa debemos realizar los siguientes pasos para cambiar el color de fondo de un botón.
-
-<Aside>Vamos a asumir que ya sabes [HTML](https://www.w3schools.com/html/) para el siguiente ejemplo</Aside>
-
-```js
-// Imagina que creamos un color al azar y lo guardamos en una variable llamada randomColor
-let botón = document.getElementById("mi-botón")
-botón.style['background-color'] = randomColor
-```
-
-Como vez en el ejemplo, para cambiar el color debemos primero indicar **cómo** obtener el botón y **cómo** cambiar su color.
-
-##### ReactJS - UI Declarativo
-
-En programación declarativa debemos cambiar nuestra forma de pensar.
-
-<Aside>Vamos a asumir que ya sabes [React](https://es.react.dev/learn) para el siguiente ejemplo</Aside>
-
-Veamos cómo cambiamos el color de fondo de un botón en React:
-
-```js
-import { useState } from 'react';
-
-function MiButton() {
-  // Imagina que creamos un color al azar y lo guardamos en una variable llamada randomColor
-  let [randomColor, setRandomColor] = useState(...);
-  return (
-    <button
-    style={{
-      background-color: randomColor
-    }}
-    >Soy un botón</button>
-  );
+```javascript
+// La palabra "async" convierte la función en un proceso asíncrono
+async function prepararCafe() {
+  console.log("1. Pidiendo café al barista...");
+  
+  // "await" pausa esta función hasta que la promesa se complete, sin congelar el navegador
+  await esperarSegundos(2); 
+  
+  console.log("2. ☕ ¡Café listo para disfrutar!");
 }
 ```
 
-En este ejemplo estamos indicando más bien **qué** color queremos cambiar y **qué** color le queremos poner. El cómo está implicito en la librería.
+---
 
-### Programación Asíncrona
+### 🔍 Experimento en Vivo: Síncrono vs Asíncrono en la Consola
 
-Finalmente, JavaScript también nos permite utilizar un paradigma llamado Programación Asíncrona.
+Vamos a experimentar la diferencia en vivo:
 
-<Aside>Debemos notar que el navegador recorre el programa línea a línea, en el mismo orden en que nosotros lo escribimos. En cada punto, el navegador espera a que la líinea termine su trabajo antes de pasar a la siguiente línea. Tiene que hacer esto porque cada línea depende del trabajo realizado en las líneas precedentes. - [Developer Mozilla](https://developer.mozilla.org/es/docs/Learn/JavaScript/Asynchronous/Introducing)</Aside>
+1. **Abre la consola de tu navegador (`F12`).**
+2. **Ejecuta este código con un temporizador asíncrono (`setTimeout`):**
+   ```javascript
+   console.log("🟢 Paso 1: Inicio");
 
-Al cargar nuestra página web, normalmente nuestro código JavaScript se ejecuta línea por línea. A esto se le llama programación síncrona. Sin embargo, no siempre es lo más adecuado ejecutar línea por línea nuestro código. Por ejemplo, la acción de un botón queremos que se ejecute cuando el usuario presione el botón. A esto se le llama eventos.
+   setTimeout(() => {
+     console.log("🟡 Paso 2: Tarea en segundo plano completada tras 2 segundos");
+   }, 2000);
 
-También hay escenarios en los que una acción puede tomar demasiado tiempo para terminar; como una descarga de un archivo o mostrar un vídeo. En estos casos podemos recurir a la programación asíncrona.
+   console.log("🔴 Paso 3: Fin del script principal");
+   ```
+3. **Observa el orden en la consola:** Verás que aparece primero el `Paso 1`, de inmediato el `Paso 3`, y 2 segundos después el `Paso 2`. ¡JavaScript nunca se congeló!
 
-Que algo sea asíncrono significa que puede ejecutarse varias tareas al mismo tiempo. Gracias a la sincronidad podemos definir el orden de ejecución de cada tarea, pero este orden no siempre es claro, en esos escenarios utilizamos tareas asíncronas.
+---
 
-Para que entender con mayor claridad la diferencia entre síncrono y asíncrono, imagina que tenemos que descargar varios archivos:
+## 💻 Fase 3: Práctica Asistida en Vivo
 
-```js
-async function descargarArchivo1() { ... }
-async function descargarArchivo2() { ... }
-async function descargarArchivo3() { ... }
+Abriremos la consola y resolveremos juntos 4 retos guiados combinando POO, funciones puras y asincronía.
 
-let archivo1 = await descargarArchivo1(); // Tiempo de descarga estimado: 3 segundos
-let archivo2 = await descargarArchivo2(); // Tiempo de descarga estimado: 2 segundos
-let archivo3 = await descargarArchivo3(); // Tiempo de descarga estimado: 4 segundos
+---
 
-// Tiempo de descarga total estimado: 9 segundos
+{/* Tiempo sugerido: 20 min */}
+### 🧩 Reto 1: Modelando una `CuentaBancaria` con POO
+
+**Objetivo:** Crear una clase con estado interno protegido y métodos que validen reglas de negocio.
+
+```javascript
+class CuentaBancaria {
+  constructor(titular, saldoInicial = 0) {
+    this.titular = titular;
+    this.saldo = saldoInicial;
+    this.historial = [];
+  }
+
+  depositar(monto) {
+    if (monto <= 0) {
+      return "❌ El monto a depositar debe ser mayor a 0.";
+    }
+    this.saldo += monto;
+    this.historial.push(`Depósito: +$${monto}`);
+    return `Depósito exitoso. Saldo actual: $${this.saldo}`;
+  }
+
+  retirar(monto) {
+    if (monto > this.saldo) {
+      return `❌ Fondos insuficientes. Intentaste retirar $${monto}, pero tu saldo es $${this.saldo}`;
+    }
+    this.saldo -= monto;
+    this.historial.push(`Retiro: -$${monto}`);
+    return `Retiro exitoso de $${monto}. Saldo restante: $${this.saldo}`;
+  }
+
+  consultarEstado() {
+    return {
+      titular: this.titular,
+      saldo: this.saldo,
+      movimientos: this.historial
+    };
+  }
+}
+
+// Pruebas en consola:
+const miCuenta = new CuentaBancaria("Joul Medina", 500);
+console.log(miCuenta.depositar(200)); // Saldo: 700
+console.log(miCuenta.retirar(100));   // Saldo: 600
+console.log(miCuenta.retirar(1000));  // Fondos insuficientes
+console.log(miCuenta.consultarEstado());
 ```
 
-En este ejemplo, para poder descargar cada archivo debemos esperar a que el primer archivo se termine de descargar para descargar el siguiente. Esto sería programación síncrona. Cada tarea se ejecuta una despues de otra en un orden muy claro
+---
 
-Ahora, veamos el mismo ejemplo pero con programación asíncrona:
+{/* Tiempo sugerido: 25 min */}
+### 🧩 Reto 2: Tubería Funcional de Transformación de Datos
 
-```js
-async function descargarArchivo1() { ... }
-async function descargarArchivo2() { ... }
-async function descargarArchivo3() { ... }
+**Objetivo:** Encadenar funciones puras para limpiar y transformar una lista de precios en dólares a moneda local formateada.
 
-let archivo1 = descargarArchivo1(); // Tiempo de descarga estimado: 3 segundos
-let archivo2 = descargarArchivo2(); // Tiempo de descarga estimado: 2 segundos
-let archivo3 = descargarArchivo3(); // Tiempo de descarga estimado: 4 segundos
+```javascript
+const preciosUSD = [12.5, 45.0, 99.99, 5.0, 150.0];
+const TASA_CAMBIO = 18.5; // Pesos por dólar
 
-const todosLosArchivos = Promise.all([archivo1, archivo2, archivo3])
-// Tiempo de descarga total estimado: 4 segundos
+// 1. Funciones puras independientes
+const convertirAMonedaLocal = (precioUSD) => precioUSD * TASA_CAMBIO;
+const redondear = (monto) => Math.round(monto * 100) / 100;
+const darFormatoMoneda = (monto) => `$${monto.toFixed(2)} MXN`;
+
+// 2. Tubería de procesamiento con map encadenado
+const preciosFormateados = preciosUSD
+  .map(convertirAMonedaLocal)
+  .map(redondear)
+  .map(darFormatoMoneda);
+
+console.log("Precios originales (USD):", preciosUSD);
+console.log("Precios procesados:", preciosFormateados);
 ```
 
-En este ejemplo todos los archivos se ejecutan casi al mismo tiempo. No es al mismo tiempo porque hay una diferencia de tiempo entre ejecutar cada línea, pero eso puede ser una diferencia de 1 milisegundo; insignificante en la mayoría de los casos. Lo interesante de este ejemplo es que el tiempo total estimado será igual al tiempo total estimado del archivo que tarde más tiempo en ejecutarse, por lo que el tiempo total se ve reducido sin lugar a duda.
+---
 
-Con este paradigma podemos desarrollar páginas web y aplicaciones modernas con una mejor distribución de los tiempos de espera para los usuarios.
+{/* Tiempo sugerido: 25 min */}
+### 🧩 Reto 3: Creando y Resolviendo una Promesa Real
 
-## Conclusión
+**Objetivo:** Crear una función que simule la descarga de un archivo con resolución exitosa o fallo aleatorio.
 
-JavaScript permite utilizar una gran variedad de paradigmas. Cada uno de ellos nos puede servir para resolver distintos problemas, por eso es importante entender el propósito de cada uno y saber cuándo utilizar cada uno e incluso cómo utilizar mezclas de los mismos.
+```javascript
+function descargarArchivo(nombreArchivo) {
+  return new Promise((resolve, reject) => {
+    console.log(`⏳ Descargando "${nombreArchivo}" desde el servidor...`);
+
+    setTimeout(() => {
+      const conexionExitosa = true; // Cambia a false para probar el error
+
+      if (conexionExitosa) {
+        resolve(`✅ Archivo "${nombreArchivo}" descargado con éxito (5.4 MB)`);
+      } else {
+        reject(new Error(`❌ Error de red al descargar "${nombreArchivo}"`));
+      }
+    }, 2000);
+  });
+}
+
+// Consumo con .then() y .catch():
+descargarArchivo("reporte_anual.pdf")
+  .then(mensajeExito => console.log(mensajeExito))
+  .catch(error => console.error(error.message));
+```
+
+---
+
+{/* Tiempo sugerido: 20 min */}
+### 🧩 Reto 4: Sincronización de Procesos con `async / await` y `try / catch`
+
+**Objetivo:** Coordinar dos tareas asíncronas consecutivas de forma limpia sin callbacks anidados.
+
+```javascript
+function simularEspera(segundos) {
+  return new Promise(resolve => setTimeout(resolve, segundos * 1000));
+}
+
+async function procesarRegistroUsuario(nombreUsuario) {
+  try {
+    console.log(`1. Verificando disponibilidad de "${nombreUsuario}"...`);
+    await simularEspera(1.5);
+    console.log("   -> Nombre disponible.");
+
+    console.log("2. Guardando usuario en la base de datos...");
+    await simularEspera(1.5);
+    console.log("   -> Usuario guardado.");
+
+    console.log("3. Enviando correo de bienvenida...");
+    await simularEspera(1.0);
+    console.log("   -> Correo enviado.");
+
+    return `🎉 ¡Registro de ${nombreUsuario} completado con éxito!`;
+  } catch (error) {
+    return `⚠️ Falla en el proceso de registro: ${error.message}`;
+  }
+}
+
+// Ejecutamos la función asíncrona:
+procesarRegistroUsuario("joul_dev").then(resultado => console.log(resultado));
+```
+
+---
+
+{/* Duración estimada para el instructor: 45 min */}
+## 🗣️ Fase 4: Exposición de Resultados, Debate y Debugging
+
+Compartimos soluciones y analizamos las trampas más frecuentes al trabajar con clases y asincronía.
+
+### 🐞 Las 4 Trampas Clásicas de Paradigmas y Asincronía
+
+#### 1. Olvidar la palabra clave `new` al crear un objeto
+* **El error:** Escribir `const cuenta = CuentaBancaria("Ana", 100);` sin `new`.
+* **Consecuencia:** `TypeError: Class constructor CuentaBancaria cannot be invoked without 'new'`.
+* **Solución:** Las clases siempre requieren `new` para reservar su espacio en memoria.
+
+#### 2. Olvidar la palabra `await` en una función asíncrona
+* **El error:** Escribir `const datos = descargarArchivo("datos.csv");` sin `await`.
+* **Consecuencia:** En lugar de recibir el texto del archivo, `datos` contendrá un objeto `Promise { <pending> }`.
+* **Solución:** Siempre que llames a una función que devuelva una promesa dentro de una función `async`, antepón `await`.
+
+#### 3. Errores Asíncronos no Capturados (*Unhandled Promise Rejection*)
+* **El error:** Llamar a una función asíncrona que falla sin envolver el `await` en un `try / catch`.
+* **Consecuencia:** El navegador o Node.js emitirá una advertencia crítica de promesa no manejada.
+* **Solución:** Todo código asíncrono con `await` debe vivir dentro de un bloque `try { ... } catch (error) { ... }`.
+
+#### 4. Modificar variables globales dentro de funciones
+* **El error:** Que una función altere un arreglo global en lugar de recibirlo como parámetro y devolver uno nuevo.
+* **Consecuencia:** Rompe el principio de funciones puras y causa errores "fantasma" difíciles de rastrear.
+
+---
+
+{/* Duración estimada para el instructor: 30 min */}
+## 🏠 Fase 5: Definición de Práctica en Casa / Reto Semanal
+
+Para consolidar la POO y la Asincronía, construirás el simulador de una cocina digital.
+
+### 🏆 Proyecto Semanal: "El Simulador Asíncrono de Restaurante y Cocina"
+
+**Descripción del Problema:**
+Un restaurante necesita un sistema para gestionar pedidos. Cada pedido debe representarse como un objeto con su estado, y pasar por las etapas de cocina con retardos de tiempo reales.
+
+#### Especificaciones Técnicas del Proyecto:
+
+1. **Clase `Pedido` (POO):**
+   * Propiedades: `id`, `cliente`, `platillo`, `estado` (inicia en `"Recibido"`), `precio`.
+   * Métodos:
+     * `actualizarEstado(nuevoEstado)`: Cambia el estado del pedido y muestra un mensaje en consola.
+     * `resumen()`: Devuelve un texto con la información completa del pedido.
+
+2. **Proceso de Cocina Asíncrono (`async / await`):**
+   * Crea una función asíncrona `cocinarPedido(pedido)` que ejecute las siguientes etapas secuenciales con pausas de tiempo (`setTimeout` en Promesas):
+     1. **Paso 1 (1 segundo):** Cambiar estado a `"Preparando ingredientes"`.
+     2. **Paso 2 (2 segundos):** Cambiar estado a `"Cocinando en el fuego"`.
+     3. **Paso 3 (1.5 segundos):** Cambiar estado a `"Emplatando y decorando"`.
+     4. **Paso 4 (1 segundo):** Cambiar estado a `"¡Listo para entrega!"`.
+
+3. **Control de Errores con `try / catch`:**
+   * Si el platillo pedido es `"Veneno"` o un texto vacío, la función debe lanzar un `throw new Error("Platillo no permitido en el menú")` y el bloque `catch` debe reportar la cancelación del pedido.
+
+4. **Prueba en Consola:**
+   * Crea 2 pedidos (ej. `Pedido 1: "Hamburguesa Gourmet"`, `Pedido 2: "Pizza Margarita"`), inícialos y observa cómo la consola narra el progreso de ambos en tiempo real.
+
+<Aside type="tip" title="Criterio de Autoevaluación">
+Asegúrate de que la consola muestre claramente el cambio de estados en cada segundo sin bloquear el navegador durante la espera.
+</Aside>
+
+---
+
+## 📚 Recursos y Videos Recomendados
+
+Para profundizar en POO, Programación Funcional y Asincronía:
+
+<CardGrid>
+  <LinkCard
+    title="Programación Orientada a Objetos en JavaScript (Clases y Métodos)"
+    href="https://www.youtube.com/watch?v=N_t1A39IB_8"
+    description="Entiende las clases, constructores y métodos con analogías prácticas paso a paso."
+  />
+  <LinkCard
+    title="Asincronía en JavaScript: Promesas y Async / Await Explicados"
+    href="https://www.youtube.com/watch?v=rKK1q7nFtUJ"
+    description="Descubre cómo dominar el Event Loop, las promesas y el flujo asíncrono sin complicaciones."
+  />
+  <LinkCard
+    title="Programación Funcional para Principiantes"
+    href="https://developer.mozilla.org/es/docs/Glossary/First_class_Function"
+    description="Conceptos de funciones como ciudadanos de primera clase e inmutabilidad en MDN."
+  />
+  <LinkCard
+    title="Async/Await en JavaScript Moderno"
+    href="https://developer.mozilla.org/es/docs/Learn/JavaScript/Asynchronous/Promises"
+    description="Guía oficial de Mozilla Developer Network sobre cómo estructurar flujos asíncronos."
+  />
+</CardGrid>
+
+---
+
+## 🚀 Conclusión y Próximos Pasos
+
+¡Excelente trabajo! Has dado un salto cuántico en tu madurez como desarrollador. Ahora comprendes cómo modelar entidades con **Clases (POO)**, cómo escribir código predecible con **Funciones Puras** y cómo manejar tareas en segundo plano con **Promesas y Async/Await**.
+
+Con estos fundamentos listos, en la próxima sesión daremos el paso hacia el desarrollo de aplicaciones completas: **[Lección 5: Stacks Tecnológicos & Arquitectura del Proyecto ShortURL (L5)](/roadmap/para-no-programadores/5)**, donde diseñaremos nuestro gran proyecto de fin de curso.
 
 <Cta></Cta>

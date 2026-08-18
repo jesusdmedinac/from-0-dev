@@ -1,468 +1,525 @@
 ---
-title: Frontend
-description: En esta clase aprenderás los fundamentos del desarrollo frontend, cómo estructurar y diseñar una página web simple utilizando HTML, CSS, y JavaScript, y las mejores prácticas para comenzar tu camino como desarrollador frontend.
+title: Frontend - HTML, CSS y Manipulación del DOM
+description: Guía y cuaderno de trabajo para una sesión de 4 horas. Construye la interfaz gráfica de usuario completa de ShortURL con HTML5 semántico, diseño responsivo con CSS Flexbox y eventos del DOM en JavaScript.
 ---
 
-import { Aside } from '@astrojs/starlight/components';
+import { Aside, CardGrid, LinkCard } from '@astrojs/starlight/components';
 import Cta from '@components/cta/para-no-programadores/cta.astro';
 
 <Cta></Cta>
 
-<Aside title="Referencia">Tanto el front end como el back end son aspectos críticos de cualquier aplicación. El front end es aquello que ven los usuarios e incluye elementos visuales, como botones, casillas de verificación, gráficos y mensajes de texto. Permite a los usuarios interactuar con la aplicación. El back-end son los datos y la infraestructura que permiten que la aplicación funcione. Almacena y procesa los datos de las aplicaciones para los usuarios. - [AWS](https://aws.amazon.com/es/compare/the-difference-between-frontend-and-backend/)</Aside>
+En la **[Lección 5: Stacks Tecnológicos y Arquitectura (L5)](/roadmap/para-no-programadores/5)** diseñamos la arquitectura completa de **ShortURL** y creamos el prototipo algorítmico en memoria.
 
-En esta clase aprenderás los fundamentos del desarrollo frontend, cómo estructurar y diseñar una página web simple utilizando HTML, CSS, y JavaScript, y las mejores prácticas para comenzar tu camino como desarrollador frontend.
+Ahora daremos vida a la primera gran capa de nuestro stack: el **Frontend**. Los usuarios no interactúan con una aplicación a través de la terminal o de la consola de desarrollo; necesitan una interfaz gráfica atractiva, intuitiva, limpia y que se adapte perfectamente a cualquier pantalla, desde un monitor de escritorio hasta un teléfono inteligente.
 
-# ¿Qué es el Frontend?
+En esta sesión intensiva de **4 horas**, construiremos la interfaz gráfica completa de ShortURL utilizando la trinidad clásica de la web: **HTML5** para la estructura, **CSS3 con Flexbox** para el diseño visual, y **JavaScript** para conectar los eventos del usuario con el Document Object Model (**DOM**).
 
-El Frontend es la parte de una aplicación o sitio web con la que los usuarios interactúan directamente. Incluye todo lo que los usuarios ven y tocan, como botones, imágenes, formularios, y menús de navegación. Los desarrolladores frontend se encargan de traducir el diseño y la funcionalidad en código que el la computadora puede interpretar.
+---
 
-Las principales tecnologías utilizadas por desarrolladores frontend son HTML, CSS y JavaScript.
+## 🗺️ Estructura de la Sesión
 
-## HTML: Lenguaje de etiquetas de hipertexto
+{/* 
+Guía metodológica para el instructor:
+- Fase 1: Revisión del Tema Anterior y Conclusiones (~30 min)
+- Fase 2: Introducción al Tema y Fundamentos Teóricos (~45 min)
+- Fase 3: Práctica Asistida en Vivo (~90 min)
+- Fase 4: Exposición, Debate y Debugging (~45 min)
+- Fase 5: Reto Semanal y Práctica en Casa (~30 min)
+*/}
 
-HTML es el lenguaje de marcado utilizado para crear la estructura básica de una página web. Cada página HTML está compuesta por una serie de elementos que representan diferentes partes del contenido.
+Cada una de nuestras sesiones semanales sigue una metodología pedagógica dividida en **5 fases**:
 
-```html title="index.html"
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mi primera página web</title>
-</head>
-<body>
-    <h1>¡Hola, Mundo!</h1>
-    <p>Bienvenido a mi primera página web.</p>
-</body>
-</html>
+```
+Estructura de la Sesión
+├── ☕ Fase 1: Revisión del Tema Anterior y Conclusiones
+├── 🎯 Fase 2: Introducción al Tema y Fundamentos
+├── 💻 Fase 3: Práctica Asistida en Vivo
+├── 🗣️ Fase 4: Exposición, Debate y Debugging
+└── 🏠 Fase 5: Reto Semanal y Práctica en Casa
 ```
 
-Expliquemos el ejemplo:
-- `<!DOCTYPE html>`: Define que este archivo es un documento de HTML 5.
-- `<html>`: Es el elemento raíz que contiene todo el contenido de la página.
-- `<head>`: Contiene meta información sobre la página como el título y las referencias a hojas de estilo.
-- `<title>`: Especifica un título para la página HTML (Que normalmente se muestra en la pestaña de nuestro navegador).
-- `<body>`: Contiene el contenido visible de la página como textos, imágenes y enlaces.
-- `<h1>`: Define un encabezado largo.
-- `<p>`: Define un párrafo.
+---
 
-No es necesario memorizar todas las etiquetas existentes, pero sí es importante saber que existen muchas opciones disponibles:
-https://www.w3schools.com/html/
+{/* Duración estimada para el instructor: 30 min */}
+## ☕ Fase 1: Revisión del Tema Anterior y Conclusiones
 
-En HTML utilizamos etiquetas para representar la estructura de nuestras páginas web. Su sintaxis puede variar, es decir, su forma de escribirlas, pero en general se pueden definir de la siguiente manera:
+Iniciamos la sesión conectando el prototipo lógico de la semana anterior con la experiencia de usuario.
+
+{/* Tiempo sugerido: 15 min */}
+### 1. Puesta en Común del Reto de la Lección 5
+
+En la lección previa desarrollamos el *"Prototipo en Memoria de ShortURL"*, generando códigos aleatorios y validando URLs:
+* **Discusión en grupo:** ¿Cómo manejaste el rechazo de URLs que no comenzaban con `http://` o `https://`?
+* ¿Qué sentiste al ver la tabla de clics en la consola con `console.table()`?
+* Si le pidiéramos a un amigo que use tu programa ahora mismo... ¿sabría cómo abrir la consola de desarrollador para escribir comandos de JavaScript?
+
+{/* Tiempo sugerido: 15 min */}
+### 2. El Puente Conceptual: La Interfaz de Usuario (UI)
+
+El 99% de las personas que navegan por internet nunca han visto una línea de código. La misión del desarrollador Frontend es crear un "puente visual" para que cualquier persona pueda utilizar la lógica de nuestro software simplemente haciendo clic en botones y escribiendo en campos de texto.
+
+Hoy construiremos los tres archivos que conformarán la interfaz pública de ShortURL:
+* `index.html`: El esqueleto de la página.
+* `styles.css`: La ropa, colores y disposición espacial adaptable.
+* `app.js`: El cerebro interactivo que escucha las acciones del usuario.
+
+---
+
+{/* Duración estimada para el instructor: 45 min */}
+## 🎯 Fase 2: Introducción al Tema y Fundamentos Teóricos
+
+Analicemos cómo colaboran las tres tecnologías del Frontend en el navegador.
+
+---
+
+{/* Tiempo sugerido: 15 min */}
+### 1. HTML5 Semántico: Estructura con Significado
+
+HTML (*HyperText Markup Language*) utiliza **etiquetas** para decirle al navegador qué tipo de información contiene cada elemento. El HTML moderno es **semántico**: usamos etiquetas que describen su propósito real:
 
 ```html
-<nombre-de-la-etiqueta>Contenido de la etiqueta (O innerHTML)</nombre-de-la-etiqueta>
+{/* Estructura Semántica Básica */}
+<main class="contenedor-principal">
+  <header class="encabezado">
+    <h1>ShortURL</h1>
+    <p>Acorta tus enlaces en un segundo</p>
+  </header>
+
+  <form id="formulario-acortador">
+    <input type="url" placeholder="Pega tu enlace largo aquí..." required />
+    <button type="submit">Acortar Enlace</button>
+  </form>
+
+  <section id="contenedor-resultado" class="oculto">
+    {/* Aquí aparecerá el enlace acortado con JavaScript */}
+  </section>
+</main>
 ```
 
-Como puedes notar, la etiqueta tiene un inicio definido con los símbolos `<` `>` alrededor del nombre de la etiqueta y un final definido con los mismos símbolos, pero añadiendo una diagonal antes después del símbolo `<` y antes del nombre de la etiqueta.
+---
 
-Nuestro ejemplo se vería más o menos así:
+{/* Tiempo sugerido: 15 min */}
+### 2. CSS3 Moderno y Flexbox: Centrado y Diseño Responsivo
 
-![Mi primera página HTML](../../../../assets/first-html-example.png)
+CSS (*Cascading Style Sheets*) se encarga del aspecto visual. Durante muchos años centrar elementos en una página web era una pesadilla; hoy utilizamos **CSS Flexbox**, un sistema que organiza los elementos de forma elástica y perfecta:
 
-## CSS: Hoja de Estilo en Cascada
-
-CSS es el lenguaje de estilos utilizado para describir la presentación de documentos HTML o XML. Esto nos permite editar los colores, fuentes y disposición de los elementos.
-
-```css title="stilos.css"
+```css
+/* Centrar la tarjeta en medio de la pantalla */
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f0f0f0;
-    color: #333;
-    margin: 0;
-    padding: 0;
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center; /* Centrado horizontal */
+  align-items: center;     /* Centrado vertical */
+  font-family: system-ui, -apple-system, sans-serif;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
 }
 
-h1 {
-    color: #007BFF;
-    text-align: center;
-}
-
-p {
-    font-size: 18px;
-    line-height: 1.6;
-    text-align: center;
+.tarjeta {
+  background: #ffffff;
+  padding: 2.5rem;
+  border-radius: 1rem;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 480px;
 }
 ```
 
-CSS está basado en reglas de estilos. Estas reglas se definen con la siguiente sintaxis:
-![Sintaxis CSS](../../../../assets/css-sintaxis.png)
+---
 
-Puedes consultar la lista completa de propiedades CSS en el siguiente enlace:
-https://www.w3schools.com/css/
+{/* Tiempo sugerido: 15 min */}
+### 3. JavaScript y el DOM: El Sistema Nervioso
 
-## Utilizar CSS en HTML
+El **DOM (*Document Object Model*)** es la representación en memoria que el navegador hace de nuestro HTML. A través del DOM, JavaScript puede "ver", escuchar y modificar cualquier elemento de la página:
 
-Existen dos maneras de utilizar CSS en HTML.
-
-La primera es agregando una etiqueta `style` dentro de la etiqueta `head`:
-
-```html title="index.html"
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mi primera página con estilo</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f0f0f0;
-            color: #333;
-            margin: 0;
-            padding: 0;
-        }
-        h1 {
-            color: #007BFF;
-            text-align: center;
-        }
-        p {
-            font-size: 18px;
-            line-height: 1.6;
-            text-align: center;
-        }
-    </style>
-</head>
-<body>
-    <h1>¡Hola, Mundo!</h1>
-    <p>Bienvenido a mi primera página web con estilo.</p>
-</body>
-</html>
+```
+[Usuario hace clic en "Acortar"]
+            │
+            ▼
+[addEventListener("submit")] ──► [event.preventDefault()] ──► [Modificar DOM con resultado]
 ```
 
-La forma más práctica es creando un enlace de nuestro archivo CSS dentro de la etiqueta `head` de nuestro HTML utilizando la etiqueta `link`:
+#### El método salvavidas: `event.preventDefault()`
+Por defecto, cuando envías un formulario HTML, el navegador intenta recargar la página completa. Para evitar que la página se reinicie y borre los datos, usamos `event.preventDefault()`:
 
-```html title="index.html"
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mi primera página con estilo</title>
-    <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-    <h1>¡Hola, Mundo!</h1>
-    <p>Bienvenido a mi primera página web con estilo.</p>
-</body>
-</html>
-```
+```javascript
+const formulario = document.getElementById("formulario-acortador");
 
-Para fines prácticos, vamos a asumir que tienes una carpeta con los siguientes archivos:
-
-- `index.html`
-- `styles.css`
-
-<Aside title="Contenido de los archivos">Puedes copiar el contenido del archivo CSS en el ejemplo anterior: [styles.css](#css-hoja-de-estilo-en-cascada)</Aside>
-
-## JavaScript: Interactividad en páginas web
-
-A diferencia de HTML y CSS, JavaScript sí es un lenguaje de programación. JavaScript nos permite añadir interactividad a nuestros sitios web. Con él podemos hacer que nuestras páginas web respondan a las acciones del usuario.
-
-```js title="scripts.js"
-const botón = document.getElementById('botón');
-const salida = document.getElementById('salida');
-
-botón.addEventListener('click', () => {
-  salida.textContent = '¡Hola! Has hecho clic en el botón.';
+formulario.addEventListener("submit", function(evento) {
+  evento.preventDefault(); // ¡Detiene la recarga de la página!
+  console.log("Formulario capturado limpiamente en JavaScript.");
 });
 ```
 
-En el ejemplo podemos ver dos constantes: `button` y `output`. JavaScript nos permite acceder a elementos HTML (Definidos como etiquetas) gracias a una técnica llamada [DOM](https://www.w3schools.com/JS/js_htmldom.asp) (Document Object Model o Modelo de objeto de documento).
+---
 
-la función `getElementById` del objeto `document` se utiliza para obtener un elemento identificandolo por su id (Identificador en Inglés). El id se define como propiedad en la etiqueta HTML y debe ser único en cada documento HTML. Si existen múltiples elementos con el mismo id sólo se toma en cuenta el primer elemento.
+### 🔍 Experimento en Vivo: Manipulando el DOM en Tiempo Real
 
-```html title="index.html"
+Vamos a crear un elemento visual en cualquier página web directamente desde la consola:
+
+1. **Abre cualquier página web en tu navegador y abre la consola (`F12`).**
+2. **Ejecuta este código para inyectar una tarjeta flotante:**
+   ```javascript
+   const aviso = document.createElement("div");
+   aviso.innerText = "🚀 ¡Hola desde el DOM de JavaScript!";
+   aviso.style.position = "fixed";
+   aviso.style.top = "20px";
+   aviso.style.right = "20px";
+   aviso.style.padding = "15px 25px";
+   aviso.style.background = "#10b981";
+   aviso.style.color = "white";
+   aviso.style.borderRadius = "8px";
+   aviso.style.fontWeight = "bold";
+   aviso.style.zIndex = "99999";
+   document.body.appendChild(aviso);
+   ```
+3. **Observa tu pantalla:** Verás aparecer una tarjeta verde en la esquina superior derecha. ¡Acabas de modificar el DOM con código puro!
+
+---
+
+## 💻 Fase 3: Práctica Asistida en Vivo
+
+Construiremos los 3 archivos de la interfaz gráfica de **ShortURL**.
+
+---
+
+{/* Tiempo sugerido: 20 min */}
+### 🧩 Reto 1: Maquetación Semántica (`index.html`)
+
+**Objetivo:** Crear el archivo base de la aplicación con estructura limpia y accesible.
+
+```html title="public/index.html"
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Interactividad con JavaScript</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ShortURL | Acortador de Enlaces</title>
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-    <h1>Interactividad básica</h1>
-    <button id="botón">Haz clic aquí</button>
-    <button id="botón">Haz clic aquí</button>
-    <p id="salida"></p>
 
-    <script>
-        const botón = document.getElementById('botón');
-        const salida = document.getElementById('salida');
+  <main class="tarjeta">
+    <header class="tarjeta-header">
+      <div class="icono-logo">🔗</div>
+      <h1>ShortURL</h1>
+      <p>Pega un enlace largo para obtener uno corto y fácil de compartir.</p>
+    </header>
 
-        botón.addEventListener('click', (event) => {
-            salida.textContent = '¡Hola! Has hecho clic en el botón ' + event.target.innerHTML;
-        });
-    </script>
+    <form id="form-acortar" class="formulario">
+      <div class="grupo-input">
+        <input 
+          type="url" 
+          id="input-url" 
+          placeholder="https://ejemplo.com/enlace-muy-largo..." 
+          required 
+        />
+      </div>
+      <button type="submit" id="btn-acortar">Acortar Enlace</button>
+    </form>
+
+    {/* Contenedor del resultado (inicialmente vacío) */}
+    <section id="seccion-resultado" class="resultado-oculto"></section>
+  </main>
+
+  {/* Script cargado al final del body */}
+  <script src="app.js"></script>
 </body>
 </html>
 ```
 
-En el ejemplo utilizamos una etiqueta `script` para escribir nuestro código JavaScript. Y agregamos dos botones con el mismo id. Al momento de presionar cualquier botón, el mensaje siempre indica que se presionó el botón 1.
+---
 
-Para enlazar nuestro documento HTML con un archivo JavaScript podemos utilizar la etiqueta `script` y utilizando la propiedad `src`:
+{/* Tiempo sugerido: 25 min */}
+### 🧩 Reto 2: Estilos Visuales Modernos y Adaptables (`styles.css`)
 
-```html title="index.html"
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Interactividad con JavaScript</title>
-</head>
-<body>
-    <h1>Interactividad básica</h1>
-    <button id="miBotón">Haz clic aquí</button>
-    <p id="salida"></p>
+**Objetivo:** Diseñar una interfaz limpia, centrada con Flexbox y con sombras suaves.
 
-    <script src="scripts.js" ></script>
-</body>
-</html>
-```
-
-# Ejercicio: Acortador de URLs
-
-Continuando con el desarrollo de nuestro acortador de URLs, agregaremos un archivo CSS y un archivo JS para mantener todo ordenado.
-
-```html title="index.html"
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ShortURLDesde0</title>
-  <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-  <h1>ShortURLDesde0</h1>
-  <input type="text" name="url" id="url-to-shorten" placeholder="URL a acortar">
-  <input type="submit" value="Acortar" id="shorten-button">
-  <ul id="shortened-urls"></ul>
-  <script src="scripts.js" ></script>
-</body>
-</html>
-```
-
-En nuestro archivo CSS definimos los estilos de la siguiente manera:
-```css title="styles.css"
-/*
-Aquí se definen los estilos generales del cuerpo (body) de la página:
-
-font-family: sans-serif;: Se establece una fuente genérica sin serif (como Arial o Helvetica) para todo el texto del body.
-display: flex;: Se utiliza el modelo de caja flexible (flexbox) para organizar los elementos dentro del body.
-flex-direction: column;: Los elementos se apilarán verticalmente, uno debajo del otro.
-align-items: center;: Los elementos se centrarán verticalmente.
-justify-content: center;: Los elementos se centrarán horizontalmente.
-min-height: 100vh;: El body ocupará al menos el 100% de la altura de la ventana gráfica (viewport).
-background-color: #f5f5f5;: Se establece un color de fondo gris claro para el body.
-margin: 0;: Se eliminan los márgenes predeterminados del body.
-*/
-body {
-  font-family: sans-serif;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  min-height: 100vh;
-  background-color: #f5f5f5;
+```css title="public/styles.css"
+* {
+  box-sizing: border-box;
   margin: 0;
+  padding: 0;
 }
 
-/*
-Estilos para las etiquetas <h1>:
+body {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1.5rem;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  background: linear-gradient(135deg, #1e1e2f 0%, #111119 100%);
+  color: #333333;
+}
 
-color: #333;: Se establece un color gris oscuro para el texto del título.
-margin-bottom: 2rem;: Se agrega un margen inferior de 2 "rem" (unidad relativa al tamaño de fuente del elemento raíz) al título.
-*/
-h1 {
-  color: #333;
+.tarjeta {
+  background: #ffffff;
+  width: 100%;
+  max-width: 480px;
+  padding: 2.5rem;
+  border-radius: 1.25rem;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.35);
+  text-align: center;
+}
+
+.tarjeta-header .icono-logo {
+  font-size: 3rem;
+  margin-bottom: 0.5rem;
+}
+
+.tarjeta-header h1 {
+  font-size: 1.8rem;
+  color: #1e1e2f;
+  margin-bottom: 0.5rem;
+}
+
+.tarjeta-header p {
+  color: #6b7280;
+  font-size: 0.95rem;
   margin-bottom: 2rem;
 }
 
-/*
-Estilos para los inputs de tipo "text":
-
-padding: 1rem;: Se agrega un relleno interno de 1 "rem" alrededor del texto dentro del input.
-border-radius: 5px;: Se redondean las esquinas del input con un radio de 5 píxeles.
-border: 1px solid #ccc;: Se establece un borde sólido de 1 píxel y color gris claro para el input.
-width: 300px;: Se establece un ancho fijo de 300 píxeles para el input.
-margin-bottom: 1rem;: Se agrega un margen inferior de 1 "rem" al input.
-*/
-input[type="text"] {
-  padding: 1rem;
-  border-radius: 5px;
-  border: 1px solid #ccc;
-  width: 300px;
-  margin-bottom: 1rem;
-}
-
-/*
-Estilos para los inputs de tipo "text" cuando están enfocados (seleccionados):
-
-outline: none;: Se elimina el contorno predeterminado que aparece al enfocar el input.
-border-color: #007bff;: Se cambia el color del borde a un azul (#007bff) cuando el input está enfocado.
-box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);: Se agrega una sombra suave de color azul alrededor del input cuando está enfocado.
-*/
-input[type="text"]:focus {
-  outline: none;
-  border-color: #007bff;
-  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
-}
-
-/*
-Estilos para los botones de tipo "submit":
-
-background-color: #007bff;: Se establece un color de fondo azul (#007bff) para el botón.
-color: white;: Se establece el color del texto del botón a blanco.
-padding: 1rem 2rem;: Se agrega un relleno interno de 1 "rem" arriba y abajo, y 2 "rem" a los lados del texto del botón.
-border: none;: Se elimina el borde predeterminado del botón.
-border-radius: 5px;: Se redondean las esquinas del botón con un radio de 5 píxeles.
-cursor: pointer;: El cursor del ratón cambiará a una mano cuando se coloque sobre el botón, indicando que es interactivo.
-transition: background-color 0.3s ease;: Se establece una transición suave de 0.3 segundos para el cambio de color de fondo del botón.
-*/
-input[type="submit"] {
-  background-color: #007bff;
-  color: white;
-  padding: 1rem 2rem;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-/*
-Estilos para los botones de tipo "submit" cuando el ratón se coloca sobre ellos:
-
-background-color: #0062cc;: Se cambia el color de fondo del botón a un azul más oscuro (#0062cc) cuando el ratón se coloca sobre él.
-*/
-input[type="submit"]:hover {
-  background-color: #0062cc;
-}
-
-/*
-Estilos para la lista de URLs acortadas (#shortened-urls):
-
-list-style: none;: Se elimina el estilo de lista predeterminado (viñetas o números).
-padding: 0;: Se elimina el relleno interno predeterminado de la lista.
-margin-top: 2rem;: Se agrega un margen superior de 2 "rem" a la lista.
-*/
-#shortened-urls {
-  list-style: none;
-  padding: 0;
-  margin-top: 2rem;
-}
-
-/*
-Estilos para cada elemento de lista (<li>) dentro de la lista de URLs acortadas:
-
-background-color: #fff;: Se establece un color de fondo blanco para cada elemento de lista.
-padding: 1rem;: Se agrega un relleno interno de 1 "rem" alrededor del contenido de cada elemento de lista.
-border-radius: 5px;: Se redondean las esquinas de cada elemento de lista con un radio de 5 píxeles.
-margin-bottom: 1rem;: Se agrega un margen inferior de 1 "rem" a cada elemento de lista.
-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);: Se agrega una sombra suave debajo de cada elemento de lista para darles profundidad.
-display: flex;: Se utiliza el modelo de caja flexible (flexbox) para organizar los elementos dentro de cada elemento de lista.
-justify-content: space-between;: Los elementos dentro de cada elemento de lista se distribuirán con espacio máximo entre ellos.
-align-items: center;: Los elementos dentro de cada elemento de lista se centrarán verticalmente.
-*/
-#shortened-urls li {
-  background-color: #fff;
-  padding: 1rem;
-  border-radius: 5px;
-  margin-bottom: 1rem;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+.formulario {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  flex-direction: column;
+  gap: 1rem;
 }
 
-/*
-Estilos para los enlaces (<a>) dentro de la lista de URLs acortadas:
-
-color: #007bff;: Se establece un color azul (#007bff) para el texto de los enlaces.
-text-decoration: none;: Se elimina el subrayado predeterminado de los enlaces.
-*/
-#shortened-urls a {
-  color: #007bff;
-  text-decoration: none;
+.grupo-input input {
+  width: 100%;
+  padding: 0.9rem 1.2rem;
+  font-size: 1rem;
+  border: 2px solid #e5e7eb;
+  border-radius: 0.75rem;
+  outline: none;
+  transition: border-color 0.2s;
 }
 
-/*
-Estilos para los enlaces (<a>) dentro de la lista de URLs acortadas cuando el ratón se coloca sobre ellos:
-
-text-decoration: underline;: Se agrega un subrayado al texto de los enlaces cuando el ratón se coloca sobre ellos.
-*/
-#shortened-urls a:hover {
-  text-decoration: underline;
+.grupo-input input:focus {
+  border-color: #6366f1;
 }
 
-/*
-Esta sección define estilos que solo se aplicarán cuando el ancho de la pantalla sea igual o menor a 400 píxeles:
+button {
+  background: #6366f1;
+  color: #ffffff;
+  font-size: 1rem;
+  font-weight: 600;
+  padding: 0.9rem;
+  border: none;
+  border-radius: 0.75rem;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.1s;
+}
 
-input[type="text"] { width: 100%; }: En pantallas pequeñas, los inputs de tipo "text" ocuparán el 100% del ancho disponible de su contenedor padre.
-*/
-@media (max-width: 400px) {
-  input[type="text"] {
-    width: 100%;
-  }
+button:hover {
+  background: #4f46e5;
+}
+
+button:active {
+  transform: scale(0.98);
+}
+
+/* Estilos de la tarjeta de resultado */
+.resultado-oculto {
+  display: none;
+}
+
+.tarjeta-resultado {
+  margin-top: 1.5rem;
+  padding: 1.25rem;
+  background: #f0fdf4;
+  border: 1px solid #bbf7d0;
+  border-radius: 0.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.enlace-corto {
+  color: #16a34a;
+  font-weight: bold;
+  font-size: 1.1rem;
+  word-break: break-all;
+}
+
+.btn-copiar {
+  background: #16a34a;
+}
+
+.btn-copiar:hover {
+  background: #15803d;
 }
 ```
 
-Con este estilo implementado deberíamos poder ver una página más interesante:
+---
 
-![CSS on shorturl Desde0](../../../../assets/css-on-shorturl-desde0.png)
+{/* Tiempo sugerido: 25 min */}
+### 🧩 Reto 3: Conexión Interactiva del DOM (`app.js`)
 
-Y nuestro JavaScript sólo será modificado un poco:
+**Objetivo:** Interceptar el envío del formulario, leer el valor ingresado y generar un código corto simulado.
 
-```diff lang="js" title="scripts.js"
-// Cargamos los elementos utilizando el DOM
-const urlToShortenInput = document.getElementById('url-to-shorten');
-const shortenButton = document.getElementById('shorten-button');
-const shortenedUrlsList = document.getElementById('shortened-urls');
-// Creamos un arreglo para almacenar los urls que acortaremos
-const shortenedUrls = [];
+```javascript title="public/app.js"
+// 1. Seleccionamos los elementos del DOM que vamos a utilizar
+const formulario = document.getElementById("form-acortar");
+const inputUrl = document.getElementById("input-url");
+const seccionResultado = document.getElementById("seccion-resultado");
 
-// Configuramos el evento de click para acortar los urls
-shortenButton.addEventListener('click', () => {
-  // Ejecutamos la función para acortar urls
-  shortURL();
+// 2. Función auxiliar para generar un código corto de prueba
+function generarCodigoAleatorio(longitud = 6) {
+  const caracteres = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+  let codigo = "";
+  for (let i = 0; i < longitud; i++) {
+    codigo += caracteres[Math.floor(Math.random() * caracteres.length)];
+  }
+  return codigo;
+}
+
+// 3. Escuchamos el evento "submit" del formulario
+formulario.addEventListener("submit", function(evento) {
+  // Evitamos que la página se recargue
+  evento.preventDefault();
+
+  const urlOriginal = inputUrl.value.trim();
+  const codigo = generarCodigoAleatorio();
+  const urlCorta = `https://short.ly/${codigo}`;
+
+  // Mostramos el resultado en pantalla
+  renderizarResultado(urlCorta, urlOriginal);
 });
+```
 
-function shortURL() {
-  // Tomamos el valor de nuestro url a acortar
-  const urlToShorten = urlToShortenInput.value;
-  // Si nuestro valor no es falsy agregamos el url a la lista
-  if (urlToShorten) {
--    shortenedUrls.push(urlToShorten);
--    // Ejecutamos la función para dibujar la lista de urls acortados
--    renderShortenedUrls();
-+    // Fetch nos permite hacer una solicitud http a nuestro backend
-+    fetch('http://localhost:3000/api/shorturl?urlToShorten=' + urlToShorten)
-+      // La función then nos responde con un objeto que convertiremos en JSON utilizando la función `json`
-+      .then(response => response.json())
-+      // Después podemos agregar el URL acortado a nuestro arreglo y renderizar nuestra lista
-+      .then(json => {
-+        shortenedUrls.push(json.shortenURL.shortenedUrl);
-+        renderShortenedUrls();
-+      })
-+      // En caso de error podemos mostrarlo en la consola
-+      .catch(error => console.error(error));
-  }
-}
+---
 
-function renderShortenedUrls() {
-  // Eliminamos el contenido de nuestra lista
-  shortenedUrlsList.innerHTML = '';
-  // Recorremos la lista de urls acortados
-  for (let shortenedUrl of shortenedUrls) {
-    // Agregamos un elemento a la lista por cada url acortado
-    shortenedUrlsList.innerHTML += `<li><a href="${shortenedUrl}" target="_blank">${shortenedUrl}</a></li>`;
-  }
-+ // Limpiamos el texto de nuestro input
-+ urlToShortenInput.value = '';
+{/* Tiempo sugerido: 20 min */}
+### 🧩 Reto 4: Renderizado Dinámico y Botón "Copiar al Portapapeles"
+
+**Objetivo:** Inyectar HTML dinámico con el enlace generado y permitir copiarlo con un clic usando la API moderna del navegador.
+
+```javascript title="public/app.js (Continuación)"
+function renderizarResultado(urlCorta, urlOriginal) {
+  // Construimos el HTML de la tarjeta de resultado
+  seccionResultado.className = "tarjeta-resultado";
+  seccionResultado.innerHTML = `
+    <p style="font-size: 0.85rem; color: #6b7280;">¡Tu enlace acortado está listo!</p>
+    <a href="${urlOriginal}" target="_blank" class="enlace-corto" id="texto-enlace">${urlCorta}</a>
+    <button type="button" class="btn-copiar" id="btn-copiar">📋 Copiar al Portapapeles</button>
+  `;
+
+  // Agregamos interactividad al botón de copiar
+  const btnCopiar = document.getElementById("btn-copiar");
+  
+  btnCopiar.addEventListener("click", async function() {
+    try {
+      // Usamos la API del Portapapeles del navegador
+      await navigator.clipboard.writeText(urlCorta);
+      btnCopiar.innerText = "✅ ¡Copiado con éxito!";
+      
+      // Restauramos el texto original después de 2 segundos
+      setTimeout(() => {
+        btnCopiar.innerText = "📋 Copiar al Portapapeles";
+      }, 2000);
+    } catch (error) {
+      console.error("No se pudo copiar:", error);
+    }
+  });
 }
 ```
 
-Con esta implementación vemos una interfaz de usuario más presentable, pero nuestra aplicación aún no funciona. Para hacerla funcionar debemos actualizar nuestro Backend. Pero eso lo veremos en la siguiente clase.
+---
+
+{/* Duración estimada para el instructor: 45 min */}
+## 🗣️ Fase 4: Exposición de Resultados, Debate y Debugging
+
+Probamos los archivos en el navegador, revisamos los proyectos de los estudiantes y analizamos los errores típicos de Frontend.
+
+### 🐞 Las 4 Trampas Clásicas de Frontend
+
+#### 1. Olvidar `event.preventDefault()`
+* **El síntoma:** Haces clic en "Acortar", la pantalla parpadea medio segundo y todo el formulario vuelve a quedar en blanco sin mostrar el enlace.
+* **La causa:** El navegador envió una petición HTTP tradicional y recargó la página entera.
+* **La solución:** La primera línea de tu listener de formulario siempre debe ser `evento.preventDefault()`.
+
+#### 2. Colocar la etiqueta `<script>` en el `<head>` sin `defer`
+* **El síntoma:** `TypeError: Cannot read properties of null (reading 'addEventListener')`.
+* **La causa:** El navegador ejecutó el archivo JavaScript antes de haber leído el HTML del formulario, por lo que `document.getElementById()` devolvió `null`.
+* **La solución:** Coloca tu etiqueta `<script src="app.js"></script>` justo antes de cerrar `</body>`.
+
+#### 3. Confundir `class` con `id` al seleccionar en JavaScript
+* **El error:** Escribir `document.getElementById("formulario")` cuando en el HTML pusiste `<form class="formulario">`.
+* **Regla:** `getElementById` busca exclusivamente atributos `id=""`. Para clases se usa `document.querySelector(".formulario")`.
+
+#### 4. Olvidar el `<meta name="viewport">`
+* **El síntoma:** La página se ve perfecta en tu computadora, pero al abrirla en el celular se ve minúscula y desproporcionada.
+* **La solución:** Incluir siempre la etiqueta meta de viewport en el `<head>`.
+
+---
+
+{/* Duración estimada para el instructor: 30 min */}
+## 🏠 Fase 5: Definición de Práctica en Casa / Reto Semanal
+
+Mejorarás la experiencia de usuario (UX) de ShortURL con validación visual en tiempo real.
+
+### 🏆 Proyecto Semanal: "El Validador Visual en Tiempo Real"
+
+**Descripción del Problema:**
+Los usuarios a veces cometen errores al escribir enlaces (por ejemplo, escriben texto sin formato o enlaces incompletos). Vamos a guiar al usuario visualmente mientras escribe.
+
+#### Especificaciones Técnicas a Implementar:
+
+1. **Validación mientras escribe (Evento `input`):**
+   * Agrega un `addEventListener("input", ...)` sobre `inputUrl`.
+   * Si el texto ingresado no comienza con `"http://"` o `"https://"`, cambia el borde del input a color rojo (`#ef4444`) y muestra un mensaje pequeño en texto rojo: *"⚠️ El enlace debe comenzar con http:// o https://"*.
+   * Si el enlace es válido, cambia el borde a color verde (`#22c55e`) y oculta el mensaje de error.
+
+2. **Deshabilitar el botón si la URL no es válida:**
+   * Si el texto no es una URL válida, añade la propiedad `btnAcortar.disabled = true;` y reduce su opacidad en CSS.
+   * En cuanto sea válida, reactiva el botón `btnAcortar.disabled = false;`.
+
+3. **Limpieza automática:**
+   * Cuando se genere el enlace corto exitosamente, limpia el campo de texto `inputUrl.value = "";` para que el usuario pueda ingresar otro de inmediato.
+
+<Aside type="tip" title="Criterio de Autoevaluación">
+Abre tu `index.html` en Chrome, presiona `F12` y activa el modo de visualización móvil (icono de tablet/celular). Verifica que el diseño se adapte fluidamente y que las validaciones rojas y verdes funcionen al escribir.
+</Aside>
+
+---
+
+## 📚 Recursos y Videos Recomendados
+
+Para profundizar en desarrollo Frontend y manipulación del DOM:
+
+<CardGrid>
+  <LinkCard
+    title="Curso Rápido de HTML5 y CSS3 desde Cero"
+    href="https://www.youtube.com/watch?v=kbpUu0pG8G0"
+    description="Aprende los fundamentos de etiquetas semánticas y estilizado moderno paso a paso."
+  />
+  <LinkCard
+    title="Aprende CSS Flexbox en 15 Minutos"
+    href="https://www.youtube.com/watch?v=wXhhvwvX89o"
+    description="Domina el centrado y la distribución de elementos elásticos en cualquier pantalla."
+  />
+  <LinkCard
+    title="Manipulación del DOM con JavaScript Moderno"
+    href="https://developer.mozilla.org/es/docs/Learn/JavaScript/Client-side_web_APIs/Manipulating_documents"
+    description="Guía oficial de Mozilla Developer Network sobre selectores y eventos del DOM."
+  />
+  <LinkCard
+    title="La API del Portapapeles (Clipboard API) en MDN"
+    href="https://developer.mozilla.org/es/docs/Web/API/Clipboard_API"
+    description="Documentación estándar sobre cómo copiar y pegar texto de forma segura con JavaScript."
+  />
+</CardGrid>
+
+---
+
+## 🚀 Conclusión y Próximos Pasos
+
+¡Excelente! Ya tenemos una interfaz gráfica moderna, atractiva, responsiva y conectada con eventos de JavaScript.
+
+Sin embargo, en este momento los enlaces se generan solo en la memoria de nuestro navegador. Si otra persona intenta entrar a `https://short.ly/a8B9x`, ¡la página no existe en internet!
+
+En la próxima sesión daremos el gran salto al lado del servidor: **[Lección 7: Backend - Servidor Web & API REST con Node.js y Express (L7)](/roadmap/para-no-programadores/7)**, donde crearemos nuestro primer servidor real para procesar peticiones y redirigir visitantes de todo el mundo.
 
 <Cta></Cta>

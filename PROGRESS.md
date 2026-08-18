@@ -27,15 +27,15 @@
 - [x] Scenario: Lesson 1 - Getting Started, Web Architecture & Browser Console
 - [x] Scenario: Lesson 2 - Core Programming Concepts & JavaScript Fundamentals
 - [x] Scenario: Lesson 3 - JavaScript Language Tour & Error Handling
-- [ ] Scenario: Lesson 4 - Programming Paradigms (OOP, Functional & Async)
-- [ ] Scenario: Lesson 5 - Tech Stacks & ShortURL Project Architecture Kickoff
-- [ ] Scenario: Lesson 6 - Frontend Development (Semantic HTML, Responsive CSS & DOM Events)
-- [ ] Scenario: Lesson 7 - Backend Development (Node.js, Express & REST API)
-- [ ] Scenario: Lesson 8 - Databases & Persistence (SQLite & SQL)
-- [ ] Scenario: Lesson 9 - Terminal Mastery (Command Line Interface)
-- [ ] Scenario: Lesson 10 - Version Control with Git and GitHub
-- [ ] Scenario: Lesson 11 - Operating Systems & Environment Variables
-- [ ] Scenario: Lesson 12 - DevOps, Cloud Deployment & Graduation
+- [x] Scenario: Lesson 4 - Programming Paradigms (OOP, Functional & Async)
+- [x] Scenario: Lesson 5 - Tech Stacks & ShortURL Project Architecture Kickoff
+- [x] Scenario: Lesson 6 - Frontend Development (Semantic HTML, Responsive CSS & DOM Events)
+- [x] Scenario: Lesson 7 - Backend Development (Node.js, Express & REST API)
+- [x] Scenario: Lesson 8 - Databases & Persistence (SQLite & SQL)
+- [x] Scenario: Lesson 9 - Terminal Mastery (Command Line Interface)
+- [x] Scenario: Lesson 10 - Version Control with Git and GitHub
+- [x] Scenario: Lesson 11 - Operating Systems & Environment Variables
+- [x] Scenario: Lesson 12 - DevOps, Cloud Deployment & Graduation
 
 ## Ruta: Para principiantes
 

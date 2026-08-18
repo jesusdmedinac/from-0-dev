@@ -1,303 +1,374 @@
 ---
-title: Stacks
-description: En desarrollo de software un stack es un conjunto de tecnologías utilizadas para crear aplicaciones CRUD en diferentes plataformas.
+title: Stacks Tecnológicos y Arquitectura del Proyecto
+description: "Guía y cuaderno de trabajo para una sesión de 4 horas. Qué es un Stack tecnológico, anatomía Cliente-Servidor y diseño de la arquitectura de nuestro proyecto central: ShortURL."
 ---
 
-import { Aside } from '@astrojs/starlight/components';
+import { Aside, CardGrid, LinkCard } from '@astrojs/starlight/components';
 import Cta from '@components/cta/para-no-programadores/cta.astro';
 
 <Cta></Cta>
 
-<Aside title="Referencia">El `stack` tecnológico es el conjunto de tecnologías utilizadas para desarrollar una aplicación, incluidos los lenguajes de programación, los marcos, las bases de datos, las herramientas de front-end (cara que verá el cliente) y back-end (cara de desarrollo que trabajamos en producción) y las API. - [Bambu Mobile](https://bambu-mobile.com/que-es-el-stack-tecnologico/)</Aside>
+En la **[Lección 4: Paradigmas de Programación (L4)](/roadmap/para-no-programadores/4)** dominamos la Programación Orientada a Objetos, las funciones puras y el manejo de tareas asíncronas con `async / await`.
 
-## ¿Qué es un `Stack` en desarrollo de software?
+Hasta ahora hemos ejecutado código en la consola de nuestro navegador. Pero para construir una aplicación real que funcione en internet y que cualquier persona en el mundo pueda usar desde su teléfono o computadora, necesitamos conectar múltiples piezas de software que colaboren en equipo. A este conjunto integrado de tecnologías lo llamamos **Stack Tecnológico**.
 
-La palabra `stack` en el contexto del desarrollo de software proviene del término en inglés que significa “pila”. En informática, una “pila” es una estructura de datos que opera bajo el principio LIFO (Last In, First Out), donde el último elemento en entrar es el primero en salir. Sin embargo, en el desarrollo de software, `stack` se utiliza para referirse a un conjunto de tecnologías que se utilizan en conjunto para desarrollar una aplicación o sistema completo.
+En esta sesión intensiva de **4 horas**, comprenderemos la anatomía de un Stack, analizaremos la arquitectura Cliente-Servidor y daremos el banderazo oficial a nuestro gran proyecto práctico del curso: **ShortURL** (un acortador de enlaces web profesional estilo Bitly).
 
-Un ejemplo común es el “LAMP `stack`”, que incluye Linux (sistema operativo), Apache (servidor web), MySQL (base de datos) y PHP (lenguaje de programación). Otro ejemplo es el “MEAN `stack`”, que incluye MongoDB (base de datos), Express.js (framework de servidor web), Angular (framework de front-end) y Node.js (entorno de ejecución de JavaScript del lado del servidor).
+---
 
-El uso del término `stack` en este sentido se popularizó en las comunidades de desarrollo de software para describir la combinación de tecnologías y herramientas que forman la base de una aplicación o servicio web.
+## 🗺️ Estructura de la Sesión
 
-## ¿Cómo saber qué `Stack` necesito?
+{/* 
+Guía metodológica para el instructor:
+- Fase 1: Revisión del Tema Anterior y Conclusiones (~30 min)
+- Fase 2: Introducción al Tema y Fundamentos Teóricos (~45 min)
+- Fase 3: Práctica Asistida en Vivo (~90 min)
+- Fase 4: Exposición, Debate y Debugging (~45 min)
+- Fase 5: Reto Semanal y Práctica en Casa (~30 min)
+*/}
 
-Aunque no hay una convención sobre qué tecnologías definen el `stack` de desarrollo, existen algunos `Stacks` aceptados por la comunidad. Estos `Stacks` son propuestos por grupos de desarrolladores para desarrollar aplicaciones completas.
+Cada una de nuestras sesiones semanales sigue una metodología pedagógica dividida en **5 fases**:
 
-Por ejemplo, los `Stacks` LAMP y XAMP son comunmente utilizados para introducir a principiantes en el mundo de desarrollo porque otorgan un entorno controlado y fácil de utilizar. LAMP y XAMP tienen en común lo siguiente: Ambos utilizan Apache como servidor web, MySQL como base de datos y PHP como lenguaje de programación. La diferencia que tiene cáda uno es el sistema operativo en donde se ejecuta el servidor. LAMP utiliza Linux y XAMP utiliza Windows.
-
-<Aside>Si quieres profundizar más sobre estos `stacks` te recomiendo que consultes el siguiente enlace: [Qué tipo de servidor usar](https://achetemele.wordpress.com/2013/04/10/que-tipo-de-servidor-utilizar-wamp-mamp-xampp-lamp/)</Aside>
-
-Para fines prácticos, el `Stack` que elijas dependerá de 3 preguntas claves:
-
-1. ¿Dónde estará tu Frontend?
-2. ¿Dónde estará tu Backend?
-3. ¿Dónde almacenarás los datos?
-
-## ¿Dónde estará tu Frontend?
-
-Para elegir un Frontend debemos tomar en cuenta a nuestros usuarios. Es decir, qué dispositivo utilizan nuestros usuarios. Por ejemplo, si nuestro usuario utiliza una computadora, un teléfono móvil, un navegador, etc.
-
-Casi todas los dispositivos tienen alguna forma de navegar en internet, por lo que crear una aplicación web suele ser la forma más práctica de llegar a la gran mayoría de usuarios.
-
-Aunque el Frontend no es exclusivo de aplicaciones web, es mucho más común referirse a desarrolladores web como Frontend developers. Sin embargo, cualquier desarrollador que se dedique a crear interfaces de usuario podría ser considerado Frontend.
-
-Para fines prácticos, nosotros asumiremos que queremos crear una aplicación web. Eso significa que debemos elegir una tecnología para ejecutar nuestra aplicación.
-
-PHP suele ser un lenguaje muy utilizado por su versatilidad para crear el Frontend y el Backend con el mismo lenguaje. Sin embargo, las herramientas requeridas para comenzar a utilizar el lenguaje suelen ser más complejas que sólo utiizar JavaScript.
-
-JavaScript también requiere herramientas para poderlo utilizar en Frontend y Backend, pero es mucho más sencillo de utilizar en el Front, ya que con un simple archivo HTML estamos listos para crear una aplicación web.
-
-<Aside>Un sitio web es un conjunto de páginas web en un mismo dominio, por ejemplo wikipedia.com. Una aplicación web es un sitio web cuyo propósito suele estar bien acotado para resolver problemas como por ejemplo facebook.com</Aside>
-
-Para este curso crearemos una aplicación para acortar URLs. Para ello crearemos un HTML de la siguiente manera:
-
-```html
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ShortURLDesde0</title>
-</head>
-<body>
-  <h1>ShortURLDesde0</h1>
-  <input type="text" name="url" id="url-to-shorten" placeholder="URL a acortar">
-  <input type="submit" value="Acortar" id="shorten-button">
-  <ul id="shortened-urls">
-  </ul>
-</body>
-</html>
+```
+Estructura de la Sesión
+├── ☕ Fase 1: Revisión del Tema Anterior y Conclusiones
+├── 🎯 Fase 2: Introducción al Tema y Fundamentos
+├── 💻 Fase 3: Práctica Asistida en Vivo
+├── 🗣️ Fase 4: Exposición, Debate y Debugging
+└── 🏠 Fase 5: Reto Semanal y Práctica en Casa
 ```
 
-Con este pequeño HTML tenemos nuestra interfaz para acortar URLs. Ahora debemos crear el comportamiento utilizando JavaScript.
+---
 
-```js
-// Cargamos los elementos utilizando el DOM
-const urlToShortenInput = document.getElementById('url-to-shorten');
-const shortenButton = document.getElementById('shorten-button');
-const shortenedUrlsList = document.getElementById('shortened-urls');
-// Creamos un arreglo para almacenar los urls que acortaremos
-const shortenedUrls = [];
+{/* Duración estimada para el instructor: 30 min */}
+## ☕ Fase 1: Revisión del Tema Anterior y Conclusiones
 
-// Configuramos el evento de click para acortar los urls
-shortenButton.addEventListener('click', () => {
-  // Ejecutamos la función para acortar urls
-  shortURL();
-});
+Iniciamos la sesión analizando el simulador asíncrono y conectando con la necesidad de almacenar datos de forma global.
 
-function shortURL() {
-  // Tomamos el valor de nuestro url a acortar
-  const urlToShorten = urlToShortenInput.value;
-  // Si nuestro valor no es falsy agregamos el url a la lista
-  if (urlToShorten) {
-    shortenedUrls.push(urlToShorten);
-    // Ejecutamos la función para dibujar la lista de urls acortados
-    renderShortenedUrls();
+{/* Tiempo sugerido: 15 min */}
+### 1. Puesta en Común del Reto de la Lección 4
+
+En la sesión anterior construimos el *"Simulador Asíncrono de Restaurante"*, coordinando pedidos con clases y pausas de tiempo con `async / await`:
+* **Discusión en grupo:** ¿Cómo modelaste los cambios de estado del pedido a medida que avanzaba el reloj?
+* ¿Qué ocurrió cuando intentaste consultar un pedido que había sido cancelado por el bloque `try / catch`?
+* Si recargaste la página de tu navegador... ¿notaste que todos los pedidos desaparecieron instantáneamente de la memoria?
+
+{/* Tiempo sugerido: 15 min */}
+### 2. El Puente Conceptual: De Scripts Aislados a Aplicaciones Completas
+
+La memoria RAM de tu navegador es volátil: en cuanto cierras la pestaña o recargas la página, las variables mueren. Además, si tú creas un pedido en tu computadora, otra persona en su teléfono celular no puede verlo.
+
+Para que una aplicación sea verdaderamente útil en el mundo real, necesitamos tres capas esenciales:
+1. **Una cara visual** donde el usuario interactúe (Frontend).
+2. **Un cerebro central en la nube** que reciba peticiones de miles de usuarios al mismo tiempo (Backend).
+3. **Una bóveda permanente** donde los datos queden guardados para siempre (Base de Datos).
+
+La combinación armoniosa de estas tres capas es lo que llamamos un **Stack**.
+
+---
+
+{/* Duración estimada para el instructor: 45 min */}
+## 🎯 Fase 2: Introducción al Tema y Fundamentos Teóricos
+
+Analicemos cómo se organiza un stack y diseñemos la arquitectura de nuestro proyecto.
+
+---
+
+{/* Tiempo sugerido: 15 min */}
+### 1. ¿Qué es un Stack Tecnológico? La Analogía de la Hamburguesa
+
+Imagina una hamburguesa gourmet en un restaurante:
+* **El Pan Superior (Frontend):** Es lo que ves primero, el diseño, la textura y los colores. En la web, es el **HTML, CSS y JavaScript** que corre en el navegador del cliente.
+* **La Carne y Aderezos (Backend):** Es el corazón del sabor y donde ocurre la preparación principal. En la web, es el servidor (**Node.js y Express**) que procesa la lógica, la seguridad y las reglas de negocio.
+* **El Pan Inferior (Base de Datos):** Es la base sólida que sostiene todos los ingredientes para que no se caigan. En la web, es el motor de persistencia (**SQLite**) que guarda los registros en el disco duro.
+
+```
+┌────────────────────────────────────────────────────────┐
+│ 🎨 FRONTEND (Cliente: Navegador Web)                   │
+│ HTML5 (Estructura) + CSS3 (Estilo) + JavaScript (DOM)  │
+├────────────────────────────────────────────────────────┤
+│ ⚙️ BACKEND (Servidor: Lógica en la Nube)               │
+│ Node.js + Servidor Web Express (API REST)              │
+├────────────────────────────────────────────────────────┤
+│ 🗄️ BASE DE DATOS (Persistencia de Datos)               │
+│ SQLite (Tablas relacionales y consultas SQL)           │
+└────────────────────────────────────────────────────────┘
+```
+
+---
+
+{/* Tiempo sugerido: 15 min */}
+### 2. El Proyecto Central del Curso: ShortURL
+
+A partir de esta lección y hasta el final del curso, construiremos una aplicación web completa y real: **ShortURL** (un acortador de enlaces web).
+
+#### ¿Qué problema resuelve ShortURL?
+Seguramente has visto enlaces gigantescos y feos en internet:
+```
+https://tienda.com/productos/categoria/electronica/ofertas-verano?id=8492048&ref=facebook_ads_campaign_2026
+```
+ShortURL transformará ese enlace kilométrico en uno limpio, elegante y fácil de compartir:
+```
+https://short.ly/a8B9x
+```
+
+#### Los 2 Flujos Clave del Sistema:
+
+```
+Flujo 1: Acortar Enlace
+[Usuario pega URL larga] ──► [Backend genera código "a8B9x"] ──► [Se guarda en SQLite] ──► [Devuelve URL corta]
+
+Flujo 2: Redirección Instantánea
+[Visitante entra a short.ly/a8B9x] ──► [Backend busca "a8B9x" en SQLite] ──► [Redirige a URL larga original 🚀]
+```
+
+---
+
+{/* Tiempo sugerido: 15 min */}
+### 3. El Stack Elegido para el Curso
+
+Para construir ShortURL utilizaremos el stack más limpio, potente y estándar de la industria:
+* **Frontend:** HTML5 Semántico + CSS Flexbox + JavaScript Vanilla (sin frameworks pesados para entender los fundamentos puros).
+* **Backend:** Node.js con Express (JavaScript en el servidor).
+* **Base de Datos:** SQLite (base de datos relacional compacta y ultra rápida).
+* **Control de Versiones y Nube:** Git, GitHub y despliegue gratuito en la nube.
+
+---
+
+### 🔍 Experimento en Vivo: Simulando una Redirección en la Consola
+
+Vamos a experimentar cómo funciona el "truco" de la redirección web:
+
+1. **Abre la consola de tu navegador (`F12`).**
+2. **Ejecuta este comando en la consola:**
+   ```javascript
+   // Le ordenamos al navegador que viaje inmediatamente a otro sitio web
+   window.location.href = "https://astro.build";
+   ```
+3. **Observa qué ocurre:** El navegador cambia de página al instante. Ese mismo comportamiento es el que programaremos en nuestro servidor Backend cuando un usuario visite un enlace corto.
+
+---
+
+## 💻 Fase 3: Práctica Asistida en Vivo
+
+Abriremos la consola y crearemos los algoritmos fundacionales de ShortURL.
+
+---
+
+{/* Tiempo sugerido: 20 min */}
+### 🧩 Reto 1: Definición del Modelo de Datos de ShortURL
+
+**Objetivo:** Diseñar la estructura de datos que representará cada enlace acortado en el sistema.
+
+```javascript
+// Diseñamos la ficha técnica (Objeto) de un enlace
+function crearFichaEnlace(urlOriginal, codigoCorto) {
+  return {
+    id: Date.now(), // Identificador numérico único basado en milisegundos
+    urlOriginal: urlOriginal,
+    codigoCorto: codigoCorto,
+    clics: 0,
+    fechaCreacion: new Date().toISOString()
+  };
+}
+
+// Probamos creando nuestro primer registro:
+const enlaceEjemplo = crearFichaEnlace(
+  "https://developer.mozilla.org/es/docs/Web/JavaScript",
+  "mdn-js"
+);
+
+console.log("Ficha del enlace en memoria:", enlaceEjemplo);
+```
+
+---
+
+{/* Tiempo sugerido: 25 min */}
+### 🧩 Reto 2: Algoritmo Generador de Códigos Cortos Aleatorios
+
+**Objetivo:** Crear una función que genere códigos aleatorios únicos de 6 caracteres (ej. `"x7K9p2"`).
+
+```javascript
+function generarCodigoCorto(longitud = 6) {
+  // Caracteres permitidos: letras minúsculas, mayúsculas y números
+  const caracteres = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+  let codigo = "";
+
+  for (let i = 0; i < longitud; i++) {
+    // Escogemos una posición al azar dentro del alfabeto
+    const indiceAleatorio = Math.floor(Math.random() * caracteres.length);
+    codigo += caracteres[indiceAleatorio];
   }
+
+  return codigo;
 }
 
-function renderShortenedUrls() {
-  // Eliminamos el contenido de nuestra lista
-  shortenedUrlsList.innerHTML = '';
-  // Recorremos la lista de urls acortados
-  for (let shortenedUrl of shortenedUrls) {
-    // Agregamos un elemento a la lista por cada url acortado
-    shortenedUrlsList.innerHTML += `<li><a href="${shortenedUrl}" target="_blank">${shortenedUrl}</a></li>`;
+// Probamos generando varios códigos:
+console.log("Código 1:", generarCodigoCorto()); // Ej: "8kF2qA"
+console.log("Código 2:", generarCodigoCorto()); // Ej: "p9M1zL"
+console.log("Código personalizado de 8 caracteres:", generarCodigoCorto(8));
+```
+
+---
+
+{/* Tiempo sugerido: 25 min */}
+### 🧩 Reto 3: Validador de URLs Seguras
+
+**Objetivo:** Asegurar que los usuarios solo ingresen enlaces web válidos que comiencen con `http://` o `https://`.
+
+```javascript
+function validarURL(urlIngresada) {
+  const urlLimpia = urlIngresada.trim();
+
+  // Validamos que no esté vacía
+  if (urlLimpia.length === 0) {
+    return { valida: false, motivo: "La URL no puede estar vacía." };
   }
-}
-```
 
-## ¿Dónde estará tu Backend?
-
-El Backend suele ser la parte más importante de nuestro `Stack` pero también la más infravalorada debido a que los usuarios no entienden que el Frontend interactúa con ella.
-
-Aunque hoy en día el Frontend y el Backend se consideran como aislados, no siempre se les consideró así. Existen lenguajes de programación que nos permiten crear el Frontend y el Backend. Por ejemplo, PHP:
-
-```php
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Consulta de Base de Datos</title>
-</head>
-<body>
-
-<?php
-$servername = "localhost"; // Cambia esto si tu servidor de base de datos está en otro host
-$username = "tu_usuario"; // Tu usuario de base de datos
-$password = "tu_contraseña"; // Tu contraseña de base de datos
-$dbname = "mi_base_de_datos";
-
-// Crear conexión
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-// Verificar conexión
-if ($conn->connect_error) {
-    die("Conexión fallida: " . $conn->connect_error);
-}
-
-// Realizar consulta
-$sql = "SELECT nombre, email FROM usuarios WHERE nombre = 'Juan'";
-$result = $conn->query($sql);
-
-$mensaje = "";
-
-if ($result->num_rows > 0) {
-    // Salida de datos de cada fila
-    while($row = $result->fetch_assoc()) {
-        $mensaje .= "Nombre: " . $row["nombre"]. " - Email: " . $row["email"]. "<br>";
-    }
-} else {
-    $mensaje = "0 resultados";
-}
-
-$conn->close();
-?>
-
-<p id="resultado">
-    <?php echo $mensaje; ?>
-</p>
-
-</body>
-</html>
-```
-
-En este ejemplo podemos ver cómo desde el mismo archivo estamos creando el Frontend y el Backend.
-
-Para entender el Backend lo simplificaremos como el encargado de acceder a los datos y generar una interfaz para el Frontend. ¿Por qué el Frontend no accede directamente a los datos? la respuesta simple es porque no todas las herramientas utilizadas utilizadas para crear aplicaciones de Frontend pueden acceder a los datos. Si bien, PHP nos permite crear un Frontend y un Backend en un solo archivo, al utilizar HTML y JavaScript puros, tenemos la limitante del lenguaje, por lo que debemos recurrir a otras técnicas para conectarnos a los datos.
-
-El Backend suele generar interfaces que el Frontend puede leer. Estas interfaces presentan los datos de la base de datos en un formato que el Frontend puede interpretar y utilizar para actualizar la interfaz gráfica.
-
-Algunos tipos de API son REST y SOAP. Con el mismo ejemplo del acortador de URLs, crearemos una API REST en formato JSON con una tecnología que nos permite utilizar JavaScript para acceder a los datos llamada Node.JS.
-
-### Instalar Node.JS
-
-Para este proyecto utilizaremos [NodeJS LTS 20.16.0](https://nodejs.org/en/download/package-manager). En este sitio podrás seleccionar la configuración más adecuada para tu sistema operativo.
-
-Una vez instalado, podemos comprobar nuesra versión de node y npm:
-
-```bash title="Verificando la versión de node"
-# Verificar la versión de Node
-node -v
-# Verificar la versión de npm
-npm -v
-```
-
-### Crear nuestro Backend
-
-Con estas herramientas configuradas podremos crear un servidor web en nuestra computadora de la siguiente manera:
-
-```js
-// Importamos las librerías nativas para crear nuestro servidor
-const http = require('http');
-const url = require('url');
-
-const shortenedUrls = [];
-
-// Creamos el servidor HTTP
-const server = http.createServer((req, res) => {
-    // Analizamos la URL de la solicitud
-    const parsedUrl = url.parse(req.url, true);
-    // Extraemos el nombre de la ruta
-    const pathname = parsedUrl.pathname;
-    // Extraemos el método de la solicitud
-    const method = req.method;
-
-    // Configuramos el formato de la respuesta
-    res.setHeader('Content-Type', 'application/json');
-
-    // Verificamos el método de la solicitud y la ruta solicitada
-    if (method === 'GET' && pathname === '/api/shorturl') {
-      // Tomamos el url que recibimos como parametro en la consulta
-      const urlToShorten = parsedUrl.query.urlToShorten;
-      /*
-       * Creamos un objeto para guardar el url que acortamos
-       * y el URL que hace referencia a este mismo.
-       */
-      const shortenURL = { 
-        urlToShorten, 
-        shortenedUrl: `http://localhost:3000/api/redirect?shortenedUrlIndex=${shortenedUrls.length + 1}` 
-      };
-      shortenedUrls.push(shortenURL);
-      // Definimos el código del estatus de la respuesta
-      res.writeHead(200);
-      // Enviamos la respuesta en formato JSON
-      res.end(JSON.stringify({ 
-        message: 'GET request to /api/shorturl', 
-        shortenURL
-      }));
-    } else if (method === 'GET' && pathname === '/api/redirect') {
-      // Tomamos el url que recibimos como parametro en la consulta
-      const shortenedUrlIndex = parsedUrl.query.shortenedUrlIndex
-      // Redirigimos la solicitud al url original
-      res.writeHead(302, { Location: shortenedUrls[shortenedUrlIndex - 1].url });
-      // Finalizamos la solicitud
-      res.end();
-    }
-});
-
-// Configuramos una función para escuchar las solicitudes del servidor en el puerto 3000
-const PORT = 3000;
-server.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`);
-});
-```
-
-Con este pequeño servidor web podemos exponer nuestra API que se encargará de acortar los URL de nuestra aplicación web.
-
-## ¿Dónde almacenarás los datos?
-
-Ya tenemos nuestro Frontend y nuestro Backend. Sin embargo, NodeJS no tiene un sistema de almacenamiento o memoria permanente, por lo que los URLs acortados se pierden cada vez que reiniciamos el servidor. Para persistir los datos (Recordarlos con el paso del tiempo) debemos utilizar una base de datos que no sólo almacene los datos sino que tenga un mecanismo con las siguientes características.
-
-### ¿Qué es una base de datos?
-
-Una base de datos es un sistema de información estructurada que persiste con el tiempo. Normalmente la información es digital y por lo tanto, depende de Hardware (Equipos electrónicos físicos) para almacenar la información. Dicho Hardware suele estar contenido en super computadoras cuando se requiere almacenar grandes cantidades de información. Pero para fines de desarrollo de software, casi cualquier computadora moderna puede instalar un sistema de gestión de base de datos ([DBMS](https://es.wikipedia.org/wiki/Sistema_de_gesti%C3%B3n_de_bases_de_datos)) para configurar, crear y manipular datos de forma local, es decir, sólo disponibles en nuestra computadora personal.
-
-### Instalar [SQLite](https://www.sqlite.org/)
-
-Gracias a Node.JS podemos acceder a una gran variedad de bases de datos. Entre las más populares están [MySQL](https://www.mysql.com/), [PostgreSQL](https://www.postgresql.org/) y [MongoDB](https://www.mongodb.com/). Sin embargo, la forma más simple de empezar a aprender sobre base de datos es [SQLite](https://www.sqlite.org/), que como su nombre lo indica, nos permite tener una base de datos muy ligera pero con características potentes para almacenar pequeñas o incluso grandes cantidades de datos si el proyecto crece lo suficiente.
-
-### [SQLite en Node.JS](https://www.sqlitetutorial.net/sqlite-nodejs/)
-
-Esta sección está inspirada en el articulo de [sqlitetutorial](https://www.sqlitetutorial.net/sqlite-nodejs/) en el que explican cómo conectarse y manipular una base de datos utilizando la librería de SQLite3 de node.
-
-Para empezar a utilizar SQLite debemos instalar una librería que pueda conectarse a nuestra base de datos. Gracias a node podemos utilizar npm para instalar dicha librería:
-
-```bash title="Instalando sqlite3"
-npm install sqlite3
-```
-
-Para conectarnos a una base de datos SQLite necesitaremos:
-
-1. Importar el módulo de sqlite3
-2. Mandar a llamar la función de `Database()` del módulo sqlite3 y pasarle la información del archivo de nuestra base de datos, el mode de apertura de la base de datos y una función que se ejecute cuando la base de datos sea creada.
-
-#### Conectándose a una base de datos
-
-Para abrir una conección a una base de datos podemos hacer lo siguiente:
-
-```js
-// Importamos el módulo de sqlite3
-// La función verbose permite que los posibles errores sean mucho más claros
-const sqlite3 = require('sqlite3').verbose();
-// Creamos un objeto de nuestra base de datos
-// Con sqlite3.OPEN_CREATE permite que si la base de datos no existe, se cree automáticamente
-let db = new sqlite3.Database('/db/file.db', sqlite3.OPEN_CREATE, (err) => {
-  // Y podemos mostrar los errores de la siguiente manera
-  if (err) {
-    return console.error(err.message);
+  // Validamos que comience con protocolo web seguro
+  const tieneProtocolo = urlLimpia.startsWith("http://") || urlLimpia.startsWith("https://");
+  
+  if (!tieneProtocolo) {
+    return { valida: false, motivo: "La URL debe comenzar con http:// o https://" };
   }
-  console.log('Connected to the in-memory SQlite database.');
-});
+
+  // Validamos que contenga al menos un punto para el dominio
+  if (!urlLimpia.includes(".")) {
+    return { valida: false, motivo: "La URL debe incluir un dominio válido (ej. .com, .org)." };
+  }
+
+  return { valida: true, urlNormalizada: urlLimpia };
+}
+
+// Casos de prueba:
+console.log(validarURL("https://google.com"));       // { valida: true, ... }
+console.log(validarURL("mi-sitio-sin-protocolo.com")); // { valida: false, motivo: "..." }
+console.log(validarURL("   "));                       // { valida: false, motivo: "..." }
 ```
 
-Es importante cerrar la conneción a nuestra base de datos una vez que terminemos de utilizarla.
-```js
-db.close();
+---
+
+{/* Tiempo sugerido: 20 min */}
+### 🧩 Reto 4: Estructura de Carpetas del Proyecto ShortURL
+
+**Objetivo:** Diseñar la arquitectura de archivos en el disco para separar claramente Frontend de Backend.
+
+```
+proyecto-shorturl/
+├── package.json          # Archivo de configuración del proyecto Node.js
+├── server.js             # Servidor Backend (Express y rutas)
+├── /data/                # Almacenamiento permanente
+│   └── shorturl.db       # Base de datos SQLite
+└── /public/              # Interfaz gráfica (Frontend estático)
+    ├── index.html        # Estructura visual de la página
+    ├── styles.css        # Diseño y estilos responsivos
+    └── app.js            # Lógica interactiva del cliente (fetch y DOM)
 ```
 
-## ¿Cómo conectamos todo?
+---
 
-¡Perfecto! ya tenemos nuestro Frontend, Backend y nuestra base de datos. ¿Cómo podemos conectar todo? Pues eso lo veremos las siguientes clases, en las que estudiaremos con un poco más de profundidad cada uno de ellos: [Frontend](https://desde0.jesusdmedinac/roadmap/para-no-programadores/6), [Backend](https://desde0.jesusdmedinac/roadmap/para-no-programadores/7) y [Base de Datos](https://desde0.jesusdmedinac/roadmap/para-no-programadores/8)
+{/* Duración estimada para el instructor: 45 min */}
+## 🗣️ Fase 4: Exposición de Resultados, Debate y Debugging
+
+Analizamos en conjunto el diseño de la arquitectura y desarmamos los posibles puntos débiles del sistema.
+
+### 🐞 Debate y Trampas de Arquitectura en Sistemas Web
+
+#### 1. ¿Por qué no guardar las URLs en el `localStorage` del navegador?
+* **El dilema:** `localStorage` permite guardar datos en el navegador del usuario sin configurar servidores.
+* **El problema crítico:** Si guardas el enlace en el navegador de Juan, cuando María abra `short.ly/a8B9x` en su propio teléfono, su navegador no tendrá ese dato. Un acortador exige una **base de datos centralizada compartida**.
+
+#### 2. La trampa de las colisiones de códigos aleatorios
+* **El riesgo:** ¿Qué pasa si el generador aleatorio crea dos veces el mismo código `"abc123"` para dos URLs distintas?
+* **La solución arquitectónica:** Antes de guardar un código nuevo en la base de datos, el servidor debe verificar si ya existe. Si existe, genera uno nuevo de inmediato.
+
+#### 3. URLs relativas vs absolutas
+* **El error:** Intentar redirigir a `"google.com"` en lugar de `"https://google.com"`.
+* **Consecuencia:** El navegador creerá que es una página interna (`short.ly/google.com`) y dará error 404.
+
+---
+
+{/* Duración estimada para el instructor: 30 min */}
+## 🏠 Fase 5: Definición de Práctica en Casa / Reto Semanal
+
+Construirás el motor lógico completo de ShortURL funcionando en memoria.
+
+### 🏆 Proyecto Semanal: "El Prototipo en Memoria de ShortURL"
+
+**Descripción del Problema:**
+Antes de armar el servidor web y la base de datos en las próximas clases, crearemos un programa en JavaScript que simule todo el sistema ShortURL en la consola.
+
+#### Especificaciones Técnicas del Script:
+
+1. **Base de Datos Simulada:**
+   * Crea un arreglo global `const baseDeDatos = [];`.
+
+2. **Función `acortarURL(urlLarga)`:**
+   * Valida la URL con el validador del Reto 3.
+   * Genera un código corto de 6 caracteres con el generador del Reto 2.
+   * Crea el objeto de la ficha del enlace (con `clics: 0`) y lo guarda con `push()` en `baseDeDatos`.
+   * Devuelve un mensaje con la URL corta generada (ej. `"https://short.ly/" + codigo`).
+
+3. **Función `visitarEnlace(codigoCorto)`:**
+   * Busca en `baseDeDatos` el enlace que tenga ese `codigoCorto` (usa `find()`).
+   * Si no existe, devuelve `"❌ Error 404: Enlace no encontrado."`.
+   * Si existe, incrementa su contador `enlace.clics++` y devuelve `"🚀 Redirigiendo a: " + enlace.urlOriginal`.
+
+4. **Función `mostrarEstadisticas()`:**
+   * Muestra en consola la tabla completa de enlaces y clics acumulados con `console.table(baseDeDatos)`.
+
+#### Prueba en Consola:
+```javascript
+console.log(acortarURL("https://wikipedia.org"));
+console.log(acortarURL("https://github.com"));
+
+// Simulamos que dos usuarios hacen clic en el primer enlace:
+visitarEnlace("CODIGO_GENERADO");
+visitarEnlace("CODIGO_GENERADO");
+
+// Mostramos el reporte:
+mostrarEstadisticas();
+```
+
+<Aside type="tip" title="Criterio de Autoevaluación">
+Verifica que el contador de clics aumente correctamente cada vez que ejecutes `visitarEnlace()` y que las URLs inválidas sean rechazadas con un mensaje claro.
+</Aside>
+
+---
+
+## 📚 Recursos y Videos Recomendados
+
+Para profundizar en la arquitectura web y stacks de desarrollo:
+
+<CardGrid>
+  <LinkCard
+    title="¿Qué es un Tech Stack y cómo elegir el adecuado?"
+    href="https://www.youtube.com/watch?v=5rT_2lMjh30"
+    description="Explicación clara de las capas Frontend, Backend y Bases de Datos en aplicaciones modernas."
+  />
+  <LinkCard
+    title="Arquitectura Cliente - Servidor Explicada Fácil"
+    href="https://www.youtube.com/watch?v=ZzkVZXWjLz0"
+    description="Aprende cómo viajan las peticiones HTTP desde tu navegador hasta el servidor central."
+  />
+  <LinkCard
+    title="Cómo funciona un Acortador de URLs por dentro"
+    href="https://developer.mozilla.org/es/docs/Learn/Server-side/First_steps/Client-Server_overview"
+    description="Guía de arquitectura web sobre el ciclo de solicitud y respuesta en MDN."
+  />
+  <LinkCard
+    title="Estructura de Proyectos Web Profesionales"
+    href="https://www.youtube.com/watch?v=b4wS9Wv93k8"
+    description="Mejores prácticas para organizar carpetas y archivos en proyectos Full-Stack."
+  />
+</CardGrid>
+
+---
+
+## 🚀 Conclusión y Próximos Pasos
+
+¡Felicidades! Hemos sentado las bases arquitectónicas de nuestro proyecto. Ahora entiendes con total claridad cómo interactúan el Frontend, el Backend y la Base de Datos, y cómo funcionará el flujo de **ShortURL**.
+
+En la próxima sesión construiremos la cara visual del proyecto: **[Lección 6: Frontend - HTML, CSS y Manipulación del DOM (L6)](/roadmap/para-no-programadores/6)**, donde maquetaremos una interfaz interactiva y adaptable a teléfonos celulares.
 
 <Cta></Cta>
