@@ -14,31 +14,45 @@ Esta sesión de **4 horas** está diseñada para que entiendas la teoría a trav
 
 ---
 
-## ⏱️ Estructura de la Sesión de 4 Horas
+## 🗺️ Estructura de la Sesión
+
+{/*
+Guía metodológica para el instructor:
+- Fase 1: Revisión del Tema Anterior y Conclusiones (~30 min)
+- Fase 2: Introducción al Tema y Fundamentos Teóricos (~45 min)
+- Fase 3: Práctica Asistida en Vivo (~90 min)
+- Fase 4: Exposición, Debate y Debugging (~45 min)
+- Fase 5: Reto Semanal y Práctica en Casa (~30 min)
+*/}
+
+Cada una de nuestras sesiones semanales sigue una metodología pedagógica dividida en **5 fases**:
 
 ```
-Sesión de 4 Horas: Conceptos Básicos
-├── ☕ Fase 1: Revisión del Tema Anterior y Conclusiones (30 min)
-├── 🎯 Fase 2: Introducción al Tema y Fundamentos (45 min)
-├── 💻 Fase 3: Práctica Asistida en Vivo (90 min)
-├── 🗣️ Fase 4: Exposición, Debate y Debugging (45 min)
-└── 🏠 Fase 5: Reto Semanal y Práctica en Casa (30 min)
+Estructura de la Sesión
+├── ☕ Fase 1: Revisión del Tema Anterior y Conclusiones
+├── 🎯 Fase 2: Introducción al Tema y Fundamentos
+├── 💻 Fase 3: Práctica Asistida en Vivo
+├── 🗣️ Fase 4: Exposición, Debate y Debugging
+└── 🏠 Fase 5: Reto Semanal y Práctica en Casa
 ```
 
 ---
 
-## ☕ Fase 1: Revisión del Tema Anterior y Conclusiones (30 min)
+{/*Duración estimada para el instructor: 30 min */}
+## ☕ Fase 1: Revisión del Tema Anterior y Conclusiones
 
 Comenzamos la sesión revisando el proyecto realizado en casa y conectándolo con los temas de hoy.
 
-### 1. Puesta en Común del Reto de la Lección 1 (15 min)
+{/*Tiempo sugerido: 15 min */}
+### 1. Puesta en Común del Reto de la Lección 1
 
 En la sesión anterior construimos un calculador interactivo de tiempo de vida con `prompt()`, `alert()` y `Number()`.
 * **Discusión en grupo:** ¿Qué ocurrió cuando ingresaste letras o dejaste el campo vacío en lugar de escribir un año numérico?  
   *(Apareció `NaN` o "Not a Number", porque JavaScript no puede restar letras de un número).*
 * **¿Qué aprendimos?** Las computadoras son extremadamente estrictas con los tipos de datos que reciben.
 
-### 2. El Puente Conceptual: ¿Por qué necesitamos variables y lógica? (15 min)
+{/*Tiempo sugerido: 15 min */}
+### 2. El Puente Conceptual: ¿Por qué necesitamos variables y lógica?
 
 En la Lección 1 escribimos líneas de código independientes. El problema es que una vez que terminaba la línea, **la información se desvanecía en el aire**.
 
@@ -52,18 +66,20 @@ Para construir aplicaciones reales (como una tienda online, un chat o un videoju
 
 ---
 
-## 🎯 Fase 2: Introducción al Tema y Fundamentos Teóricos (45 min)
+{/*Duración estimada para el instructor: 45 min */}
+## 🎯 Fase 2: Introducción al Tema y Fundamentos Teóricos
 
 En esta fase exploraremos los 5 pilares fundamentales de la programación mediante analogías y ejemplos directos en JavaScript.
 
 ---
 
-### 1. Variables: Las Cajas Etiquetadas de la Memoria (10 min)
+{/*Tiempo sugerido: 10 min */}
+### 1. Variables: Las Cajas Etiquetadas de la Memoria
 
 Imagina que la memoria RAM de tu computadora es un almacén gigante con millones de estanterías numeradas. Para no tener que recordar que tu dato está en la estantería `#0x7FFF5FBFFD98`, el lenguaje te permite tomar una **caja**, pegarle una **etiqueta con un nombre claro** y guardar un **valor dentro**.
 
 ```javascript
-/* 1. Declaración */ let /* 2. Nombre */ puntosJugador /* 3. Asignación */ = /* 4. Valor */ 100;
+{/* 1. Declaración */} let {/* 2. Nombre */} puntosJugador {/* 3. Asignación */} = {/* 4. Valor */} 100;
 ```
 
 #### La diferencia moderna: `let` vs `const`
@@ -91,7 +107,8 @@ En tutoriales antiguos de internet verás la palabra `var`. En el JavaScript mod
 
 ---
 
-### 2. Tipos de Datos: La Naturaleza de la Información (10 min)
+{/*Tiempo sugerido: 10 min */}
+### 2. Tipos de Datos: La Naturaleza de la Información
 
 No todos los datos se procesan igual en la memoria. JavaScript clasifica la información en categorías fundamentales:
 
@@ -120,7 +137,8 @@ const usuario = {
 
 ---
 
-### 3. Operadores: El Motor de Cálculo y Comparación (10 min)
+{/*Tiempo sugerido: 10 min */}
+### 3. Operadores: El Motor de Cálculo y Comparación
 
 Los operadores nos permiten combinar, transformar y evaluar variables:
 
@@ -143,7 +161,8 @@ Los operadores nos permiten combinar, transformar y evaluar variables:
 
 ---
 
-### 4. Estructuras de Control y Funciones (15 min)
+{/*Tiempo sugerido: 15 min */}
+### 4. Estructuras de Control y Funciones
 
 #### La Toma de Decisiones (`if`, `else if`, `else`)
 Permite que el código elija qué camino seguir según la situación:
@@ -183,13 +202,15 @@ const totalProducto2 = calcularPrecioFinal(250, 16); // 290
 
 ---
 
-## 💻 Fase 3: Práctica Semanal Asistida en Vivo (90 min)
+{/*Duración estimada para el instructor: 90 min */}
+## 💻 Fase 3: Práctica Semanal Asistida en Vivo
 
 Abriremos la consola de nuestro navegador y construiremos 4 retos guiados paso a paso con el instructor.
 
 ---
 
-### 🧩 Reto 1: La Calculadora de Cuentas y Propinas (20 min)
+{/*Tiempo sugerido: 20 min */}
+### 🧩 Reto 1: La Calculadora de Cuentas y Propinas
 
 **Objetivo:** Combinar variables `const`, operadores matemáticos y formateo de texto para resolver un problema cotidiano.
 
@@ -218,7 +239,8 @@ console.log("Cada persona aporta: $" + cuotaIndividual);
 
 ---
 
-### 🧩 Reto 2: El Portero Virtual / Control de Acceso con `if/else` (25 min)
+{/*Tiempo sugerido: 25 min */}
+### 🧩 Reto 2: El Portero Virtual / Control de Acceso con `if/else`
 
 **Objetivo:** Dominar condicionales anidados y operadores lógicos booleanos (`&&`, `||`).
 
@@ -250,7 +272,8 @@ if (edadUsuario >= 18) {
 
 ---
 
-### 🧩 Reto 3: El Generador Automático de Tablas y Conteo con Bucles (25 min)
+{/*Tiempo sugerido: 25 min */}
+### 🧩 Reto 3: El Generador Automático de Tablas y Conteo con Bucles
 
 **Objetivo:** Automatizar repeticiones con bucles `for` y recorrer arreglos de datos.
 
@@ -277,7 +300,8 @@ for (let i = 0; i < alumnos.length; i++) {
 
 ---
 
-### 🧩 Reto 4: La Fábrica de Funciones Reutilizables (20 min)
+{/*Tiempo sugerido: 20 min */}
+### 🧩 Reto 4: La Fábrica de Funciones Reutilizables
 
 **Objetivo:** Aprender a modularizar código para que sea limpio, mantenible y profesional.
 
@@ -304,7 +328,8 @@ console.log("¿Una persona de 25 años es mayor de edad?", esMayorDeEdad(25)); /
 
 ---
 
-## 🗣️ Fase 4: Exposición de Resultados, Debate y Debugging (45 min)
+{/*Duración estimada para el instructor: 45 min */}
+## 🗣️ Fase 4: Exposición de Resultados, Debate y Debugging
 
 En esta fase los estudiantes muestran sus consolas, comparan cómo resolvieron los retos y analizamos las trampas más comunes del código en vivo.
 
@@ -330,7 +355,8 @@ En esta fase los estudiantes muestran sus consolas, comparan cómo resolvieron l
 
 ---
 
-## 🏠 Fase 5: Definición de Práctica en Casa / Reto Semanal (30 min)
+{/*Duración estimada para el instructor: 30 min */}
+## 🏠 Fase 5: Definición de Práctica en Casa / Reto Semanal
 
 Para consolidar tu pensamiento lógico y preparar el terreno para la Lección 3, desarrollarás tu primer sistema comercial interactivo.
 
