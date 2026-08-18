@@ -55,7 +55,9 @@ Para crear o modificar contenido, es **obligatorio** seguir las directrices de `
     3.  **Fase 3**: Práctica asistida en vivo con 3 a 4 retos guiados progresivos (~90 min).
     4.  **Fase 4**: Exposición de resultados, debate y debugging de errores comunes (`SyntaxError`, `ReferenceError`, trampas de sintaxis) (~45 min).
     5.  **Fase 5**: Reto semanal estructurado y práctica en casa con criterios de evaluación (~30 min).
--   **Regla de Tiempos Invisibles**: **NO colocar marcas de tiempo visibles para el alumno** en títulos o textos. Todos los tiempos se especifican como comentarios HTML (`<!-- Duración estimada para el instructor: XX min -->`) en el código fuente.
+-   **Regla de Tiempos Invisibles y Formato de Comentarios (.md vs .mdx)**: **NO colocar marcas de tiempo visibles para el alumno** en títulos o textos. 
+    - En archivos `.mdx` (lecciones del curso), los tiempos se especifican obligatoriamente como comentarios JSX/MDX (`{/* Duración estimada para el instructor: XX min */}`). Los comentarios HTML `<!-- -->` están prohibidos en `.mdx` porque rompen el compilador Rollup/MDX.
+    - En archivos `.md` (documentación general, READMEs, ADRs), los comentarios invisibles usan el formato estándar Markdown/HTML `<!-- texto -->`.
 -   **Enfoque Pragmático (Sin pseudocódigo abstracto innecesario)**: Enseñar la lógica de programación directamente sobre código real ejecutable del ecosistema del curso (ej. JavaScript).
 -   **Formato y Componentes**:
     -   Frontmatter (título, descripción).
@@ -83,7 +85,7 @@ Para cualquier tarea de desarrollo, refactorización o creación de nuevas funci
 ## 6. Instrucciones para el Agente
 
 -   **Punto de Partida**: Utiliza este documento (`AGENTS.md`) y `CONTENT_STYLE.md` como tu principal fuente de contexto sobre el proyecto.
--   **Metodología de Contenido**: Toda nueva lección o modificación debe cumplir con el estándar de **4 horas en 5 fases**, **tiempos invisibles en comentarios HTML**, **primera persona inclusiva** y **retos prácticos guiados**.
+-   **Metodología de Contenido**: Toda nueva lección o modificación debe cumplir con el estándar de **4 horas en 5 fases**, **tiempos invisibles en comentarios MDX/JSX `{/* ... */}`**, **primera persona inclusiva** y **retos prácticos guiados**.
 -   **Documentación de Decisiones (ADRs)**: Al sugerir o crear registros de decisión arquitectónica, utiliza **nombres semánticos** (ej: `ADR-backend-comunicacion.md`) en lugar de números secuenciales, siguiendo el formato definido en `CONTENT_STYLE.md`.
 -   **Creación de Contenido y Uso de Fuentes**:
     -   Al generar nuevas lecciones o modificar existentes, adhiérete estrictamente a las guías en `CONTENT_STYLE.md` y replica la estructura y tono del contenido existente.

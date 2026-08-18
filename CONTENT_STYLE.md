@@ -26,9 +26,11 @@ Estructura de la Sesión
 └── 🏠 Fase 5: Reto Semanal y Práctica en Casa
 ```
 
-### ⏱️ Regla Crítica: Tiempos Invisibles para el Estudiante
+### ⏱️ Regla Crítica: Tiempos Invisibles y Formato de Comentarios (.md vs .mdx)
 - **NO colocar marcas de tiempo visibles** en los encabezados ni en el texto para los estudiantes (ej. NO escribir `## Fase 1 (30 min)` ni `### Reto 1 (20 min)`).
-- **SÍ incluir comentarios HTML en el código fuente** (`<!-- Duración estimada para el instructor: 45 min -->`, `<!-- Tiempo sugerido: 15 min -->`) para que el instructor y los agentes conozcan la cadencia temporal sin abrumar al alumno.
+- **Distinción obligatoria de comentarios según el tipo de archivo**:
+  - **En archivos `.mdx` (todas las lecciones en `src/content/docs/`)**: Los comentarios en el código fuente **deben usar la sintaxis JSX/MDX `{/* texto */}`** (`{/* Duración estimada para el instructor: 45 min */}`). Los comentarios HTML `<!-- -->` están prohibidos en `.mdx` porque rompen el compilador Rollup/MDX.
+  - **En archivos `.md` (documentación general, `README.md`, `PROGRESS.md`, `AGENTS.md`, ADRs)**: Los comentarios invisibles utilizan la sintaxis estándar de Markdown/HTML `<!-- texto -->`.
 
 ---
 
@@ -114,14 +116,14 @@ Párrafo introductorio conectando con la [Lección Anterior (LX-1)](/roadmap/...
 
 ## 🗺️ Estructura de la Sesión
 
-<!-- 
+{/* 
 Guía metodológica para el instructor:
 - Fase 1: Revisión del Tema Anterior / Rompehielos (~30 min)
 - Fase 2: Introducción al Tema y Fundamentos Teóricos (~45 min)
 - Fase 3: Práctica Asistida en Vivo (~90 min)
 - Fase 4: Exposición, Debate y Debugging (~45 min)
 - Fase 5: Reto Semanal y Práctica en Casa (~30 min)
--->
+*/}
 
 Cada una de nuestras sesiones semanales sigue una metodología pedagógica dividida en **5 fases**:
 
@@ -136,63 +138,63 @@ Estructura de la Sesión
 
 ---
 
-<!-- Duración estimada para el instructor: 30 min -->
+{/* Duración estimada para el instructor: 30 min */}
 ## ☕ Fase 1: Revisión del Tema Anterior y Conclusiones
 
-<!-- Tiempo sugerido: 15 min -->
+{/* Tiempo sugerido: 15 min */}
 ### 1. Puesta en Común del Reto Anterior
 ...
 
-<!-- Tiempo sugerido: 15 min -->
+{/* Tiempo sugerido: 15 min */}
 ### 2. El Puente Conceptual
 ...
 
 ---
 
-<!-- Duración estimada para el instructor: 45 min -->
+{/* Duración estimada para el instructor: 45 min */}
 ## 🎯 Fase 2: Introducción al Tema y Fundamentos Teóricos
 
-<!-- Tiempo sugerido: 15 min -->
+{/* Tiempo sugerido: 15 min */}
 ### 1. Concepto A
 ...
 
-<!-- Tiempo sugerido: 15 min -->
+{/* Tiempo sugerido: 15 min */}
 ### 2. Concepto B
 ...
 
-<!-- Tiempo sugerido: 15 min -->
+{/* Tiempo sugerido: 15 min */}
 ### 🔍 Experimento en Vivo: [Nombre del Experimento]
 Vamos a hacer un experimento juntos...
 
 ---
 
-<!-- Duración estimada para el instructor: 90 min -->
+{/* Duración estimada para el instructor: 90 min */}
 ## 💻 Fase 3: Práctica Asistida en Vivo
 
 Abriremos nuestro entorno de desarrollo y construiremos juntos los siguientes retos guiados:
 
-<!-- Tiempo sugerido: 20 min -->
+{/* Tiempo sugerido: 20 min */}
 ### 🧩 Reto 1: [Nombre del Reto 1]
 **Objetivo:** ...
 ```javascript
 // Código comentado
 ```
 
-<!-- Tiempo sugerido: 25 min -->
+{/* Tiempo sugerido: 25 min */}
 ### 🧩 Reto 2: [Nombre del Reto 2]
 ...
 
-<!-- Tiempo sugerido: 25 min -->
+{/* Tiempo sugerido: 25 min */}
 ### 🧩 Reto 3: [Nombre del Reto 3]
 ...
 
-<!-- Tiempo sugerido: 20 min -->
+{/* Tiempo sugerido: 20 min */}
 ### 🧩 Reto 4: [Nombre del Reto 4]
 ...
 
 ---
 
-<!-- Duración estimada para el instructor: 45 min -->
+{/* Duración estimada para el instructor: 45 min */}
 ## 🗣️ Fase 4: Exposición de Resultados, Debate y Debugging
 
 ### 🐞 Errores Típicos y Trampas Comunes
@@ -202,7 +204,7 @@ Abriremos nuestro entorno de desarrollo y construiremos juntos los siguientes re
 
 ---
 
-<!-- Duración estimada para el instructor: 30 min -->
+{/* Duración estimada para el instructor: 30 min */}
 ## 🏠 Fase 5: Definición de Práctica en Casa / Reto Semanal
 
 ### 🏆 Proyecto Semanal: "[Nombre del Proyecto]"
