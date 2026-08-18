@@ -44,23 +44,31 @@ El contenido se divide en cuatro rutas, cada una dirigida a un público específ
 3.  **Stack personalizado**: Para desarrolladores que buscan especializarse y acelerar su crecimiento, con un enfoque en estrategia y ciclo de vida del software.
 4.  **Ingeniería de software**: Temas teóricos y de alto nivel sobre principios de la ingeniería de software.
 
-### Guía de Estilo
+### Guía de Estilo y Metodología Pedagógica
 
-Para crear o modificar contenido, es crucial seguir las directrices de `CONTENT_STYLE.md`. Los puntos clave son:
+Para crear o modificar contenido, es **obligatorio** seguir las directrices de `CONTENT_STYLE.md`. Los puntos clave son:
 
--   **Tono**: Alentador, empático y conversacional.
--   **Estructura de Lección**: Cada lección en `.mdx` debe estar diseñada para una sesión de aprendizaje de aproximadamente **4 horas**. Esto requiere un desarrollo de contenido profundo y detallado, que incluya no solo la teoría principal, sino también múltiples actividades prácticas (`<Aside>`), ejemplos extendidos y discusiones teóricas. La estructura general debe incluir:
-    1.  Frontmatter (título, descripción).
-    2.  CTA (Call to Action) inicial.
-    3.  Introducción y contenido principal dividido con `###`.
-    4.  Uso extensivo de componentes interactivos como `<Aside>`, `<LinkCard>` e `<iframe>`.
-    5.  CTA final.
--   **Formato**: Usar **negritas** para términos clave, comentar el código y hacer preguntas para fomentar la interacción.
--   **Referencias Cruzadas**: Al referenciar lecciones o entregables previos, usar el formato **(LX)** donde X es el número de lección (ej: **(L2)**) y debe incluir obligatoriamente un vínculo a dicha lección. (Ver `CONTENT_STYLE.md`).
+-   **Tono y Perspectiva**: Redacción en primera persona inclusiva ("*Vamos a hacer un experimento juntos*", "*Veamos qué ocurre si...*"). Prohibidas las acotaciones impersonales o en tercera persona tipo libreto.
+-   **Estructura de Lección de 4 Horas en 5 Fases**: Cada lección en `.mdx` debe estructurarse obligatoriamente en 5 bloques pedagógicos:
+    1.  **Fase 1**: Rompehielos / Revisión de la semana previa y puente conceptual (~30 min).
+    2.  **Fase 2**: Introducción teórica dialogada y experimentos guiados en vivo (~45 min).
+    3.  **Fase 3**: Práctica asistida en vivo con 3 a 4 retos guiados progresivos (~90 min).
+    4.  **Fase 4**: Exposición de resultados, debate y debugging de errores comunes (`SyntaxError`, `ReferenceError`, trampas de sintaxis) (~45 min).
+    5.  **Fase 5**: Reto semanal estructurado y práctica en casa con criterios de evaluación (~30 min).
+-   **Regla de Tiempos Invisibles**: **NO colocar marcas de tiempo visibles para el alumno** en títulos o textos. Todos los tiempos se especifican como comentarios HTML (`<!-- Duración estimada para el instructor: XX min -->`) en el código fuente.
+-   **Enfoque Pragmático (Sin pseudocódigo abstracto innecesario)**: Enseñar la lógica de programación directamente sobre código real ejecutable del ecosistema del curso (ej. JavaScript).
+-   **Formato y Componentes**:
+    -   Frontmatter (título, descripción).
+    -   CTA inicial (`<Cta></Cta>`).
+    -   Estructura en 5 fases con encabezados `##`.
+    -   Uso de `<Aside type="tip|note|caution">` para reflexiones y criterios de evaluación.
+    -   Sección obligatoria de `## 📚 Recursos y Videos Recomendados` con `<CardGrid>` y `<LinkCard>`.
+    -   CTA final (`<Cta></Cta>`).
+-   **Referencias Cruzadas**: Toda lección debe enlazar al inicio a la lección previa y al cierre a la siguiente usando el formato **`[Texto descriptivo (LX)](/ruta/a/leccion)`**.
 
 ### Estado de Avance
 
-El proyecto está en desarrollo activo. Muchas lecciones están incompletas y marcadas como "WIP" (Work in Progress). Para conocer el estado actual de cada lección, **consulta el archivo `PROGRESS.md`**.
+El proyecto está en desarrollo activo. Para conocer el estado actual de cada lección, **consulta el archivo `PROGRESS.md`**.
 
 ## 5. Proceso de Desarrollo (AI Planning Process)
 
@@ -74,12 +82,12 @@ Para cualquier tarea de desarrollo, refactorización o creación de nuevas funci
 
 ## 6. Instrucciones para el Agente
 
--   **Punto de Partida**: Utiliza este documento (`AGENTS.md`) como tu principal fuente de contexto sobre el proyecto.
--   **Metodología**: Antes de escribir cualquier código, asegúrate de haber cumplido los pasos 1 al 4 del proceso de planificación.
+-   **Punto de Partida**: Utiliza este documento (`AGENTS.md`) y `CONTENT_STYLE.md` como tu principal fuente de contexto sobre el proyecto.
+-   **Metodología de Contenido**: Toda nueva lección o modificación debe cumplir con el estándar de **4 horas en 5 fases**, **tiempos invisibles en comentarios HTML**, **primera persona inclusiva** y **retos prácticos guiados**.
 -   **Documentación de Decisiones (ADRs)**: Al sugerir o crear registros de decisión arquitectónica, utiliza **nombres semánticos** (ej: `ADR-backend-comunicacion.md`) en lugar de números secuenciales, siguiendo el formato definido en `CONTENT_STYLE.md`.
 -   **Creación de Contenido y Uso de Fuentes**:
     -   Al generar nuevas lecciones o modificar existentes, adhiérete estrictamente a las guías en `CONTENT_STYLE.md` y replica la estructura y tono del contenido existente.
-    -   **REGLA IRROMPIBLE (FUENTES CONFIABLES)**: Al explicar conceptos teóricos, diseñar arquitecturas o establecer "mejores prácticas" en las lecciones, el agente **DEBE OBLIGATORIAMENTE** investigar y citar fuentes confiables. Toda lección debe incluir una sección final de "Referencias y Lecturas Recomendadas" utilizando `<LinkCard>`, enlazando a: Documentación oficial, libros/literatura estándar de la industria, y/o artículos de ingeniería de empresas reconocidas (ej: AWS, Google, OWASP). Esto evidencia que la experiencia compartida tiene fundamentos sólidos de alto nivel.
+    -   **REGLA IRROMPIBLE (FUENTES CONFIABLES)**: Toda lección debe incluir una sección final de "Recursos y Videos Recomendados" utilizando `<CardGrid>` y `<LinkCard>`, enlazando a fuentes de alta calidad pedagógica (videos claros para principiantes / no programadores, y documentación oficial como MDN/React.dev o estándares OWASP/AWS para cursos técnicos).
 -   **Análisis Técnico**: Para entender la implementación de una característica, examina los archivos en `src/components/` (componentes reutilizables) y `src/pages/` (rutas y lógica de página).
 -   **Consultas Específicas**:
     -   **Stack y dependencias**: `package.json`.
