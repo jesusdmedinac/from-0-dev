@@ -23,18 +23,19 @@
 
 ## Ruta: Para no programadores
 
-- [x] Lección 1: Antes de empezar
-- [x] Lección 2: Conceptos básicos
-- [x] Lección 3: Language Tour
-- [x] Lección 4: Paradigmas
-- [x] Lección 5: Stacks
-- [x] Lección 6: Frontend
-- [x] Lección 7: Backend
-- [ ] Lección 8: Base de datos
-- [ ] Lección 9: Uso de Terminal
-- [ ] Lección 10: Control de versiones
-- [ ] Lección 11: Sistemas Operativos
-- [ ] Lección 12: DevOps
+### Feature: Non-Programmers Course Curriculum (Lessons 1 to 12)
+- [x] Scenario: Lesson 1 - Getting Started, Web Architecture & Browser Console
+- [x] Scenario: Lesson 2 - Core Programming Concepts & JavaScript Fundamentals
+- [x] Scenario: Lesson 3 - JavaScript Language Tour & Error Handling
+- [ ] Scenario: Lesson 4 - Programming Paradigms (OOP, Functional & Async)
+- [ ] Scenario: Lesson 5 - Tech Stacks & ShortURL Project Architecture Kickoff
+- [ ] Scenario: Lesson 6 - Frontend Development (Semantic HTML, Responsive CSS & DOM Events)
+- [ ] Scenario: Lesson 7 - Backend Development (Node.js, Express & REST API)
+- [ ] Scenario: Lesson 8 - Databases & Persistence (SQLite & SQL)
+- [ ] Scenario: Lesson 9 - Terminal Mastery (Command Line Interface)
+- [ ] Scenario: Lesson 10 - Version Control with Git and GitHub
+- [ ] Scenario: Lesson 11 - Operating Systems & Environment Variables
+- [ ] Scenario: Lesson 12 - DevOps, Cloud Deployment & Graduation
 
 ## Ruta: Para principiantes
 
