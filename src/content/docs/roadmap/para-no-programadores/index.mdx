@@ -43,18 +43,23 @@ La mayoría de los cursos de programación fallan porque son abstractos, usan t�
 
 A lo largo del curso construirás de forma incremental **ShortURL**, una aplicación web completa que permite ingresar un enlace largo y transformarlo en una dirección corta funcional:
 
-```
-[Usuario pega enlace largo] ──► [Frontend Web HTML/CSS/JS] ──► [Servidor Express] ──► [Base de Datos SQLite]
-                                                                        │
-                                                              [Genera código corto]
-                                                                        │
-                                                     [Redirige en vivo con código 302 🚀]
-```
+<CardGrid>
+  <Card title="1. 🖥️ Frontend (Semana 6)" icon="laptop">
+    **La cara visible:** Interfaz visual con HTML5 semántico, diseño elástico con CSS Flexbox y manipulación del DOM para captura y copiado al portapapeles.
+  </Card>
 
-1. **Frontend (Semana 6):** Interfaz visual con HTML5 semántico, diseño elástico con CSS Flexbox y manipulación del DOM con la API del Portapapeles.
-2. **Backend (Semana 7):** Servidor web en Node.js y Express con API REST y redirección HTTP 302.
-3. **Base de Datos (Semana 8):** Persistencia relacional segura con SQLite y sentencias SQL protegidas contra inyecciones.
-4. **Control de Versiones y Nube (Semanas 9 a 12):** Dominio de la terminal, repositorio en GitHub, variables de entorno (`.env`) y despliegue global en la nube (PaaS) con certificado HTTPS gratuito.
+  <Card title="2. ⚡ Backend (Semana 7)" icon="seti:nodejs">
+    **El cerebro:** Servidor web en Node.js y Express con API REST, generación de códigos cortos y redirección HTTP 302 hacia el enlace original.
+  </Card>
+
+  <Card title="3. 🗄️ Base de Datos (Semana 8)" icon="seti:db">
+    **La memoria:** Persistencia relacional segura con SQLite y sentencias SQL protegidas para almacenar las URLs de forma permanente.
+  </Card>
+
+  <Card title="4. ☁️ Control de Versiones y Nube (Semanas 9 a 12)" icon="rocket">
+    **Puesta en producción:** Dominio de la terminal, repositorio en GitHub, variables de entorno (`.env`) y despliegue global en la nube con HTTPS gratuito.
+  </Card>
+</CardGrid>
 
 ---
 
