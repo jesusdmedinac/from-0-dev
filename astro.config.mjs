@@ -44,6 +44,7 @@ export default defineConfig({
         {
           label: 'Para no programadores',
           items: [
+            { label: 'Bienvenida y Registro', link: '/roadmap/para-no-programadores/' },
             { label: 'Antes de empezar', link: '/roadmap/para-no-programadores/1' },
             { label: 'Conceptos básicos', link: '/roadmap/para-no-programadores/2' },
             { label: 'Language Tour', link: '/roadmap/para-no-programadores/3' },
