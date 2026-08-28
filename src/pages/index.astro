@@ -17,105 +17,114 @@ import Testimonies from "@components/testimonies.astro";
 ---
 <script type="module" src="https://cdn.jsdelivr.net/npm/@justinribeiro/lite-youtube@1.5.0/lite-youtube.js"></script>
 <Layout maxisterEnabled={true} seoProps={{
-  title: "Taller de programación Desde0 a experto.",
-  description: "Taller de programación Desde0 a experto.",
-  canonical: "https://programaciondesde0.com",
+  title: "Programación Desde0 - Academia de Programación para Todos",
+  description: "Aprende a programar desde cero absoluto hasta convertirte en desarrollador profesional con rutas prácticas y clases en vivo.",
+  canonical: "https://desde0.jesusdmedinac.com",
   openGraph: {
     basic: {
-      title: "Taller de programación Desde0 a experto.",
-      url: "https://programaciondesde0.com",
+      title: "Programación Desde0 - Academia de Programación para Todos",
+      url: "https://desde0.jesusdmedinac.com",
       type: "website",
       image: "/hero-talent.png",
     },
   }
 }}>
   <Container>
+    {/* HERO 1: Para No Programadores */}
     <Hero
-      title="🚀 Desarrollo de sitios web y apps móviles GRATIS 💻📱"
-      subtitle="¿Tienes una idea o proyecto y necesitas ayuda para hacerlo realidad? Desde nuestra Academia Desde0, te conectamos con practicantes talentosos que están listos para desarrollar tus sitios web y apps móviles sin costo."
-      heroImage={heroImage}
-      heroAlt="Talento en Desde0"
+      title="Aprende a programar desde cero absoluto 🚀"
+      subtitle="¿Nunca has escrito código? Te enseñamos paso a paso con analogías del mundo real, cero frustración y construyendo tu primera aplicación web completa (ShortURL). Clases en vivo los domingos ($200 MXN / sesión)."
+      heroImage={paraNoProgramadoresLogo}
+      heroAlt="Programación para no programadores Desde0"
     >
       <Link
-        href="https://tally.so/r/wv2l84"
+        href="https://tally.so/r/7RrOeP"
         class="bg-paradiso text-white flex gap-1 items-center justify-center rounded-full"
         rel="noopener">
-        Contratar talento gratis
-        <Icon class="text-white w-5 h-5" name="right-arrow" />
-      </Link>
-    </Hero>
-    <Cta
-      title="Desarrollo de sitios web y apps móviles gratis"
-      message="Consigue practicantes para tus proyectos e ideas"
-    >
-      <Link href="https://tally.so/r/wv2l84" style="inverted" class="rounded-full">Contrata talento gratis</Link>
-    </Cta>
-    <Stages
-      title="Talleres de programación para todos los niveles">
-      <Stage
-          title="Para no programadores"
-          description="Da tus primeros pasos en el desarrollo de software. Construye unas bases sólidas para poder elegir correctamente sólo integrarlo en tu día a día y decide si quieres dedicarte tiempo completo al desarrollo de software."
-          primaryRef="https://tally.so/r/3lA8G5"
-          secondaryRef="/roadmap/para-no-programadores/1"
-          picture={paraNoProgramadoresLogo}
-      ></Stage>
-      <Stage
-        title="Para principiantes (Juniors)"
-        description="Si ya decidiste a qué te quieres dedicar, ahora debes incrementar tu valor al perfeccionar las habilidades que aumentarán tu empleabilidad. Domina las técnicas de desarrollo de software más utilizadas y comienza a compartir lo que sabes con el mundo."
-        picture={paraPrincipiantesLogo}
-        primaryRef="https://tally.so/r/3lA8G5"
-        secondaryRef="/roadmap/para-principiantes/1"
-      ></Stage>
-      <Stage
-        title="Elige tu Stack personalizado"
-        description="Elegir una especialidad te destacará del resto. Android, iOS, Frontend, Backend, Desktop. Cada Stack tiene una ruta personalizada para ti. Aprenderás los lenguajes de programación, técnicas de desarrollo y administración de base de datos."
-        picture={stackPersonalizadoLogo}
-        primaryRef="https://tally.so/r/3lA8G5"
-        secondaryRef="/roadmap/stack-personalizado/1"
-      ></Stage>
-      <Stage
-        title="Software Engineering"
-        description="Desde principios básicos como YAGNI, DRY, SOLID hasta técnicas de desarrollo avanzadas como TDD, DDD y Clean Code o Clean Architecture. Cambia tu manera de pensar y de trabajar en equipos de alto rendimiento. Destácate por tus habilidades sociales."
-        picture={softwareEngineeringLogo}
-        primaryRef="https://tally.so/r/3lA8G5"
-        secondaryRef="/roadmap/software-engineering/1"
-      ></Stage>
-    </Stages>
-    <Cta
-      title="¿Necesitas talento tech?"
-      message="Entrena a tu equipo en las últimas tecnologías"
-    >
-      <Link href="https://tally.so/r/wv2l84" style="inverted" class="rounded-full">Transforma tu talento</Link>
-    </Cta>
-    <Hero
-      title="Kotlin Multiplatform"
-      subtitle="Desarrolla sistemas interconectados entre diferentes plataformas aprovechando al máximo las capacidades de Kotlin Multiplatform."
-      heroImage={kotlinMultiplatformLogo}
-      heroAlt="Kotlin Multiplatform Logo"
-    >
-      <Link
-        href="https://tally.so/r/3XDpzY"
-        class="bg-paradiso flex gap-1 items-center justify-center rounded-full"
-        rel="noopener">
-        Registrarme
+        Apartar mi lugar ($200 MXN)
         <Icon class="text-white w-5 h-5" name="right-arrow" />
       </Link>
       <Link
         size="lg"
         style="outline"
         rel="noopener"
-        href="https://kmp.jesusdmedinac.com/"
+        href="/roadmap/para-no-programadores/"
         class="border-charlotte bg-charlotte text-paradiso flex gap-1 items-center justify-center rounded-full">
-        Conoce la ruta de aprendizaje
+        Ver temario y ruta
         <Icon class="w-4 h-4" name="seti:notebook" />
       </Link>
     </Hero>
+
     <Cta
-      title="Desarrollo de sitios web y apps móviles gratis"
-      message="Consigue practicantes para tus proyectos e ideas"
+      title="Convocatoria Abierta: Inicio Domingo 6 de Septiembre"
+      message="24 semanas de formación guiada en vivo (9:00 - 11:00 AM o 4:00 - 6:00 PM) con Diploma Oficial de Participación."
     >
-      <Link href="https://tally.so/r/wv2l84" style="inverted" class="rounded-full">Contrata talento gratis</Link>
+      <Link href="https://tally.so/r/7RrOeP" style="inverted" class="rounded-full">Inscribirme ahora</Link>
     </Cta>
-    <!-- <Testimonies></Testimonies>-->
+
+    {/* SECCIÓN DE RUTAS / TALLERES */}
+    <Stages
+      title="Rutas de aprendizaje para cada etapa de tu carrera">
+      <Stage
+          title="Para no programadores"
+          description="Da tus primeros pasos en el desarrollo de software. Construye bases sólidas con analogías claras, aprende desarrollo web y crea el proyecto ShortURL."
+          primaryRef="https://tally.so/r/7RrOeP"
+          secondaryRef="/roadmap/para-no-programadores/"
+          picture={paraNoProgramadoresLogo}
+      ></Stage>
+      <Stage
+        title="Para principiantes (Juniors)"
+        description="Si ya decidiste a qué te quieres dedicar, ahora debes incrementar tu valor al perfeccionar las habilidades que aumentarán tu empleabilidad. Domina las técnicas de desarrollo de software más utilizadas y comienza a compartir lo que sabes con el mundo."
+        picture={paraPrincipiantesLogo}
+        primaryRef="https://tally.so/r/7RrOeP"
+        secondaryRef="/roadmap/para-principiantes/1"
+      ></Stage>
+      <Stage
+        title="Elige tu Stack personalizado"
+        description="Elegir una especialidad te destacará del resto. Android, iOS, Frontend, Backend, Desktop. Cada Stack tiene una ruta personalizada para ti. Aprenderás los lenguajes de programación, técnicas de desarrollo y administración de base de datos."
+        picture={stackPersonalizadoLogo}
+        primaryRef="https://tally.so/r/7RrOeP"
+        secondaryRef="/roadmap/stack-personalizado/1"
+      ></Stage>
+      <Stage
+        title="Software Engineering"
+        description="Desde principios básicos como YAGNI, DRY, SOLID hasta técnicas de desarrollo avanzadas como TDD, DDD y Clean Code o Clean Architecture. Cambia tu manera de pensar y de trabajar en equipos de alto rendimiento. Destácate por tus habilidades sociales."
+        picture={softwareEngineeringLogo}
+        primaryRef="https://tally.so/r/7RrOeP"
+        secondaryRef="/roadmap/software-engineering/1"
+      ></Stage>
+    </Stages>
+
+    {/* HERO 2: Kotlin para Principiantes */}
+    <Hero
+      title="Kotlin para Principiantes ⚡"
+      subtitle="Domina el lenguaje moderno de JetBrains para Android, backend y multiplataforma. Aprende de forma agnóstica a la plataforma y construye un asistente AI Chat CLI paso a paso en clases en vivo o a tu propio ritmo."
+      heroImage={kotlinMultiplatformLogo}
+      heroAlt="Kotlin para Principiantes"
+    >
+      <Link
+        href="https://kotlin-0-dev.jesusdmedinac.com/"
+        class="bg-paradiso text-white flex gap-1 items-center justify-center rounded-full"
+        rel="noopener">
+        Explorar curso de Kotlin
+        <Icon class="text-white w-5 h-5" name="right-arrow" />
+      </Link>
+      <Link
+        size="lg"
+        style="outline"
+        rel="noopener"
+        href="https://tally.so/r/GxAj5o"
+        class="border-charlotte bg-charlotte text-paradiso flex gap-1 items-center justify-center rounded-full">
+        Apartar lugar en vivo ($600 MXN)
+        <Icon class="w-4 h-4" name="seti:notebook" />
+      </Link>
+    </Hero>
+
+    <Cta
+      title="¿Tienes dudas sobre qué ruta elegir?"
+      message="Únete a nuestra comunidad en Discord y recibe orientación personalizada de mentores y compañeros."
+    >
+      <Link href="https://discord.gg/nChTf3PdGJ" style="inverted" class="rounded-full">Unirme a Discord</Link>
+    </Cta>
   </Container>
 </Layout>
